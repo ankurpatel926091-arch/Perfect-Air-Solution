@@ -213,14 +213,8 @@ const About = () => (
     <section
       style={{ padding: "15px 24px", background: "hsl(var(--brand-light))" }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "20px",
-          }}
-        >
+     <div style={{ maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
