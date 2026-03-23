@@ -55,7 +55,7 @@ const sections = [
     icon: Mail,
     title: "Contact",
     content: [
-      "For any questions regarding these terms, contact us at info@limrasales.com or +91 92364 77974.",
+      "For any questions regarding these terms, contact us at info@limrasales.com or +91 98391 71701.",
       "LIMRA Sales & Services, Civil Lines, Bareilly, Uttar Pradesh 243001.",
     ],
   },

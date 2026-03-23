@@ -89,13 +89,13 @@ const SiteFooter = () => {
             </motion.div>
 
             <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.9)" }}>
-              Established in 2017, we are Bareilly's most trusted HVAC partner — delivering expert AC installation, maintenance, and sales for homes &amp; businesses.
+              Established in 2012, we are Bareilly's most trusted HVAC partner — delivering expert AC installation, maintenance, and sales for homes &amp; businesses.
             </p>
 
             {/* Trust badges */}
             <div className="flex flex-col gap-3 mb-6">
               {[
-                { icon: Shield, text: "9+ Years of Trusted Service" },
+                { icon: Shield, text: "14+ Years of Trusted Service" },
                 { icon: Clock,  text: "Mon – Sat: 9:00 AM – 7:00 PM" },
               ].map(({ icon: Icon, text }, i) => (
                 <motion.div
@@ -225,7 +225,7 @@ const SiteFooter = () => {
             <p className="text-[11px] font-bold text-white uppercase tracking-[0.16em] mb-5">Contact Us</p>
             <ul className="space-y-4 mb-6">
               {[
-                { href: "tel:+919236477974", Icon: Phone, label: "Phone", value: "+91 92364 77974" },
+                { href: "tel:+919839171701", Icon: Phone, label: "Phone", value: "+91 98391 71701" },
                 { href: "mailto:info@limrasales.com", Icon: Mail, label: "Email", value: "info@limrasales.com" },
                 { href: "https://maps.google.com/?q=184,+New+Civil+Lines,+Hardoi,+Uttar+Pradesh+241001", Icon: MapPin, label: "Location", value: "184, New Civil Lines, Hardoi, Uttar Pradesh 241001", target: "_blank" },
               ].map(({ href, Icon, label, value, target }, i) => (

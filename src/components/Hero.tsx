@@ -51,7 +51,7 @@ export default function HeroSection() {
           <span style={{ color: "hsl(var(--brand-sky))" }}>
             &amp; Service Experts in Uttar Pradesh
           </span>{" "}
-          Trusted by 5,000+ Customers Since 2017
+          Trusted by 5,000+ Customers Since 2012
         </motion.h1>
 
         {/* Subtitle */}

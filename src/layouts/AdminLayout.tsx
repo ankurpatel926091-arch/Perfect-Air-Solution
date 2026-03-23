@@ -24,7 +24,7 @@ const AdminLayout = () => {
     { label: "Services", path: "/admin/services", icon: Briefcase },
     { label: "Brands", path: "/admin/brands", icon: Tags },
     { label: "Projects", path: "/admin/projects", icon: ImageIcon },
-    { label: "Site Settings", path: "/admin/settings", icon: Settings },
+  
   ];
 
   return (

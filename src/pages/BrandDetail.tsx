@@ -100,7 +100,7 @@ export default function BrandDetail() {
               </p>
 
               <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
-                <a href="tel:+919236477974" style={{
+                <a href="tel:+919839171701" style={{
                   background: BRAND.white, color: BRAND.dark,
                   padding: "12px 24px", borderRadius: "10px", fontWeight: 700,
                   display: "inline-flex", alignItems: "center", gap: "8px",
@@ -109,7 +109,7 @@ export default function BrandDetail() {
                 }}>
                   <Phone size={16} /> Get {brand.brandName} Quote
                 </a>
-                <a href={`https://wa.me/919236477974?text=Hi, I'm interested in ${brand.brandName} products`}
+                <a href={`https://wa.me/919839171701?text=Hi, I'm interested in ${brand.brandName} products`}
                   target="_blank" rel="noopener noreferrer"
                   style={{
                     background: "rgba(255,255,255,0.1)", color: BRAND.white,
@@ -235,7 +235,7 @@ export default function BrandDetail() {
                         </li>
                       ))}
                     </ul>
-                    <a href="tel:+919236477974" style={{
+                    <a href="tel:+919839171701" style={{
                       width: "100%", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px",
                       background: `linear-gradient(135deg, ${BRAND.dark}, ${BRAND.primary})`,
                       color: BRAND.white, padding: "11px", borderRadius: "10px",
@@ -271,7 +271,7 @@ export default function BrandDetail() {
               Get the best deals on {brand.brandName} air conditioners in Bareilly with expert installation &amp; service.
             </p>
             <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "14px" }}>
-              <a href="tel:+919236477974" style={{
+              <a href="tel:+919839171701" style={{
                 background: BRAND.white, color: BRAND.dark,
                 padding: "13px 28px", borderRadius: "10px", fontWeight: 700,
                 display: "inline-flex", alignItems: "center", gap: "8px",

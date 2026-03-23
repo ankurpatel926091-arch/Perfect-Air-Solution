@@ -66,7 +66,7 @@ function SolutionCard({ title, items, primaryBtnLabel, imageUrl, imageAlt, badge
 
         <div style={{ display: "flex", gap: "10px" }}>
           <a
-            href="tel:+919236477974"
+            href="tel:+919839171701"
             style={{
               flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
               background: "hsl(var(--brand-dark))", color: "white",

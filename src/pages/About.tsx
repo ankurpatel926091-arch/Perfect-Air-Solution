@@ -6,7 +6,7 @@ import CTASection from "@/components/CTASection";
 const stats = [
   { value: 5000, suffix: "+", label: "Customers" },
   { value: 500, suffix: "+", label: "Commercial Projects" },
-  { value: 9, suffix: "+", label: "Years Experience" },
+  { value: 14, suffix: "+", label: "Years Experience" },
   { value: 20, suffix: "+", label: "Cities" },
 ];
 
@@ -35,7 +35,7 @@ const values = [
 
 const milestones = [
   {
-    year: "2017",
+    year: "2012",
     text: "Founded in Hardoi as a small AC service workshop with a vision to deliver reliable cooling solutions.",
   },
   {
@@ -119,7 +119,7 @@ const About = () => (
           animate={{ opacity: 1, y: 0 }}
           style={{ color: "white", marginBottom: "16px" }}
         >
-          Building Comfort Since 2017
+          Building Comfort Since 2012
         </motion.h1>
 
         {/* Description */}
@@ -138,7 +138,7 @@ const About = () => (
         >
           LIMRA Sales and Services is a trusted HVAC and air conditioning
           company delivering reliable cooling solutions for homes, offices,
-          hospitals, hotels, and industrial facilities. Since 2017, we
+          hospitals, hotels, and industrial facilities. Since 2012, we
           specialize in AC installation, AC servicing, VRV/VRF systems, chiller
           plants, cold rooms, and industrial cooling services with a strong
           commitment to quality, safety, and customer satisfaction.
@@ -183,7 +183,7 @@ const About = () => (
             }}
           >
             <p style={{ fontSize: "14px" }}>
-              Founded in 2017, LIMRA Sales and Services began with a clear
+              Founded in 2012, LIMRA Sales and Services began with a clear
               vision — to provide reliable, honest, and high-quality cooling
               solutions that customers can truly depend on. What started as a
               small HVAC service initiative has steadily evolved into a trusted

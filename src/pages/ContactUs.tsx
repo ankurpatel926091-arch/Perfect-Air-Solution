@@ -115,8 +115,8 @@ const contactDetails = [
   {
     icon: <Phone size={20} />,
     label: "Call Us",
-    value: "+91 92364 77974",
-    href: "tel:+919236477974",
+    value: "+91 98391 71701",
+    href: "tel:+919839171701",
     hoverColor: "rgba(34,197,94,0.08)",
     hoverBorder: "rgba(34,197,94,0.3)",
     iconColor: "#16a34a",
@@ -716,7 +716,7 @@ export default function ContactUs() {
                 Authorized Dealers
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["Daikin", "LG", "Blue Star", "Hitachi", "Panasonic", "Lloyd", "Samsung", "Mitsubishi", "Carrier", "Amstrad", "Midea"].map((b) => (
+                {["Daikin", "Blue Star", "Hitachi", "Panasonic", "Mitsubishi", "Carrier", "Midea"].map((b) => (
                   <span
                     key={b}
                     className="px-3 py-1 rounded-full text-xs font-semibold shadow-sm"

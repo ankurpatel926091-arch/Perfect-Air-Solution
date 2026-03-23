@@ -68,7 +68,7 @@ const SiteHeader = () => {
           {/* Right actions */}
           <div className="header-actions">
             <a
-              href="tel:+919236477974"
+              href="tel:+919839171701"
               className="enquiry-btn desktop-only"
               aria-label="Call LIMRA Sales and Services"
             >
@@ -135,7 +135,7 @@ const SiteHeader = () => {
                   transition={{ delay: navLinks.length * 0.045 + 0.05, duration: 0.22 }}
                 >
                   <a
-                    href="tel:+919236477974"
+                    href="tel:+919839171701"
                     className="mobile-call-btn"
                     aria-label="Call LIMRA Sales and Services"
                   >

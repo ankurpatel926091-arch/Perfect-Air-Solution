@@ -178,7 +178,7 @@ export default function ServiceDetailPage() {
               <Calendar size={15} /> Book Now
             </button>
 
-            <a href="tel:+919236477974"
+            <a href="tel:+919839171701"
               className="flex items-center justify-center gap-2 w-full p-[14px] rounded-xl font-medium text-[0.88rem] no-underline transition-all duration-200 hover:opacity-90"
               style={{ background: BRAND.primaryPale, color: BRAND.dark, border: `1px solid ${BRAND.slate100}` }}>
               <Phone size={14} color={BRAND.primary} /> Call Us

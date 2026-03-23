@@ -311,7 +311,7 @@ export default function Shop() {
 
                   <div className="p-4 grid grid-cols-2 gap-3 border-t border-slate-100">
                     <a
-                      href="tel:+919236477974"
+                      href="tel:+919839171701"
                       className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 py-2 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors"
                       style={{ textDecoration: 'none' }}
                     >
