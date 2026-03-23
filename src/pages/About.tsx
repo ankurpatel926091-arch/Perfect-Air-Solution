@@ -242,7 +242,7 @@ const About = () => (
               <div
                 style={{
                   fontFamily: "DM Serif Display",
-                  fontSize: "2.8rem",
+                  fontSize: "2.2rem",
                   color: "white",
                   lineHeight: 1,
                   marginBottom: "8px",
