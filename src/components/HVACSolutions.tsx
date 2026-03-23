@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Phone, Wind, Droplets, ThermometerSun, AirVent, Building2, Home } from "lucide-react";
 
 const residentialItems = [
-  { icon: <Wind size={16} />, label: "Up to 3 ton" },
+  { icon: <Wind size={16} />, label: "Split ACs Up to 3 ton" },
   { icon: <Wind size={16} />, label: "Window ACs" },
   { icon: <Wind size={16} />, label: "Portable ACs" },
   { icon: <Droplets size={16} />, label: "Water Coolers & Dispensers" },
@@ -15,7 +15,7 @@ const commercialItems = [
   { icon: <Wind size={16} />, label: "Cassette & Ductable ACs" },
   { icon: <ThermometerSun size={16} />, label: "Chillers & Heat Pumps" },
   { icon: <Building2 size={16} />, label: "Tower ACs" },
-  { icon: <AirVent size={16} />, label: "Ventilation & fresh Air Systems" },
+  { icon: <AirVent size={16} />, label: "Ventilation & Fresh Air Systems" },
 ];
 
 const cardVariants = {
@@ -120,7 +120,7 @@ export default function HVACSolutions() {
           </p>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "12px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "12px" }}>
           <SolutionCard
             index={0}
             title="Residential Solutions"

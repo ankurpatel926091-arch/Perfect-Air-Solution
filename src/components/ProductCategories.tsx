@@ -86,17 +86,17 @@ export default function ProductCategories() {
             Our Products
           </motion.div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "24px" }}>
-            <div>
-              {/* h2 — global: DM Serif Display, 400, brand-dark */}
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.6 }}
-                style={{ marginBottom: "5x", marginTop: 0 }}
-              >
-                Cooling Solutions for Every Need
-              </motion.h2>
-            </div>
+         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6">
+             <motion.h2
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  className="text-sm sm:text-base md:text-3xl"
+  style={{ marginBottom: "5px", marginTop: 0 }}
+>
+  Cooling Solutions for Every Need
+</motion.h2>
 
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
               <button
@@ -124,7 +124,7 @@ export default function ProductCategories() {
           </div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginBottom: "20px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: "20px", marginBottom: "20px" }}>
           {categories.map((cat, i) => <Card key={cat.title} cat={cat} i={i} />)}
         </div>
       </div>

@@ -1,8 +1,9 @@
-import { Tag, ChevronRight, BookOpen, Wrench, Thermometer, Wind, Zap } from "lucide-react";
+import { Tag, ChevronRight, BookOpen, Wrench, Thermometer, Wind, Zap, ChevronLeft } from "lucide-react";
 import { useGetBlogsQuery } from "@/store/api";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
 
 export interface ApiBlogPost {
   _id: string; id?: string; slug?: string; title: string;
@@ -21,7 +22,6 @@ const getCategoryIcon = (category: string) => {
   }
 };
 
-// Category badge keeps its own colorMap (semantic colors, not brand)
 function CategoryBadge({ category }: { category: string }) {
   const colorMap: Record<string, string> = {
     "Maintenance": "#e07830",
@@ -51,7 +51,7 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
 
   return (
     <article
-      className="bg-card rounded-2xl overflow-hidden flex flex-col group"
+      className="bg-card rounded-2xl overflow-hidden flex flex-col group h-full"
       style={{
         border: "1px solid hsl(var(--border))",
         boxShadow: "0 4px 16px hsl(var(--brand-dark) / 0.07)",
@@ -152,9 +152,165 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
   );
 }
 
+// ─── Mobile Carousel ────────────────────────────────────────────────────────
+function MobileCarousel({ posts }: { posts: ApiBlogPost[] }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const startXRef = useRef<number | null>(null);
+  const isDraggingRef = useRef(false);
+
+  const goTo = (index: number) => {
+    const clamped = Math.max(0, Math.min(posts.length - 1, index));
+    setActiveIndex(clamped);
+  };
+
+  // Touch handlers for swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    startXRef.current = e.touches[0].clientX;
+    isDraggingRef.current = false;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (startXRef.current === null) return;
+    const diff = e.touches[0].clientX - startXRef.current;
+    if (Math.abs(diff) > 5) isDraggingRef.current = true;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (startXRef.current === null) return;
+    const diff = e.changedTouches[0].clientX - startXRef.current;
+    if (Math.abs(diff) > 50) {
+      goTo(diff < 0 ? activeIndex + 1 : activeIndex - 1);
+    }
+    startXRef.current = null;
+  };
+
+  return (
+    <div className="relative">
+      {/* Carousel track */}
+      <div
+        className="overflow-hidden"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        <div
+          ref={trackRef}
+          style={{
+            display: "flex",
+            transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            transform: `translateX(calc(-${activeIndex * 100}% - ${activeIndex * 16}px))`,
+            gap: "16px",
+          }}
+        >
+          {posts.map((post: ApiBlogPost) => (
+            <div
+              key={post._id || post.id}
+              style={{ minWidth: "100%", flex: "0 0 100%" }}
+            >
+              <BlogCard post={post} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Prev / Next buttons */}
+      {activeIndex > 0 && (
+        <button
+          onClick={() => goTo(activeIndex - 1)}
+          aria-label="Previous article"
+          style={{
+            position: "absolute",
+            left: "-12px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            background: "hsl(var(--brand-dark))",
+            color: "white",
+            border: "none",
+            borderRadius: "50%",
+            width: "36px",
+            height: "36px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+            zIndex: 10,
+          }}
+        >
+          <ChevronLeft size={18} />
+        </button>
+      )}
+      {activeIndex < posts.length - 1 && (
+        <button
+          onClick={() => goTo(activeIndex + 1)}
+          aria-label="Next article"
+          style={{
+            position: "absolute",
+            right: "-12px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            background: "hsl(var(--brand-dark))",
+            color: "white",
+            border: "none",
+            borderRadius: "50%",
+            width: "36px",
+            height: "36px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+            zIndex: 10,
+          }}
+        >
+          <ChevronRight size={18} />
+        </button>
+      )}
+
+      {/* Dot indicators */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "8px",
+          marginTop: "20px",
+        }}
+      >
+        {posts.map((_: ApiBlogPost, i: number) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            style={{
+              width: i === activeIndex ? "24px" : "8px",
+              height: "8px",
+              borderRadius: "100px",
+              background: i === activeIndex ? "hsl(var(--brand-dark))" : "hsl(var(--brand-dark) / 0.25)",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              transition: "all 0.3s ease",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Export ─────────────────────────────────────────────────────────────
 export default function BlogPreview() {
   const { data: blogPosts = [], isLoading, error } = useGetBlogsQuery();
   const recentPosts = blogPosts.slice(0, 3);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   if (isLoading || error || recentPosts.length === 0) return null;
 
@@ -195,18 +351,29 @@ export default function BlogPreview() {
           </Link>
         </motion.div>
 
-        {/* Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
-          {recentPosts.map((post: ApiBlogPost, i: number) => (
-            <motion.div
-              key={post._id || post.id}
-              initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }}
-            >
-              <BlogCard post={post} />
-            </motion.div>
-          ))}
-        </div>
+        {/* Desktop Grid / Mobile Carousel */}
+        {isMobile ? (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <MobileCarousel posts={recentPosts} />
+          </motion.div>
+        ) : (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
+            {recentPosts.map((post: ApiBlogPost, i: number) => (
+              <motion.div
+                key={post._id || post.id}
+                initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }}
+              >
+                <BlogCard post={post} />
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

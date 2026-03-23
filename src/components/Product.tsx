@@ -35,13 +35,38 @@ export function CommercialApplications() {
             Industries We Serve
           </div>
 
-          {/* h2 — global: DM Serif Display, 400, brand-dark */}
           <h2 style={{ marginTop: 0 }}>
             Commercial HVAC Applications
           </h2>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "16px", marginBottom: "40px" }}>
+        {/* 
+          Mobile  (< 480px) : 2 columns
+          Tablet  (480–767px): 3 columns
+          Desktop (768px+)   : auto-fill, minmax 250px
+        */}
+        <style>{`
+          .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 40px;
+          }
+          @media (min-width: 480px) {
+            .applications-grid {
+              grid-template-columns: repeat(3, 1fr);
+              gap: 14px;
+            }
+          }
+          @media (min-width: 768px) {
+            .applications-grid {
+              grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+              gap: 16px;
+            }
+          }
+        `}</style>
+
+        <div className="applications-grid">
           {applications.map((app, i) => (
             <motion.div
               key={i}

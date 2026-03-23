@@ -67,7 +67,7 @@ export default function AboutPreview() {
 
         {/* Stats */}
         <div style={{ padding: "0 0 10px", margin: "0 auto", width: "100%" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "20px" }}>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {stats.map((s, i) => (
               <motion.div
                 key={s.label}
@@ -83,7 +83,7 @@ export default function AboutPreview() {
                 {/* Stat number — DM Serif display, white */}
                 <div style={{
                   fontFamily: "DM Serif Display",
-                  fontSize: "2.8rem", color: "white",
+                  fontSize: "2.2rem", color: "white",
                   lineHeight: 1, marginBottom: "8px", fontWeight: 400,
                 }}>
                   <CountUp from={0} to={s.value} duration={1.2} separator="," direction="up" startWhen={true} />
