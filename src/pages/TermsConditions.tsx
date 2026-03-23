@@ -47,7 +47,7 @@ const sections = [
     icon: Scale,
     title: "Dispute Resolution",
     content: [
-      "Any disputes arising from these terms shall be governed by the laws of India and subject to the jurisdiction of courts in Bareilly, Uttar Pradesh.",
+      "Any disputes arising from these terms shall be governed by the laws of India and subject to the jurisdiction of courts in Hardoi, Uttar Pradesh.",
       "We encourage customers to contact us directly to resolve any issues before pursuing legal remedies.",
     ],
   },
@@ -56,7 +56,7 @@ const sections = [
     title: "Contact",
     content: [
       "For any questions regarding these terms, contact us at info@limrasales.com or +91 98391 71701.",
-      "LIMRA Sales & Services, Civil Lines, Bareilly, Uttar Pradesh 243001.",
+      "LIMRA Sales & Services, Civil Lines, Hardoi, Uttar Pradesh 243001.",
     ],
   },
 ];

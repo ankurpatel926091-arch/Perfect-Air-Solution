@@ -81,7 +81,7 @@ export default function BrandDetail() {
                 color: BRAND.accentOnDark, padding: "6px 16px", borderRadius: "100px",
                 fontSize: "0.8rem", fontWeight: 600, marginBottom: "24px"
               }}>
-                <Shield size={13} /> Authorized Dealer in Bareilly
+                <Shield size={13} /> Authorized Dealer in Hardoi
               </div>
 
               <h1 style={{
@@ -153,7 +153,7 @@ export default function BrandDetail() {
                 padding: "5px 14px", borderRadius: "100px", marginBottom: "16px"
               }}>Why Choose</div>
               <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)", color: BRAND.dark, fontWeight: 800 }}>
-                {brand.brandName} in Bareilly
+                {brand.brandName} in Hardoi
               </h2>
               <div style={{ width: "48px", height: "3px", background: `linear-gradient(90deg, ${BRAND.dark}, ${BRAND.primary})`, borderRadius: "2px", margin: "16px auto 0" }} />
             </motion.div>
@@ -268,7 +268,7 @@ export default function BrandDetail() {
               Ready to Experience <span style={{ color: BRAND.accentOnDark }}>{brand.brandName}</span>?
             </h2>
             <p style={{ color: BRAND.textOnDark, marginBottom: "36px", fontSize: "1.05rem", fontWeight: 300 }}>
-              Get the best deals on {brand.brandName} air conditioners in Bareilly with expert installation &amp; service.
+              Get the best deals on {brand.brandName} air conditioners in Hardoi with expert installation &amp; service.
             </p>
             <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "14px" }}>
               <a href="tel:+919839171701" style={{

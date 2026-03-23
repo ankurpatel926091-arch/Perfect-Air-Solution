@@ -47,7 +47,7 @@ const sections = [
     title: "Contact Us",
     content: [
       "If you have any questions about this Privacy Policy, please contact us at info@limrasales.com or call +91 98391 71701.",
-      "LIMRA Sales & Services, Civil Lines, Bareilly, Uttar Pradesh 243001.",
+      "LIMRA Sales & Services, Civil Lines, Hardoi, Uttar Pradesh 243001.",
     ],
   },
 ];

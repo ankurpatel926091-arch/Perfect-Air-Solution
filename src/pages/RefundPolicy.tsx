@@ -60,7 +60,7 @@ const sections = [
     content: [
       "For any refund-related queries, reach out to us at info@limrasales.com or call +91 98391 71701.",
       "Our customer support team is available Monday to Saturday, 9:00 AM – 7:00 PM.",
-      "LIMRA Sales & Services, Civil Lines, Bareilly, Uttar Pradesh 243001.",
+      "LIMRA Sales & Services, Civil Lines, Hardoi, Uttar Pradesh 243001.",
     ],
   },
 ];

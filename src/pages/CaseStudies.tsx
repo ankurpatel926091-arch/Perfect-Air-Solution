@@ -83,7 +83,7 @@ function generatePDF(study: any) {
   doc.line(margin, footerY - 5, pageWidth - margin, footerY - 5);
   doc.setFontSize(8);
   doc.setTextColor(150, 150, 150);
-  doc.text("LIMRA Sales And Services | Bareilly & Shahjahanpur, UP | www.limrasales.com", margin, footerY);
+  doc.text("LIMRA Sales And Services | Hardoi & Shahjahanpur, UP | www.limrasales.com", margin, footerY);
 
   doc.save(`${(study.title || study.name || "study").replace(/\s+/g, "-").toLowerCase()}-case-study.pdf`);
 }

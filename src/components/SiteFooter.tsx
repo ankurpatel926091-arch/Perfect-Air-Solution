@@ -89,7 +89,7 @@ const SiteFooter = () => {
             </motion.div>
 
             <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.9)" }}>
-              Established in 2012, we are Bareilly's most trusted HVAC partner — delivering expert AC installation, maintenance, and sales for homes &amp; businesses.
+              Established in 2012, we are Hardoi's most trusted HVAC partner — delivering expert AC installation, maintenance, and sales for homes &amp; businesses.
             </p>
 
             {/* Trust badges */}
