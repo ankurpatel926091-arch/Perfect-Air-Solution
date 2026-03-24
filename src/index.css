@@ -59,7 +59,7 @@
 
     --glow-primary: 0 0 40px hsl(197 94% 41% / 0.3);
     --glow-primary-strong: 0 0 60px hsl(197 94% 41% / 0.5);
-    --letter-spacing-global: 0.02rem !important;
+    --letter-spacing-global: 0.04rem;
   }
 
   .dark {
@@ -96,12 +96,12 @@
 @layer base {
   * {
     @apply border-border;
-    letter-spacing: var(--letter-spacing-global) !important; 
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-family: "DM Serif Display";
+    letter-spacing: var(--letter-spacing-global);
   }
 
   /* Paragraph Styling */
@@ -109,6 +109,7 @@
     font-family: "Inter";
     font-size: 1.02rem;
     line-height: 1.625;
+    letter-spacing: inherit;
   }
 
   h1 {
@@ -117,7 +118,7 @@
     font-size: clamp(2rem, 4vw, 3rem);
     color: hsl(var(--brand-dark));
     line-height: 1.15;
-    letter-spacing: 0.1rem !important;
+    letter-spacing: inherit;
   }
 
   h2 {
@@ -126,7 +127,7 @@
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     color: hsl(var(--brand-dark));
     line-height: 1.2;
-    letter-spacing: 0.1rem !important;
+    letter-spacing: inherit;
   }
 
   h3,
@@ -135,7 +136,18 @@
   h6 {
     font-family: "DM Serif Display";
     font-weight: 600;
-    letter-spacing: 0.1rem !important;
+    letter-spacing: inherit;
+  }
+
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  label,
+  li,
+  span {
+    letter-spacing: inherit;
   }
 }
 
@@ -147,13 +159,13 @@
     font-family: "DM Serif Display";
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.15;
-    letter-spacing: 0.1rem !important;
+    letter-spacing: inherit;
   }
 
   .heading-2 {
     font-family: "DM Serif Display";
     font-size: clamp(1.5rem, 3vw, 2.25rem);
-    letter-spacing: 0.1rem !important;
+    letter-spacing: inherit;
   }
 
   .body-text {

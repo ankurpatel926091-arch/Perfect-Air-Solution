@@ -183,7 +183,8 @@ const SiteHeader = () => {
 
         /* Inner flex row */
         .header-inner {
-          max-width: 1280px;
+          width: 100%;
+          max-width: 1180px;
           margin: 0 auto;
           padding: 0 24px;
           height: 80px;
