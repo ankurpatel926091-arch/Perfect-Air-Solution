@@ -381,7 +381,7 @@ export default function ProductsPage() {
         className="bg-card sticky top-0 z-10"
         style={{ borderBottom: "1px solid hsl(var(--border))", padding: "12px 24px" }}
       >
-        <div className="flex gap-2 justify-center overflow-x-auto w-full">
+        <div className="flex gap-2 overflow-x-auto w-full px-2 no-scrollbar justify-start sm:justify-center">
           {filters.map((f) => (
             <button
               key={f.id}
