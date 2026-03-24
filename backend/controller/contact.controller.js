@@ -3,7 +3,7 @@ import sendEmail from "../utils/sendEmail.js";
 
 export const submitContactForm = async (req, res) => {
   try {
-    const { name, email, phone, service, message } = req.body;
+    const { name, email, phone, service, inquiryType, productTitle, productPrice, message } = req.body;
 
     if (!name || !email) {
       return res.status(400).json({ message: "Name and Email are required" });
@@ -14,10 +14,12 @@ export const submitContactForm = async (req, res) => {
       email,
       phone,
       service,
+      inquiryType: inquiryType || "contact",
+      productTitle,
+      productPrice,
       message,
     });
 
-   
     await sendEmail(contact);
 
     res.status(201).json({

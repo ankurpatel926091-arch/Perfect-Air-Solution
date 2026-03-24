@@ -6,6 +6,13 @@ const contactSchema = new mongoose.Schema(
     email: { type: String, required: true },
     phone: String,
     service: String,
+    inquiryType: {
+      type: String,
+      enum: ["contact", "product"],
+      default: "contact",
+    },
+    productTitle: String,
+    productPrice: String,
     message: String,
   },
   { timestamps: true }

@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Phone, Eye, CheckCircle, MapPin } from "lucide-react";
+import { Phone, Eye, CheckCircle, MapPin, Clock } from "lucide-react";
 import heroImage from "@/assets/heroimage.webp";
-import type { CSSProperties } from "react";
 
 const badges = [
-  { icon: CheckCircle, text: "Free Site Visit & Consultation" },
-  { icon: CheckCircle, text: "Expert Installation Team" },
-  { icon: MapPin, text: "Uttar Pradesh" },
+  { icon: CheckCircle, text: "Free Site Visit" },
+  { icon: Clock,       text: "Same-Day Response" },
+  { icon: MapPin,      text: "Uttar Pradesh" },
 ];
 
 export default function HeroSection() {
@@ -30,14 +29,15 @@ export default function HeroSection() {
       {/* Content */}
       <div className="hero-content-wrapper">
 
-        {/* Badge */}
+        {/* Urgency pill */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="hero-badge"
+          className="hero-urgency-pill"
         >
-          HVAC & Air Conditioning Experts
+          <span className="urgency-dot" />
+          Limited Slots Available This Month — Book Now
         </motion.div>
 
         {/* h1 */}
@@ -47,11 +47,11 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="hero-heading"
         >
-          #1 HVAC Installation{" "}
-          <span style={{ color: "hsl(var(--brand-sky))" }}>
-            &amp; Service Experts in Uttar Pradesh
+          AC Not Cooling?{" "}
+          <span className="heading-accent">
+            Get It Fixed Today
           </span>{" "}
-          Trusted by 5,000+ Customers Since 2012
+          — UP's Most Trusted HVAC Team Since 2012
         </motion.h1>
 
         {/* Subtitle */}
@@ -59,9 +59,11 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="hero-subtitle body-text"
+          className="hero-subtitle"
         >
-          Industrial | Commercial | Residential HVAC Solutions in Lucknow &amp; Across UP
+          5,000+ happy customers across Lucknow &amp; UP.{" "}
+          <strong style={{ color: "white" }}>Call now for a free inspection</strong>{" "}
+          — our expert reaches you within hours.
         </motion.p>
 
         {/* CTAs */}
@@ -72,42 +74,44 @@ export default function HeroSection() {
           className="hero-cta-group"
         >
           <Link to="/contact" className="btn-primary">
-            <Phone size={16} fill="white" stroke="none" /> Get Free Site Inspection
+            <Phone size={16} fill="white" stroke="none" /> Get Free Site
+            Inspection
           </Link>
           <Link to="/case-studies" className="btn-outline">
             <Eye size={16} /> View Our Projects
           </Link>
         </motion.div>
 
-        {/* Badges */}
+        {/* Trust badges */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
           className="hero-badges"
         >
           {badges.map((b, i) => (
             <span key={i} className="hero-badge-item">
-              <b.icon size={14} style={{ color: "hsl(var(--brand-sky))" }} /> {b.text}
+              <b.icon size={13} className="badge-icon" />
+              {b.text}
             </span>
           ))}
         </motion.div>
       </div>
 
       <style>{`
-        /* ── Hero Section ── */
-      .hero-section {
-  background: var(--bg-hero-gradient, hsl(var(--brand-dark)));
-  position: relative;
-  width: 100%;
-  min-height: calc(100vh - 80px);  /* 100vh → calc(100vh - 80px) */
-  margin-top: 80px;                /* YEH ADD KARO */
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
+        /* ── Section ── */
+        .hero-section {
+          background: var(--bg-hero-gradient, hsl(var(--brand-dark)));
+          position: relative;
+          width: 100%;
+          min-height: calc(100vh - 80px);
+          margin-top: 80px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+        }
 
-        /* Grid overlay */
+        /* ── Grid overlay ── */
         .hero-grid-overlay {
           position: absolute;
           inset: 0;
@@ -119,7 +123,7 @@ export default function HeroSection() {
           pointer-events: none;
         }
 
-        /* ── Background image (desktop: right panel, mobile: full blurred bg) ── */
+        /* ── Background image ── */
         .hero-image-container {
           position: absolute;
           right: 2%;
@@ -149,55 +153,74 @@ export default function HeroSection() {
           pointer-events: none;
         }
 
-       /* ── Content wrapper ── */
-.hero-content-wrapper {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 48px 24px 48px;  /* 100px → 48px */
-}
+        /* ── Content wrapper ── */
+        .hero-content-wrapper {
+          position: relative;
+          z-index: 10;
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 48px 24px;
+        }
 
-        /* ── Badge pill ── */
-        .hero-badge {
-          display: inline-block;
-          background: hsl(var(--primary) / 0.2);
-          border: 1px solid hsl(var(--primary) / 0.4);
+        /* ── Urgency pill ── */
+        .hero-urgency-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: hsl(var(--primary) / 0.18);
+          border: 1px solid hsl(var(--primary) / 0.5);
           color: hsl(var(--brand-sky));
           font-weight: 700;
           font-size: 0.72rem;
-          letter-spacing: 0.18em;
+          letter-spacing: 0.14em;
           text-transform: uppercase;
-          padding: 5px 16px;
+          padding: 5px 14px;
           border-radius: 100px;
-          margin-bottom: 16px;
+          margin-bottom: 18px;
+        }
+        .urgency-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #22c55e;
+          box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
+          animation: pulse-dot 1.8s ease-in-out infinite;
+          flex-shrink: 0;
+        }
+        @keyframes pulse-dot {
+          0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.25); }
+          50%       { box-shadow: 0 0 0 6px rgba(34,197,94,0.08); }
         }
 
         /* ── Heading ── */
         .hero-heading {
           color: white;
-          word-spacing: 0.05em;
-          letter-spacing: 0.02em;
+          letter-spacing: 0.01em;
           margin-bottom: 16px;
-          max-width: min(95vw, 690px);
-          word-break: break-word;
+          max-width: min(95vw, 680px);
+          line-height: 1.2;
+        }
+        .heading-accent {
+          color: hsl(var(--brand-sky));
         }
 
         /* ── Subtitle ── */
         .hero-subtitle {
-          color: hsl(var(--brand-sky) / 0.8);
+          color: hsl(var(--brand-sky) / 0.75);
           max-width: 480px;
-          margin-bottom: 32px;
-          font-weight: 400;
+          margin-bottom: 28px;
+          font-size: 1rem;
+          line-height: 1.6;
         }
 
         /* ── CTA group ── */
         .hero-cta-group {
           display: flex;
           flex-wrap: wrap;
+          align-items: center;
           gap: 12px;
-          margin-bottom: 32px;
+          margin-bottom: 28px;
         }
 
         /* ── Buttons ── */
@@ -246,49 +269,38 @@ export default function HeroSection() {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          color: hsl(var(--brand-sky) / 0.7);
-          font-size: 0.84rem;
+          color: hsl(var(--brand-sky) / 0.65);
+          font-size: 0.83rem;
+        }
+        .badge-icon {
+          color: hsl(var(--brand-sky));
         }
 
-        /* ════════════════════════════════════════
-           RESPONSIVE BREAKPOINTS
-        ════════════════════════════════════════ */
+        /* ══ RESPONSIVE ══ */
 
-        /* ── Tablet (≤ 1024px): shrink image, narrow content ── */
         @media (max-width: 1024px) {
-          .hero-image-container {
-            width: 50%;
-            right: 0;
-          }
-          .hero-heading {
-            max-width: 100%;
-            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-          }
+          .hero-image-container { width: 50%; right: 0; }
+          .hero-heading { font-size: clamp(1.6rem, 3.5vw, 2.4rem); max-width: 100%; }
         }
 
-        /* ── Mobile (≤ 767px): stack image behind, full-width content ── */
-      @media (max-width: 767px) {
-  .hero-section {
-    min-height: calc(100svh - 68px);  /* 68px = mobile header height */
-    margin-top: 68px;
-    align-items: flex-end;
-  }
-
-          /* Image becomes a full blurred backdrop */
+        @media (max-width: 767px) {
+          .hero-section {
+            min-height: calc(100svh - 68px);
+            margin-top: 68px;
+            align-items: flex-end;
+          }
           .hero-image-container {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 55%;
-            top: 0;
-            right: 0;
+            top: 0; right: 0;
           }
           .hero-image {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             object-position: top center;
-            opacity: 0.55;
+            opacity: 0.5;
           }
           .hero-image-fade {
             background: linear-gradient(
@@ -298,29 +310,16 @@ export default function HeroSection() {
               hsl(var(--brand-dark)) 85%
             );
           }
-
-          /* Content slides up from bottom */
-          .hero-content-wrapper {
-            padding: 24px 20px 40px;
-          }
-
+          .hero-content-wrapper { padding: 24px 20px 40px; }
           .hero-heading {
             font-size: clamp(1.45rem, 6vw, 2rem);
             max-width: 100%;
-            line-height: 1.3;
+            line-height: 1.28;
           }
+          .hero-subtitle { font-size: 0.9rem; max-width: 100%; margin-bottom: 20px; }
 
-          .hero-subtitle {
-            font-size: 0.9rem;
-            max-width: 100%;
-            margin-bottom: 24px;
-          }
-
-          .hero-cta-group {
-            flex-direction: column;
-            gap: 10px;
-          }
-
+          /* Stack CTAs vertically */
+          .hero-cta-group { flex-direction: column; gap: 10px; }
           .btn-primary,
           .btn-outline {
             width: 100%;
@@ -329,23 +328,14 @@ export default function HeroSection() {
             padding: 14px 20px;
           }
 
-          .hero-badges {
-            gap: 12px;
-          }
-          .hero-badge-item {
-            font-size: 0.78rem;
-          }
+          .hero-badges { gap: 12px; }
+          .hero-badge-item { font-size: 0.78rem; }
         }
 
-        /* ── Very small phones (≤ 380px) ── */
         @media (max-width: 380px) {
-          .hero-heading {
-            font-size: 1.3rem;
-          }
-          .hero-badge {
-            font-size: 0.65rem;
-            letter-spacing: 0.12em;
-          }
+          .hero-heading { font-size: 1.3rem; }
+          .hero-urgency-pill { font-size: 0.62rem; }
+          .btn-call-number { font-size: 0.95rem; }
         }
       `}</style>
     </section>

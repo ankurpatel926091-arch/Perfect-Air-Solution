@@ -59,6 +59,7 @@
 
     --glow-primary: 0 0 40px hsl(197 94% 41% / 0.3);
     --glow-primary-strong: 0 0 60px hsl(197 94% 41% / 0.5);
+    --letter-spacing-global: 0.02rem !important;
   }
 
   .dark {
@@ -95,6 +96,7 @@
 @layer base {
   * {
     @apply border-border;
+    letter-spacing: var(--letter-spacing-global) !important; 
   }
 
   body {
@@ -115,6 +117,7 @@
     font-size: clamp(2rem, 4vw, 3rem);
     color: hsl(var(--brand-dark));
     line-height: 1.15;
+    letter-spacing: 0.1rem !important;
   }
 
   h2 {
@@ -123,6 +126,7 @@
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     color: hsl(var(--brand-dark));
     line-height: 1.2;
+    letter-spacing: 0.1rem !important;
   }
 
   h3,
@@ -131,6 +135,7 @@
   h6 {
     font-family: "DM Serif Display";
     font-weight: 600;
+    letter-spacing: 0.1rem !important;
   }
 }
 
@@ -142,11 +147,13 @@
     font-family: "DM Serif Display";
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.15;
+    letter-spacing: 0.1rem !important;
   }
 
   .heading-2 {
     font-family: "DM Serif Display";
     font-size: clamp(1.5rem, 3vw, 2.25rem);
+    letter-spacing: 0.1rem !important;
   }
 
   .body-text {
@@ -187,6 +194,11 @@
 
   .shadow-glow-primary-strong {
     box-shadow: var(--glow-primary-strong);
+  }
+
+  /* Custom Letter Spacing Utility */
+  .tracking-wide-custom {
+    letter-spacing: 0.1rem !important;
   }
 
   /* Global Section Padding */
