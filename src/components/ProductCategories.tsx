@@ -115,106 +115,8 @@ export default function ProductCategories() {
   if (categories.length === 0) return null;
 
   return (
-    <section className="section-padding pc-section">
+    <section className="section-padding" style={{ background: "hsl(var(--brand-light))" }}>
       <style>{`
-        /* ── Global overflow fix ── */
-        .pc-section *,
-        .pc-section *::before,
-        .pc-section *::after {
-          box-sizing: border-box;
-        }
-
-        /* ── Section ── */
-        .pc-section {
-          background: hsl(var(--brand-light));
-          width: 100%;
-          max-width: 100%;
-          overflow-x: hidden;
-        }
-
-        .pc-inner {
-          max-width: 1200px;
-          width: 100%;
-          margin: 0 auto;
-          padding-left: clamp(16px, 5vw, 48px);
-          padding-right: clamp(16px, 5vw, 48px);
-        }
-
-        /* ── Header ── */
-        .pc-header {
-          margin-bottom: clamp(20px, 3.5vw, 32px);
-        }
-
-        .pc-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          font-size: clamp(9px, 1.1vw, 11px);
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: hsl(var(--primary));
-          background: hsl(var(--primary) / 0.1);
-          border: 0.5px solid hsl(var(--primary) / 0.25);
-          border-radius: 999px;
-          padding: 4px 14px;
-          margin-bottom: 10px;
-        }
-
-        .pc-pill-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: hsl(var(--primary));
-          display: inline-block;
-          flex-shrink: 0;
-        }
-
-        .pc-heading-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 16px;
-          flex-wrap: wrap;
-        }
-
-        .pc-heading {
-          font-size: clamp(1rem, 2.2vw, 1.55rem);
-          font-weight: 700;
-          color: hsl(var(--foreground));
-          margin: 0;
-          line-height: 1.25;
-          flex: 1 1 0%;
-          min-width: 0;
-          word-break: break-word;
-          overflow-wrap: break-word;
-        }
-
-        .pc-view-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 7px;
-          font-size: clamp(11px, 1.2vw, 13px);
-          font-weight: 600;
-          color: hsl(var(--foreground));
-          background: hsl(var(--card));
-          border: 1px solid hsl(var(--border));
-          border-radius: 999px;
-          padding: clamp(7px, 1vw, 9px) clamp(14px, 1.8vw, 20px);
-          cursor: pointer;
-          white-space: nowrap;
-          flex-shrink: 0;
-          box-shadow: 0 1px 4px hsl(var(--primary) / 0.08);
-        }
-
-        /* ── Grid ── */
-        .pc-grid {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: clamp(10px, 1.5vw, 16px);
-          width: 100%;
-        }
-
         /* ── Card ── */
         .pc-card {
           position: relative;
@@ -328,7 +230,6 @@ export default function ProductCategories() {
         .pc-card-btn-label {
           font-size: clamp(10px, 1vw, 12px);
           color: #fff;
-       
         }
 
         .pc-card-btn-icon {
@@ -342,36 +243,44 @@ export default function ProductCategories() {
           flex-shrink: 0;
         }
 
-        /* ── Breakpoints ── */
+        .pc-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: clamp(10px, 1.5vw, 16px);
+          width: 100%;
+        }
 
-        /* Large tablets / small desktops: 2 columns */
+        .pc-view-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          font-size: clamp(11px, 1.2vw, 13px);
+          font-weight: 600;
+          color: hsl(var(--foreground));
+          background: hsl(var(--card));
+          border: 1px solid hsl(var(--border));
+          border-radius: 999px;
+          padding: clamp(7px, 1vw, 9px) clamp(14px, 1.8vw, 20px);
+          cursor: pointer;
+          white-space: nowrap;
+          flex-shrink: 0;
+          box-shadow: 0 1px 4px hsl(var(--primary) / 0.08);
+        }
+
+        /* ── Breakpoints ── */
         @media (max-width: 960px) {
           .pc-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
 
-        /* Tablets: tighten heading */
         @media (max-width: 768px) {
-          .pc-heading {
-            font-size: clamp(0.95rem, 3vw, 1.25rem);
-          }
           .pc-card {
             aspect-ratio: 16 / 11;
           }
         }
 
-        /* Large phones: still 2 columns but compact */
         @media (max-width: 640px) {
-          .pc-heading-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-          }
-          .pc-view-btn {
-            width: 100%;
-            justify-content: center;
-          }
           .pc-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
@@ -380,14 +289,12 @@ export default function ProductCategories() {
             aspect-ratio: 3 / 2.5;
             border-radius: 12px;
           }
-          .pc-card-badge {
-            top: 8px;
-            left: 8px;
-            padding: 2px 8px;
+          .pc-view-btn {
+            width: 100%;
+            justify-content: center;
           }
         }
 
-        /* Small phones: 1 column */
         @media (max-width: 400px) {
           .pc-grid {
             grid-template-columns: minmax(0, 1fr);
@@ -395,60 +302,44 @@ export default function ProductCategories() {
           .pc-card {
             aspect-ratio: 16 / 9;
           }
-          .pc-card-desc {
-            -webkit-line-clamp: 3;
-          }
-        }
-
-        /* Landscape phones: 3 columns short cards */
-        @media (max-height: 500px) and (orientation: landscape) {
-          .pc-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-          }
-          .pc-card {
-            aspect-ratio: 16 / 10;
-          }
-        }
-
-        /* Very wide screens: constrain card heights */
-        @media (min-width: 1400px) {
-          .pc-card {
-            aspect-ratio: 4 / 2.8;
-          }
-          .pc-card-title {
-            font-size: 1.1rem;
-          }
-          .pc-card-desc {
-            font-size: 12.5px;
-          }
         }
       `}</style>
 
-      <div className="pc-inner">
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 5vw, 48px)" }}>
         {/* Header */}
-        <div className="pc-header">
-          {/* Pill */}
+        <div style={{ textAlign: "left", marginBottom: "20px" }}>
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="pc-pill"
+            transition={{ duration: 0.5 }}
+            style={{
+              display: "inline-block",
+              background: "hsl(var(--primary) / 0.1)",
+              border: "1px solid hsl(var(--primary) / 0.25)",
+              color: "hsl(var(--primary))",
+              fontWeight: 700,
+              fontSize: "1rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              padding: "5px 20px",
+              borderRadius: "100px",
+              marginBottom: "18px"
+            }}
           >
-            <span className="pc-pill-dot" />
-            Browse by category
+            Product Categories
           </motion.div>
 
-          {/* Heading row */}
-          <div className="pc-heading-row">
+          {/* Heading and View All button row */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", flexWrap: "wrap" }}>
             <motion.h2
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="pc-heading"
+              transition={{ duration: 0.6 }}
+              style={{ margin: 0, flex: 1 }}
             >
-              Choose the Right Cooling &amp; Water Solutions
+              Choose the Right Cooling & Water Solutions
             </motion.h2>
 
             <motion.button
