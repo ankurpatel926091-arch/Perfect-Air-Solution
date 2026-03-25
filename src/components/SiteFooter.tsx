@@ -14,7 +14,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import cclogo from "../assets/cc-logo.png";
-import Logo from "../assets/logo3.png";
+import Logo from "../assets/logo4.png";
 import { useGetServicesQuery, useGetProjectsQuery } from "@/store/api";
 
 const quickLinks = [

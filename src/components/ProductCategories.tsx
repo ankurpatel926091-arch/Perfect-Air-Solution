@@ -13,14 +13,15 @@ type ServiceCategory = {
   tagline?: string;
   desc?: string;
   badge?: string;
+  tag?: string;
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.6 },
+    transition: { delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
@@ -34,136 +35,70 @@ function Card({ cat, i }: { cat: ServiceCategory; i: number }) {
       whileInView="visible"
       viewport={{ once: true }}
       variants={fadeUp}
-      whileHover={{ y: -4 }}
       onClick={() => navigate("/product")}
-      style={{ cursor: "pointer" }}
+      className="pc-card"
+      whileHover="hover"
     >
-      <div
-        style={{
-          background: "hsl(var(--card))",
-          border: "1px solid hsl(var(--border))",
-          borderRadius: "16px",
-          padding: "28px",
-          boxShadow: "0 2px 16px hsl(var(--primary) / 0.08)",
-          transition: "all 0.3s",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          gap: "12px",
-        }}
-      >
-        <div
-          style={{
-            width: "100%",
-            aspectRatio: "4 / 3",
-            borderRadius: "14px",
-            overflow: "hidden",
-            background: "hsl(var(--muted))",
-            border: "1px solid hsl(var(--border))",
-          }}
-        >
-          {cat.image ? (
-            <img
-              src={cat.image}
-              alt={cat.title || "Service category"}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
-            />
-          ) : (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "hsl(var(--muted-foreground))",
-                fontSize: "0.9rem",
-                fontWeight: 600,
-              }}
-            >
-              No Image
-            </div>
-          )}
-        </div>
+      {/* Image */}
+      {cat.image ? (
+        <motion.img
+          src={cat.image}
+          alt={cat.title || "Category"}
+          className="pc-card-img"
+          variants={{ hover: { scale: 1.06 } }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        />
+      ) : (
+        <div className="pc-card-placeholder" />
+      )}
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "12px",
-          }}
-        >
-          <h3
-            style={{
-              color: "hsl(var(--primary))",
-              fontSize: "1.05rem",
-              margin: 0,
-            }}
-          >
-            {cat.title || "Service"}
-          </h3>
-          {cat.badge ? (
-            <span
-              style={{
-                fontSize: "0.72rem",
-                fontWeight: 700,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "hsl(var(--brand-dark))",
-                background: "hsl(var(--brand-dark) / 0.08)",
-                border: "1px solid hsl(var(--brand-dark) / 0.14)",
-                borderRadius: "999px",
-                padding: "4px 10px",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {cat.badge}
-            </span>
-          ) : null}
-        </div>
+      {/* Gradient overlay */}
+      <div className="pc-card-overlay" />
 
-        <p
-          className="body-text"
-          style={{
-            fontSize: "0.87rem",
-            color: "hsl(var(--muted-foreground))",
-            lineHeight: 1.65,
-            margin: 0,
-            flex: 1,
-          }}
-        >
-          {cat.tagline ||
-            cat.desc ||
-            "Explore this service category and view related products."}
+      {/* Top accent strip on hover */}
+      <motion.div
+        variants={{ hover: { opacity: 1 } }}
+        initial={{ opacity: 0 }}
+        className="pc-card-accent"
+      />
+
+      {/* Badge */}
+      {cat.badge && (
+        <div className="pc-card-badge">{cat.badge}</div>
+      )}
+
+      {/* Content */}
+      <div className="pc-card-content">
+        {cat.tag && (
+          <div className="pc-card-tag">{cat.tag}</div>
+        )}
+
+        <h3 className="pc-card-title">
+          {cat.title || "Service"}
+        </h3>
+
+        <p className="pc-card-desc">
+          {cat.tagline || cat.desc || "Explore this service category and view related products."}
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingTop: "12px",
-            marginTop: "auto",
-            borderTop: "1px solid hsl(var(--border))",
+        {/* Explore button */}
+        <motion.div
+          variants={{
+            hover: {
+              background: "rgba(255,255,255,0.22)",
+              borderColor: "rgba(255,255,255,0.4)",
+            },
           }}
+          className="pc-card-btn"
         >
-          <span
-            style={{
-              fontSize: "0.85rem",
-              fontWeight: 600,
-              color: "hsl(var(--primary))",
-            }}
+          <span className="pc-card-btn-label">Explore category</span>
+          <motion.div
+            variants={{ hover: { x: 2 } }}
+            className="pc-card-btn-icon"
           >
-            View More
-          </span>
-          <ArrowRight size={16} style={{ color: "hsl(var(--primary))" }} />
-        </div>
+            <ArrowRight size={10} color="#fff" />
+          </motion.div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -180,104 +115,360 @@ export default function ProductCategories() {
   if (categories.length === 0) return null;
 
   return (
-    <section
-      className="section-padding"
-      style={{ background: "hsl(var(--brand-light))" }}
-    >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 clamp(24px, 5vw, 48px)",
-        }}
-      >
-        <div style={{ textAlign: "left", marginBottom: "20px" }}>
+    <section className="section-padding pc-section">
+      <style>{`
+        /* ── Global overflow fix ── */
+        .pc-section *,
+        .pc-section *::before,
+        .pc-section *::after {
+          box-sizing: border-box;
+        }
+
+        /* ── Section ── */
+        .pc-section {
+          background: hsl(var(--brand-light));
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+        }
+
+        .pc-inner {
+          max-width: 1200px;
+          width: 100%;
+          margin: 0 auto;
+          padding-left: clamp(16px, 5vw, 48px);
+          padding-right: clamp(16px, 5vw, 48px);
+        }
+
+        /* ── Header ── */
+        .pc-header {
+          margin-bottom: clamp(20px, 3.5vw, 32px);
+        }
+
+        .pc-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: clamp(9px, 1.1vw, 11px);
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: hsl(var(--primary));
+          background: hsl(var(--primary) / 0.1);
+          border: 0.5px solid hsl(var(--primary) / 0.25);
+          border-radius: 999px;
+          padding: 4px 14px;
+          margin-bottom: 10px;
+        }
+
+        .pc-pill-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: hsl(var(--primary));
+          display: inline-block;
+          flex-shrink: 0;
+        }
+
+        .pc-heading-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .pc-heading {
+          font-size: clamp(1rem, 2.2vw, 1.55rem);
+          font-weight: 700;
+          color: hsl(var(--foreground));
+          margin: 0;
+          line-height: 1.25;
+          flex: 1 1 0%;
+          min-width: 0;
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
+
+        .pc-view-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          font-size: clamp(11px, 1.2vw, 13px);
+          font-weight: 600;
+          color: hsl(var(--foreground));
+          background: hsl(var(--card));
+          border: 1px solid hsl(var(--border));
+          border-radius: 999px;
+          padding: clamp(7px, 1vw, 9px) clamp(14px, 1.8vw, 20px);
+          cursor: pointer;
+          white-space: nowrap;
+          flex-shrink: 0;
+          box-shadow: 0 1px 4px hsl(var(--primary) / 0.08);
+        }
+
+        /* ── Grid ── */
+        .pc-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: clamp(10px, 1.5vw, 16px);
+          width: 100%;
+        }
+
+        /* ── Card ── */
+        .pc-card {
+          position: relative;
+          border-radius: 16px;
+          overflow: hidden;
+          cursor: pointer;
+          background: #111;
+          aspect-ratio: 4 / 3;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          border: 0.5px solid rgba(255,255,255,0.08);
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
+        }
+
+        .pc-card-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .pc-card-placeholder {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, hsl(var(--primary) / 0.25), hsl(var(--primary) / 0.08));
+        }
+
+        .pc-card-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.42) 38%, rgba(0,0,0,0.06) 65%, transparent 100%);
+          pointer-events: none;
+        }
+
+        .pc-card-accent {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: hsl(var(--primary));
+          z-index: 3;
+        }
+
+        .pc-card-badge {
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          font-size: clamp(8px, 1vw, 10px);
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #fff;
+          background: rgba(255,255,255,0.15);
+          border: 0.5px solid rgba(255,255,255,0.3);
+          border-radius: 999px;
+          padding: 3px 10px;
+          backdrop-filter: blur(6px);
+          z-index: 3;
+        }
+
+        .pc-card-content {
+          position: relative;
+          z-index: 2;
+          padding: clamp(12px, 2vw, 18px);
+        }
+
+        .pc-card-tag {
+          font-size: clamp(8px, 1vw, 10px);
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.5);
+          margin-bottom: 4px;
+        }
+
+        .pc-card-title {
+          color: #fff;
+          font-size: clamp(0.8rem, 1.4vw, 1rem);
+          font-weight: 700;
+          margin: 0 0 4px;
+          line-height: 1.25;
+        }
+
+        .pc-card-desc {
+          font-size: clamp(10px, 1vw, 11.5px);
+          color: rgba(255,255,255,0.58);
+          margin: 0 0 clamp(10px, 1.5vw, 14px);
+          line-height: 1.5;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .pc-card-btn {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: rgba(255,255,255,0.10);
+          border: 0.5px solid rgba(255,255,255,0.20);
+          border-radius: 10px;
+          padding: clamp(7px, 1vw, 9px) clamp(10px, 1.2vw, 13px);
+          backdrop-filter: blur(8px);
+          transition: background 0.2s, border-color 0.2s;
+        }
+
+        .pc-card-btn-label {
+          font-size: clamp(10px, 1vw, 12px);
+        
+          color: #fff;
+       
+        }
+
+        .pc-card-btn-icon {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.18);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        /* ── Breakpoints ── */
+
+        /* Large tablets / small desktops: 2 columns */
+        @media (max-width: 960px) {
+          .pc-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        /* Tablets: tighten heading */
+        @media (max-width: 768px) {
+          .pc-heading {
+            font-size: clamp(0.95rem, 3vw, 1.25rem);
+          }
+          .pc-card {
+            aspect-ratio: 16 / 11;
+          }
+        }
+
+        /* Large phones: still 2 columns but compact */
+        @media (max-width: 640px) {
+          .pc-heading-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+          }
+          .pc-view-btn {
+            width: 100%;
+            justify-content: center;
+          }
+          .pc-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+          }
+          .pc-card {
+            aspect-ratio: 3 / 2.5;
+            border-radius: 12px;
+          }
+          .pc-card-badge {
+            top: 8px;
+            left: 8px;
+            padding: 2px 8px;
+          }
+        }
+
+        /* Small phones: 1 column */
+        @media (max-width: 400px) {
+          .pc-grid {
+            grid-template-columns: minmax(0, 1fr);
+          }
+          .pc-card {
+            aspect-ratio: 16 / 9;
+          }
+          .pc-card-desc {
+            -webkit-line-clamp: 3;
+          }
+        }
+
+        /* Landscape phones: 3 columns short cards */
+        @media (max-height: 500px) and (orientation: landscape) {
+          .pc-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+          .pc-card {
+            aspect-ratio: 16 / 10;
+          }
+        }
+
+        /* Very wide screens: constrain card heights */
+        @media (min-width: 1400px) {
+          .pc-card {
+            aspect-ratio: 4 / 2.8;
+          }
+          .pc-card-title {
+            font-size: 1.1rem;
+          }
+          .pc-card-desc {
+            font-size: 12.5px;
+          }
+        }
+      `}</style>
+
+      <div className="pc-inner">
+        {/* Header */}
+        <div className="pc-header">
+          {/* Pill */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            style={{
-              display: "inline-block",
-              background: "hsl(var(--primary) / 0.1)",
-              border: "1px solid hsl(var(--primary) / 0.25)",
-              color: "hsl(var(--primary))",
-              fontWeight: 700,
-              fontSize: "1rem",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              padding: "5px 20px",
-              borderRadius: "100px",
-              marginBottom: "5px",
-            }}
+            transition={{ duration: 0.4 }}
+            className="pc-pill"
           >
-            Browse by Category
+            <span className="pc-pill-dot" />
+            Browse by category
           </motion.div>
 
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-6">
+          {/* Heading row */}
+          <div className="pc-heading-row">
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-sm sm:text-base md:text-3xl"
-              style={{ marginBottom: "5px", marginTop: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="pc-heading"
             >
-          Choose the Right Cooling & Water Solutions
-
+              Choose the Right Cooling &amp; Water Solutions
             </motion.h2>
 
-            <motion.div
+            <motion.button
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.2 }}
+              onClick={() => navigate("/product")}
+              whileHover={{ y: -1 }}
+              className="pc-view-btn"
             >
-              <button
-                onClick={() => navigate("/product")}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background:
-                    "linear-gradient(135deg, hsl(var(--brand-dark)) 0%, hsl(var(--primary)) 100%)",
-                  color: "white",
-                  fontWeight: 700,
-                  fontSize: "0.9rem",
-                  padding: "10px 22px",
-                  borderRadius: "100px",
-                  border: "none",
-                  cursor: "pointer",
-                  boxShadow: "0 4px 16px hsl(var(--primary) / 0.25)",
-                  transition: "all 0.25s",
-                  whiteSpace: "nowrap",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 6px 20px hsl(var(--primary) / 0.38)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 4px 16px hsl(var(--primary) / 0.25)";
-                }}
-              >
-                View All Products <ArrowRight size={16} />
-              </button>
-            </motion.div>
+              View all products
+              <ArrowRight size={14} />
+            </motion.button>
           </div>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
-            gap: "20px",
-            marginBottom: "20px",
-          }}
-        >
+        {/* Cards grid */}
+        <div className="pc-grid">
           {categories.map((cat, i) => (
             <Card
               key={cat._id || cat.id || cat.slug || cat.title || i}

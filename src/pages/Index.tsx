@@ -16,15 +16,15 @@ const Index = () => (
     <Hero />
     
     <AboutPreview />
-   
+    <ProductCategories />
     <HVACSolutions />
     
     <Services />
-    <ProductCategories />
+   
     
     {/* <FeaturedProjects /> */}
     <Product />
-    {/* <WhyChooseUs /> */}
+    <WhyChooseUs />
     
     <CTASection />
     <BrandMarquee />
