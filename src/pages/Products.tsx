@@ -29,12 +29,12 @@ import PortableAcImg from "@/assets/categories/portable-ac.png";
 import ModularOtImg from "@/assets/categories/modular-ot.png";
 import AirPurifierImg from "@/assets/categories/air-purifier.png";
 import FreezerImg from "@/assets/categories/freezer.png";
-import ChillerImg from "@/assets/categories/chiller.png";
+import ChillerImg from "@/assets/categories/chiller.jpg";
 import ColdRoomImg from "@/assets/categories/cold-room.png";
 import AhuImg from "@/assets/categories/air-handling-unit.png";
-import DuctableAcImg from "@/assets/categories/ductable-ac.png";
-import HeatPumpImg from "@/assets/categories/heat-pump.png";
-import VentilationImg from "@/assets/categories/ventilation.png";
+import DuctableAcImg from "@/assets/categories/ductable.jpg";
+import HeatPumpImg from "@/assets/categories/heat-pump.jpg";
+import VentilationImg from "@/assets/categories/ventilation.jpg";
 import {  
   Dialog,
   DialogContent,
