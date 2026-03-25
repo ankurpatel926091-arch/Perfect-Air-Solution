@@ -327,7 +327,6 @@ export default function ProductCategories() {
 
         .pc-card-btn-label {
           font-size: clamp(10px, 1vw, 12px);
-        
           color: #fff;
        
         }
