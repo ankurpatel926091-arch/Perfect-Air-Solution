@@ -186,12 +186,12 @@ const SiteHeader = () => {
           width: 100%;
           max-width: 1180px;
           margin: 0 auto;
-          padding: 0 24px;
-          height: 80px;
+          padding: 0 16px;
+          height: 70px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 16px;
+          gap: 12px;
         }
 
         /* Logo */
@@ -202,7 +202,7 @@ const SiteHeader = () => {
           text-decoration: none;
         }
         .header-logo img {
-          height: 80px;
+          height: 50px;
           width: auto;
           display: block;
         }
@@ -218,8 +218,8 @@ const SiteHeader = () => {
        .nav-link {
   font-family: Inter, sans-serif;
   font-weight: 500;
-  font-size: 0.97rem;
-  padding: 7px 12px;
+  font-size: 0.85rem;
+  padding: 6px 10px;
   border-radius: 8px;
   color: hsl(var(--brand-dark));
   text-decoration: none;
@@ -272,6 +272,8 @@ const SiteHeader = () => {
           display: flex;
           align-items: center;
           justify-content: center;
+          min-width: 44px;
+          min-height: 44px;
           padding: 8px;
           border-radius: 8px;
           background: transparent;
@@ -279,6 +281,10 @@ const SiteHeader = () => {
           cursor: pointer;
           color: hsl(var(--brand-dark));
           -webkit-tap-highlight-color: transparent;
+          transition: background 0.2s;
+        }
+        .mobile-menu-btn:active {
+          background: hsl(var(--primary) / 0.08);
         }
 
         /* ── Mobile Nav ── */
@@ -286,9 +292,10 @@ const SiteHeader = () => {
           overflow: hidden;
           background: rgba(255, 255, 255, 0.97);
           border-top: 1px solid hsl(var(--border));
+          margin-top: 0;
         }
         .mobile-nav-inner {
-          padding: 12px 20px 20px;
+          padding: 8px 16px 16px;
           display: flex;
           flex-direction: column;
           gap: 2px;
@@ -298,9 +305,9 @@ const SiteHeader = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 13px 16px;
+  padding: 12px 14px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: hsl(var(--brand-dark));
   text-decoration: none;
   border-radius: 10px;
@@ -328,15 +335,20 @@ const SiteHeader = () => {
           justify-content: center;
           align-items: center;
           gap: 8px;
-          margin-top: 12px;
-          padding: 14px;
+          margin-top: 8px;
+          padding: 13px 16px;
           background: linear-gradient(135deg, hsl(var(--brand-dark)) 0%, hsl(var(--primary)) 100%);
           color: white;
           font-weight: 700;
-          font-size: 1rem;
+          font-size: 0.95rem;
           border-radius: 100px;
           text-decoration: none;
           box-shadow: 0 4px 16px hsl(var(--primary) / 0.3);
+          transition: opacity 0.2s, transform 0.2s;
+        }
+        .mobile-call-btn:active {
+          opacity: 0.85;
+          transform: scale(0.98);
         }
 
         /* Backdrop */
@@ -357,29 +369,41 @@ const SiteHeader = () => {
         .mobile-only    { display: flex !important; }
         .desktop-only   { display: none !important; }
 
+        /* ── Small phones (≤ 360px) ── */
+        @media (max-width: 360px) {
+          .header-inner { padding: 0 12px; height: 64px; }
+          .header-logo img { height: 44px; }
+          .mobile-menu-btn { padding: 6px; }
+          .mobile-nav-link { font-size: 0.9rem; padding: 11px 12px; }
+          .mobile-call-btn { font-size: 0.95rem; }
+        }
+
+        /* ── Medium phones (361px - 480px) ── */
+        @media (min-width: 361px) and (max-width: 480px) {
+          .header-inner { padding: 0 14px; }
+          .header-logo img { height: 48px; }
+        }
+
         /* ── Tablet (≥ 768px): show desktop nav, hide hamburger ── */
         @media (min-width: 768px) and (max-width: 1023px) {
+          .header-inner { padding: 0 20px; height: 72px; }
           .desktop-nav { display: flex !important; gap: 0; }
-          .nav-link { font-size: 0.85rem; padding: 6px 8px; }
+          .nav-link { font-size: 0.82rem; padding: 6px 9px; }
           .mobile-only { display: none !important; }
           /* Enquiry button shows on tablet too */
           .desktop-only { display: inline-flex !important; }
           .enquiry-btn { font-size: 0.85rem; padding: 10px 16px; }
-          .header-logo img { height: 54px; }
+          .header-logo img { height: 56px; }
         }
 
         /* ── Desktop (≥ 1024px): full layout ── */
         @media (min-width: 1024px) {
+          .header-inner { padding: 0 24px; height: 80px; }
+          .header-logo img { height: 80px; }
           .desktop-nav  { display: flex !important; }
+          .nav-link { font-size: 0.97rem; padding: 7px 12px; }
           .mobile-only  { display: none !important; }
           .desktop-only { display: inline-flex !important; }
-        }
-
-        /* ── Small phones (≤ 360px) ── */
-        @media (max-width: 360px) {
-          .header-inner { padding: 0 14px; height: 68px; }
-          .header-logo img { height: 52px; }
-          .mobile-nav-link { font-size: 0.92rem; padding: 11px 14px; }
         }
       `}</style>
     </>
