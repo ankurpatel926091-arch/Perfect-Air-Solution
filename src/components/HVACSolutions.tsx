@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Phone, Wind, Droplets, ThermometerSun, AirVent, Building2, Home } from "lucide-react";
-
+import commercialImage from "../assets/commercial.jpg";
+import resedentialImage from "../assets/resedential.jpg"
 const residentialItems = [
   { icon: <Wind size={16} />, label: "Split ACs Up to 3 ton" },
   { icon: <Wind size={16} />, label: "Window ACs" },
@@ -126,7 +127,7 @@ export default function HVACSolutions() {
             title="Residential Solutions"
             items={residentialItems}
             primaryBtnLabel="Get Quote"
-            imageUrl="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&auto=format&fit=crop&q=80"
+            imageUrl={resedentialImage}
             imageAlt="Residential air conditioner installation technician installing split AC"
             badgeIcon={<Home size={18} style={{ color: "hsl(var(--primary))" }} />}
           />
@@ -135,7 +136,7 @@ export default function HVACSolutions() {
             title="Commercial & VRF Systems"
             items={commercialItems}
             primaryBtnLabel="Get Quote"
-            imageUrl="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&auto=format&fit=crop&q=80"
+            imageUrl={commercialImage}
             imageAlt="Commercial VRF HVAC system installation inside office building"
             badgeIcon={<Building2 size={18} style={{ color: "hsl(var(--primary))" }} />}
           />
