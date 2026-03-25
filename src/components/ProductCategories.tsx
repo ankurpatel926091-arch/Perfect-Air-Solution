@@ -195,7 +195,7 @@ export default function ProductCategories() {
         .pc-card-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.42) 38%, rgba(0,0,0,0.06) 65%, transparent 100%);
+          background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 38%, rgba(0,0,0,0.30) 65%, rgba(0,0,0,0.08) 100%);
           pointer-events: none;
         }
 
