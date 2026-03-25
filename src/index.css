@@ -59,7 +59,7 @@
 
     --glow-primary: 0 0 40px hsl(197 94% 41% / 0.3);
     --glow-primary-strong: 0 0 60px hsl(197 94% 41% / 0.5);
-    --letter-spacing-global: 0.04rem;
+    --letter-spacing-global: 0.1rem;
   }
 
   .dark {

@@ -76,7 +76,7 @@ const contactSchema = Yup.object({
   service: Yup.string()
     .optional()
     .oneOf(
-      ["AC Installation", "AC Repair", "AMC Service", "VRV/VRF", "Cold Storage"],
+      ["AC Installation", "AC Repair", "AMC Service", "VRF", "Cold Storage"],
       "Invalid service selected"
     ),
 
@@ -95,7 +95,7 @@ const contactSchema = Yup.object({
 const services: ServiceOption[] = [
   { id: "residential", label: "Residential AC", icon: <Wind size={15} /> },
   { id: "commercial", label: "Commercial HVAC", icon: <Zap size={15} /> },
-  { id: "vrv", label: "VRV / VRF Systems", icon: <Thermometer size={15} /> },
+  { id: "vrf", label: "VRF Systems", icon: <Thermometer size={15} /> },
   { id: "amc", label: "Service & AMC", icon: <CheckCircle size={15} /> },
   { id: "chiller", label: "Chiller Systems", icon: <Wind size={15} /> },
   { id: "other", label: "Other", icon: <MessageSquare size={15} /> },
@@ -106,7 +106,7 @@ const slugToServiceId: Record<string, string> = {
   "ac-installation": "residential",
   "ac-repair": "residential",
   "amc-service": "amc",
-  "vrv-vrf": "vrv",
+  "vrf": "vrf",
   "cold-storage": "chiller",
   "commercial-hvac": "commercial",
 };

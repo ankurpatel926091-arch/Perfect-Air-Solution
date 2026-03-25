@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useGetServicesQuery } from "@/store/api";
-import Loader from "@/components/ui/Loader";
+import splitAc from "@/assets/categories/split-ac.png";
+import windowAc from "@/assets/categories/window-ac.png";
+import cassetteAc from "@/assets/categories/cassette-ac.png";
+import towerAc from "@/assets/categories/tower-ac.png";
+import waterCooler from "@/assets/categories/water-cooler-dispenser.png";
+import vrfImg from "@/assets/categories/vrf.png";
 
 type ServiceCategory = {
   _id?: string;
@@ -15,6 +19,53 @@ type ServiceCategory = {
   badge?: string;
   tag?: string;
 };
+
+const staticCategories: ServiceCategory[] = [
+  {
+    title: "Split AC",
+    tagline: "High-efficiency cooling for your home and office.",
+    image: splitAc,
+    tag: "Residential",
+    badge: "Popular",
+    slug: "split-ac"
+  },
+  {
+    title: "Window AC",
+    tagline: "Compact and powerful cooling solutions for any room.",
+    image: windowAc,
+    tag: "Residential",
+    slug: "window-ac"
+  },
+  {
+    title: "Cassette AC",
+    tagline: "Unobtrusive ceiling-mounted cooling for large spaces.",
+    image: cassetteAc,
+    tag: "Commercial",
+    slug: "cassette-ac"
+  },
+  {
+    title: "Tower AC",
+    tagline: "Elegant floor-standing units with high cooling capacity.",
+    image: towerAc,
+    tag: "Commercial",
+    slug: "tower-ac"
+  },
+  {
+    title: "Water Cooler and Dispenser",
+    tagline: "Pure, chilled water for offices and public spaces.",
+    image: waterCooler,
+    tag: "Industrial",
+    slug: "water-cooler-and-dispenser"
+  },
+  {
+    title: "VRF",
+    tagline: "Advanced Variable Refrigerant Flow systems for complex buildings.",
+    image: vrfImg,
+    tag: "Industrial",
+    badge: "Advanced",
+    slug: "vrf"
+  }
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -106,13 +157,7 @@ function Card({ cat, i }: { cat: ServiceCategory; i: number }) {
 
 export default function ProductCategories() {
   const navigate = useNavigate();
-  const { data: services = [], isLoading } = useGetServicesQuery();
-
-  if (isLoading) return <Loader />;
-
-  const categories = [...services].reverse().slice(0, 6);
-
-  if (categories.length === 0) return null;
+  const categories = staticCategories;
 
   return (
     <section className="section-padding" style={{ background: "hsl(var(--brand-light))" }}>
@@ -202,6 +247,7 @@ export default function ProductCategories() {
           font-weight: 700;
           margin: 0 0 4px;
           line-height: 1.25;
+          letter-spacing: 0.1rem;
         }
 
         .pc-card-desc {
@@ -337,7 +383,7 @@ export default function ProductCategories() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              style={{ margin: 0, flex: 1 }}
+              style={{ margin: 0, flex: 1, letterSpacing: "0.1rem" }}
             >
               Choose the Right Cooling & Water Solutions
             </motion.h2>

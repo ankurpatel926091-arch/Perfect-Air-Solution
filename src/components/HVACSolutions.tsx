@@ -132,11 +132,11 @@ export default function HVACSolutions() {
           />
           <SolutionCard
             index={1}
-            title="Commercial & VRV Systems"
+            title="Commercial & VRF Systems"
             items={commercialItems}
             primaryBtnLabel="Get Quote"
             imageUrl="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&auto=format&fit=crop&q=80"
-            imageAlt="Commercial VRV HVAC system installation inside office building"
+            imageAlt="Commercial VRF HVAC system installation inside office building"
             badgeIcon={<Building2 size={18} style={{ color: "hsl(var(--primary))" }} />}
           />
         </div>

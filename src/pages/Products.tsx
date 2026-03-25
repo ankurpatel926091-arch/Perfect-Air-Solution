@@ -17,29 +17,32 @@ import {
   LoaderCircle,
 } from "lucide-react";
 import { toast } from "react-toastify";
-import SplitAcImg from "@/assets/split-ac.png";
-import WindowAcImg from "@/assets/window-ac.png";
-import CassetteAcImg from "@/assets/cassette-ac.png";
-import DuctableAcImg from "@/assets/ductable-ac.png";
-import TowerAcImg from "@/assets/tower-ac.png";
-import PackageAcImg from "@/assets/package-ac.png";
-import VrvVrfImg from "@/assets/vrv-vrf.png";
-import AhuImg from "@/assets/ahu.png";
-import ChillerImg from "@/assets/chiller.png";
-import WaterCooledChillerImg from "@/assets/water-cooled-chiller.png";
-import ColdRoomImg from "@/assets/cold-room.png";
-import IcePlantImg from "@/assets/ice-plant.png";
-import WaterDispenserImg from "@/assets/water-dispenser.png";
-import RoPlantImg from "@/assets/ro-plant.png";
-import WaterCoolerImg from "@/assets/water-cooler.png";
-import PanelAcImg from "@/assets/panel-ac.png";
-import {
+import SplitAcImg from "@/assets/categories/split-ac.png";
+import WindowAcImg from "@/assets/categories/window-ac.png";
+import CassetteAcImg from "@/assets/categories/cassette-ac.png";
+import TowerAcImg from "@/assets/categories/tower-ac.png";
+import VrvVrfImg from "@/assets/categories/vrf.png";
+import WaterCoolerImg from "@/assets/categories/water-cooler-dispenser.png";
+import RoPlantImg from "@/assets/categories/ro-system.png";
+import SolarHeaterImg from "@/assets/categories/solar-heater.png";
+import PortableAcImg from "@/assets/categories/portable-ac.png";
+import ModularOtImg from "@/assets/categories/modular-ot.png";
+import AirPurifierImg from "@/assets/categories/air-purifier.png";
+import FreezerImg from "@/assets/categories/freezer.png";
+import ChillerImg from "@/assets/categories/chiller.png";
+import ColdRoomImg from "@/assets/categories/cold-room.png";
+import AhuImg from "@/assets/categories/air-handling-unit.png";
+import DuctableAcImg from "@/assets/categories/ductable-ac.png";
+import HeatPumpImg from "@/assets/categories/heat-pump.png";
+import VentilationImg from "@/assets/categories/ventilation.png";
+import {  
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
 
 interface Product {
   name: string;
@@ -67,23 +70,178 @@ interface EnquiryFormState {
 }
 
 const categories: Category[] = [
-  { id: "split-ac", icon: <Snowflake size={22} />, title: "Split AC", description: "Energy-efficient Split AC for homes and offices with powerful cooling performance.", image: SplitAcImg, brands: ["Daikin", "Voltas", "LG", "Samsung"], products: [] },
-  { id: "window-ac", icon: <Box size={22} />, title: "Window AC", description: "Compact and budget-friendly Window AC for small rooms with easy installation.", image: WindowAcImg, brands: ["Carrier", "Godrej", "Blue Star"], products: [] },
-  { id: "cassette-ac", icon: <AirVent size={22} />, title: "Cassette & Ductable ACs", description: "Ceiling-mounted and ducted AC solutions for offices, showrooms, and larger commercial spaces.", image: CassetteAcImg, brands: ["Daikin", "Mitsubishi", "Carrier"], price: "Starting from Rs. 78,000", products: [] },
-  { id: "ductable-ac", icon: <Wind size={22} />, title: "Ductable AC", description: "Centralized ductable AC system for large areas and commercial spaces.", image: DuctableAcImg, brands: ["Daikin", "Blue Star"], price: "Starting from Rs. 95,000", products: [] },
-  { id: "water-dispenser", icon: <Droplet size={22} />, title: "Water Dispenser", description: "Hot and cold water dispensers with energy-efficient cooling system.", image: WaterDispenserImg, brands: ["Voltas", "Blue Star"], products: [] },
-  { id: "ro-plant", icon: <Droplet size={22} />, title: "RO Plant", description: "Advanced RO plant systems for pure and safe drinking water.", image: RoPlantImg, brands: ["Kent", "Aquaguard"], price: "Starting from Rs. 65,000", products: [] },
-  { id: "tower-ac", icon: <ThermometerSun size={22} />, title: "Tower ACs", description: "High-capacity tower AC solutions for large rooms, halls, and event spaces.", image: TowerAcImg, brands: ["Blue Star", "Voltas"], products: [] },
-  { id: "package-ac", icon: <Box size={22} />, title: "Package AC", description: "Heavy-duty Package AC for commercial buildings and malls.", image: PackageAcImg, brands: ["Carrier", "Daikin"], price: "Starting from Rs. 1,25,000", products: [] },
-  { id: "vrv-vrf", icon: <Building2 size={22} />, title: "Daikin VRF Systems", description: "Advanced Daikin VRF systems for smart multi-zone cooling across commercial spaces.", image: VrvVrfImg, brands: ["Daikin", "Mitsubishi"], price: "Starting from Rs. 2,40,000", products: [] },
-  { id: "ahu", icon: <Fan size={22} />, title: "Ventilation & Fresh Air Systems", description: "Fresh air and ventilation systems for healthier airflow in centralized HVAC environments.", image: AhuImg, brands: ["Systemair", "Blue Star"], price: "Starting from Rs. 1,10,000", products: [] },
-  { id: "cold-room", icon: <Snowflake size={22} />, title: "Cold Room", description: "Custom-built cold room solutions for storage and preservation.", image: ColdRoomImg, brands: ["Blue Star", "Carrier"], price: "Starting from Rs. 1,80,000", products: [] },
-  { id: "chiller", icon: <Snowflake size={22} />, title: "Chillers & Heat Pumps", description: "Industrial chillers and heat pump solutions for large-scale cooling and temperature control.", image: ChillerImg, brands: ["Daikin", "Trane"], price: "Starting from Rs. 3,25,000", products: [] },
-  { id: "air-cooled-chiller", icon: <Fan size={22} />, title: "Air-Cooled Chiller", description: "Efficient air-cooled chiller with low maintenance cost.", image: ChillerImg, brands: ["Blue Star", "Carrier"], price: "Starting from Rs. 2,90,000", products: [] },
-  { id: "water-cooled-chiller", icon: <Droplets size={22} />, title: "Water-Cooled Chiller", description: "High-capacity water-cooled chiller for heavy-duty applications.", image: WaterCooledChillerImg, brands: ["Daikin", "Trane"], price: "Starting from Rs. 3,60,000", products: [] },
-  { id: "ice-plant", icon: <Snowflake size={22} />, title: "Ice Plant", description: "Industrial ice plant for bulk ice production.", image: IcePlantImg, brands: ["Blue Star"], price: "Starting from Rs. 4,20,000", products: [] },
-  { id: "panel-ac", icon: <Activity size={22} />, title: "Panel AC", description: "Compact panel AC for electrical control panels.", image: PanelAcImg, brands: ["Pfannenberg"], price: "Starting from Rs. 52,000", products: [] },
-  { id: "water-cooler", icon: <Droplets size={22} />, title: "Water Cooler", description: "Commercial water cooler for offices, schools, and public spaces.", image: WaterCoolerImg, brands: ["Voltas", "Blue Star"], products: [] },
+  // --- Residential Solution ---
+  { 
+    id: "split-ac", 
+    icon: <Snowflake size={22} />, 
+    title: "Split AC", 
+    description: "High-efficiency cooling for homes and offices with powerful performance.", 
+    image: SplitAcImg, 
+    brands: ["Daikin", "Blue Star", "Hitachi", "Panasonic", "Mitsubishi", "Carrier", "Midea"], 
+    products: [] 
+  },
+  { 
+    id: "cassette-ac", 
+    icon: <AirVent size={22} />, 
+    title: "Cassette Air Conditioners", 
+    description: "Sleek ceiling-mounted cooling for residential and commercial spaces.", 
+    image: CassetteAcImg, 
+    brands: ["Daikin", "Blue Star", "Hitachi", "Panasonic", "Mitsubishi", "Carrier", "Midea"], 
+    products: [] 
+  },
+  { 
+    id: "tower-ac", 
+    icon: <ThermometerSun size={22} />, 
+    title: "Floor Standing Air Conditioners", 
+    description: "Elegant tower AC solutions for large living areas and event spaces.", 
+    image: TowerAcImg, 
+    brands: ["Daikin", "Blue Star", "Hitachi", "Panasonic", "Mitsubishi", "Carrier", "Midea"], 
+    products: [] 
+  },
+  { 
+    id: "window-ac", 
+    icon: <Box size={22} />, 
+    title: "Window Air Conditioners", 
+    description: "Compact and powerful cooling solutions for any room.", 
+    image: WindowAcImg, 
+    brands: ["Daikin", "Blue Star", "Hitachi", "Panasonic", "Mitsubishi", "Carrier", "Midea"], 
+    products: [] 
+  },
+  { 
+    id: "portable-ac", 
+    icon: <Wind size={22} />, 
+    title: "Portable Air Conditioners", 
+    description: "Convenient and mobile cooling for flexible space management.", 
+    image: PortableAcImg, 
+    brands: ["Blue Star", "Carrier", "Midea"], 
+    products: [] 
+  },
+  { 
+    id: "water-cooler", 
+    icon: <Droplets size={22} />, 
+    title: "Water Coolers & Dispensers", 
+    description: "Hygienic and energy-efficient chilled water solutions.", 
+    image: WaterCoolerImg, 
+    brands: ["Blue Star", "Midea", "Carrier"], 
+    products: [] 
+  },
+  { 
+    id: "ro-system", 
+    icon: <Droplet size={22} />, 
+    title: "Alkaline Water RO Systems", 
+    description: "Advanced RO systems for pure, healthy, and safe drinking water.", 
+    image: RoPlantImg, 
+    brands: ["Blue Star"], 
+    products: [] 
+  },
+  { 
+    id: "solar-heater", 
+    icon: <ThermometerSun size={22} />, 
+    title: "Solar Water Heaters", 
+    description: "Eco-friendly and sustainable water heating solutions.", 
+    image: SolarHeaterImg, 
+    brands: ["Blue Star", "Panasonic"], 
+    products: [] 
+  },
+  { 
+    id: "ventilation", 
+    icon: <Fan size={22} />, 
+    title: "Ventilation Fans & HRV Systems", 
+    description: "Fresh air and ventilation solutions for a healthier indoor environment.", 
+    image: VentilationImg, 
+    brands: ["Panasonic", "Mitsubishi", "Daikin"], 
+    products: [] 
+  },
+  { 
+    id: "air-purifier", 
+    icon: <Wind size={22} />, 
+    title: "Air Purifiers & Water Softeners", 
+    description: "Advanced technology for pure indoor air and soft water quality.", 
+    image: AirPurifierImg, 
+    brands: ["Daikin", "Panasonic", "Blue Star", "Midea"], 
+    products: [] 
+  },
+  { 
+    id: "freezer-fridge", 
+    icon: <Snowflake size={22} />, 
+    title: "Deep Freezers & Commercial Refrigerators", 
+    description: "Heavy-duty storage solutions for preservation and cooling.", 
+    image: FreezerImg, 
+    brands: ["Blue Star", "Midea", "Panasonic", "Mitsubishi"], 
+    products: [] 
+  },
+
+  // --- Commercial HVAC Solution ---
+  { 
+    id: "vrf-system", 
+    icon: <Building2 size={22} />, 
+    title: "VRF Systems", 
+    description: "Advanced multi-zone cooling solutions for commercial buildings.", 
+    image: VrvVrfImg, 
+    brands: ["Daikin", "Blue Star", "Hitachi", "Panasonic", "Mitsubishi", "Carrier", "Midea"], 
+    price: "Starting from Rs. 2,40,000", 
+    products: [] 
+  },
+  { 
+    id: "chiller", 
+    icon: <Snowflake size={22} />, 
+    title: "Chillers", 
+    description: "Industrial cooling solutions for large-scale temperature control.", 
+    image: ChillerImg, 
+    brands: ["Daikin", "Blue Star", "Hitachi", "Carrier", "Mitsubishi"], 
+    price: "Starting from Rs. 3,25,000", 
+    products: [] 
+  },
+  { 
+    id: "heat-pump", 
+    icon: <Activity size={22} />, 
+    title: "Heat Pump", 
+    description: "Efficient energy-saving temperature regulation for various applications.", 
+    image: HeatPumpImg, 
+    brands: ["Daikin", "Blue Star", "Mitsubishi", "Panasonic"], 
+    price: "Starting from Rs. 1,50,000", 
+    products: [] 
+  },
+  { 
+    id: "ductable-ac", 
+    icon: <Wind size={22} />, 
+    title: "Ductable ACs", 
+    description: "Centralized cooling systems for offices and large commercial spaces.", 
+    image: DuctableAcImg, 
+    brands: ["Daikin", "Blue Star", "Hitachi", "Panasonic", "Mitsubishi", "Carrier", "Midea"], 
+    price: "Starting from Rs. 95,000", 
+    products: [] 
+  },
+  { 
+    id: "cold-room", 
+    icon: <Snowflake size={22} />, 
+    title: "Cold Rooms & Storage", 
+    description: "Customized cold storage solutions for preservation needs.", 
+    image: ColdRoomImg, 
+    brands: ["Blue Star", "Carrier", "Midea"], 
+    price: "Starting from Rs. 1,80,000", 
+    products: [] 
+  },
+  { 
+    id: "ahu", 
+    icon: <Fan size={22} />, 
+    title: "Air Handling Units", 
+    description: "Robust AHUs for centralized air circulation and filtration.", 
+    image: AhuImg, 
+    brands: ["Daikin", "Blue Star", "Carrier"], 
+    price: "Starting from Rs. 1,10,000", 
+    products: [] 
+  },
+  { 
+    id: "modular-ot", 
+    icon: <Activity size={22} />, 
+    title: "Modular Operating Theatre (OT)", 
+    description: "Specialized medical-grade HVAC solutions for hygienic clinical environments.", 
+    image: ModularOtImg, 
+    brands: ["Daikin", "Blue Star", "Mitsubishi"], 
+    price: "Starting from Rs. 5,50,000", 
+    products: [] 
+  },
 ];
 
 function StarRating({ count }: { count: number }) {
@@ -141,6 +299,7 @@ function ProductCard({
             color: "hsl(var(--primary))",
             fontSize: "1.125rem",
             marginBottom: "4px",
+            letterSpacing: "0.1rem",
           }}
         >
           {cat.title}
@@ -268,8 +427,28 @@ export default function ProductsPage() {
   ];
 
   const filterMap: Record<string, string[]> = {
-    residential: ["split-ac", "window-ac", "tower-ac", "water-dispenser", "water-cooler"],
-    commercial: ["vrv-vrf", "cassette-ac", "chiller", "ahu", "package-ac", "ductable-ac", "panel-ac", "ro-plant", "cold-room", "ice-plant", "air-cooled-chiller", "water-cooled-chiller"],
+    residential: [
+      "split-ac", 
+      "cassette-ac", 
+      "tower-ac", 
+      "window-ac", 
+      "portable-ac", 
+      "water-cooler", 
+      "ro-system", 
+      "solar-heater", 
+      "ventilation", 
+      "air-purifier",
+      "freezer-fridge"
+    ],
+    commercial: [
+      "vrf-system", 
+      "chiller", 
+      "heat-pump", 
+      "ductable-ac", 
+      "cold-room", 
+      "ahu", 
+      "modular-ot"
+    ],
   };
 
   useEffect(() => {
@@ -369,7 +548,7 @@ export default function ProductsPage() {
   return (
     <div className="bg-background min-h-screen">
       <div className="bg-hero-gradient text-center" style={{ padding: "56px 24px", marginTop: "48px" }}>
-        <h1 style={{ color: "white", marginBottom: "12px" }}>
+        <h1 style={{ color: "white", marginBottom: "12px", letterSpacing: "0.1rem" }}>
           Our Products
         </h1>
         <p className="body-text" style={{ color: "rgba(255, 255, 255, 0.88)" }}>

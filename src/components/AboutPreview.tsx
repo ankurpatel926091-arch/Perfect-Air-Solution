@@ -59,7 +59,7 @@ export default function AboutPreview() {
           >
             LIMRA Sales &amp; Services is a leading HVAC and air conditioning solutions provider based in Uttar Pradesh, delivering reliable installation, maintenance, and large-scale commercial cooling projects across the state. With strong technical expertise and years of hands-on industry experience, we provide complete climate control solutions for residential, commercial, and industrial spaces.
 
-            From standard AC installations to advanced VRF/VRV systems, ducting, ventilation, cold rooms, ice plants, and chiller plants, our team ensures every project is executed with precision, safety, and efficiency. We specialize in the installation and servicing of Window, Split, Cassette, Ductable, Package AC, and AHU systems, along with copper piping and complete HVAC line work.
+            From standard AC installations to advanced VRF systems, ducting, ventilation, cold rooms, ice plants, and chiller plants, our team ensures every project is executed with precision, safety, and efficiency. We specialize in the installation and servicing of Window, Split, Cassette, Ductable, Package AC, and AHU systems, along with copper piping and complete HVAC line work.
 
             With a commitment to quality workmanship, transparent service, and long-term customer satisfaction, LIMRA Sales &amp; Services continues to build trust through performance and professionalism.
           </motion.p>

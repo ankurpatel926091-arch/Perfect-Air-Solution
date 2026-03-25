@@ -49,9 +49,9 @@ export default function HeroSection() {
         >
           AC Not Cooling?{" "}
           <span className="heading-accent">
-            Get It Fixed Today
+            Book Now & Get Cool Air Today
           </span>{" "}
-          — UP's Most Trusted HVAC Team Since 2012
+          — Limited Slots Available
         </motion.h1>
 
         {/* Subtitle */}

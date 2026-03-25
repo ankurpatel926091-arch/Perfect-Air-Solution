@@ -20,20 +20,19 @@ const SiteHeader = () => {
 
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
-  /* Close menu on Escape key */
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  /* Lock body scroll when menu is open */
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  /* Subtle shadow on scroll */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -44,21 +43,46 @@ const SiteHeader = () => {
 
   return (
     <>
-      <header className={`site-header${scrolled ? " scrolled" : ""}`}>
-        <div className="header-inner">
+      <header
+        className={`fixed top-0 left-0 right-0 z-[1000] bg-white/95 backdrop-blur-xl transition-shadow duration-300 ${
+          scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.08)]" : "shadow-none"
+        }`}
+      >
+        {/* ── Inner flex row ── */}
+        <div className="w-full max-w-[1200px] mx-auto flex items-center justify-between gap-3 px-4 sm:px-5 md:px-6 lg:px-8 h-[60px] sm:h-[64px] md:h-[68px] lg:h-[72px]">
 
           {/* Logo */}
-          <Link to="/" className="header-logo" aria-label="LIMRA Sales & Services – Home">
-            <img src={Logo} alt="LIMRA Sales & Services" />
+          <Link
+            to="/"
+            aria-label="LIMRA Sales & Services – Home"
+            className="flex items-center flex-shrink-0"
+          >
+            <img
+              src={Logo}
+              alt="LIMRA Sales & Services"
+              className="h-[36px] sm:h-[40px] md:h-[44px] lg:h-[48px] w-auto object-contain"
+            />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="desktop-nav" aria-label="Main navigation">
+          {/* Desktop Nav — md and above */}
+          <nav
+            aria-label="Main navigation"
+            className="hidden md:flex items-center justify-center flex-1 gap-0.5 xl:gap-1"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`nav-link${isActive(link.path) ? " nav-link--active" : ""}`}
+                className={`
+                  relative whitespace-nowrap rounded-lg leading-none transition-all duration-200 font-medium
+                  text-[0.72rem] px-2 py-1.5
+                  lg:text-[0.82rem] lg:px-2.5 lg:py-[7px]
+                  xl:text-[0.875rem] xl:px-3
+                  ${isActive(link.path)
+                    ? "text-[hsl(var(--primary))] font-bold"
+                    : "text-[hsl(var(--brand-dark))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary)/0.07)]"
+                  }
+                `}
               >
                 {link.name}
               </Link>
@@ -66,17 +90,23 @@ const SiteHeader = () => {
           </nav>
 
           {/* Right actions */}
-          <div className="header-actions">
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Enquiry button — md and above */}
             <a
               href="tel:+919839171701"
-              className="enquiry-btn desktop-only"
               aria-label="Call LIMRA Sales and Services"
+              className="hidden md:inline-flex items-center gap-1.5 bg-gradient-to-br from-[hsl(var(--brand-dark))] to-[hsl(var(--primary))] text-white font-bold rounded-full shadow-lg shadow-[hsl(var(--primary)/0.25)] hover:opacity-90 hover:-translate-y-px transition-all duration-200 whitespace-nowrap no-underline
+                text-[0.72rem] px-3 py-2
+                lg:text-[0.82rem] lg:px-4 lg:py-2.5
+                xl:text-[0.875rem] xl:px-5"
             >
-              <Phone size={17} aria-hidden="true" /> Enquiry Now
+              <Phone size={13} className="lg:w-[15px] lg:h-[15px]" aria-hidden="true" />
+              Enquiry Now
             </a>
 
+            {/* Hamburger — below md */}
             <button
-              className="mobile-menu-btn mobile-only"
+              className="md:hidden flex items-center justify-center w-[42px] h-[42px] rounded-lg bg-transparent border-0 cursor-pointer text-[hsl(var(--brand-dark))] active:bg-[hsl(var(--primary)/0.08)] transition-colors"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
@@ -89,16 +119,16 @@ const SiteHeader = () => {
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.18 }}
-                  style={{ display: "flex" }}
+                  className="flex"
                 >
-                  {menuOpen ? <X size={24} /> : <Menu size={24} />}
+                  {menuOpen ? <X size={22} /> : <Menu size={22} />}
                 </motion.span>
               </AnimatePresence>
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* ── Mobile dropdown ── */}
         <AnimatePresence>
           {menuOpen && (
             <motion.nav
@@ -108,9 +138,9 @@ const SiteHeader = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.28, ease: "easeInOut" }}
-              className="mobile-nav"
+              className="overflow-hidden bg-white md:hidden"
             >
-              <div className="mobile-nav-inner">
+              <div className="px-4 pt-2 pb-4 flex flex-col gap-1">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.name}
@@ -121,10 +151,19 @@ const SiteHeader = () => {
                     <Link
                       to={link.path}
                       onClick={() => setMenuOpen(false)}
-                      className={`mobile-nav-link${isActive(link.path) ? " mobile-nav-link--active" : ""}`}
+                      className={`flex items-center justify-between px-3.5 py-3 rounded-[10px] font-semibold text-[0.95rem] transition-all duration-200 no-underline ${
+                        isActive(link.path)
+                          ? "text-[hsl(var(--primary))]"
+                          : "text-[hsl(var(--brand-dark))] hover:bg-[hsl(var(--primary)/0.07)] hover:text-[hsl(var(--primary))]"
+                      }`}
                     >
                       {link.name}
-                      {isActive(link.path) && <span className="active-dot" aria-hidden="true" />}
+                      {isActive(link.path) && (
+                        <span
+                          aria-hidden="true"
+                          className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--primary))] flex-shrink-0"
+                        />
+                      )}
                     </Link>
                   </motion.div>
                 ))}
@@ -136,10 +175,11 @@ const SiteHeader = () => {
                 >
                   <a
                     href="tel:+919839171701"
-                    className="mobile-call-btn"
                     aria-label="Call LIMRA Sales and Services"
+                    className="mt-2 flex justify-center items-center gap-2 px-4 py-3 bg-gradient-to-br from-[hsl(var(--brand-dark))] to-[hsl(var(--primary))] text-white font-bold text-[0.95rem] rounded-full shadow-lg shadow-[hsl(var(--primary)/0.28)] active:opacity-85 active:scale-[0.98] transition-all no-underline"
                   >
-                    <Phone size={16} aria-hidden="true" /> Call Now
+                    <Phone size={16} aria-hidden="true" />
+                    Call Now
                   </a>
                 </motion.div>
               </div>
@@ -148,11 +188,11 @@ const SiteHeader = () => {
         </AnimatePresence>
       </header>
 
-      {/* Backdrop overlay when mobile menu is open */}
+      {/* Backdrop */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="menu-backdrop"
+            className="fixed inset-0 z-[999] bg-black/35 backdrop-blur-sm md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -162,250 +202,6 @@ const SiteHeader = () => {
           />
         )}
       </AnimatePresence>
-
-      <style>{`
-        /* ════════════════════════════════════════
-           SITE HEADER
-        ════════════════════════════════════════ */
-        .site-header {
-          position: fixed;
-          top: 0; left: 0; right: 0;
-          z-index: 1000;
-          background: rgba(255, 255, 255, 0.92);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid hsl(var(--border));
-          transition: box-shadow 0.3s ease;
-        }
-        .site-header.scrolled {
-          box-shadow: 0 4px 30px hsl(var(--primary) / 0.12);
-        }
-
-        /* Inner flex row */
-        .header-inner {
-          width: 100%;
-          max-width: 1180px;
-          margin: 0 auto;
-          padding: 0 16px;
-          height: 70px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-        }
-
-        /* Logo */
-        .header-logo {
-          display: flex;
-          align-items: center;
-          flex-shrink: 0;
-          text-decoration: none;
-        }
-        .header-logo img {
-          height: 50px;
-          width: auto;
-          display: block;
-        }
-
-        /* ── Desktop Nav ── */
-        .desktop-nav {
-          display: flex;
-          align-items: center;
-          gap: 2px;
-          flex: 1;
-          justify-content: center;
-        }
-       .nav-link {
-  font-family: Inter, sans-serif;
-  font-weight: 500;
-  font-size: 0.85rem;
-  padding: 6px 10px;
-  border-radius: 8px;
-  color: hsl(var(--brand-dark));
-  text-decoration: none;
-  white-space: nowrap;
-  line-height: 1;
-  transition: color 0.2s, background 0.2s;
-}
-        .nav-link:hover {
-          color: hsl(var(--primary));
-          background: hsl(var(--primary) / 0.06);
-        }
-        .nav-link--active {
-          color: hsl(var(--primary));
-          font-weight: 700;
-        }
-
-        /* ── Right actions ── */
-        .header-actions {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          flex-shrink: 0;
-        }
-
-        /* Enquiry button */
-        .enquiry-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 11px 22px;
-          background: linear-gradient(135deg, hsl(var(--brand-dark)) 0%, hsl(var(--primary)) 100%);
-          color: white;
-          font-size: 0.95rem;
-          font-weight: 700;
-          border-radius: 100px;
-          text-decoration: none;
-          white-space: nowrap;
-          line-height: 1;
-          box-shadow: 0 6px 20px hsl(var(--primary) / 0.3);
-          transition: opacity 0.2s, transform 0.2s;
-          font-family: Inter, sans-serif;
-        }
-        .enquiry-btn:hover {
-          opacity: 0.9;
-          transform: translateY(-1px);
-        }
-
-        /* Hamburger button */
-        .mobile-menu-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-width: 44px;
-          min-height: 44px;
-          padding: 8px;
-          border-radius: 8px;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          color: hsl(var(--brand-dark));
-          -webkit-tap-highlight-color: transparent;
-          transition: background 0.2s;
-        }
-        .mobile-menu-btn:active {
-          background: hsl(var(--primary) / 0.08);
-        }
-
-        /* ── Mobile Nav ── */
-        .mobile-nav {
-          overflow: hidden;
-          background: rgba(255, 255, 255, 0.97);
-          border-top: 1px solid hsl(var(--border));
-          margin-top: 0;
-        }
-        .mobile-nav-inner {
-          padding: 8px 16px 16px;
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-        }
-       .mobile-nav-link {
-  font-family: Inter, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 14px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: hsl(var(--brand-dark));
-  text-decoration: none;
-  border-radius: 10px;
-  transition: background 0.18s, color 0.18s;
-}
-        .mobile-nav-link:hover,
-        .mobile-nav-link:active {
-          background: hsl(var(--primary) / 0.07);
-          color: hsl(var(--primary));
-        }
-        .mobile-nav-link--active {
-          color: hsl(var(--primary));
-        }
-        .active-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: hsl(var(--primary));
-          flex-shrink: 0;
-        }
-
-        /* Mobile call CTA */
-        .mobile-call-btn {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 8px;
-          margin-top: 8px;
-          padding: 13px 16px;
-          background: linear-gradient(135deg, hsl(var(--brand-dark)) 0%, hsl(var(--primary)) 100%);
-          color: white;
-          font-weight: 700;
-          font-size: 0.95rem;
-          border-radius: 100px;
-          text-decoration: none;
-          box-shadow: 0 4px 16px hsl(var(--primary) / 0.3);
-          transition: opacity 0.2s, transform 0.2s;
-        }
-        .mobile-call-btn:active {
-          opacity: 0.85;
-          transform: scale(0.98);
-        }
-
-        /* Backdrop */
-        .menu-backdrop {
-          position: fixed;
-          inset: 0;
-          z-index: 999;
-          background: rgba(0, 0, 0, 0.35);
-          backdrop-filter: blur(2px);
-          -webkit-backdrop-filter: blur(2px);
-        }
-
-        /* ════════════════════════════════════════
-           VISIBILITY HELPERS
-        ════════════════════════════════════════ */
-        /* Default: mobile layout */
-        .desktop-nav    { display: none !important; }
-        .mobile-only    { display: flex !important; }
-        .desktop-only   { display: none !important; }
-
-        /* ── Small phones (≤ 360px) ── */
-        @media (max-width: 360px) {
-          .header-inner { padding: 0 12px; height: 64px; }
-          .header-logo img { height: 44px; }
-          .mobile-menu-btn { padding: 6px; }
-          .mobile-nav-link { font-size: 0.9rem; padding: 11px 12px; }
-          .mobile-call-btn { font-size: 0.95rem; }
-        }
-
-        /* ── Medium phones (361px - 480px) ── */
-        @media (min-width: 361px) and (max-width: 480px) {
-          .header-inner { padding: 0 14px; }
-          .header-logo img { height: 48px; }
-        }
-
-        /* ── Tablet (≥ 768px): show desktop nav, hide hamburger ── */
-        @media (min-width: 768px) and (max-width: 1023px) {
-          .header-inner { padding: 0 20px; height: 72px; }
-          .desktop-nav { display: flex !important; gap: 0; }
-          .nav-link { font-size: 0.82rem; padding: 6px 9px; }
-          .mobile-only { display: none !important; }
-          /* Enquiry button shows on tablet too */
-          .desktop-only { display: inline-flex !important; }
-          .enquiry-btn { font-size: 0.85rem; padding: 10px 16px; }
-          .header-logo img { height: 56px; }
-        }
-
-        /* ── Desktop (≥ 1024px): full layout ── */
-        @media (min-width: 1024px) {
-          .header-inner { padding: 0 24px; height: 80px; }
-          .header-logo img { height: 80px; }
-          .desktop-nav  { display: flex !important; }
-          .nav-link { font-size: 0.97rem; padding: 7px 12px; }
-          .mobile-only  { display: none !important; }
-          .desktop-only { display: inline-flex !important; }
-        }
-      `}</style>
     </>
   );
 };

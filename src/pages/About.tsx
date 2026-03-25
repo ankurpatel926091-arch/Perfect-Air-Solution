@@ -24,7 +24,7 @@ const values = [
   {
     icon: CheckCircle,
     title: "Quality Assured",
-    desc: "Through strict quality checks and performance testing, we guarantee reliable and energy-efficient air conditioning systems. From VRV/VRF systems to chiller plants, quality remains our top priority.",
+    desc: "Through strict quality checks and performance testing, we guarantee reliable and energy-efficient air conditioning systems. From VRF systems to chiller plants, quality remains our top priority.",
   },
   {
     icon: Target,
@@ -44,7 +44,7 @@ const milestones = [
   },
   {
     year: "2023",
-    text: "Entered commercial and industrial cooling sector including VRV/VRF systems, Cold Rooms, and Chiller Plants.",
+    text: "Entered commercial and industrial cooling sector including VRF systems, Cold Rooms, and Chiller Plants.",
   },
   {
     year: "2024",
@@ -139,7 +139,7 @@ const About = () => (
           LIMRA Sales and Services is a trusted HVAC and air conditioning
           company delivering reliable cooling solutions for homes, offices,
           hospitals, hotels, and industrial facilities. Since 2012, we
-          specialize in AC installation, AC servicing, VRV/VRF systems, chiller
+          specialize in AC installation, AC servicing, VRF systems, chiller
           plants, cold rooms, and industrial cooling services with a strong
           commitment to quality, safety, and customer satisfaction.
         </motion.p>
@@ -193,7 +193,7 @@ const About = () => (
             <p style={{ fontSize: "14px" }}>
               Over the years, we have successfully installed and serviced
               thousands of air conditioning systems — from residential Split and
-              Window AC units to advanced VRV/VRF systems, cold rooms, and
+              Window AC units to advanced VRF systems, cold rooms, and
               large-scale industrial chiller plants. Our growth has been driven
               by strong technical expertise, prompt service delivery, and an
               unwavering commitment to quality workmanship.
