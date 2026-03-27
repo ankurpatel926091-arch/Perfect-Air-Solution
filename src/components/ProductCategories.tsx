@@ -365,7 +365,7 @@ export default function ProductCategories() {
               border: "1px solid hsl(var(--primary) / 0.25)",
               color: "hsl(var(--primary))",
               fontWeight: 700,
-              fontSize: "1rem",
+          
               letterSpacing: "0.18em",
               textTransform: "uppercase",
               padding: "5px 20px",
@@ -373,7 +373,7 @@ export default function ProductCategories() {
               marginBottom: "18px"
             }}
           >
-            Product Categories
+           Shop by Top Categories
           </motion.div>
 
           {/* Heading and View All button row */}
@@ -383,9 +383,9 @@ export default function ProductCategories() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              style={{ margin: 0, flex: 1, letterSpacing: "0.1rem" }}
+              style={{ margin: 0, flex: 1, letterSpacing: "0.1rem"}}
             >
-              Choose the Right Cooling & Water Solutions
+              Don’t Miss Out – Shop Trending Cooling Products Today
             </motion.h2>
 
             <motion.button
