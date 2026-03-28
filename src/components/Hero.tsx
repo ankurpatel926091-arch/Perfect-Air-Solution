@@ -319,8 +319,9 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="hero-heading"
         >
-         Get Affordable {" "}
-          <span className="heading-accent">AC Solutions for Home & Business</span>
+          Get Affordable <span className="heading-accent">AC Solutions</span>
+          <br />
+          <span className="heading-accent">for Home & Business</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -470,7 +471,7 @@ export default function HeroSection() {
 
         .hero-heading {
           color: white;
-          font-size: clamp(2rem, 5vw, 3.4rem);
+          font-size: clamp(1.7rem, 4.2vw, 2.8rem);
           font-weight: 800;
           line-height: 1.15;
           letter-spacing: -0.02em;
