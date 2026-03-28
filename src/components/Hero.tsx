@@ -4,9 +4,9 @@ import { Phone, Eye, CheckCircle, MapPin, Clock } from "lucide-react";
 import heroImage from "@/assets/heroimage.webp";
 
 const badges = [
-  { icon: CheckCircle, text: "Free Site Visit" },
-  { icon: Clock,       text: "Same-Day Response" },
-  { icon: MapPin,      text: "Uttar Pradesh" },
+  { icon: CheckCircle, text: "5,000+ Bookings" },
+  { icon: Clock, text: "Slots Filling Fast" },
+  { icon: MapPin, text: "Lucknow & UP" },
 ];
 
 export default function HeroSection() {
@@ -19,7 +19,7 @@ export default function HeroSection() {
       <div className="hero-image-container">
         <img
           src={heroImage}
-          alt="Professional HVAC installation and air conditioning service in Uttar Pradesh"
+          alt="AC service booking in Lucknow Uttar Pradesh"
           loading="eager"
           className="hero-image"
         />
@@ -37,21 +37,21 @@ export default function HeroSection() {
           className="hero-urgency-pill"
         >
           <span className="urgency-dot" />
-          Limited Slots Available This Month — Book Now
+       Trending Products — Limited Stock
         </motion.div>
 
-        {/* h1 */}
+        {/* Heading */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
           className="hero-heading"
         >
-          AC Not Cooling?{" "}
+         Upgrade Your Cooling with{" "}
           <span className="heading-accent">
-            Book Now & Get Cool Air Today
+            Limra’s Best-Selling Products
           </span>{" "}
-          — Limited Slots Available
+         
         </motion.h1>
 
         {/* Subtitle */}
@@ -61,9 +61,11 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="hero-subtitle"
         >
-          5,000+ happy customers across Lucknow &amp; UP.{" "}
-          <strong style={{ color: "white" }}>Call now for a free inspection</strong>{" "}
-          — our expert reaches you within hours.
+            Discover high-performance AC units, cooling solutions & accessories.
+          <strong style={{ color: "white" }}>
+           Fast selling items — grab yours before stock runs out.
+          </strong>{" "}
+         
         </motion.p>
 
         {/* CTAs */}
@@ -74,11 +76,11 @@ export default function HeroSection() {
           className="hero-cta-group"
         >
           <Link to="/contact" className="btn-primary">
-            <Phone size={16} fill="white" stroke="none" /> Get Free Site
-            Inspection
+            <Phone size={16} fill="white" stroke="none" /> Get Free Site Inspection
           </Link>
-          <Link to="/case-studies" className="btn-outline">
-            <Eye size={16} /> View Our Projects
+
+          <Link to="/product" className="btn-outline">
+            <Eye size={16} /> View Our Products
           </Link>
         </motion.div>
 
@@ -99,7 +101,6 @@ export default function HeroSection() {
       </div>
 
       <style>{`
-        /* ── Section ── */
         .hero-section {
           background: var(--bg-hero-gradient, hsl(var(--brand-dark)));
           position: relative;
@@ -111,7 +112,6 @@ export default function HeroSection() {
           align-items: center;
         }
 
-        /* ── Grid overlay ── */
         .hero-grid-overlay {
           position: absolute;
           inset: 0;
@@ -123,7 +123,6 @@ export default function HeroSection() {
           pointer-events: none;
         }
 
-        /* ── Background image ── */
         .hero-image-container {
           position: absolute;
           right: 2%;
@@ -135,12 +134,14 @@ export default function HeroSection() {
           align-items: center;
           justify-content: center;
         }
+
         .hero-image {
           width: 100%;
           height: 85%;
           object-fit: contain;
           object-position: center;
         }
+
         .hero-image-fade {
           position: absolute;
           inset: 0;
@@ -153,7 +154,6 @@ export default function HeroSection() {
           pointer-events: none;
         }
 
-        /* ── Content wrapper ── */
         .hero-content-wrapper {
           position: relative;
           z-index: 10;
@@ -163,7 +163,6 @@ export default function HeroSection() {
           padding: 48px 24px;
         }
 
-        /* ── Urgency pill ── */
         .hero-urgency-pill {
           display: inline-flex;
           align-items: center;
@@ -179,6 +178,7 @@ export default function HeroSection() {
           border-radius: 100px;
           margin-bottom: 18px;
         }
+
         .urgency-dot {
           width: 7px;
           height: 7px;
@@ -186,26 +186,24 @@ export default function HeroSection() {
           background: #22c55e;
           box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
           animation: pulse-dot 1.8s ease-in-out infinite;
-          flex-shrink: 0;
-        }
-        @keyframes pulse-dot {
-          0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.25); }
-          50%       { box-shadow: 0 0 0 6px rgba(34,197,94,0.08); }
         }
 
-        /* ── Heading ── */
+        @keyframes pulse-dot {
+          0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.25); }
+          50% { box-shadow: 0 0 0 6px rgba(34,197,94,0.08); }
+        }
+
         .hero-heading {
           color: white;
-          letter-spacing: 0.01em;
           margin-bottom: 16px;
-          max-width: min(95vw, 680px);
+          max-width: 680px;
           line-height: 1.2;
         }
+
         .heading-accent {
           color: hsl(var(--brand-sky));
         }
 
-        /* ── Subtitle ── */
         .hero-subtitle {
           color: hsl(var(--brand-sky) / 0.75);
           max-width: 480px;
@@ -214,57 +212,42 @@ export default function HeroSection() {
           line-height: 1.6;
         }
 
-        /* ── CTA group ── */
         .hero-cta-group {
           display: flex;
-          flex-wrap: wrap;
-          align-items: center;
           gap: 12px;
           margin-bottom: 28px;
         }
 
-        /* ── Buttons ── */
         .btn-primary {
           background: hsl(var(--primary));
           color: #fff;
           font-weight: 700;
-          font-size: 0.9rem;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
           padding: 14px 28px;
           border-radius: 8px;
-          border: none;
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          cursor: pointer;
           text-decoration: none;
-          white-space: nowrap;
         }
+
         .btn-outline {
           background: transparent;
           color: #fff;
           font-weight: 700;
-          font-size: 0.9rem;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
           padding: 13px 28px;
           border-radius: 8px;
           border: 2px solid rgba(255,255,255,0.35);
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          cursor: pointer;
           text-decoration: none;
-          white-space: nowrap;
         }
 
-        /* ── Trust badges ── */
         .hero-badges {
           display: flex;
-          flex-wrap: wrap;
           gap: 20px;
         }
+
         .hero-badge-item {
           display: inline-flex;
           align-items: center;
@@ -272,70 +255,9 @@ export default function HeroSection() {
           color: hsl(var(--brand-sky) / 0.65);
           font-size: 0.83rem;
         }
+
         .badge-icon {
           color: hsl(var(--brand-sky));
-        }
-
-        /* ══ RESPONSIVE ══ */
-
-        @media (max-width: 1024px) {
-          .hero-image-container { width: 50%; right: 0; }
-          .hero-heading { font-size: clamp(1.6rem, 3.5vw, 2.4rem); max-width: 100%; }
-        }
-
-        @media (max-width: 767px) {
-          .hero-section {
-            min-height: calc(100svh - 68px);
-            margin-top: 68px;
-            align-items: flex-end;
-          }
-          .hero-image-container {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 55%;
-            top: 0; right: 0;
-          }
-          .hero-image {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: top center;
-            opacity: 0.5;
-          }
-          .hero-image-fade {
-            background: linear-gradient(
-              to bottom,
-              transparent 0%,
-              hsl(var(--brand-dark) / 0.6) 50%,
-              hsl(var(--brand-dark)) 85%
-            );
-          }
-          .hero-content-wrapper { padding: 24px 20px 40px; }
-          .hero-heading {
-            font-size: clamp(1.45rem, 6vw, 2rem);
-            max-width: 100%;
-            line-height: 1.28;
-          }
-          .hero-subtitle { font-size: 0.9rem; max-width: 100%; margin-bottom: 20px; }
-
-          /* Stack CTAs vertically */
-          .hero-cta-group { flex-direction: column; gap: 10px; }
-          .btn-primary,
-          .btn-outline {
-            width: 100%;
-            justify-content: center;
-            font-size: 0.85rem;
-            padding: 14px 20px;
-          }
-
-          .hero-badges { gap: 12px; }
-          .hero-badge-item { font-size: 0.78rem; }
-        }
-
-        @media (max-width: 380px) {
-          .hero-heading { font-size: 1.3rem; }
-          .hero-urgency-pill { font-size: 0.62rem; }
-          .btn-call-number { font-size: 0.95rem; }
         }
       `}</style>
     </section>

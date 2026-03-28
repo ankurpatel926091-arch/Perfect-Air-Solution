@@ -2,7 +2,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
 import { gql } from 'graphql-request';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://limra-sales-and-services.onrender.com';
+// const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.limrasales.com';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // ─── GraphQL API ─────────────────────────────────────────────────────────────
 export const api = createApi({
