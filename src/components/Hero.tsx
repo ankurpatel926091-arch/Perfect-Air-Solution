@@ -552,8 +552,8 @@ export default function HeroSection() {
           align-items: center;
           gap: 16px;
           flex: 1;
-          max-width: 280px;
-          padding: 0 28px;
+          max-width: 360px;
+          padding: 0 20px;
           border-right: 1px solid rgba(255,255,255,0.08);
         }
 
@@ -578,6 +578,7 @@ export default function HeroSection() {
           font-weight: 700;
           font-size: 0.95rem;
           margin: 0 0 4px;
+          white-space: nowrap;
         }
 
         .feat-desc {
@@ -585,6 +586,10 @@ export default function HeroSection() {
           font-size: 0.8rem;
           line-height: 1.5;
           margin: 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
 
         /* Mobile */
