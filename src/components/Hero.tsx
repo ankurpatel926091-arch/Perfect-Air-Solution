@@ -302,15 +302,15 @@ export default function HeroSection() {
       {/* Centered Content */}
       <div className="hero-content-wrapper">
         {/* Urgency pill */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="hero-urgency-pill"
         >
           <span className="urgency-dot" />
-          Climate Care
-        </motion.div>
+       Get Affordable AC Solutions for Home & Business
+        </motion.div> */}
 
         {/* Heading */}
         <motion.h1
@@ -319,8 +319,8 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="hero-heading"
         >
-          Your Partner for{" "}
-          <span className="heading-accent">Total Climate Control</span>
+         Get Affordable {" "}
+          <span className="heading-accent">AC Solutions for Home & Business</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -330,10 +330,10 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="hero-subtitle"
         >
-          Discover high-performance AC units, cooling solutions & accessories
-          trusted across Lucknow & UP.{" "}
+          Expert installation, genuine products & quick service – all in one place.
+{" "}
           <strong style={{ color: "#bae6fd" }}>
-            Fast selling items — grab yours before stock runs out.
+          Request a free inspection and get the best quote today.
           </strong>
         </motion.p>
 
@@ -346,11 +346,11 @@ export default function HeroSection() {
         >
           <Link to="/contact" className="btn-primary">
             <Phone size={16} fill="white" stroke="none" />
-            Get Free Site Inspection
+           Get Free Quote
           </Link>
           <Link to="/product" className="btn-outline">
             <Eye size={16} />
-            View Our Products
+            Call Now
           </Link>
         </motion.div>
       </div>
