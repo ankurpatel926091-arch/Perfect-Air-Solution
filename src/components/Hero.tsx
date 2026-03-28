@@ -268,6 +268,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Phone, Eye, Wrench, CalendarCheck, BadgeDollarSign } from "lucide-react";
+import heroBgImage from "@/assets/hero1.webp";
 
 const features = [
   {
@@ -397,7 +398,7 @@ export default function HeroSection() {
         .hero-bg-image {
           position: absolute;
           inset: 0;
-          background: url('/src/assets/heroimage.webp') center / cover no-repeat;
+          background: url('${heroBgImage}') center / cover no-repeat;
           opacity: 0.12;
           pointer-events: none;
         }
