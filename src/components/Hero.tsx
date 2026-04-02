@@ -320,9 +320,7 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="hero-heading"
         >
-          Get Affordable <span className="heading-accent">AC Solutions</span>
-          <br />
-          <span className="heading-accent">for Home & Business</span>
+          Experience the Art of Perfect Climate
         </motion.h1>
 
         {/* Subtitle */}
