@@ -473,7 +473,7 @@ export default function HeroSection() {
           font-size: clamp(1.7rem, 4.2vw, 2.8rem);
           font-weight: 800;
           line-height: 1.15;
-          letter-spacing: -0.02em;
+          letter-spacing: 0.02em;
           margin-bottom: 18px;
           max-width: 720px;
         }
