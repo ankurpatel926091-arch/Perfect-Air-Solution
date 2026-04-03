@@ -33,6 +33,14 @@ app.use(
 );
 app.use(express.json());
 
+// Health Check Route
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Server is running 🚀",
+    timestamp: new Date()
+  });
+});
 
 // Routes
 app.use("/api/auth", authRoutes);
