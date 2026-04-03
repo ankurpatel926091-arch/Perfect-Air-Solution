@@ -33,7 +33,7 @@ export const updateBrand = async (req, res) => {
     const updatedBrand = await Brand.findByIdAndUpdate(
       req.params.id,
       { heroImage },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
     if (!updatedBrand) return res.status(404).json({ message: 'Brand not found' });
     res.status(200).json(updatedBrand);

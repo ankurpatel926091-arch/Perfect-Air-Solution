@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -25,9 +25,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (email: string, pass: string) => {
     try {
       const response = await loginAdmin({ email, password: pass }).unwrap();
-      if (response?.login?.token) {
+      if (response?.token) {
         setIsAuthenticated(true);
-        localStorage.setItem('adminToken', response.login.token);
+        localStorage.setItem('adminToken', response.token);
         return true;
       }
       return false;

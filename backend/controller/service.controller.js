@@ -83,7 +83,7 @@ export const updateService = async (req, res) => {
       try { updateData.faqs = JSON.parse(updateData.faqs); } catch(e) {}
     }
 
-    const updatedService = await Service.findByIdAndUpdate(req.params.id, updateData, { new: true, runValidators: true });
+    const updatedService = await Service.findByIdAndUpdate(req.params.id, updateData, { returnDocument: 'after', runValidators: true });
     res.status(200).json(updatedService);
   } catch (error) {
     res.status(400).json({ message: error.message });

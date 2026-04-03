@@ -1,12 +1,9 @@
 import "dotenv/config.js";
 import express from "express";
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import { typeDefs, resolvers } from './graphql.js';
 import { upload } from './config/cloudinary.js';
-import jwt from 'jsonwebtoken';
 import cors from "cors";
 import connectDB from "./config/db.js";
+import authRoutes from "./routes/auth.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
 import newsletterRoutes from "./routes/newsletter.routes.js";
 import orderRoutes from "./routes/order.routes.js";
@@ -38,6 +35,7 @@ app.use(express.json());
 
 
 // Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/orders", orderRoutes);
@@ -74,28 +72,6 @@ app.post('/api/upload-multiple', (req, res) => {
   });
 });
 
-// Apollo GraphQL setup
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
-
-await server.start();
-
-app.use('/graphql', expressMiddleware(server, {
-  context: async ({ req }) => {
-    const authHeader = req.headers.authorization || '';
-    const token = authHeader.replace('Bearer ', '');
-    if (!token) return { user: null };
-
-    try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      return { user: decoded };
-    } catch (err) {
-      return { user: null }; // Invalid or expired token
-    }
-  },
-}));
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

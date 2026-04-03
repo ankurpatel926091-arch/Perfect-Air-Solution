@@ -1,15 +1,12 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
-import { gql } from 'graphql-request';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.limrasales.com';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-// ─── GraphQL API ─────────────────────────────────────────────────────────────
+// ─── REST API ─────────────────────────────────────────────────────────────────
 export const api = createApi({
     reducerPath: 'api',
-    baseQuery: graphqlRequestBaseQuery({
-        url: `${BASE_URL}/graphql`,
+    baseQuery: fetchBaseQuery({
+        baseUrl: `${BASE_URL}/api`,
         prepareHeaders: (headers) => {
             const token = localStorage.getItem('adminToken');
             if (token) headers.set('Authorization', `Bearer ${token}`);
@@ -20,193 +17,82 @@ export const api = createApi({
     endpoints: (builder) => ({
 
         // ================= AUTH =================
-        loginAdmin: builder.mutation<any, any>({
-            query: (variables) => ({
-                document: gql`
-                    mutation Login($email: String!, $password: String!) {
-                        login(email: $email, password: $password) {
-                            token
-                            user
-                        }
-                    }
-                `,
-                variables,
+        loginAdmin: builder.mutation<{ token: string; user: string }, { email: string; password: string }>({
+            query: (credentials) => ({
+                url: '/auth/login',
+                method: 'POST',
+                body: credentials,
             }),
         }),
 
-        loginUser: builder.mutation<any, any>({
-            query: (variables) => ({
-                document: gql`
-                    mutation LoginUser($email: String!, $password: String!) {
-                        loginUser(email: $email, password: $password) {
-                            token
-                            user
-                        }
-                    }
-                `,
-                variables,
+        loginUser: builder.mutation<{ token: string; user: string }, { email: string; password: string }>({
+            query: (credentials) => ({
+                url: '/auth/login-user',
+                method: 'POST',
+                body: credentials,
             }),
         }),
 
-        registerUser: builder.mutation<any, any>({
-            query: (variables) => ({
-                document: gql`
-                    mutation RegisterUser($name: String!, $email: String!, $password: String!) {
-                        registerUser(name: $name, email: $email, password: $password) {
-                            token
-                            user
-                        }
-                    }
-                `,
-                variables,
+        registerUser: builder.mutation<{ token: string; user: string }, { name: string; email: string; password: string }>({
+            query: (userData) => ({
+                url: '/auth/register',
+                method: 'POST',
+                body: userData,
             }),
         }),
 
-        // ================= BLOGS (GraphQL: read + delete only) =================
-        // Create & Update → REST: POST/PUT /api/blogs  (multipart/form-data)
-        // Required fields: title, category, content (JSON array), image (File)
-        getBlogs: builder.query<any[], void>({
-            query: () => ({
-                document: gql`
-                    query GetBlogs {
-                        getBlogs {
-                            id
-                            _id
-                            title
-                            content
-                            category
-                            image
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-            }),
-            transformResponse: (res: any) => res.getBlogs,
+        // ================= BLOGS =================
+        getBlogs: builder.query<Record<string, unknown>[], void>({
+            query: () => '/blogs',
             providesTags: ['Blog'],
         }),
 
-        deleteBlog: builder.mutation<any, string>({
+        deleteBlog: builder.mutation<{ message: string }, string>({
             query: (id) => ({
-                document: gql`
-                    mutation DeleteBlog($id: ID!) {
-                        deleteBlog(id: $id)
-                    }
-                `,
-                variables: { id },
+                url: `/blogs/${id}`,
+                method: 'DELETE',
             }),
             invalidatesTags: ['Blog'],
         }),
 
-        // ================= SERVICES (GraphQL: read + delete only) =================
-        // Create & Update → REST: POST/PUT /api/services  (multipart/form-data)
-        getServices: builder.query<any[], void>({
-            query: () => ({
-                document: gql`
-                    query GetServices {
-                        getServices {
-                            id
-                            _id
-                            slug
-                            icon
-                            image
-                            badge
-                            title
-                            tagline
-                            desc
-                            longDesc
-                            highlights
-                            duration
-                            price
-                            rating
-                            reviews
-                            process { step title desc }
-                            faqs { q a }
-                        }
-                    }
-                `,
-            }),
-            transformResponse: (res: any) => res.getServices,
+        // ================= SERVICES =================
+        getServices: builder.query<Record<string, unknown>[], void>({
+            query: () => '/services',
             providesTags: ['Service'],
         }),
 
-        deleteService: builder.mutation<any, string>({
+        deleteService: builder.mutation<{ message: string }, string>({
             query: (id) => ({
-                document: gql`
-                    mutation DeleteService($id: ID!) {
-                        deleteService(id: $id)
-                    }
-                `,
-                variables: { id },
+                url: `/services/${id}`,
+                method: 'DELETE',
             }),
             invalidatesTags: ['Service'],
         }),
 
-        // ================= BRANDS (GraphQL: read + delete only) =================
-        // Create & Update → REST: POST/PUT /api/brands  (multipart/form-data)
-        getBrands: builder.query<any[], void>({
-            query: () => ({
-                document: gql`
-                    query GetBrands {
-                        getBrands {
-                            id
-                            _id
-                            heroImage
-                            createdAt
-                            updatedAt
-                        }
-                    }
-                `,
-            }),
-            transformResponse: (res: any) => res.getBrands,
+        // ================= BRANDS =================
+        getBrands: builder.query<Record<string, unknown>[], void>({
+            query: () => '/brands',
             providesTags: ['Brand'],
         }),
 
-        deleteBrand: builder.mutation<any, string>({
+        deleteBrand: builder.mutation<{ message: string }, string>({
             query: (id) => ({
-                document: gql`
-                    mutation DeleteBrand($id: ID!) {
-                        deleteBrand(id: $id)
-                    }
-                `,
-                variables: { id },
+                url: `/brands/${id}`,
+                method: 'DELETE',
             }),
             invalidatesTags: ['Brand'],
         }),
 
-        // ================= PROJECTS (GraphQL: read + delete only) =================
-        // Create & Update → REST: POST/PUT /api/projects  (multipart/form-data)
-        // Fields: featuredImage (single), images (up to 10)
-        getProjects: builder.query<any[], void>({
-            query: () => ({
-                document: gql`
-                    query GetProjects {
-                        getProjects {
-                            id
-                            _id
-                            slug
-                            title
-                            description
-                            location
-                            completionDate
-                            images
-                            featuredImage
-                        }
-                    }
-                `,
-            }),
-            transformResponse: (res: any) => res.getProjects,
+        // ================= PROJECTS =================
+        getProjects: builder.query<Record<string, unknown>[], void>({
+            query: () => '/projects',
             providesTags: ['Project'],
         }),
 
-        deleteProject: builder.mutation<any, string>({
+        deleteProject: builder.mutation<{ message: string }, string>({
             query: (id) => ({
-                document: gql`
-                    mutation DeleteProject($id: ID!) {
-                        deleteProject(id: $id)
-                    }
-                `,
-                variables: { id },
+                url: `/projects/${id}`,
+                method: 'DELETE',
             }),
             invalidatesTags: ['Project'],
         }),
@@ -315,7 +201,7 @@ export const updateServiceREST = async (id: string, formData: FormData) => {
  * Arrays (highlights, process, faqs) are JSON.stringify'd automatically.
  */
 export const buildServiceFormData = (
-    data: Record<string, any>,
+    data: Record<string, unknown>,
     imageFile?: File | null
 ): FormData => {
     const fd = new FormData();
@@ -358,7 +244,7 @@ export const updateProjectREST = async (id: string, formData: FormData) => {
  * @param imageFiles    Array of gallery image files (optional, max 10)
  */
 export const buildProjectFormData = (
-    data: Record<string, any>,
+    data: Record<string, unknown>,
     featuredImage?: File | null,
     imageFiles?: File[]
 ): FormData => {

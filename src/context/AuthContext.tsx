@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { useLoginUserMutation, useRegisterUserMutation } from '@/store/api';
 import { toast } from 'sonner';
 
@@ -33,11 +33,11 @@ export const UserAuthProvider = ({ children }: { children: React.ReactNode }) =>
   const login = async (email: string, pass: string) => {
     try {
       const response = await loginUser({ email, password: pass }).unwrap();
-      if (response?.loginUser?.token) {
+      if (response?.token) {
         setIsAuthenticated(true);
-        setUserEmail(response.loginUser.user);
-        localStorage.setItem('userToken', response.loginUser.token);
-        localStorage.setItem('userEmail', response.loginUser.user);
+        setUserEmail(response.user);
+        localStorage.setItem('userToken', response.token);
+        localStorage.setItem('userEmail', response.user);
         return true;
       }
       return false;
@@ -51,11 +51,11 @@ export const UserAuthProvider = ({ children }: { children: React.ReactNode }) =>
   const register = async (name: string, email: string, pass: string) => {
     try {
       const response = await registerUser({ name, email, password: pass }).unwrap();
-      if (response?.registerUser?.token) {
+      if (response?.token) {
         setIsAuthenticated(true);
-        setUserEmail(response.registerUser.user);
-        localStorage.setItem('userToken', response.registerUser.token);
-        localStorage.setItem('userEmail', response.registerUser.user);
+        setUserEmail(response.user);
+        localStorage.setItem('userToken', response.token);
+        localStorage.setItem('userEmail', response.user);
         return true;
       }
       return false;
