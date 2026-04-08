@@ -138,13 +138,7 @@ const Hero = () => {
             Smart AC Services <br />
             <span className="title-nowrap">
               Powered by Technology{" "}
-              <svg
-                className="icon-lightning"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
+             
             </span>
           </h1>
 

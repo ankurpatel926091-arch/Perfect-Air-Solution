@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { renderEmailTemplate, renderInfoRows, styleTokens } from "./emailTemplate.js";
 
 const sendNewsletterEmail = async (email) => {
   try {
@@ -17,7 +18,16 @@ const sendNewsletterEmail = async (email) => {
       from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
       to: adminRecipient,
       subject: "New Newsletter Subscriber",
-      html: `<p>New subscriber: <b>${email}</b></p>`,
+      html: renderEmailTemplate({
+        title: "New Newsletter Subscriber",
+        subtitle: "A user subscribed from the website",
+        bodyHtml: `
+          <div style="${styleTokens.infoWrap}">
+            ${renderInfoRows([{ label: "Subscriber Email", value: email }])}
+          </div>
+        `,
+        footerNote: "Admin Notification",
+      }),
     });
     console.log(`Newsletter admin email sent to: ${adminRecipient}`);
 
@@ -26,13 +36,19 @@ const sendNewsletterEmail = async (email) => {
       from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Welcome to Our Newsletter",
-      html: `
-        <h3>Welcome!</h3>
-        <p>Thank you for subscribing to our HVAC newsletter.</p>
-        <p>You will receive updates, tips, and exclusive offers.</p>
-        <br/>
-        <p>Limra Sales And Services Team</p>
-      `,
+      html: renderEmailTemplate({
+        title: "Welcome to Limra Newsletter",
+        subtitle: "You are now subscribed",
+        bodyHtml: `
+          <p style="margin:0 0 10px;font-size:14px;line-height:1.7;color:#334155;">
+            Thank you for subscribing. You will receive HVAC updates, maintenance tips, and exclusive offers.
+          </p>
+          <div style="${styleTokens.infoWrap}">
+            ${renderInfoRows([{ label: "Subscribed Email", value: email }])}
+          </div>
+        `,
+        footerNote: "Limra Sales And Services Team",
+      }),
     });
     console.log(`Newsletter user email sent to: ${email}`);
 

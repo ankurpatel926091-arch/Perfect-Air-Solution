@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { renderEmailTemplate, renderInfoRows, styleTokens } from "./emailTemplate.js";
 
 const sendEmail = async (contact) => {
   const {
@@ -30,35 +31,50 @@ const sendEmail = async (contact) => {
     from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: adminRecipient,
     subject: isProductInquiry ? "New Product Enquiry" : "New Contact Form Submission",
-    html: `
-      <h2>New Inquiry Received</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone || "N/A"}</p>
-      <p><strong>Inquiry Type:</strong> ${isProductInquiry ? "Product Enquiry" : "General Contact"}</p>
-      <p><strong>${isProductInquiry ? "Product" : "Service"}:</strong> ${requestedItem}</p>
-      ${isProductInquiry ? `<p><strong>Price Range:</strong> ${productPrice || "N/A"}</p>` : ""}
-      <p><strong>Message:</strong></p>
-      <p>${message || "No message provided"}</p>
-    `,
+    html: renderEmailTemplate({
+      title: isProductInquiry ? "New Product Enquiry Received" : "New Contact Request Received",
+      subtitle: "A new lead has been submitted from website",
+      bodyHtml: `
+        <div style="${styleTokens.infoWrap}">
+          ${renderInfoRows([
+            { label: "Name", value: name },
+            { label: "Email", value: email },
+            { label: "Phone", value: phone || "N/A" },
+            { label: "Inquiry Type", value: isProductInquiry ? "Product Enquiry" : "General Contact" },
+            { label: isProductInquiry ? "Product" : "Service", value: requestedItem },
+            ...(isProductInquiry ? [{ label: "Price Range", value: productPrice || "N/A" }] : []),
+          ])}
+        </div>
+        <p style="margin:14px 0 8px;font-size:13px;color:#475569;"><strong>Message</strong></p>
+        <div style="${styleTokens.infoWrap}">
+          <p style="margin:0;font-size:14px;line-height:1.7;color:#1e293b;">${message || "No message provided"}</p>
+        </div>
+      `,
+      footerNote: "Admin Notification",
+    }),
   };
 
   const userMailOptions = {
     from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: isProductInquiry ? "We received your product enquiry" : "We received your request",
-    html: `
-      <h3>Hello ${name},</h3>
-      <p>Thank you for contacting <b>Limra Sales And Services</b>.</p>
-      <p>Our team will contact you within 24 hours.</p>
-      <br/>
-      <p><b>Your Request Details:</b></p>
-      <p><strong>${isProductInquiry ? "Product" : "Service"}:</strong> ${requestedItem}</p>
-      ${isProductInquiry ? `<p><strong>Price Range:</strong> ${productPrice || "N/A"}</p>` : ""}
-      <p><strong>Message:</strong> ${message || "N/A"}</p>
-      <br/>
-      <p>Regards,<br/>Limra Sales And Services Team</p>
-    `,
+    html: renderEmailTemplate({
+      title: `Hello ${name}, your request is received`,
+      subtitle: "Thank you for contacting Limra Sales And Services",
+      bodyHtml: `
+        <p style="margin:0 0 10px;font-size:14px;line-height:1.7;color:#334155;">
+          We have received your request successfully. Our team will contact you within 24 hours.
+        </p>
+        <div style="${styleTokens.infoWrap}">
+          ${renderInfoRows([
+            { label: isProductInquiry ? "Product" : "Service", value: requestedItem },
+            ...(isProductInquiry ? [{ label: "Price Range", value: productPrice || "N/A" }] : []),
+            { label: "Message", value: message || "N/A" },
+          ])}
+        </div>
+      `,
+      footerNote: "Regards, Limra Sales And Services Team",
+    }),
   };
 
   const [adminResult, userResult] = await Promise.allSettled([

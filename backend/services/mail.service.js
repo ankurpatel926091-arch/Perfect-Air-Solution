@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
+import { renderEmailTemplate, renderInfoRows, styleTokens } from "../utils/emailTemplate.js";
 
- const getTransporter = () => {
+const getTransporter = () => {
   return nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -13,35 +14,33 @@ import nodemailer from "nodemailer";
 };
 
 export const sendOrderEmail = async (order) => {
+  const transporter = getTransporter();
 
-    const transporter = getTransporter();
-    
   const mailOptions = {
     from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: order.customer.email,
-    subject: "🛒 Order Confirmation",
-    html: `
-      <h2>Thank you for your order, ${order.customer.fullName}!</h2>
-      <p>Your order has been placed successfully.</p>
-
-      <h3>Order Details:</h3>
-      <ul>
-        <li><strong>Product:</strong> ${order.product.title}</li>
-        <li><strong>Brand:</strong> ${order.product.brand}</li>
-        <li><strong>Quantity:</strong> ${order.quantity}</li>
-        <li><strong>Total Amount:</strong> ₹${order.amount}</li>
-      </ul>
-
-      <h3>Delivery Address:</h3>
-      <p>
-        ${order.customer.address}, ${order.customer.city}, 
-        ${order.customer.state} - ${order.customer.pinCode}
-      </p>
-
-      <p>We will notify you when your order ships.</p>
-      <br/>
-      <p>Thanks,<br/>Limra Sales And Services Team</p>
-    `,
+    subject: "Order Confirmation",
+    html: renderEmailTemplate({
+      title: `Thank you for your order, ${order.customer.fullName}`,
+      subtitle: "Your order has been placed successfully",
+      bodyHtml: `
+        <div style="${styleTokens.infoWrap}">
+          ${renderInfoRows([
+            { label: "Product", value: order.product?.title || "N/A" },
+            { label: "Brand", value: order.product?.brand || "N/A" },
+            { label: "Quantity", value: order.quantity || "N/A" },
+            { label: "Total Amount", value: `INR ${order.amount}` },
+          ])}
+        </div>
+        <p style="margin:14px 0 8px;font-size:13px;color:#475569;"><strong>Delivery Address</strong></p>
+        <div style="${styleTokens.infoWrap}">
+          <p style="margin:0;font-size:14px;line-height:1.7;color:#1e293b;">
+            ${order.customer?.address || ""}, ${order.customer?.city || ""}, ${order.customer?.state || ""} - ${order.customer?.pinCode || ""}
+          </p>
+        </div>
+      `,
+      footerNote: "Limra Sales And Services Team",
+    }),
   };
 
   await transporter.sendMail(mailOptions);
@@ -56,31 +55,44 @@ export const sendBookingEmail = async (booking) => {
     from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: adminRecipient,
     subject: "New Service Booking Received",
-    html: `
-      <h2>New Booking Received</h2>
-      <p><strong>Name:</strong> ${booking.name}</p>
-      <p><strong>Email:</strong> ${booking.email}</p>
-      <p><strong>Phone:</strong> ${booking.phone}</p>
-      <p><strong>Service:</strong> ${booking.service}</p>
-    `,
+    html: renderEmailTemplate({
+      title: "New Service Booking Received",
+      subtitle: "A customer submitted a booking form",
+      bodyHtml: `
+        <div style="${styleTokens.infoWrap}">
+          ${renderInfoRows([
+            { label: "Name", value: booking.name },
+            { label: "Email", value: booking.email },
+            { label: "Phone", value: booking.phone },
+            { label: "Service", value: booking.service },
+          ])}
+        </div>
+      `,
+      footerNote: "Admin Notification",
+    }),
   };
 
   const userMailOptions = {
     from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: booking.email,
     subject: "We received your booking request",
-    html: `
-      <h3>Hello ${booking.name},</h3>
-      <p>Thank you for booking with <b>Limra Sales And Services</b>.</p>
-      <p>Our team will contact you shortly to confirm your ${booking.service} request.</p>
-      <br/>
-      <p><strong>Your Details</strong></p>
-      <p>Name: ${booking.name}</p>
-      <p>Phone: ${booking.phone}</p>
-      <p>Service: ${booking.service}</p>
-      <br/>
-      <p>Regards,<br/>Limra Sales And Services Team</p>
-    `,
+    html: renderEmailTemplate({
+      title: `Hello ${booking.name}, your booking is confirmed`,
+      subtitle: "Thank you for choosing Limra Sales And Services",
+      bodyHtml: `
+        <p style="margin:0 0 10px;font-size:14px;line-height:1.7;color:#334155;">
+          We have received your booking request and our team will contact you shortly for confirmation.
+        </p>
+        <div style="${styleTokens.infoWrap}">
+          ${renderInfoRows([
+            { label: "Name", value: booking.name },
+            { label: "Phone", value: booking.phone },
+            { label: "Service", value: booking.service },
+          ])}
+        </div>
+      `,
+      footerNote: "Regards, Limra Sales And Services Team",
+    }),
   };
 
   const [adminResult, userResult] = await Promise.allSettled([
