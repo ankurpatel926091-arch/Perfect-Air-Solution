@@ -32,7 +32,10 @@ const bookingSchema = Yup.object({
     .matches(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile number"),
   service: Yup.string()
     .required("Please select a service")
-    .oneOf(["repair", "installation", "maintenance"], "Please select a valid service"),
+    .oneOf(
+      ["repair", "installation", "maintenance"],
+      "Please select a valid service",
+    ),
 });
 
 const Hero = () => {
@@ -43,11 +46,19 @@ const Hero = () => {
   const [service, setService] = useState<BookingService | "">("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<BookingErrors>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof BookingForm, boolean>>>({});
+  const [touched, setTouched] = useState<
+    Partial<Record<keyof BookingForm, boolean>>
+  >({});
 
   const validateField = async (field: keyof BookingForm, value: string) => {
     try {
-      await bookingSchema.validateAt(field, { name, email, phone, service, [field]: value });
+      await bookingSchema.validateAt(field, {
+        name,
+        email,
+        phone,
+        service,
+        [field]: value,
+      });
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
@@ -58,7 +69,10 @@ const Hero = () => {
 
   const validateAll = async (): Promise<boolean> => {
     try {
-      await bookingSchema.validate({ name, email, phone, service }, { abortEarly: false });
+      await bookingSchema.validate(
+        { name, email, phone, service },
+        { abortEarly: false },
+      );
       setErrors({});
       return true;
     } catch (err) {
@@ -88,16 +102,19 @@ const Hero = () => {
     const toastId = toast.loading("Submitting booking...");
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/bookings`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-          service,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/bookings`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            service,
+          }),
+        },
+      );
 
       const data = await response.json();
       if (!response.ok) {
@@ -135,11 +152,9 @@ const Hero = () => {
         <div className="hero-left">
           {/* Using your global .heading-1 class logic via CSS */}
           <h1 className="hero-title">
-            Smart AC Services <br />
-            <span className="title-nowrap">
-              Powered by Technology{" "}
-             
-            </span>
+            <span className="title-line1">Smart AC Sales &amp; Services</span>
+            <br />
+            <span className="title-nowrap">Powered by Technology</span>
           </h1>
 
           <p className="subtitle">
@@ -156,10 +171,18 @@ const Hero = () => {
           </p>
 
           <div className="buttons">
-            <button className="btn btn-primary" onClick={() => navigate("/services")} type="button">
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate("/services")}
+              type="button"
+            >
               Book Service Instantly
             </button>
-            <button className="btn btn-secondary" onClick={() => navigate("/contact")} type="button">
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate("/contact")}
+              type="button"
+            >
               Get Instant Quote
             </button>
           </div>
@@ -243,7 +266,9 @@ const Hero = () => {
                 disabled={isSubmitting}
                 required
               />
-              {touched.name && errors.name && <p className="hero-field-error">{errors.name}</p>}
+              {touched.name && errors.name && (
+                <p className="hero-field-error">{errors.name}</p>
+              )}
               <input
                 type="email"
                 placeholder="Email Address"
@@ -260,13 +285,17 @@ const Hero = () => {
                 disabled={isSubmitting}
                 required
               />
-              {touched.email && errors.email && <p className="hero-field-error">{errors.email}</p>}
+              {touched.email && errors.email && (
+                <p className="hero-field-error">{errors.email}</p>
+              )}
               <input
                 type="tel"
                 placeholder="Phone Number"
                 value={phone}
                 onChange={(e) => {
-                  const nextValue = e.target.value.replace(/\D/g, "").slice(0, 10);
+                  const nextValue = e.target.value
+                    .replace(/\D/g, "")
+                    .slice(0, 10);
                   setPhone(nextValue);
                   if (touched.phone) validateField("phone", nextValue);
                 }}
@@ -278,7 +307,9 @@ const Hero = () => {
                 required
                 maxLength={10}
               />
-              {touched.phone && errors.phone && <p className="hero-field-error">{errors.phone}</p>}
+              {touched.phone && errors.phone && (
+                <p className="hero-field-error">{errors.phone}</p>
+              )}
 
               <div className="select-wrapper">
                 <select
@@ -303,9 +334,15 @@ const Hero = () => {
                   <option value="maintenance">AC Maintenance</option>
                 </select>
               </div>
-              {touched.service && errors.service && <p className="hero-field-error">{errors.service}</p>}
+              {touched.service && errors.service && (
+                <p className="hero-field-error">{errors.service}</p>
+              )}
 
-              <button type="submit" className="quote-btn" disabled={isSubmitting}>
+              <button
+                type="submit"
+                className="quote-btn"
+                disabled={isSubmitting}
+              >
                 <svg
                   className="btn-icon"
                   viewBox="0 0 24 24"

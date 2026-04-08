@@ -78,7 +78,9 @@
 }
 
 .title-nowrap {
-  white-space: normal;
+  display: inline-block;
+  white-space: nowrap;
+  font-size: clamp(1.1rem, 5vw, 0.9em);
 }
 
 .icon-lightning {
@@ -177,7 +179,10 @@
 .expert-link:hover {
   color: hsl(var(--primary));
 }
-
+.title-line1 {
+  white-space: nowrap;
+  font-size: clamp(1.1rem, 5.5vw, 2rem);
+}
 /* STATS — 3-col card grid on mobile */
 .stats-bar {
   display: grid;
@@ -461,10 +466,6 @@
     font-size: clamp(1.9rem, 3vw, 2.6rem);
   }
 
-  .title-nowrap {
-    white-space: normal;
-  }
-
   .icon-lightning {
     width: 26px;
     height: 26px;
@@ -565,10 +566,6 @@
 
   .hero-title {
     font-size: clamp(2.2rem, 3.2vw, 3rem);
-  }
-
-  .title-nowrap {
-    white-space: nowrap;
   }
 
   .icon-lightning {
