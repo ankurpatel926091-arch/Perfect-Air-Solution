@@ -466,6 +466,11 @@
     font-size: clamp(1.9rem, 3vw, 2.6rem);
   }
 
+  .title-line1,
+  .title-nowrap {
+    font-size: 1em;
+  }
+
   .icon-lightning {
     width: 26px;
     height: 26px;
