@@ -1,5 +1,5 @@
-import nodemailer from "nodemailer";
 import { renderEmailTemplate, renderInfoRows, styleTokens } from "./emailTemplate.js";
+import { sendHtmlEmail } from "./resendEmail.js";
 
 const sendEmail = async (contact) => {
   const {
@@ -15,20 +15,12 @@ const sendEmail = async (contact) => {
 
   const isProductInquiry = inquiryType === "product";
   const requestedItem = productTitle || service || "N/A";
-  const adminRecipient = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
-
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+  const adminRecipient = process.env.ADMIN_EMAIL;
+  if (!adminRecipient) {
+    throw new Error("ADMIN_EMAIL is missing");
+  }
 
   const adminMailOptions = {
-    from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: adminRecipient,
     subject: isProductInquiry ? "New Product Enquiry" : "New Contact Form Submission",
     html: renderEmailTemplate({
@@ -55,7 +47,6 @@ const sendEmail = async (contact) => {
   };
 
   const userMailOptions = {
-    from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: isProductInquiry ? "We received your product enquiry" : "We received your request",
     html: renderEmailTemplate({
@@ -78,8 +69,8 @@ const sendEmail = async (contact) => {
   };
 
   const [adminResult, userResult] = await Promise.allSettled([
-    transporter.sendMail(adminMailOptions),
-    transporter.sendMail(userMailOptions),
+    sendHtmlEmail(adminMailOptions),
+    sendHtmlEmail(userMailOptions),
   ]);
 
   if (adminResult.status === "fulfilled") {

@@ -1,21 +1,15 @@
-import nodemailer from "nodemailer";
 import { renderEmailTemplate, renderInfoRows, styleTokens } from "./emailTemplate.js";
+import { sendHtmlEmail } from "./resendEmail.js";
 
 const sendNewsletterEmail = async (email) => {
   try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
     // Admin notification
-    const adminRecipient = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+    const adminRecipient = process.env.ADMIN_EMAIL;
+    if (!adminRecipient) {
+      throw new Error("ADMIN_EMAIL is missing");
+    }
 
-    await transporter.sendMail({
-      from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
+    await sendHtmlEmail({
       to: adminRecipient,
       subject: "New Newsletter Subscriber",
       html: renderEmailTemplate({
@@ -32,8 +26,7 @@ const sendNewsletterEmail = async (email) => {
     console.log(`Newsletter admin email sent to: ${adminRecipient}`);
 
     // Welcome email
-    await transporter.sendMail({
-      from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
+    await sendHtmlEmail({
       to: email,
       subject: "Welcome to Our Newsletter",
       html: renderEmailTemplate({

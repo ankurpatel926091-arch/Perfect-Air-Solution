@@ -147,8 +147,12 @@ const Hero = () => {
           </p>
 
           <p className="description">
-            Real-time booking | Same-day service | Certified technicians <br />
-            Experience fast, reliable & hassle-free cooling solutions
+            <span className="description-line-nowrap">
+              Real-time booking | Same-day service | Certified technicians
+            </span>
+            <span className="description-line-secondary">
+              Experience fast, reliable & hassle-free cooling solutions
+            </span>
           </p>
 
           <div className="buttons">

@@ -1,23 +1,8 @@
-import nodemailer from "nodemailer";
 import { renderEmailTemplate, renderInfoRows, styleTokens } from "../utils/emailTemplate.js";
-
-const getTransporter = () => {
-  return nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-};
+import { sendHtmlEmail } from "../utils/resendEmail.js";
 
 export const sendOrderEmail = async (order) => {
-  const transporter = getTransporter();
-
   const mailOptions = {
-    from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: order.customer.email,
     subject: "Order Confirmation",
     html: renderEmailTemplate({
@@ -43,16 +28,17 @@ export const sendOrderEmail = async (order) => {
     }),
   };
 
-  await transporter.sendMail(mailOptions);
+  await sendHtmlEmail(mailOptions);
   console.log(`Order confirmation email sent to: ${order.customer.email}`);
 };
 
 export const sendBookingEmail = async (booking) => {
-  const transporter = getTransporter();
-  const adminRecipient = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+  const adminRecipient = process.env.ADMIN_EMAIL;
+  if (!adminRecipient) {
+    throw new Error("ADMIN_EMAIL is missing");
+  }
 
   const adminMailOptions = {
-    from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: adminRecipient,
     subject: "New Service Booking Received",
     html: renderEmailTemplate({
@@ -73,7 +59,6 @@ export const sendBookingEmail = async (booking) => {
   };
 
   const userMailOptions = {
-    from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
     to: booking.email,
     subject: "We received your booking request",
     html: renderEmailTemplate({
@@ -96,8 +81,8 @@ export const sendBookingEmail = async (booking) => {
   };
 
   const [adminResult, userResult] = await Promise.allSettled([
-    transporter.sendMail(adminMailOptions),
-    transporter.sendMail(userMailOptions),
+    sendHtmlEmail(adminMailOptions),
+    sendHtmlEmail(userMailOptions),
   ]);
 
   if (adminResult.status === "fulfilled") {

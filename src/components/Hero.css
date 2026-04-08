@@ -108,6 +108,17 @@
   margin-bottom: 18px;
 }
 
+.description-line-nowrap {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: clamp(0.5rem, 2.45vw, 0.92rem);
+  letter-spacing: -0.01em;
+}
+
+.description-line-secondary {
+  display: block;
+}
+
 /* BUTTONS — stacked full-width on mobile */
 .buttons {
   display: flex;
