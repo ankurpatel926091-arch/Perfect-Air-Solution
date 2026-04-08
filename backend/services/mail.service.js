@@ -39,46 +39,63 @@ export const sendBookingEmail = async (booking) => {
   }
 
   const adminMailOptions = {
-    to: adminRecipient,
-    subject: "New Service Booking Received",
-    html: renderEmailTemplate({
-      title: "New Service Booking Received",
-      subtitle: "A customer submitted a booking form",
-      bodyHtml: `
-        <div style="${styleTokens.infoWrap}">
-          ${renderInfoRows([
-            { label: "Name", value: booking.name },
-            { label: "Email", value: booking.email },
-            { label: "Phone", value: booking.phone },
-            { label: "Service", value: booking.service },
-          ])}
-        </div>
-      `,
-      footerNote: "Admin Notification",
-    }),
-  };
+  to: adminRecipient,
+  subject: "New Enquiry Received - Limra Sales And Services",
+  html: renderEmailTemplate({
+    title: "New Enquiry Received",
+    subtitle: "A customer has submitted an enquiry form",
+    bodyHtml: `
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7;color:#334155;">
+        A new enquiry has been received through your website. Please review the details below and contact the customer as soon as possible.
+      </p>
 
-  const userMailOptions = {
-    to: booking.email,
-    subject: "We received your booking request",
-    html: renderEmailTemplate({
-      title: `Hello ${booking.name}, your booking is confirmed`,
-      subtitle: "Thank you for choosing Limra Sales And Services",
-      bodyHtml: `
-        <p style="margin:0 0 10px;font-size:14px;line-height:1.7;color:#334155;">
-          We have received your booking request and our team will contact you shortly for confirmation.
-        </p>
-        <div style="${styleTokens.infoWrap}">
-          ${renderInfoRows([
-            { label: "Name", value: booking.name },
-            { label: "Phone", value: booking.phone },
-            { label: "Service", value: booking.service },
-          ])}
-        </div>
-      `,
-      footerNote: "Regards, Limra Sales And Services Team",
-    }),
-  };
+      <div style="${styleTokens.infoWrap}">
+        ${renderInfoRows([
+          { label: "Name", value: booking.name },
+          { label: "Email", value: booking.email },
+          { label: "Phone", value: booking.phone },
+          { label: "Service", value: booking.service },
+        ])}
+      </div>
+    `,
+    footerNote: `
+      Admin Notification<br/><br/>
+      <span style="font-size:12px;color:#64748b;">
+        This is an automated alert from Limra Sales And Services
+      </span>
+    `,
+  }),
+};
+
+const userMailOptions = {
+  to: booking.email,
+  subject: "Enquiry Received - Limra Sales And Services",
+  html: renderEmailTemplate({
+    title: `Hello ${booking.name}, your enquiry has been received`,
+    subtitle: "Thank you for reaching out to Limra Sales And Services",
+    bodyHtml: `
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.7;color:#334155;">
+        Thank you for contacting us. We have successfully received your enquiry, 
+        and our team will review your request and get back to you shortly.
+      </p>
+
+      <div style="${styleTokens.infoWrap}">
+        ${renderInfoRows([
+          { label: "Name", value: booking.name },
+          { label: "Phone", value: booking.phone },
+          { label: "Service", value: booking.service },
+        ])}
+      </div>
+    `,
+    footerNote: `
+      Regards,<br/>
+      Limra Sales And Services Team<br/><br/>
+      <span style="font-size:12px;color:#64748b;">
+        This is an automated email from Limra Sales And Services
+      </span>
+    `,
+  }),
+};
 
   const [adminResult, userResult] = await Promise.allSettled([
     sendHtmlEmail(adminMailOptions),
