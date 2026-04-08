@@ -38,6 +38,7 @@ import AdminBlogs from "./pages/admin/AdminBlogs";
 import AdminServices from "./pages/admin/AdminServices";
 import AdminBrands from "./pages/admin/AdminBrands";
 import AdminProjects from "./pages/admin/AdminProjects";
+import AdminBookings from "./pages/admin/AdminBookings";
 
 const queryClient = new QueryClient();
 
@@ -95,6 +96,7 @@ const App: React.FC = () => (
             <Route path="services" element={<AdminServices />} />
             <Route path="brands" element={<AdminBrands />} />
             <Route path="projects" element={<AdminProjects />} />
+            <Route path="bookings" element={<AdminBookings />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

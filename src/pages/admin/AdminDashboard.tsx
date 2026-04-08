@@ -5,13 +5,14 @@ import {
   Briefcase,
   Tag,
   FolderKanban,
+  CalendarClock,
   Plus,
   ArrowUpRight,
   Globe,
   TrendingUp,
   Activity,
 } from "lucide-react";
-import { useGetBlogsQuery, useGetServicesQuery, useGetBrandsQuery, useGetProjectsQuery } from "../../store/api";
+import { useGetBlogsQuery, useGetServicesQuery, useGetBrandsQuery, useGetProjectsQuery, useGetBookingsQuery } from "../../store/api";
 
 /* ─── tiny helper ─────────────────────────────────────────────── */
 const CountBadge = ({ loading, count }: { loading: boolean; count: number }) =>
@@ -103,8 +104,9 @@ const AdminDashboard = () => {
   const { data: services = [], isLoading: servicesLoading } = useGetServicesQuery();
   const { data: brands = [], isLoading: brandsLoading } = useGetBrandsQuery();
   const { data: projects = [], isLoading: projectsLoading } = useGetProjectsQuery();
+  const { data: bookings = [], isLoading: bookingsLoading } = useGetBookingsQuery();
 
-  const totalLoading = blogsLoading || servicesLoading || brandsLoading || projectsLoading;
+  const totalLoading = blogsLoading || servicesLoading || brandsLoading || projectsLoading || bookingsLoading;
 
   const stats: StatCardProps[] = [
     {
@@ -151,9 +153,19 @@ const AdminDashboard = () => {
       path: "/admin/brands",
       addPath: "/admin/brands/new",
     },
+    {
+      label: "Bookings",
+      count: bookings.length,
+      loading: bookingsLoading,
+      icon: CalendarClock,
+      accent: "text-cyan-600",
+      accentBg: "bg-cyan-50",
+      accentBorder: "border-cyan-100",
+      path: "/admin/bookings",
+    },
   ];
 
-  const totalContent = blogs.length + services.length + projects.length + brands.length;
+  const totalContent = blogs.length + services.length + projects.length + brands.length + bookings.length;
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -176,7 +188,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* ── stat cards ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
         {stats.map((s, i) => (
           <StatCard key={i} {...s} />
         ))}
@@ -192,7 +204,8 @@ const AdminDashboard = () => {
             <span className="text-white font-semibold">{blogs.length} blog posts</span>,{" "}
             <span className="text-white font-semibold">{services.length} services</span>,{" "}
             <span className="text-white font-semibold">{projects.length} projects</span>, and{" "}
-            <span className="text-white font-semibold">{brands.length} brands</span> published.
+            <span className="text-white font-semibold">{brands.length} brands</span> published, with{" "}
+            <span className="text-white font-semibold">{bookings.length} bookings</span> received.
           </p>
         </div>
         <a
@@ -208,11 +221,12 @@ const AdminDashboard = () => {
       {/* ── quick actions ── */}
       <div>
         <h2 className="text-base font-bold font-syne text-neutral-800 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           <QuickAction to="/admin/blogs/new" icon={FileText} label="New Blog Post" sub="Write & publish" />
           <QuickAction to="/admin/services/new" icon={Briefcase} label="New Service" sub="Add offering" />
           <QuickAction to="/admin/projects/new" icon={FolderKanban} label="New Project" sub="Showcase work" />
           <QuickAction to="/admin/brands/new" icon={Tag} label="New Brand" sub="Upload logo" />
+          <QuickAction to="/admin/bookings" icon={CalendarClock} label="View Bookings" sub="Leads & requests" />
         </div>
       </div>
 

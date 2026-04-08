@@ -1,617 +1,373 @@
-// import { motion } from "framer-motion";
-// import { Link } from "react-router-dom";
-// import { Phone, Eye, CheckCircle, MapPin, Clock } from "lucide-react";
-// import heroImage from "@/assets/heroimage.webp";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import "./Hero.css";
 
-// const badges = [
-//   { icon: CheckCircle, text: "5,000+ Bookings" },
-//   { icon: Clock, text: "Slots Filling Fast" },
-//   { icon: MapPin, text: "Lucknow & UP" },
-// ];
+type BookingService = "repair" | "installation" | "maintenance";
+type BookingForm = {
+  name: string;
+  email: string;
+  phone: string;
+  service: BookingService | "";
+};
+type BookingErrors = Partial<Record<keyof BookingForm, string>>;
 
-// export default function HeroSection() {
-//   return (
-//     <section className="hero-section">
-//       {/* Grid overlay */}
-//       <div className="hero-grid-overlay" />
+const bookingSchema = Yup.object({
+  name: Yup.string()
+    .required("Full name is required")
+    .trim()
+    .matches(/^[A-Za-z\s]+$/, "Name can only contain letters and spaces")
+    .matches(/^(?!.*\s{2,})/, "Name cannot contain multiple consecutive spaces")
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be at most 50 characters"),
+  email: Yup.string()
+    .required("Email address is required")
+    .trim()
+    .lowercase()
+    .email("Please enter a valid email address")
+    .max(100, "Email is too long"),
+  phone: Yup.string()
+    .required("Phone number is required")
+    .matches(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile number"),
+  service: Yup.string()
+    .required("Please select a service")
+    .oneOf(["repair", "installation", "maintenance"], "Please select a valid service"),
+});
 
-//       {/* Right photo */}
-//       <div className="hero-image-container">
-//         <img
-//           src={heroImage}
-//           alt="AC service booking in Lucknow Uttar Pradesh"
-//           loading="eager"
-//           className="hero-image"
-//         />
-//         <div className="hero-image-fade" />
-//       </div>
+const Hero = () => {
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [service, setService] = useState<BookingService | "">("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<BookingErrors>({});
+  const [touched, setTouched] = useState<Partial<Record<keyof BookingForm, boolean>>>({});
 
-//       {/* Content */}
-//       <div className="hero-content-wrapper">
+  const validateField = async (field: keyof BookingForm, value: string) => {
+    try {
+      await bookingSchema.validateAt(field, { name, email, phone, service, [field]: value });
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        setErrors((prev) => ({ ...prev, [field]: err.message }));
+      }
+    }
+  };
 
-//         {/* Urgency pill */}
-//         <motion.div
-//           initial={{ opacity: 0, y: -10 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.6 }}
-//           className="hero-urgency-pill"
-//         >
-//           <span className="urgency-dot" />
-// Climate Care
-//         </motion.div>
+  const validateAll = async (): Promise<boolean> => {
+    try {
+      await bookingSchema.validate({ name, email, phone, service }, { abortEarly: false });
+      setErrors({});
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const nextErrors: BookingErrors = {};
+        err.inner.forEach((e) => {
+          if (e.path) nextErrors[e.path as keyof BookingForm] = e.message;
+        });
+        setErrors(nextErrors);
+        setTouched({ name: true, email: true, phone: true, service: true });
+      }
+      return false;
+    }
+  };
 
-//         {/* Heading */}
-//         <motion.h1
-//           initial={{ opacity: 0, y: 24 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.7, delay: 0.1 }}
-//           className="hero-heading"
-//         >
-//         Your Partner for Total Climate Control{" "}
-//           {/* <span className="heading-accent">
-//             Limra’s Best-Selling Products
-//           </span>{" "} */}
-         
-//         </motion.h1>
+  const handleBookingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isSubmitting) return;
 
-//         {/* Subtitle */}
-//         <motion.p
-//           initial={{ opacity: 0, y: 16 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.6, delay: 0.2 }}
-//           className="hero-subtitle"
-//         >
-//            Discover high-performance AC units, cooling solutions & accessories trusted across Lucknow & UP.
-//           <strong style={{ color: "white" }}>
-//            Fast selling items — grab yours before stock runs out.
-//           </strong>{" "}
-         
-//         </motion.p>
+    const isValid = await validateAll();
+    if (!isValid) {
+      toast.error("Please fix the highlighted fields.");
+      return;
+    }
 
-//         {/* CTAs */}
-//         <motion.div
-//           initial={{ opacity: 0, y: 16 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.5, delay: 0.3 }}
-//           className="hero-cta-group"
-//         >
-//           <Link to="/contact" className="btn-primary">
-//             <Phone size={16} fill="white" stroke="none" /> Get Free Site Inspection
-//           </Link>
+    setIsSubmitting(true);
+    const toastId = toast.loading("Submitting booking...");
 
-//           <Link to="/product" className="btn-outline">
-//             <Eye size={16} /> View Our Products
-//           </Link>
-//         </motion.div>
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/bookings`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          service,
+        }),
+      });
 
-//         {/* Trust badges */}
-//         <motion.div
-//           initial={{ opacity: 0 }}
-//           animate={{ opacity: 1 }}
-//           transition={{ duration: 0.5, delay: 0.45 }}
-//           className="hero-badges"
-//         >
-//           {badges.map((b, i) => (
-//             <span key={i} className="hero-badge-item">
-//               <b.icon size={13} className="badge-icon" />
-//               {b.text}
-//             </span>
-//           ))}
-//         </motion.div>
-//       </div>
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.message || "Failed to submit booking.");
+      }
 
-//       <style>{`
-//         .hero-section {
-//           background: var(--bg-hero-gradient, hsl(var(--brand-dark)));
-//           position: relative;
-//           width: 100%;
-//           min-height: calc(100vh - 80px);
-//           margin-top: 80px;
-//           overflow: hidden;
-//           display: flex;
-//           align-items: center;
-//         }
+      toast.update(toastId, {
+        render: "Booking submitted successfully.",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+      setName("");
+      setEmail("");
+      setPhone("");
+      setService("");
+      setErrors({});
+      setTouched({});
+    } catch (error: any) {
+      toast.update(toastId, {
+        render: error?.message || "Server error. Please try again.",
+        type: "error",
+        isLoading: false,
+        autoClose: 4000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-//         .hero-grid-overlay {
-//           position: absolute;
-//           inset: 0;
-//           opacity: 0.07;
-//           background-image:
-//             linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-//             linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
-//           background-size: 56px 56px;
-//           pointer-events: none;
-//         }
-
-//         .hero-image-container {
-//           position: absolute;
-//           right: 2%;
-//           top: 0;
-//           width: 46%;
-//           height: 100%;
-//           z-index: 0;
-//           display: flex;
-//           align-items: center;
-//           justify-content: center;
-//         }
-
-//         .hero-image {
-//           width: 100%;
-//           height: 85%;
-//           object-fit: contain;
-//           object-position: center;
-//         }
-
-//         .hero-image-fade {
-//           position: absolute;
-//           inset: 0;
-//           background: linear-gradient(
-//             to right,
-//             hsl(var(--brand-dark)) 0%,
-//             hsl(var(--brand-dark) / 0.7) 25%,
-//             transparent 100%
-//           );
-//           pointer-events: none;
-//         }
-
-//         .hero-content-wrapper {
-//           position: relative;
-//           z-index: 10;
-//           width: 100%;
-//           max-width: 1200px;
-//           margin: 0 auto;
-//           padding: 48px 24px;
-//         }
-
-//         .hero-urgency-pill {
-//           display: inline-flex;
-//           align-items: center;
-//           gap: 8px;
-//           background: hsl(var(--primary) / 0.18);
-//           border: 1px solid hsl(var(--primary) / 0.5);
-//           color: hsl(var(--brand-sky));
-//           font-weight: 700;
-//           font-size: 0.72rem;
-//           letter-spacing: 0.14em;
-//           text-transform: uppercase;
-//           padding: 5px 14px;
-//           border-radius: 100px;
-//           margin-bottom: 18px;
-//         }
-
-//         .urgency-dot {
-//           width: 7px;
-//           height: 7px;
-//           border-radius: 50%;
-//           background: #22c55e;
-//           box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
-//           animation: pulse-dot 1.8s ease-in-out infinite;
-//         }
-
-//         @keyframes pulse-dot {
-//           0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.25); }
-//           50% { box-shadow: 0 0 0 6px rgba(34,197,94,0.08); }
-//         }
-
-//         .hero-heading {
-//           color: white;
-//           margin-bottom: 16px;
-//           max-width: 680px;
-//           line-height: 1.2;
-//         }
-
-//         .heading-accent {
-//           color: hsl(var(--brand-sky));
-//         }
-
-//         .hero-subtitle {
-//           color: hsl(var(--brand-sky) / 0.75);
-//           max-width: 480px;
-//           margin-bottom: 28px;
-//           font-size: 1rem;
-//           line-height: 1.6;
-//         }
-
-//         .hero-cta-group {
-//           display: flex;
-//           gap: 12px;
-//           margin-bottom: 28px;
-//         }
-
-//         .btn-primary {
-//           background: hsl(var(--primary));
-//           color: #fff;
-//           font-weight: 700;
-//           padding: 14px 28px;
-//           border-radius: 8px;
-//           display: inline-flex;
-//           align-items: center;
-//           gap: 8px;
-//           text-decoration: none;
-//         }
-
-//         .btn-outline {
-//           background: transparent;
-//           color: #fff;
-//           font-weight: 700;
-//           padding: 13px 28px;
-//           border-radius: 8px;
-//           border: 2px solid rgba(255,255,255,0.35);
-//           display: inline-flex;
-//           align-items: center;
-//           gap: 8px;
-//           text-decoration: none;
-//         }
-
-//         .hero-badges {
-//           display: flex;
-//           gap: 20px;
-//         }
-
-//         .hero-badge-item {
-//           display: inline-flex;
-//           align-items: center;
-//           gap: 6px;
-//           color: hsl(var(--brand-sky) / 0.65);
-//           font-size: 0.83rem;
-//         }
-
-//         .badge-icon {
-//           color: hsl(var(--brand-sky));
-//         }
-//       `}</style>
-//     </section>
-//   );
-// }
-
-
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Phone, Eye, Wrench, CalendarCheck, BadgeDollarSign } from "lucide-react";
-import heroBgImage from "@/assets/hero1.webp";
-
-const features = [
-  {
-    icon: Wrench,
-    title: "Expert Technicians",
-    desc: "Certified pros delivering reliable solutions & exceptional service.",
-  },
-  {
-    icon: CalendarCheck,
-    title: "Flexible Scheduling",
-    desc: "Book at your convenience — morning, evening or weekend slots.",
-  },
-  {
-    icon: BadgeDollarSign,
-    title: "Transparent Pricing",
-    desc: "No hidden charges. Pay only for what you need, every time.",
-  },
-];
-
-export default function HeroSection() {
   return (
-    <section className="hero-section">
-      {/* Background image overlay */}
-      <div className="hero-bg-image" />
+    <section className="hero">
+      <div className="hero-container">
+        {/* LEFT SECTION */}
+        <div className="hero-left">
+          {/* Using your global .heading-1 class logic via CSS */}
+          <h1 className="hero-title">
+            Smart AC Services <br />
+            <span className="title-nowrap">
+              Powered by Technology{" "}
+              <svg
+                className="icon-lightning"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            </span>
+          </h1>
 
-      {/* Grid overlay */}
-      <div className="hero-grid-overlay" />
+          <p className="subtitle">
+            Don't wait in heat – <span>get instant AC service today</span>
+          </p>
 
-      {/* Top glow */}
-      <div className="hero-glow" />
+          <p className="description">
+            Real-time booking | Same-day service | Certified technicians <br />
+            Experience fast, reliable & hassle-free cooling solutions
+          </p>
 
-      {/* Centered Content */}
-      <div className="hero-content-wrapper">
-        {/* Urgency pill */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="hero-urgency-pill"
-        >
-          <span className="urgency-dot" />
-       Get Affordable AC Solutions for Home & Business
-        </motion.div> */}
+          <div className="buttons">
+            <button className="btn btn-primary" onClick={() => navigate("/services")} type="button">
+              Book Service Instantly
+            </button>
+            <button className="btn btn-secondary" onClick={() => navigate("/contact")} type="button">
+              Get Instant Quote
+            </button>
+          </div>
 
-        {/* Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="hero-heading"
-        >
-          Experience the Art of Perfect Climate
-        </motion.h1>
+          <a href="tel:+919839171701" className="expert-link">
+            Talk to Expert Now &rarr;
+          </a>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="hero-subtitle"
-        >
-          Expert installation, genuine products & quick service – all in one place.
-{" "}
-          <strong style={{ color: "#bae6fd" }}>
-          Request a free inspection and get the best quote today.
-          </strong>
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="hero-cta-group"
-        >
-          <Link to="/contact" className="btn-primary">
-            <Phone size={16} fill="white" stroke="none" />
-           Get Free Quote
-          </Link>
-          <Link to="/product" className="btn-outline">
-            <Eye size={16} />
-            Call Now
-          </Link>
-        </motion.div>
-      </div>
-
-      {/* Divider */}
-      <div className="hero-divider" />
-
-      {/* Feature Strip */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.45 }}
-        className="hero-features"
-      >
-        {features.map((f, i) => (
-          <div key={i} className="hero-feat-item">
-            <div className="feat-icon-wrap">
-              <f.icon size={22} color="#38bdf8" strokeWidth={1.8} />
+          <div className="stats-bar">
+            <div className="stat-item">
+              <svg
+                className="stat-icon"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              4.8 Rating
             </div>
-            <div>
-              <p className="feat-title">{f.title}</p>
-              <p className="feat-desc">{f.desc}</p>
+            <div className="divider"></div>
+            <div className="stat-item">
+              <svg
+                className="stat-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              10,000+ Services
+            </div>
+            <div className="divider"></div>
+            <div className="stat-item">
+              <svg
+                className="stat-icon"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+              30 Min Response
             </div>
           </div>
-        ))}
-      </motion.div>
+        </div>
 
-      <style>{`
-        .hero-section {
-          position: relative;
-          width: 100%;
-          min-height: calc(100vh - 80px);
-          margin-top: 80px;
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          background: linear-gradient(135deg, #0a1628 0%, #0d2244 50%, #0f2a52 100%);
-        }
+        {/* RIGHT SECTION (FORM) */}
+        <div className="hero-form-wrapper">
+          <div className="hero-form">
+            <h2 className="form-title">
+              <svg
+                className="form-title-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+              Quick Service Booking
+            </h2>
 
-        /* Faint AC background image */
-        .hero-bg-image {
-          position: absolute;
-          inset: 0;
-          background: url('${heroBgImage}') center / cover no-repeat;
-          opacity: 0.12;
-          pointer-events: none;
-        }
+            <form onSubmit={handleBookingSubmit}>
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => {
+                  const nextValue = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                  setName(nextValue);
+                  if (touched.name) validateField("name", nextValue);
+                }}
+                onBlur={() => {
+                  setTouched((prev) => ({ ...prev, name: true }));
+                  validateField("name", name);
+                }}
+                disabled={isSubmitting}
+                required
+              />
+              {touched.name && errors.name && <p className="hero-field-error">{errors.name}</p>}
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => {
+                  const nextValue = e.target.value;
+                  setEmail(nextValue);
+                  if (touched.email) validateField("email", nextValue);
+                }}
+                onBlur={() => {
+                  setTouched((prev) => ({ ...prev, email: true }));
+                  validateField("email", email);
+                }}
+                disabled={isSubmitting}
+                required
+              />
+              {touched.email && errors.email && <p className="hero-field-error">{errors.email}</p>}
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                value={phone}
+                onChange={(e) => {
+                  const nextValue = e.target.value.replace(/\D/g, "").slice(0, 10);
+                  setPhone(nextValue);
+                  if (touched.phone) validateField("phone", nextValue);
+                }}
+                onBlur={() => {
+                  setTouched((prev) => ({ ...prev, phone: true }));
+                  validateField("phone", phone);
+                }}
+                disabled={isSubmitting}
+                required
+                maxLength={10}
+              />
+              {touched.phone && errors.phone && <p className="hero-field-error">{errors.phone}</p>}
 
-        .hero-grid-overlay {
-          position: absolute;
-          inset: 0;
-          opacity: 0.06;
-          background-image:
-            linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
-          background-size: 56px 56px;
-          pointer-events: none;
-        }
+              <div className="select-wrapper">
+                <select
+                  value={service}
+                  onChange={(e) => {
+                    const nextValue = e.target.value as BookingService | "";
+                    setService(nextValue);
+                    if (touched.service) validateField("service", nextValue);
+                  }}
+                  onBlur={() => {
+                    setTouched((prev) => ({ ...prev, service: true }));
+                    validateField("service", service);
+                  }}
+                  disabled={isSubmitting}
+                  required
+                >
+                  <option value="" disabled hidden>
+                    Select Service
+                  </option>
+                  <option value="repair">AC Repair</option>
+                  <option value="installation">AC Installation</option>
+                  <option value="maintenance">AC Maintenance</option>
+                </select>
+              </div>
+              {touched.service && errors.service && <p className="hero-field-error">{errors.service}</p>}
 
-        .hero-glow {
-          position: absolute;
-          top: -120px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 700px;
-          height: 420px;
-          background: radial-gradient(ellipse, rgba(56,189,248,0.12) 0%, transparent 70%);
-          pointer-events: none;
-        }
+              <button type="submit" className="quote-btn" disabled={isSubmitting}>
+                <svg
+                  className="btn-icon"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M13.5 2c-5.62 0-9.25 4.35-10.3 8.35a6.52 6.52 0 0 0-.17 2.08l1.37 1.37 4.1-4.11a1 1 0 0 1 1.42 1.42l-4.11 4.1 1.37 1.37c.68-.04 1.38-.1 2.08-.17 4-1.05 8.35-4.68 8.35-10.3V2h-4.11zm1.2 5.3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM2 22l4.82-3.18a9.48 9.48 0 0 0 2.36-2.36L2 22z" />
+                </svg>
+                {isSubmitting ? "SUBMITTING..." : "GET INSTANT QUOTE"}
+              </button>
+            </form>
 
-        /* Content — centered */
-        .hero-content-wrapper {
-          position: relative;
-          z-index: 10;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding: 60px 24px 36px;
-          max-width: 800px;
-          width: 100%;
-          flex: 1;
-          justify-content: center;
-        }
+            <div className="form-features">
+              {/* First Line */}
+              <div className="features-row">
+                <p>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  100% Secure
+                </p>
+                <p>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  No Hidden Charges
+                </p>
+              </div>
 
-        .hero-urgency-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(56,189,248,0.12);
-          border: 1px solid rgba(56,189,248,0.4);
-          color: #7dd3fc;
-          font-weight: 700;
-          font-size: 0.7rem;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          padding: 5px 16px;
-          border-radius: 100px;
-          margin-bottom: 20px;
-        }
-
-        .urgency-dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #22c55e;
-          box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
-          animation: pulse-dot 1.8s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-          0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.25); }
-          50%       { box-shadow: 0 0 0 6px rgba(34,197,94,0.08); }
-        }
-
-        .hero-heading {
-          color: white;
-          font-size: clamp(1.7rem, 4.2vw, 2.8rem);
-          font-weight: 800;
-          line-height: 1.15;
-          letter-spacing: 0.02em;
-          margin-bottom: 18px;
-          max-width: 720px;
-        }
-
-        .heading-accent {
-          color: #38bdf8;
-        }
-
-        .hero-subtitle {
-          color: rgba(186,230,253,0.75);
-          font-size: 1rem;
-          line-height: 1.65;
-          max-width: 520px;
-          margin-bottom: 32px;
-        }
-
-        .hero-cta-group {
-          display: flex;
-          gap: 12px;
-          justify-content: center;
-          flex-wrap: wrap;
-        }
-
-        .btn-primary {
-          background: hsl(var(--primary, 210 80% 42%));
-          color: #fff;
-          font-weight: 700;
-          padding: 14px 28px;
-          border-radius: 8px;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          text-decoration: none;
-          transition: opacity 0.2s;
-        }
-        .btn-primary:hover { opacity: 0.88; }
-
-        .btn-outline {
-          background: transparent;
-          color: #fff;
-          font-weight: 700;
-          padding: 13px 28px;
-          border-radius: 8px;
-          border: 2px solid rgba(255,255,255,0.32);
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          text-decoration: none;
-          transition: border-color 0.2s;
-        }
-        .btn-outline:hover { border-color: rgba(255,255,255,0.65); }
-
-        /* Divider */
-        .hero-divider {
-          position: relative;
-          z-index: 10;
-          width: 100%;
-          height: 1px;
-          background: rgba(255,255,255,0.08);
-        }
-
-        /* Feature strip */
-        .hero-features {
-          position: relative;
-          z-index: 10;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          background: rgba(5,20,50,0.55);
-          backdrop-filter: blur(6px);
-          padding: 28px 24px;
-        }
-
-        .hero-feat-item {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          flex: 1;
-          max-width: 360px;
-          padding: 0 20px;
-          border-right: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .hero-feat-item:last-child {
-          border-right: none;
-        }
-
-        .feat-icon-wrap {
-          width: 52px;
-          height: 52px;
-          border-radius: 50%;
-          background: rgba(29,110,181,0.22);
-          border: 1px solid rgba(56,189,248,0.3);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-
-        .feat-title {
-          color: #ffffff;
-          font-weight: 700;
-          font-size: 0.95rem;
-          margin: 0 0 4px;
-          white-space: nowrap;
-        }
-
-        .feat-desc {
-          color: rgba(186,230,253,0.6);
-          font-size: 0.8rem;
-          line-height: 1.5;
-          margin: 0;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-          .hero-features {
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-          }
-          .hero-feat-item {
-            border-right: none;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            padding: 0 0 20px;
-            max-width: 100%;
-            width: 100%;
-          }
-          .hero-feat-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-          }
-        }
-      `}</style>
+              {/* Second Line */}
+              <div className="features-row">
+                <p>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                  Instant Response
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
-}
+};
+
+export default Hero;

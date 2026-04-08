@@ -11,6 +11,7 @@ import blogRoutes from "./routes/blog.routes.js";
 import serviceRoutes from "./routes/service.routes.js";
 import brandRoutes from "./routes/brand.routes.js";
 import projectRoutes from "./routes/project.routes.js";
+import bookingRoutes from "./routes/booking.routes.js";
 const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
 connectDB();
 
@@ -51,6 +52,7 @@ app.use("/api/blogs", blogRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/brands", brandRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/bookings", bookingRoutes);
 
 // Generic Upload Route
 app.post('/api/upload', (req, res) => {

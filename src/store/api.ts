@@ -13,7 +13,7 @@ export const api = createApi({
             return headers;
         },
     }),
-    tagTypes: ['Blog', 'Service', 'Brand', 'Project'],
+    tagTypes: ['Blog', 'Service', 'Brand', 'Project', 'Booking'],
     endpoints: (builder) => ({
 
         // ================= AUTH =================
@@ -95,6 +95,25 @@ export const api = createApi({
                 method: 'DELETE',
             }),
             invalidatesTags: ['Project'],
+        }),
+
+        // ================= BOOKINGS =================
+        getBookings: builder.query<Record<string, unknown>[], void>({
+            query: () => '/bookings',
+            transformResponse: (response: any) => {
+                if (Array.isArray(response)) return response;
+                if (Array.isArray(response?.data)) return response.data;
+                return [];
+            },
+            providesTags: ['Booking'],
+        }),
+
+        deleteBooking: builder.mutation<{ message: string }, string>({
+            query: (id) => ({
+                url: `/bookings/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Booking'],
         }),
     }),
 });
@@ -275,4 +294,7 @@ export const {
 
     useGetProjectsQuery,
     useDeleteProjectMutation,
+
+    useGetBookingsQuery,
+    useDeleteBookingMutation,
 } = api;

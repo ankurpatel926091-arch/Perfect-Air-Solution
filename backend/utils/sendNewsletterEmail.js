@@ -11,30 +11,34 @@ const sendNewsletterEmail = async (email) => {
     });
 
     // Admin notification
+    const adminRecipient = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+
     await transporter.sendMail({
-      from: `"Website Newsletter" <${process.env.EMAIL_USER}>`,
-      to: process.env.ADMIN_EMAIL,
-      subject: "📩 New Newsletter Subscriber",
+      from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
+      to: adminRecipient,
+      subject: "New Newsletter Subscriber",
       html: `<p>New subscriber: <b>${email}</b></p>`,
     });
+    console.log(`Newsletter admin email sent to: ${adminRecipient}`);
 
     // Welcome email
     await transporter.sendMail({
-      from: `"Limra Services" <${process.env.EMAIL_USER}>`,
+      from: `"Limra Sales And Services" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "🎉 Welcome to Our Newsletter",
+      subject: "Welcome to Our Newsletter",
       html: `
         <h3>Welcome!</h3>
         <p>Thank you for subscribing to our HVAC newsletter.</p>
-        <p>You’ll receive updates, tips, and exclusive offers.</p>
+        <p>You will receive updates, tips, and exclusive offers.</p>
         <br/>
-        <p>— Limra Services Team</p>
+        <p>Limra Sales And Services Team</p>
       `,
     });
+    console.log(`Newsletter user email sent to: ${email}`);
 
-    console.log("📧 Newsletter emails sent");
+    console.log("Newsletter emails sent");
   } catch (error) {
-    console.error("❌ Email error:", error.message);
+    console.error("Email error:", error.message);
   }
 };
 

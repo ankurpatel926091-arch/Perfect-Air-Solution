@@ -1,6 +1,6 @@
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { LayoutDashboard, FileText, Settings, Briefcase, Tags, LogOut, Image as ImageIcon } from "lucide-react";
+import { LayoutDashboard, FileText, Briefcase, Tags, LogOut, Image as ImageIcon, CalendarClock } from "lucide-react";
 import { useAdminAuth } from "@/context/AdminAuthContext";
 
 const AdminLayout = () => {
@@ -24,6 +24,7 @@ const AdminLayout = () => {
     { label: "Services", path: "/admin/services", icon: Briefcase },
     { label: "Brands", path: "/admin/brands", icon: Tags },
     { label: "Projects", path: "/admin/projects", icon: ImageIcon },
+    { label: "Bookings", path: "/admin/bookings", icon: CalendarClock },
   
   ];
 
