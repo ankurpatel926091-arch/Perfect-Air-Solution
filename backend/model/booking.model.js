@@ -16,7 +16,13 @@ const bookingSchema = new mongoose.Schema(
     },
     service: {
       type: String,
-      enum: ["repair", "installation", "maintenance"],
+      enum: [
+        "repair",
+        "installation",
+        "maintenance",
+        "ac seeling",
+        "general enquiry",
+      ],
       required: true,
     },
   },

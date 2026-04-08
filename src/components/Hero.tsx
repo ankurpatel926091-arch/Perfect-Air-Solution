@@ -4,7 +4,12 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./Hero.css";
 
-type BookingService = "repair" | "installation" | "maintenance";
+type BookingService =
+  | "repair"
+  | "installation"
+  | "maintenance"
+  | "ac seeling"
+  | "general enquiry";
 type BookingForm = {
   name: string;
   email: string;
@@ -33,7 +38,13 @@ const bookingSchema = Yup.object({
   service: Yup.string()
     .required("Please select a service")
     .oneOf(
-      ["repair", "installation", "maintenance"],
+      [
+        "repair",
+        "installation",
+        "maintenance",
+        "ac seeling",
+        "general enquiry",
+      ],
       "Please select a valid service",
     ),
 });
@@ -332,6 +343,8 @@ const Hero = () => {
                   <option value="repair">AC Repair</option>
                   <option value="installation">AC Installation</option>
                   <option value="maintenance">AC Maintenance</option>
+                  <option value="ac seeling">AC Seeling</option>
+                  <option value="general enquiry">General Enquiry</option>
                 </select>
               </div>
               {touched.service && errors.service && (
