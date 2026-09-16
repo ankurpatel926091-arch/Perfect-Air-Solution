@@ -9,9 +9,9 @@ const sections = [
     icon: FileText,
     title: "General Terms",
     content: [
-      "By accessing and using the LIMRA Sales & Services website, you agree to be bound by these Terms & Conditions.",
+      "By accessing and using the Perfect Air Solution website, you agree to be bound by these Terms & Conditions.",
       "We reserve the right to modify these terms at any time. Continued use of the website constitutes acceptance of updated terms.",
-      "All content on this website, including text, images, and logos, is the property of LIMRA Sales & Services and is protected by intellectual property laws.",
+      "All content on this website, including text, images, and logos, is the property of Perfect Air Solution and is protected by intellectual property laws.",
     ],
   },
   {
@@ -38,7 +38,7 @@ const sections = [
     icon: AlertTriangle,
     title: "Warranties & Liability",
     content: [
-      "All products sold carry the manufacturer's warranty. LIMRA Sales & Services does not provide additional warranty beyond the manufacturer's terms.",
+      "All products sold carry the manufacturer's warranty. Perfect Air Solution provides standard service warranties for installation and AMC work.",
       "We are not liable for any indirect, incidental, or consequential damages arising from the use of our products or services.",
       "Service warranties cover workmanship for a period specified at the time of service completion.",
     ],
@@ -47,7 +47,7 @@ const sections = [
     icon: Scale,
     title: "Dispute Resolution",
     content: [
-      "Any disputes arising from these terms shall be governed by the laws of India and subject to the jurisdiction of courts in Hardoi, Uttar Pradesh.",
+      "Any disputes arising from these terms shall be governed by the laws of India and subject to jurisdiction.",
       "We encourage customers to contact us directly to resolve any issues before pursuing legal remedies.",
     ],
   },
@@ -55,8 +55,8 @@ const sections = [
     icon: Mail,
     title: "Contact",
     content: [
-      "For any questions regarding these terms, contact us at info@limrasales.com or +91 98391 71701.",
-      "LIMRA Sales & Services, Civil Lines, Hardoi, Uttar Pradesh 243001.",
+      "For any questions regarding these terms, contact us at info@perfectairsolution.com or +91 98391 71701.",
+      "Perfect Air Solution, Civil Lines, Uttar Pradesh 241001.",
     ],
   },
 ];

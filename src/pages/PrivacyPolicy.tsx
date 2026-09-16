@@ -46,8 +46,8 @@ const sections = [
     icon: Mail,
     title: "Contact Us",
     content: [
-      "If you have any questions about this Privacy Policy, please contact us at info@limrasales.com or call +91 98391 71701.",
-      "LIMRA Sales & Services, Civil Lines, Hardoi, Uttar Pradesh 243001.",
+      "If you have any questions about this Privacy Policy, please contact us at info@perfectairsolution.com or call +91 98391 71701.",
+      "Perfect Air Solution, Civil Lines, Uttar Pradesh 241001.",
     ],
   },
 ];

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface CTAProps {
@@ -21,29 +21,31 @@ const CTASection: React.FC<CTAProps> = ({
       style={{
         width: "100%",
         background: "hsl(var(--background))",
-        paddingTop: "30px",
+        paddingTop: "40px",
+        paddingBottom: "40px",
         paddingLeft: "0",
         paddingRight: "0",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="bg-hero-gradient"
           style={{
             position: "relative",
             overflow: "hidden",
             borderRadius: "32px",
-            paddingTop: "clamp(28px, 3.5vw, 40px)", // ⬅ reduced (was 48px–64px)
-            paddingBottom: "clamp(28px, 3.5vw, 40px)", // ⬅ reduced (was 48px–64px)
+            background: "linear-gradient(135deg, #051B30 0%, #0B2E4C 50%, #0284C7 100%)",
+            paddingTop: "clamp(36px, 4vw, 56px)",
+            paddingBottom: "clamp(36px, 4vw, 56px)",
             paddingLeft: "clamp(32px, 5vw, 64px)",
             paddingRight: "clamp(32px, 5vw, 64px)",
+            boxShadow: "0 20px 40px rgba(5, 27, 48, 0.25)",
           }}
         >
-          {/* Orbs */}
+          {/* Subtle Background Elements */}
           <div
             style={{
               position: "absolute",
@@ -51,7 +53,7 @@ const CTASection: React.FC<CTAProps> = ({
               right: "-60px",
               width: "280px",
               height: "280px",
-              background: "hsl(var(--primary) / 0.18)",
+              background: "rgba(56, 189, 248, 0.2)",
               borderRadius: "50%",
               filter: "blur(48px)",
               pointerEvents: "none",
@@ -64,63 +66,50 @@ const CTASection: React.FC<CTAProps> = ({
               left: "-60px",
               width: "280px",
               height: "280px",
-              background: "hsl(var(--brand-dark) / 0.4)",
+              background: "rgba(2, 132, 199, 0.3)",
               borderRadius: "50%",
               filter: "blur(48px)",
               pointerEvents: "none",
             }}
           />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              opacity: 0.15,
-              backgroundImage:
-                "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
-              backgroundSize: "28px 28px",
-              pointerEvents: "none",
-            }}
-          />
 
-          <div
-            style={{ position: "relative", zIndex: 10, textAlign: "center" }}
-          >
+          <div style={{ position: "relative", zIndex: 10, textAlign: "center" }}>
             {/* Badge */}
             <div
               style={{
                 display: "inline-block",
                 background: "rgba(255,255,255,0.12)",
                 border: "1px solid rgba(255,255,255,0.25)",
-                color: "hsl(var(--brand-sky))",
+                color: "#38BDF8",
                 fontWeight: 700,
-                fontSize: "0.72rem",
+                fontSize: "0.75rem",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase" as const,
-                padding: "5px 16px",
+                padding: "6px 18px",
                 borderRadius: "100px",
+                marginBottom: "16px",
               }}
             >
-              Get In Touch
+              Get In Touch With Perfect Air Solution
             </div>
 
-            {/* h2 */}
-            <h2 style={{ color: "white", marginBottom: "20px", marginTop: 0 }}>
-              Fast & Reliable AC Services in Uttar Pradesh– Installation, Repair
-              & AMC
+            {/* Title */}
+            <h2 style={{ color: "white", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 800, marginBottom: "16px", marginTop: 0, lineHeight: 1.2 }}>
+              Ready for Turnkey Commercial &amp; Residential HVAC Solutions?
             </h2>
 
-            {/* body-text */}
+            {/* Description */}
             <p
-              className="body-text"
               style={{
-                color: "hsl(var(--brand-sky) / 0.85)",
-                maxWidth: "520px",
+                color: "rgba(224, 242, 254, 0.9)",
+                maxWidth: "600px",
                 margin: "0 auto 32px",
+                fontSize: "1.05rem",
                 fontWeight: 400,
+                lineHeight: 1.6,
               }}
             >
-              Real-time booking | Certified technicians | Same-day service
-              Experience next-gen cooling solutions with zero hassle
+              Contact our HVAC engineering specialists for site inspection, load calculations, VRF system layout, and AMC plans.
             </p>
 
             <div
@@ -129,8 +118,7 @@ const CTASection: React.FC<CTAProps> = ({
                 flexWrap: "wrap",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "14px",
-                marginBottom: "0" /* ⬅ was 28px */,
+                gap: "16px",
               }}
             >
               <button
@@ -140,18 +128,19 @@ const CTASection: React.FC<CTAProps> = ({
                   alignItems: "center",
                   gap: "8px",
                   padding: "14px 32px",
-                  background: "hsl(var(--card))",
-                  color: "hsl(var(--brand-dark))",
+                  background: "white",
+                  color: "#051B30",
                   fontWeight: 700,
                   fontSize: "0.95rem",
                   borderRadius: "12px",
                   border: "none",
                   cursor: "pointer",
                   transition: "all 0.2s",
-                  fontFamily: "Inter",
+                  boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
                 }}
               >
-                Get Free Consultation <ArrowRight size={17} />
+                <span>Request Free Quote</span>
+                <ArrowRight size={18} />
               </button>
               <a
                 href={`tel:${phoneNumber.replace(/[^0-9+]/g, "")}`}
@@ -160,19 +149,19 @@ const CTASection: React.FC<CTAProps> = ({
                   alignItems: "center",
                   gap: "8px",
                   padding: "13px 32px",
-                  background: "transparent",
+                  background: "rgba(255,255,255,0.1)",
                   color: "white",
                   fontWeight: 700,
                   fontSize: "0.95rem",
                   borderRadius: "12px",
-                  border: "2px solid rgba(255,255,255,0.35)",
+                  border: "1.5px solid rgba(255,255,255,0.3)",
                   cursor: "pointer",
                   textDecoration: "none",
                   transition: "all 0.2s",
-                  fontFamily: "Inter",
                 }}
               >
-                <Phone size={17} /> Call {phoneNumber}
+                <Phone size={18} className="text-cyan-300" />
+                <span>Call {phoneNumber}</span>
               </a>
             </div>
           </div>

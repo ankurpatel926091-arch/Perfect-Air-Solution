@@ -63,7 +63,7 @@ const AdminLogin = () => {
               autoFocus
               disabled={isLoading}
               className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed"
-              placeholder="admin@limrasales.com"
+              placeholder="admin@perfectairsolution.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

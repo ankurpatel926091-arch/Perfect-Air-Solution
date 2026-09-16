@@ -48,7 +48,7 @@ const sections = [
     icon: CreditCard,
     title: "Refund Process",
     content: [
-      "Contact our customer support team via email (info@limrasales.com) or phone (+91 98391 71701) to initiate a refund request.",
+      "Contact our customer support team via email (info@perfectairsolution.com) or phone (+91 98391 71701) to initiate a refund request.",
       "Provide your order number, reason for refund, and any supporting images if applicable.",
       "Our team will review your request and respond within 48 hours with the resolution.",
       "Approved refunds will be credited back to the original payment method used during purchase.",
@@ -58,9 +58,9 @@ const sections = [
     icon: Mail,
     title: "Need Help?",
     content: [
-      "For any refund-related queries, reach out to us at info@limrasales.com or call +91 98391 71701.",
+      "For any refund-related queries, reach out to us at info@perfectairsolution.com or call +91 98391 71701.",
       "Our customer support team is available Monday to Saturday, 9:00 AM – 7:00 PM.",
-      "LIMRA Sales & Services, Civil Lines, Hardoi, Uttar Pradesh 243001.",
+      "Perfect Air Solution, Civil Lines, Uttar Pradesh 241001.",
     ],
   },
 ];

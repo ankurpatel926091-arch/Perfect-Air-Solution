@@ -1,146 +1,145 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Phone, Wind, Droplets, ThermometerSun, AirVent, Building2, Home } from "lucide-react";
+import { Building, Hospital, Hotel, Factory, Building2, ShieldCheck, ArrowRight } from "lucide-react";
 import commercialImage from "../assets/commercial.jpg";
-import resedentialImage from "../assets/resedential.jpg"
-const residentialItems = [
-  { icon: <Wind size={16} />, label: "Split ACs Up to 3 ton" },
-  { icon: <Wind size={16} />, label: "Window ACs" },
-  { icon: <Wind size={16} />, label: "Portable ACs" },
-  { icon: <Droplets size={16} />, label: "Water Coolers & Dispensers" },
-  { icon: <Wind size={16} />, label: "Air Purifiers & Water Softeners" },
+import resedentialImage from "../assets/resedential.jpg";
+
+const sectors = [
+  {
+    icon: Building,
+    name: "Offices & Corporate Towers",
+    description: "Quiet, multi-zone VRF and centralized ductable cooling ensuring optimal productivity and low energy bills.",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+    slug: "offices"
+  },
+  {
+    icon: Hospital,
+    name: "Hospitals & Healthcare",
+    description: "Precision temperature, humidity control, and HEPA Air Handling Units (AHUs) meeting strict medical cleanroom standards.",
+    image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80",
+    slug: "hospitals"
+  },
+  {
+    icon: Hotel,
+    name: "Hotels & Hospitality",
+    description: "Silent room ACs and high-capacity central chillers delivering 24/7 guest comfort across suites and banquet halls.",
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+    slug: "hotels"
+  },
+  {
+    icon: Building2,
+    name: "Commercial Buildings & Malls",
+    description: "Heavy-tonnage central chiller plants and cassette units built to handle high footfall thermal loads effortlessly.",
+    image: commercialImage,
+    slug: "commercial-buildings"
+  },
+  {
+    icon: Factory,
+    name: "Industrial & Manufacturing Spaces",
+    description: "Heavy-duty ventilation, exhaust systems, process cooling chillers, and ductable HVAC for factory floors.",
+    image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80",
+    slug: "industrial-spaces"
+  },
+  {
+    icon: Building,
+    name: "Offices & Corporate Towers",
+    description: "Quiet, multi-zone VRF and centralized ductable cooling ensuring optimal productivity and low energy bills.",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+    slug: "offices"
+  },
 ];
-
-const commercialItems = [
-  { icon: <Building2 size={16} />, label: "Daikin VRF Systems" },
-  { icon: <Wind size={16} />, label: "Cassette & Ductable ACs" },
-  { icon: <ThermometerSun size={16} />, label: "Chillers & Heat Pumps" },
-  { icon: <Building2 size={16} />, label: "Tower ACs" },
-  { icon: <AirVent size={16} />, label: "Ventilation & Fresh Air Systems" },
-];
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" } }),
-};
-
-function SolutionCard({ title, items, primaryBtnLabel, imageUrl, imageAlt, badgeIcon, index }: any) {
-  const navigate = useNavigate();
-  return (
-    <motion.div
-      custom={index} initial="hidden" whileInView="visible"
-      viewport={{ once: true }} variants={cardVariants} whileHover={{ y: -6 }}
-      style={{
-        background: "hsl(var(--card))", borderRadius: "20px",
-        border: "1px solid hsl(var(--border))", overflow: "hidden",
-        display: "flex", flexDirection: "column",
-        boxShadow: "0 2px 16px hsl(var(--primary) / 0.08)", transition: "all 0.3s",
-      }}
-    >
-      <div style={{ position: "relative", width: "100%", height: "200px", overflow: "hidden" }}>
-        <img
-          src={imageUrl}
-          alt={imageAlt}
-          loading="lazy"
-          decoding="async"
-          width="800"
-          height="500"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, hsl(var(--brand-dark) / 0.1), hsl(var(--brand-dark) / 0.45))" }} />
-        <div style={{ position: "absolute", top: 12, left: 12, width: "38px", height: "38px", background: "hsl(var(--card))", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px hsl(var(--primary) / 0.15)" }}>
-          {badgeIcon}
-        </div>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(90deg, hsl(var(--brand-dark)), hsl(var(--primary)))" }} />
-      </div>
-
-      <div style={{ padding: "28px", flex: 1, display: "flex", flexDirection: "column" }}>
-        <h3 style={{ fontSize: "1.1rem", marginBottom: "20px" }}>{title}</h3>
-
-        <ul style={{ flex: 1, marginBottom: "24px", display: "flex", flexDirection: "column", gap: "4px", listStyle: "none", padding: 0 }}>
-          {items.map((item: any, i: number) => (
-            <li key={i} className="body-text" style={{ display: "flex", alignItems: "center", gap: "10px", color: "hsl(var(--muted-foreground))", fontSize: "0.88rem" }}>
-              <span style={{ color: "hsl(var(--primary))" }}>{item.icon}</span> {item.label}
-            </li>
-          ))}
-        </ul>
-
-        <div style={{ display: "flex", gap: "10px" }}>
-          <a
-            href="tel:+919839171701"
-            style={{
-              flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
-              background: "hsl(var(--brand-dark))", color: "white",
-              fontWeight: 600, padding: "12px 16px", borderRadius: "10px",
-              border: "none", cursor: "pointer", fontSize: "0.88rem",
-              transition: "background 0.2s", textDecoration: "none",
-            }}
-          >
-            <Phone size={15} /> {primaryBtnLabel}
-          </a>
-          <button
-            style={{
-              flex: 1, background: "hsl(var(--brand-light))", color: "hsl(var(--primary))",
-              fontWeight: 600, padding: "12px 16px", borderRadius: "10px",
-              border: "1px solid hsl(var(--border))", cursor: "pointer",
-              fontSize: "0.88rem", transition: "background 0.2s",
-            }}
-            onClick={() => navigate("/product")}
-          >
-            View Products
-          </button>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 export default function HVACSolutions() {
+  const navigate = useNavigate();
+
   return (
-    <section className="section-padding" style={{ background: "hsl(var(--card))" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 5vw, 48px)" }}>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.6 }}
-          style={{ textAlign: "center", marginBottom: "20px" }}
-        >
-          <div style={{
-            display: "inline-block",
-            background: "hsl(var(--primary) / 0.1)", border: "1px solid hsl(var(--primary) / 0.25)",
-            color: "hsl(var(--primary))", fontWeight: 700, fontSize: "1rem",
-            letterSpacing: "0.18em", textTransform: "uppercase" as const,
-            padding: "5px 20px", borderRadius: "100px",
-          }}>
-            Complete HVAC Solutions
-          </div>
-
-          {/* body-text */}
-          <p className="body-text" style={{ color: "hsl(var(--muted-foreground))", marginTop: "10px" }}>
-            From residential comfort to large commercial projects, we've got you covered.
-          </p>
-        </motion.div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "12px" }}>
-          <SolutionCard
-            index={0}
-            title="Residential Solutions"
-            items={residentialItems}
-            primaryBtnLabel="Get Quote"
-            imageUrl={resedentialImage}
-            imageAlt="Residential air conditioner installation technician installing split AC"
-            badgeIcon={<Home size={18} style={{ color: "hsl(var(--primary))" }} />}
-          />
-          <SolutionCard
-            index={1}
-            title="Commercial & VRF Systems"
-            items={commercialItems}
-            primaryBtnLabel="Get Quote"
-            imageUrl={commercialImage}
-            imageAlt="Commercial VRF HVAC system installation inside office building"
-            badgeIcon={<Building2 size={18} style={{ color: "hsl(var(--primary))" }} />}
-          />
+    <section className="py-20 bg-gradient-to-b from-[#E6F4FA] via-[#F4FAFF] to-[#EEF8FF] text-slate-800 relative overflow-hidden">
+      {/* Background radial dot grid */}
+      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#0284C7_1px,transparent_1px)] [background-size:24px_24px]" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block bg-sky-100/90 border border-sky-200/80 text-[#0284C7] text-xs font-bold uppercase tracking-widest px-5 py-1.5 rounded-full mb-3 shadow-sm"
+          >
+            Industries &amp; Sectors Served
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#051B30] tracking-tight"
+          >
+            Engineered Cooling for Every Industry
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-slate-600 text-base md:text-lg mt-4 font-normal leading-relaxed"
+          >
+            Perfect Air Solution provides customized HVAC design, VRF systems, cassette units, and maintenance contracts engineered for diverse corporate and industrial requirements.
+          </motion.p>
         </div>
+
+        {/* Industry Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sectors.map((sector, index) => {
+            const IconComponent = sector.icon;
+            return (
+              <motion.div
+                key={sector.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ y: -6 }}
+                onClick={() => navigate(`/hvac-applications`)}
+                className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-xl shadow-sky-900/5 hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10 transition-all duration-300 flex flex-col cursor-pointer"
+              >
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden bg-slate-100">
+                  <img
+                    src={sector.image}
+                    alt={sector.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" />
+                  
+                  {/* Icon badge */}
+                  <div className="absolute top-4 left-4 w-11 h-11 rounded-xl bg-white/95 backdrop-blur-md border border-sky-100 flex items-center justify-center text-[#0284C7] shadow-md">
+                    <IconComponent size={22} />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 flex-1 flex flex-col justify-between bg-white">
+                  <div>
+                    <h3 className="text-xl font-bold text-[#051B30] group-hover:text-[#0284C7] transition-colors mb-2">
+                      {sector.name}
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed font-normal">
+                      {sector.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-[#0284C7] group-hover:text-sky-600">
+                    <span>Explore Sector Solutions</span>
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );

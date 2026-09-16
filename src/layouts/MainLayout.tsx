@@ -17,13 +17,11 @@ const MainLayout: React.FC = () => {
       <ProgressBar />
       <ScrollToTop />
       <SiteHeader />
-      <AnimatePresence mode="wait">
-        <PageTransition key={location.pathname}>
-          <main className="min-h-screen">
-            <Outlet />
-          </main>
-        </PageTransition>
-      </AnimatePresence>
+      <PageTransition key={location.pathname}>
+        <main className="min-h-screen">
+          <Outlet />
+        </main>
+      </PageTransition>
       <SiteFooter />
       <ScrollToTopButton />
       <FloatingActionButton />

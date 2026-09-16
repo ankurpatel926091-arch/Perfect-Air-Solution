@@ -10,20 +10,20 @@ import {
   UserCheck,
   ArrowRight,
   Clock,
-  Shield,
+  ShieldCheck,
   ChevronRight,
+  Wind,
 } from "lucide-react";
 import cclogo from "../assets/cc-logo.png";
-import Logo from "../assets/logo4.png";
-import { useGetServicesQuery, useGetProjectsQuery } from "@/store/api";
+import { useGetServicesQuery } from "@/store/api";
 
 const quickLinks = [
   { label: "Home", to: "/" },
-  { label: "Our Story", to: "/about" },
-  { label: "All Products", to: "/shop" },
-  // { label: "Our Projects", to: "/case-studies" },
-  { label: "Brands", to: "/brands" },
-  { label: "Blog", to: "/blog" },
+  { label: "About Us", to: "/about" },
+  { label: "Products / Solutions", to: "/product" },
+  { label: "Services", to: "/services" },
+  { label: "Projects", to: "/case-studies" },
+  { label: "Gallery", to: "/gallery" },
   { label: "Contact Us", to: "/contact" },
 ];
 
@@ -59,12 +59,18 @@ const linkItemVariants = {
 };
 
 const SiteFooter = () => {
-  const {
-    data: services,
-    isLoading: servicesLoading,
-    isError: servicesError,
-  } = useGetServicesQuery();
-  const { data: projects } = useGetProjectsQuery();
+  const { data: services } = useGetServicesQuery();
+
+  const staticServicesList = [
+    { title: "AC Installation", slug: "ac-installation" },
+    { title: "AC Repair & Maintenance", slug: "ac-repair-maintenance" },
+    { title: "AMC Services", slug: "amc-services" },
+    { title: "HVAC Design & Consultation", slug: "hvac-design-consultation" },
+    { title: "Commercial HVAC Solutions", slug: "commercial-hvac-solutions" },
+    { title: "Preventive Maintenance", slug: "preventive-maintenance" },
+  ];
+
+  const displayServices = (services && services.length > 0) ? services : staticServicesList;
 
   return (
     <motion.footer
@@ -72,10 +78,7 @@ const SiteFooter = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.01 }}
       variants={containerVariants}
-      style={{
-        background:
-          "linear-gradient(160deg, hsl(var(--brand-dark)) 0%, #051B30 50%, hsl(var(--brand-dark)) 100%)",
-      }}
+      className="bg-[#051B30] text-slate-200 border-t border-slate-800"
     >
       {/* Top accent line */}
       <motion.div
@@ -85,415 +88,185 @@ const SiteFooter = () => {
         transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         style={{
           height: 3,
-          background:
-            "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--brand-light)), hsl(var(--primary)))",
+          background: "linear-gradient(90deg, #0284C7, #38BDF8, #0284C7)",
           transformOrigin: "left",
         }}
       />
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 pt-8 pb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 items-stretch">
+          
           {/* Brand Column */}
-          <motion.div variants={colVariants} className="lg:pr-6">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
+          <motion.div variants={colVariants} className="lg:pr-4 flex flex-col justify-between h-full">
+            <div>
               <Link
                 to="/"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  textDecoration: "none",
-                }}
+                className="flex items-center gap-3 mb-3.5 text-decoration-none group"
               >
-                <img
-                  src={Logo}
-                  alt="LIMRA Sales & Services"
-                  style={{
-                    height: "70px",
-                    width: "auto",
-                    backgroundColor: "white",
-                    padding: "5px",
-                    marginBottom: "10px",
-                  }}
-                />
+                <div className="w-11 h-11 p-2.5 rounded-xl bg-gradient-to-tr from-[#0284C7] to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-sky-500/25 group-hover:scale-105 transition-transform">
+                  <Wind size={24} className="text-white" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-extrabold text-2xl lg:text-3xl tracking-tight text-white leading-none">
+                    PERFECT <span className="text-[#38BDF8]">AIR</span>
+                  </span>
+                  <span className="text-xs font-bold tracking-[0.24em] text-slate-300 uppercase leading-none mt-1">
+                    SOLUTION
+                  </span>
+                </div>
               </Link>
-            </motion.div>
 
-            <p
-              className="text-sm leading-relaxed mb-5"
-              style={{ color: "rgba(255,255,255,0.9)" }}
-            >
-              Established in 2012, we are Hardoi's most trusted HVAC partner —
-              delivering expert AC installation, maintenance, and sales for
-              homes &amp; businesses.
-            </p>
+              <p className="text-base leading-relaxed mb-3.5 text-slate-200 font-normal">
+                Perfect Air Solution is a premier HVAC and air conditioning company providing turnkey residential, commercial, and industrial climate control, VRF systems, AC installation, and maintenance.
+              </p>
 
-            {/* Trust badges */}
-            <div className="flex flex-col gap-3 mb-6">
-              {[
-                { icon: Shield, text: "14+ Years of Trusted Service" },
-                { icon: Clock, text: "Mon – Sat: 9:00 AM – 7:00 PM" },
-              ].map(({ icon: Icon, text }, i) => (
-                <motion.div
-                  key={text}
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-                  className="flex items-center gap-2.5 text-xs"
-                  style={{ color: "rgba(255,255,255,0.5)" }}
-                >
-                  <Icon
-                    size={14}
-                    style={{ color: "hsl(var(--brand-light))" }}
-                  />
-                  <span>{text}</span>
-                </motion.div>
-              ))}
+              {/* Trust badges */}
+              <div className="flex flex-col gap-2 mb-3.5">
+                {[
+                  { icon: ShieldCheck, text: "Certified HVAC Engineers & Technicians" },
+                  { icon: Clock, text: "Mon – Sat: 9:00 AM – 7:00 PM" },
+                ].map(({ icon: Icon, text }) => (
+                  <div key={text} className="flex items-center gap-2.5 text-sm font-medium text-slate-200">
+                    <Icon size={17} className="text-[#38BDF8] flex-shrink-0" />
+                    <span>{text}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Social Icons */}
-            <div className="flex gap-2.5">
-              {socialLinks.map((s, i) => (
-                <motion.a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  initial={{ opacity: 0, scale: 0.6 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: 0.4 + i * 0.08,
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 18,
-                  }}
-                  whileHover={{ scale: 1.18, y: -3 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center"
-                  style={{
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    color: "rgba(255,255,255,0.9)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background =
-                      "hsl(var(--primary) / 0.19)";
-                    e.currentTarget.style.borderColor =
-                      "hsl(var(--primary) / 0.31)";
-                    e.currentTarget.style.color = "hsl(var(--brand-light))";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-                    e.currentTarget.style.borderColor =
-                      "rgba(255,255,255,0.08)";
-                    e.currentTarget.style.color = "rgba(255,255,255,0.9)";
-                  }}
+            {/* Social Links */}
+            <div className="flex items-center gap-3 mt-2">
+              {socialLinks.map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-[#0284C7] text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 border border-slate-700/60"
                 >
-                  <s.icon size={16} />
-                </motion.a>
+                  <Icon size={18} />
+                </a>
               ))}
             </div>
           </motion.div>
 
           {/* Quick Links */}
           <motion.div variants={colVariants}>
-            <p className="text-[11px] font-bold text-white uppercase tracking-[0.16em] mb-5">
+            <p className="text-sm font-extrabold text-cyan-300 uppercase tracking-[0.2em] mb-3.5">
               Quick Links
             </p>
-            <motion.ul
-              className="space-y-2.5"
-              variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
-            >
-              {quickLinks.map((l) => (
-                <motion.li key={l.label} variants={linkItemVariants}>
+            <ul className="space-y-2">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
                   <Link
-                    to={l.to}
-                    className="text-sm flex items-center gap-1.5 transition-all duration-200"
-                    style={{
-                      color: "rgba(255,255,255,0.9)",
-                      textDecoration: "none",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "hsl(var(--brand-light))";
-                      e.currentTarget.style.transform = "translateX(4px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "rgba(255,255,255,0.9)";
-                      e.currentTarget.style.transform = "translateX(0)";
-                    }}
+                    to={link.to}
+                    className="text-base font-semibold text-slate-200 hover:text-cyan-300 flex items-center gap-2.5 transition-all duration-200 text-decoration-none group"
                   >
-                    <ChevronRight
-                      size={13}
-                      style={{
-                        color: "hsl(var(--brand-light))",
-                        opacity: 0.7,
-                        flexShrink: 0,
-                      }}
-                    />
-                    {l.label}
+                    <ChevronRight size={15} className="text-[#0284C7] group-hover:translate-x-1 transition-transform" />
+                    <span>{link.label}</span>
                   </Link>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-
-          {/* Services */}
-          <motion.div variants={colVariants}>
-            <p className="text-[11px] font-bold text-white uppercase tracking-[0.16em] mb-5">
-              Our Services
-            </p>
-            {servicesLoading ? (
-              <div className="space-y-2.5">
-                {[1, 2, 3].map((i) => (
-                  <motion.div
-                    key={i}
-                    animate={{ opacity: [0.4, 0.8, 0.4] }}
-                    transition={{
-                      duration: 1.4,
-                      repeat: Infinity,
-                      delay: i * 0.2,
-                    }}
-                    className="h-4 rounded"
-                    style={{
-                      background: "rgba(255,255,255,0.06)",
-                      width: `${60 + i * 10}%`,
-                    }}
-                  />
-                ))}
-              </div>
-            ) : servicesError ? (
-              <p className="text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>
-                Unable to load services
-              </p>
-            ) : (
-              <ul className="space-y-2.5">
-                {services && services.length > 0 ? (
-                  [...services]
-                    .reverse()
-                    .slice(0, 6)
-                    .map((s: any) => (
-                      <li key={s._id || s.id}>
-                        <Link
-                          to={`/service/${s.slug}`}
-                          className="text-sm flex items-center gap-1.5 transition-all duration-200"
-                          style={{
-                            color: "rgba(255,255,255,0.9)",
-                            textDecoration: "none",
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.color =
-                              "hsl(var(--brand-light))";
-                            e.currentTarget.style.transform = "translateX(4px)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.color =
-                              "rgba(255,255,255,0.9)";
-                            e.currentTarget.style.transform = "translateX(0)";
-                          }}
-                        >
-                          <ChevronRight
-                            size={13}
-                            style={{
-                              color: "hsl(var(--brand-light))",
-                              opacity: 0.7,
-                              flexShrink: 0,
-                            }}
-                          />
-                          {s.title}
-                        </Link>
-                      </li>
-                    ))
-                ) : (
-                  <li
-                    className="text-sm"
-                    style={{ color: "rgba(255,255,255,0.7)" }}
-                  >
-                    No services available.
-                  </li>
-                )}
-              </ul>
-            )}
-          </motion.div>
-
-          {/* Contact Info */}
-          <motion.div variants={colVariants}>
-            <p className="text-[11px] font-bold text-white uppercase tracking-[0.16em] mb-5">
-              Contact Us
-            </p>
-            <ul className="space-y-4 mb-6">
-              {[
-                {
-                  href: "tel:+919839171701",
-                  Icon: Phone,
-                  label: "Phone",
-                  value: "+91 98391 71701",
-                },
-                {
-                  href: "mailto:info@limrasales.com",
-                  Icon: Mail,
-                  label: "Email",
-                  value: "info@limrasales.com",
-                },
-                {
-                  href: "https://maps.google.com/?q=184,+New+Civil+Lines,+Hardoi,+Uttar+Pradesh+241001",
-                  Icon: MapPin,
-                  label: "Location",
-                  value: "184, New Civil Lines, Hardoi, Uttar Pradesh 241001",
-                  target: "_blank",
-                },
-              ].map(({ href, Icon, label, value, target }, i) => (
-                <motion.li
-                  key={label}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
-                >
-                  <motion.a
-                    href={href}
-                    target={target}
-                    rel={target ? "noopener noreferrer" : undefined}
-                    className="flex items-start gap-3 group"
-                    style={{
-                      color: "rgba(255,255,255,0.9)",
-                      textDecoration: "none",
-                    }}
-                    whileHover={{ x: 3 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = "hsl(var(--brand-light))")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = "rgba(255,255,255,0.9)")
-                    }
-                  >
-                    <motion.div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-                      style={{ background: "hsl(var(--primary) / 0.08)" }}
-                      whileHover={{
-                        scale: 1.15,
-                        background: "hsl(var(--primary) / 0.19)",
-                      }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <Icon
-                        size={14}
-                        style={{ color: "hsl(var(--brand-light))" }}
-                      />
-                    </motion.div>
-                    <div>
-                      <p
-                        className="text-xs mb-0.5"
-                        style={{ color: "rgba(255,255,255,0.7)" }}
-                      >
-                        {label}
-                      </p>
-                      <p className="text-sm font-medium">{value}</p>
-                    </div>
-                  </motion.a>
-                </motion.li>
+                </li>
               ))}
             </ul>
-
-            {/* Admin Login */}
-            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                to="/admin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold transition-all duration-300"
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  color: "rgba(255,255,255,0.6)",
-                  textDecoration: "none",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
-                  e.currentTarget.style.color = "#fff";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                  e.currentTarget.style.color = "rgba(255,255,255,0.6)";
-                }}
-              >
-                <UserCheck size={14} /> Admin Portal{" "}
-                <ArrowRight size={12} style={{ marginLeft: 2 }} />
-              </Link>
-            </motion.div>
           </motion.div>
+
+          {/* HVAC Services */}
+          <motion.div variants={colVariants}>
+            <p className="text-sm font-extrabold text-cyan-300 uppercase tracking-[0.2em] mb-3.5">
+              Our Services
+            </p>
+            <ul className="space-y-2">
+              {displayServices.slice(0, 6).map((s: any) => (
+                <li key={s.slug || s.title}>
+                  <Link
+                    to={`/service/${s.slug}`}
+                    className="text-base font-semibold text-slate-200 hover:text-cyan-300 flex items-center gap-2.5 transition-all duration-200 text-decoration-none group"
+                  >
+                    <ChevronRight size={15} className="text-[#0284C7] group-hover:translate-x-1 transition-transform" />
+                    <span>{s.title}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Contact Information */}
+          <motion.div variants={colVariants}>
+            <p className="text-sm font-extrabold text-cyan-300 uppercase tracking-[0.2em] mb-3.5">
+              Contact Us
+            </p>
+            <ul className="space-y-3">
+              <li>
+                <a href="tel:+919839171701" className="flex items-start gap-3 group text-decoration-none">
+                  <div className="w-9 h-9 rounded-xl bg-sky-500/10 text-cyan-400 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#0284C7] group-hover:text-white transition-colors">
+                    <Phone size={16} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400 mb-0.5 font-semibold">Phone Call / WhatsApp</p>
+                    <p className="text-base font-extrabold text-white group-hover:text-cyan-300 transition-colors">+91 98391 71701</p>
+                  </div>
+                </a>
+              </li>
+
+              <li>
+                <a href="mailto:info@perfectairsolution.com" className="flex items-start gap-3 group text-decoration-none">
+                  <div className="w-9 h-9 rounded-xl bg-sky-500/10 text-cyan-400 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#0284C7] group-hover:text-white transition-colors">
+                    <Mail size={16} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400 mb-0.5 font-semibold">Email Support</p>
+                    <p className="text-base font-extrabold text-white group-hover:text-cyan-300 transition-colors">info@perfectairsolution.com</p>
+                  </div>
+                </a>
+              </li>
+
+              <li>
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-sky-500/10 text-cyan-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <MapPin size={16} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400 mb-0.5 font-semibold">Corporate Office</p>
+                    <p className="text-sm text-slate-200 font-medium leading-normal">Perfect Air Solution Centre, Civil Lines, Uttar Pradesh 241001</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </motion.div>
+
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, delay: 0.3 }}
-        style={{
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          background: "rgba(0,0,0,0.25)",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-5">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
-              © {new Date().getFullYear()} LIMRA Sales &amp; Services. All
-              rights reserved.
-            </p>
+      {/* Bottom Copyright Bar */}
+      <div className="border-t border-slate-800/80 bg-slate-950/80 py-5 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+          <p className="text-sm sm:text-base text-slate-200 font-semibold">
+            © {new Date().getFullYear()} Perfect Air Solution. All rights reserved.
+          </p>
 
-            <div className="flex items-center gap-4 flex-wrap justify-center">
-              {policyLinks.map((l) => (
-                <Link
-                  key={l.label}
-                  to={l.to}
-                  className="text-xs flex items-center gap-1 transition-colors duration-200"
-                  style={{
-                    color: "rgba(255,255,255,0.7)",
-                    textDecoration: "none",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "hsl(var(--brand-light))")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "rgba(255,255,255,0.7)")
-                  }
-                >
-                  {l.label} <ArrowRight size={10} style={{ opacity: 0.6 }} />
-                </Link>
-              ))}
-            </div>
-
-            <a
-              href="https://www.codecrafter.co.in/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative flex items-center gap-3 px-4 py-2.5 rounded-2xl transition-all duration-500 hover:-translate-y-1 shadow-[0_8px_30px_rgba(255,255,255,0.05)] border border-white/10 bg-white/[0.04] backdrop-blur-md overflow-hidden"
-              style={{ textDecoration: "none" }}
-            >
-              <span className="text-[10px] font-medium tracking-[0.2em] text-white/80 transition-colors duration-500 uppercase z-10">
-                Designed by
-              </span>
-              <div className="relative flex items-center z-10">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/0 via-white/20 to-white/0 blur-xl opacity-100 transition-all duration-700 ease-out scale-110" />
-                <img
-                  src={cclogo}
-                  alt="CodeCrafter"
-                  className="w-[85px] opacity-100 scale-105 transition-all duration-500 filter brightness-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] relative z-10"
-                />
-              </div>
-            </a>
+          <div className="flex items-center gap-6 flex-wrap justify-center text-sm sm:text-base font-semibold">
+            {policyLinks.map((l) => (
+              <Link
+                key={l.label}
+                to={l.to}
+                className="text-slate-300 hover:text-cyan-300 text-decoration-none transition-colors"
+              >
+                {l.label}
+              </Link>
+            ))}
           </div>
+
+          <a
+            href="https://www.codecrafter.co.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 text-sm sm:text-base text-slate-200 hover:text-white transition-colors text-decoration-none"
+          >
+            <span className="font-bold">Designed by</span>
+            <img src={cclogo} alt="CodeCrafter" className="h-10 sm:h-12 w-auto object-contain brightness-125 hover:scale-105 transition-transform" />
+          </a>
         </div>
-      </motion.div>
+      </div>
     </motion.footer>
   );
 };

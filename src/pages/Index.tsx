@@ -1,35 +1,49 @@
 import Hero from "@/components/Hero";
-import BrandMarquee from "@/components/BrandMarquee";
-import Services from "@/components/Services";
-import ProductCategories from "@/components/ProductCategories";
 import AboutPreview from "@/components/AboutPreview";
+import ProductCategories from "@/components/ProductCategories";
+import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import HVACSolutions from "@/components/HVACSolutions";
 import FeaturedProjects from "@/components/FeaturedProjects";
+import Testimonials from "@/components/Testimonials";
+import BrandMarquee from "@/components/BrandMarquee";
 import BlogPreview from "@/components/BlogPreview";
 import CTASection from "@/components/CTASection";
-import Newsletter from "@/components/Newsletter";
-import Product from "@/components/Product";
-import HVACSolutions from "@/components/HVACSolutions";
 
 const Index = () => (
-  <main>
+  <main className="overflow-hidden">
+    {/* 1. Hero Section */}
     <Hero />
     
+    {/* 2. About Perfect Air Solution */}
     <AboutPreview />
+
+    {/* 3. Products / Solutions */}
     <ProductCategories />
-    <HVACSolutions />
-    
+
+    {/* 4. Services */}
     <Services />
-   
-    
-    {/* <FeaturedProjects /> */}
-    <Product />
+
+    {/* 5. Why Choose Us */}
     <WhyChooseUs />
-    
-    <CTASection />
+
+    {/* 6. Industries / Sectors */}
+    <HVACSolutions />
+
+    {/* 7. Projects / Gallery Preview */}
+    <FeaturedProjects />
+
+    {/* 8. Testimonials */}
+    <Testimonials />
+
+    {/* Brand Partners Marquee */}
     <BrandMarquee />
+
+    {/* Latest Blog Preview */}
     <BlogPreview />
-    {/* <Newsletter /> */}
+
+    {/* 9. Get a Quote CTA */}
+    <CTASection />
   </main>
 );
 

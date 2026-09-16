@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, Phone, Wind, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "../assets/logo4.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "Our Story", path: "/about" },
+  { name: "About Us", path: "/about" },
+  { name: "Products / Solutions", path: "/product" },
   { name: "Services", path: "/services" },
-  { name: "Products", path: "/product" },
-  { name: "Blog", path: "/blog" },
+  { name: "Projects", path: "/case-studies" },
+  { name: "Gallery", path: "/gallery" },
   { name: "Contact Us", path: "/contact" },
 ];
 
@@ -17,6 +17,7 @@ const SiteHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
@@ -45,42 +46,65 @@ const SiteHeader = () => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-[1000] bg-white/95 backdrop-blur-xl transition-shadow duration-300 ${
-          scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.08)]" : "shadow-none"
+          scrolled ? "shadow-[0_4px_24px_rgba(5,27,48,0.12)] border-b border-slate-100" : "border-b border-slate-100/80"
         }`}
       >
-        {/* ── Inner flex row ── */}
-        <div className="w-full max-w-[1200px] mx-auto flex items-center justify-between gap-3 px-4 sm:px-5 md:px-6 lg:px-8 h-[60px] sm:h-[64px] md:h-[68px] lg:h-[72px]">
+        {/* Top Info Strip */}
+        <div className="hidden lg:block bg-[#051B30] text-slate-300 text-xs py-1.5 px-6 border-b border-slate-800">
+          <div className="max-w-[1240px] mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-1.5 text-cyan-400 font-medium">
+                <ShieldCheck size={14} /> Certified HVAC Engineers & Technicians
+              </span>
+              <span>•</span>
+              <span>Email: <a href="mailto:info@perfectairsolution.com" className="hover:text-cyan-400 transition-colors">info@perfectairsolution.com</a></span>
+            </div>
+            <div className="flex items-center gap-4">
+              <span>Working Hours: Mon - Sat 9:00 AM - 7:00 PM</span>
+              <span>•</span>
+              <a href="tel:+919839171701" className="text-cyan-400 font-bold hover:underline">
+                Call: +91 98391 71701
+              </a>
+            </div>
+          </div>
+        </div>
 
-          {/* Logo */}
+        {/* Inner flex row */}
+        <div className="w-full max-w-[1240px] mx-auto flex items-center justify-between gap-3 px-4 sm:px-5 md:px-6 lg:px-8 h-[64px] sm:h-[68px] md:h-[72px]">
+
+          {/* Perfect Air Solution Brand Logo */}
           <Link
             to="/"
-            aria-label="LIMRA Sales & Services – Home"
-            className="flex items-center flex-shrink-0"
+            aria-label="Perfect Air Solution – Home"
+            className="flex items-center gap-2.5 group flex-shrink-0 text-decoration-none"
           >
-            <img
-              src={Logo}
-              alt="LIMRA Sales & Services"
-              className="h-[36px] sm:h-[40px] md:h-[44px] lg:h-[48px] w-auto object-contain"
-            />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#051B30] via-[#0B2E4C] to-[#0284C7] flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform duration-300">
+              <Wind size={22} className="text-cyan-300 animate-pulse" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-extrabold text-base sm:text-lg md:text-xl tracking-tight text-[#051B30] leading-none">
+                PERFECT <span className="text-[#0284C7]">AIR</span>
+              </span>
+              <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] text-slate-500 uppercase leading-none mt-1">
+                SOLUTION
+              </span>
+            </div>
           </Link>
 
-          {/* Desktop Nav — md and above */}
+          {/* Desktop Nav */}
           <nav
             aria-label="Main navigation"
-            className="hidden md:flex items-center justify-center flex-1 gap-0.5 xl:gap-1"
+            className="hidden lg:flex items-center justify-center flex-1 gap-1 xl:gap-2 px-4"
           >
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 className={`
-                  relative whitespace-nowrap rounded-lg leading-none transition-all duration-200 font-medium
-                  text-[0.72rem] px-2 py-1.5
-                  lg:text-[0.82rem] lg:px-2.5 lg:py-[7px]
-                  xl:text-[0.875rem] xl:px-3
+                  relative whitespace-nowrap rounded-lg transition-all duration-200 font-semibold text-xs xl:text-sm px-2.5 py-2
                   ${isActive(link.path)
-                    ? "text-[hsl(var(--primary))] font-bold"
-                    : "text-[hsl(var(--brand-dark))] hover:text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary)/0.07)]"
+                    ? "text-[#0284C7] bg-sky-50 font-bold"
+                    : "text-slate-700 hover:text-[#0284C7] hover:bg-slate-50"
                   }
                 `}
               >
@@ -89,24 +113,18 @@ const SiteHeader = () => {
             ))}
           </nav>
 
-          {/* Right actions */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            {/* Enquiry button — md and above */}
-            <a
-              href="tel:+919839171701"
-              aria-label="Call LIMRA Sales and Services"
-              className="hidden md:inline-flex items-center gap-1.5 bg-gradient-to-br from-[hsl(var(--brand-dark))] to-[hsl(var(--primary))] text-white font-bold rounded-full shadow-lg shadow-[hsl(var(--primary)/0.25)] hover:opacity-90 hover:-translate-y-px transition-all duration-200 whitespace-nowrap no-underline
-                text-[0.72rem] px-3 py-2
-                lg:text-[0.82rem] lg:px-4 lg:py-2.5
-                xl:text-[0.875rem] xl:px-5"
-            >
-              <Phone size={13} className="lg:w-[15px] lg:h-[15px]" aria-hidden="true" />
-              Enquiry Now
-            </a>
-
-            {/* Hamburger — below md */}
+          {/* Right CTA */}
+          <div className="flex items-center gap-3 flex-shrink-0">
             <button
-              className="md:hidden flex items-center justify-center w-[42px] h-[42px] rounded-lg bg-transparent border-0 cursor-pointer text-[hsl(var(--brand-dark))] active:bg-[hsl(var(--primary)/0.08)] transition-colors"
+              onClick={() => navigate("/contact")}
+              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-[#051B30] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold rounded-full text-xs xl:text-sm px-5 py-2.5 shadow-md shadow-sky-600/25 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+            >
+              <span>Get a Quote</span>
+            </button>
+
+            {/* Mobile Hamburger */}
+            <button
+              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 border-0 cursor-pointer text-[#051B30] active:bg-slate-200 transition-colors"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
@@ -128,7 +146,7 @@ const SiteHeader = () => {
           </div>
         </div>
 
-        {/* ── Mobile dropdown ── */}
+        {/* Mobile Dropdown */}
         <AnimatePresence>
           {menuOpen && (
             <motion.nav
@@ -138,31 +156,28 @@ const SiteHeader = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.28, ease: "easeInOut" }}
-              className="overflow-hidden bg-white md:hidden"
+              className="overflow-hidden bg-white lg:hidden border-t border-slate-100 shadow-xl"
             >
-              <div className="px-4 pt-2 pb-4 flex flex-col gap-1">
+              <div className="px-4 pt-3 pb-6 flex flex-col gap-1.5">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.name}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.045, duration: 0.22 }}
+                    transition={{ delay: i * 0.04, duration: 0.2 }}
                   >
                     <Link
                       to={link.path}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center justify-between px-3.5 py-3 rounded-[10px] font-semibold text-[0.95rem] transition-all duration-200 no-underline ${
+                      className={`flex items-center justify-between px-4 py-3 rounded-xl font-semibold text-sm transition-all ${
                         isActive(link.path)
-                          ? "text-[hsl(var(--primary))]"
-                          : "text-[hsl(var(--brand-dark))] hover:bg-[hsl(var(--primary)/0.07)] hover:text-[hsl(var(--primary))]"
+                          ? "bg-sky-50 text-[#0284C7] font-bold"
+                          : "text-slate-700 hover:bg-slate-50 hover:text-[#0284C7]"
                       }`}
                     >
                       {link.name}
                       {isActive(link.path) && (
-                        <span
-                          aria-hidden="true"
-                          className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--primary))] flex-shrink-0"
-                        />
+                        <span className="w-2 h-2 rounded-full bg-[#0284C7]" />
                       )}
                     </Link>
                   </motion.div>
@@ -171,16 +186,19 @@ const SiteHeader = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navLinks.length * 0.045 + 0.05, duration: 0.22 }}
+                  transition={{ delay: navLinks.length * 0.04 + 0.05, duration: 0.2 }}
+                  className="mt-2 pt-2 border-t border-slate-100"
                 >
-                  <a
-                    href="tel:+919839171701"
-                    aria-label="Call LIMRA Sales and Services"
-                    className="mt-2 flex justify-center items-center gap-2 px-4 py-3 bg-gradient-to-br from-[hsl(var(--brand-dark))] to-[hsl(var(--primary))] text-white font-bold text-[0.95rem] rounded-full shadow-lg shadow-[hsl(var(--primary)/0.28)] active:opacity-85 active:scale-[0.98] transition-all no-underline"
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      navigate("/contact");
+                    }}
+                    className="w-full flex justify-center items-center gap-2 px-5 py-3.5 bg-gradient-to-r from-[#051B30] to-[#0284C7] text-white font-bold text-sm rounded-xl shadow-lg shadow-sky-500/20 active:opacity-90 transition-all"
                   >
-                    <Phone size={16} aria-hidden="true" />
-                    Call Now
-                  </a>
+                    <Phone size={16} />
+                    <span>Get a Quote / Call Now</span>
+                  </button>
                 </motion.div>
               </div>
             </motion.nav>
@@ -192,7 +210,7 @@ const SiteHeader = () => {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-[999] bg-black/35 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-[999] bg-black/40 backdrop-blur-sm lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

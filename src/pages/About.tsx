@@ -1,54 +1,54 @@
 import { motion } from "framer-motion";
-import { Shield, Award, CheckCircle, Target, Phone } from "lucide-react";
+import { Shield, Award, CheckCircle, Target, Phone, ArrowRight, Clock, Users, Building, MapPin } from "lucide-react";
 import CountUp from "@/components/ui/CountUp";
 import CTASection from "@/components/CTASection";
 
 const stats = [
-  { value: 5000, suffix: "+", label: "Customers" },
+  { value: 5000, suffix: "+", label: "Happy Customers" },
   { value: 500, suffix: "+", label: "Commercial Projects" },
   { value: 14, suffix: "+", label: "Years Experience" },
-  { value: 20, suffix: "+", label: "Cities" },
+  { value: 20, suffix: "+", label: "Cities Covered" },
 ];
 
 const values = [
   {
     icon: Shield,
-    title: "Reliability",
-    desc: "We stand behind every AC installation and industrial cooling project with dependable service, strong workmanship, and responsive after-sales support. Our commitment ensures consistent performance and long-term customer trust.",
+    title: "Reliability & Trust",
+    desc: "We stand behind every AC installation and industrial cooling project with dependable service, strong workmanship, and responsive after-sales support.",
   },
   {
     icon: Award,
-    title: "Excellence",
-    desc: "We deliver HVAC solutions with certified technicians, premium components, and no shortcuts. Every project reflects our dedication to technical precision and professional standards.",
+    title: "Engineering Excellence",
+    desc: "We deliver HVAC solutions with certified technicians, premium components, and no shortcuts. Every project reflects our technical precision.",
   },
   {
     icon: CheckCircle,
-    title: "Quality Assured",
-    desc: "Through strict quality checks and performance testing, we guarantee reliable and energy-efficient air conditioning systems. From VRF systems to chiller plants, quality remains our top priority.",
+    title: "Strict Quality Assurance",
+    desc: "Through rigorous performance testing, we guarantee reliable and energy-efficient air conditioning systems across all installations.",
   },
   {
     icon: Target,
-    title: "Innovation",
-    desc: "We continuously adopt modern, energy-efficient, and smart HVAC technologies to deliver advanced cooling solutions for residential, commercial, and industrial needs.",
+    title: "Modern Innovation",
+    desc: "We continuously adopt modern, energy-efficient, and smart HVAC technologies to deliver advanced cooling solutions for all sectors.",
   },
 ];
 
 const milestones = [
   {
     year: "2012",
-    text: "Founded in Hardoi as a small AC service workshop with a vision to deliver reliable cooling solutions.",
+    text: "Founded as a specialized AC service workshop with a vision to deliver reliable cooling solutions across Northern India.",
   },
   {
     year: "2020",
-    text: "Expanded services across nearby districts and built a strong customer base in residential and commercial HVAC projects.",
+    text: "Expanded services across multiple districts and built a strong base in residential and commercial HVAC projects.",
   },
   {
     year: "2023",
-    text: "Entered commercial and industrial cooling sector including VRF systems, Cold Rooms, and Chiller Plants.",
+    text: "Entered commercial and industrial cooling sector including VRF systems, Cold Rooms, and Heavy-tonnage Chiller Plants.",
   },
   {
-    year: "2024",
-    text: "Successfully completed major commercial and industrial projects across Uttar Pradesh, strengthening our reputation as a trusted HVAC partner.",
+    year: "2024+",
+    text: "Successfully completed 500+ commercial projects, strengthening our position as a premier turnkey HVAC partner.",
   },
 ];
 
@@ -57,525 +57,245 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-// Reusable section-badge component
 const Badge = ({ label }: { label: string }) => (
-  <div
-    style={{
-      display: "inline-block",
-      background: "hsl(var(--primary) / 0.1)",
-      border: "1px solid hsl(var(--primary) / 0.25)",
-      color: "hsl(var(--primary))",
-      fontWeight: 700,
-      fontSize: "0.72rem",
-      letterSpacing: "0.18em",
-      textTransform: "uppercase" as const,
-      padding: "5px 14px",
-      borderRadius: "100px",
-    }}
-  >
+  <div className="inline-block bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3 shadow-sm">
     {label}
   </div>
 );
 
 const About = () => (
-  <main className="bg-background">
-    {/* ── Hero ── */}
+  <main className="bg-slate-50 font-sans min-h-screen">
+    
+    {/* ── Hero Banner ── */}
+    <section className="relative pt-24 pb-20 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      {/* Ambient background light */}
+      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-    <section
-      className="bg-hero-gradient"
-      style={{
-        paddingTop: "96px",
-        paddingRight: "24px",
-        paddingBottom: "56px",
-        paddingLeft: "24px",
-        textAlign: "center",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.08,
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div
-        style={{
-          margin: "0 auto",
-          textAlign: "center",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        {/* Heading */}
+      <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
+          <span>ABOUT PERFECT AIR SOLUTION</span>
+        </div>
+        
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          style={{ color: "white", marginBottom: "16px" }}
+          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight"
         >
-          Building Comfort Since 2012
+          Building Comfort &amp; Engineering Trust Since 2012
         </motion.h1>
 
-        {/* Description */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="body-text"
-          style={{
-            color: "hsl(var(--brand-sky))",
-            maxWidth: "1200px",
-            margin: "0 auto",
-            fontWeight: 300,
-            fontSize: "14px",
-          }}
+          transition={{ delay: 0.2 }}
+          className="text-slate-200 text-base sm:text-lg max-w-3xl mx-auto font-normal leading-relaxed"
         >
-          LIMRA Sales and Services is a trusted HVAC and air conditioning
-          company delivering reliable cooling solutions for homes, offices,
-          hospitals, hotels, and industrial facilities. Since 2012, we
-          specialize in AC installation, AC servicing, VRF systems, chiller
-          plants, cold rooms, and industrial cooling services with a strong
-          commitment to quality, safety, and customer satisfaction.
+          Perfect Air Solution is a premier HVAC and air conditioning company delivering reliable, energy-efficient cooling solutions for homes, offices, hospitals, hotels, and industrial facilities.
         </motion.p>
       </div>
     </section>
 
-   
-    
-
     {/* ── Our Story ── */}
-    <section
-      style={{
-       
-        paddingLeft: "0",
-        paddingRight: "0",
-        background: "hsl(var(--brand-light))",
-        marginTop: "0px",
-        paddingTop: "30px",
-        paddingBottom: "30px",
-      }}
-    >
-      <div style={{ maxWidth: "1200px", width: "100%", margin: "0 auto" }}>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-        >
-          <Badge label="Our Story" />
-          {/* h2 — global: DM Serif Display, 400, brand-dark */}
-          <h2>Delivering Comfort, Building Trust</h2>
-          <div
-            className="body-text"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "18px",
-              color: "hsl(var(--muted-foreground))",
-              fontWeight: 300,
-              fontSize: "14px",
-            }}
-          >
-            <p style={{ fontSize: "14px" }}>
-              Founded in 2012, LIMRA Sales and Services began with a clear
-              vision — to provide reliable, honest, and high-quality cooling
-              solutions that customers can truly depend on. What started as a
-              small HVAC service initiative has steadily evolved into a trusted
-              name in air conditioning and industrial cooling solutions across
-              multiple cities.
-            </p>
-            <p style={{ fontSize: "14px" }}>
-              Over the years, we have successfully installed and serviced
-              thousands of air conditioning systems — from residential Split and
-              Window AC units to advanced VRF systems, cold rooms, and
-              large-scale industrial chiller plants. Our growth has been driven
-              by strong technical expertise, prompt service delivery, and an
-              unwavering commitment to quality workmanship.
-            </p>
-          <p style={{ fontSize: "14px" }}>
-              Today, with 5,000+ satisfied customers and 500+ completed
-              commercial projects, we continue to focus on innovation,
-              energy-efficient solutions, and long-term client partnerships. For
-              us, cooling is more than just a service — it is about delivering
-              comfort, reliability, and performance that businesses and families
-              can confidently rely on.
-            </p>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-    <section
-      style={{ padding: "15px 24px", background: "hsl(var(--brand-light))" }}
-    >
-     <div style={{ maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: i * 0.1, duration: 0.6 },
-                },
-              }}
-              style={{
-                color: "white",
-                background:
-                  "linear-gradient(135deg, hsl(var(--brand-dark)) 0%, hsl(var(--primary)) 100%)",
-                borderRadius: "16px",
-                padding: "32px 24px",
-                textAlign: "center",
-                boxShadow: "0 4px 20px hsl(var(--primary) / 0.08)",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "DM Serif Display",
-                  fontSize: "2.2rem",
-                  color: "white",
-                  lineHeight: 1,
-                  marginBottom: "8px",
-                  fontWeight: 400,
-                }}
-              >
-                <CountUp
-                  from={0}
-                  to={s.value}
-                  duration={1.2}
-                  separator=","
-                  direction="up"
-                  startWhen={true}
-                />
-                {s.suffix}
-              </div>
-
-              <div
-                className="body-text"
-                style={{
-                  fontSize: "0.85rem",
-                  color: "white",
-                  fontWeight: 700,
-                }}
-              >
-                {s.label}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ── Values ── */}
-    <section
-      style={{
-        paddingTop: "30px",
-        paddingBottom: "30px",
-        paddingLeft: "0",
-        paddingRight: "0",
-        background: "hsl(var(--card))",
-      }}
-    >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          style={{ textAlign: "center", marginBottom: "56px" }}
-        >
-          <Badge label="Our Values" />
-          {/* h2 — global styles applied */}
-          <h2 style={{ marginTop: 0 }}>What Drives Us</h2>
-        </motion.div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "20px",
-          }}
-        >
-          {values.map((v, i) => (
-            <motion.div
-              key={v.title}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{
-                hidden: { opacity: 0, y: 24 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: i * 0.1, duration: 0.5 },
-                },
-              }}
-              style={{
-                background: "hsl(var(--card))",
-                border: "1px solid hsl(var(--border))",
-                borderRadius: "18px",
-                padding: "28px",
-                boxShadow: "0 2px 16px hsl(var(--primary) / 0.08)",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              {/* Top accent */}
-              <div
-                style={{
-                  height: "3px",
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  background:
-                    "linear-gradient(90deg, hsl(var(--brand-dark)), hsl(var(--primary)))",
-                }}
-              />
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "12px",
-                  background: "hsl(var(--brand-light))",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "16px",
-                }}
-              >
-                <v.icon size={22} style={{ color: "hsl(var(--primary))" }} />
-              </div>
-              {/* h3 — global: Inter 600, foreground color */}
-              <h3 style={{ marginBottom: "8px", fontSize: "1rem", letterSpacing: "1px" }}>
-                {v.title}
-              </h3>
-              <p
-                className="body-text"
-                style={{
-                  fontSize: "0.875rem",
-                  color: "hsl(var(--muted-foreground))",
-                  lineHeight: 1.65,
-                  letterSpacing: "1px",
-                }}
-              >
-                {v.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ── Milestones & Mission ── */}
-   <section style={{ paddingTop: "30px", paddingBottom: "36px", paddingLeft: "0", paddingRight: "0", background: "hsl(var(--background))" }}>
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "64px",
-          alignItems: "flex-start",
-        }}
-      >
-        {/* Timeline */}
-        <div style={{ flex: "1 1 55%", minWidth: "320px" }}>
+    <section className="py-16 sm:py-20 bg-gradient-to-b from-[#EEF8FF] via-[#F4FAFF] to-[#E6F4FA]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Text */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            style={{ marginBottom: "10px" }}
+            className="lg:col-span-7"
           >
-            <Badge label="Milestones" />
-            {/* h2 — global styles applied */}
-            <h2 style={{ marginTop: 0 }}>Our Journey</h2>
-          </motion.div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            {milestones.map((m, i) => (
-              <motion.div
-                key={m.year}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: i * 0.15, duration: 0.5 }}
-                whileHover={{ x: 8, transition: { duration: 0.2 } }}
-                style={{
-                  display: "flex",
-                  gap: "24px",
-                  alignItems: "flex-start",
-                  position: "relative",
-                }}
-              >
-                {/* Connector line */}
-                {i < milestones.length - 1 && (
-                  <motion.div
-                    initial={{ height: 0 }}
-                    whileInView={{ height: "calc(100% - 40px)" }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{
-                      delay: i * 0.15 + 0.3,
-                      duration: 0.6,
-                      ease: "easeInOut",
-                    }}
-                    style={{
-                      position: "absolute",
-                      left: "31px",
-                      top: "64px",
-                      width: "2px",
-                      background:
-                        "linear-gradient(to bottom, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.1) 100%)",
-                      zIndex: 0,
-                    }}
-                  />
-                )}
-                {/* Year badge */}
-                <div
-                  style={{
-                    flexShrink: 0,
-                    width: "64px",
-                    height: "64px",
-                    borderRadius: "50%",
-                    background:
-                      "linear-gradient(135deg, hsl(var(--brand-dark)) 0%, hsl(var(--primary)) 100%)",
-                    color: "white",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: 700,
-                    fontSize: "0.875rem",
-                    letterSpacing: "0.02em",
-                    boxShadow: "0 6px 20px hsl(var(--primary) / 0.28)",
-                    zIndex: 1,
-                    position: "relative",
-                  }}
-                >
-                  {m.year}
-                </div>
-                {/* Text */}
-                <div
-                  style={{
-                    paddingTop: "14px",
-                    flex: 1,
-                    paddingBottom: i === milestones.length - 1 ? "0" : "24px",
-                  }}
-                >
-                  <p
-                    className="body-text"
-                    style={{
-                      color: "hsl(var(--foreground) / 0.85)",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    {m.text}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Mission Card */}
-        <div
-          style={{
-            flex: "1 1 35%",
-            minWidth: "320px",
-            position: "sticky",
-            top: "120px",
-          }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            style={{
-              padding: "2px",
-              borderRadius: "22px",
-              background:
-                "linear-gradient(135deg, hsl(var(--primary) / 0.25) 0%, transparent 100%)",
-            }}
-          >
-            <div
-              style={{
-                background: "hsl(var(--brand-light))",
-                borderRadius: "20px",
-                padding: "48px 40px",
-                boxShadow: "0 24px 48px hsl(var(--brand-dark) / 0.04)",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "16px",
-                  marginBottom: "32px",
-                }}
-              >
-                <div
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "12px",
-                    background: "hsl(var(--card))",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: "0 8px 16px hsl(var(--brand-dark) / 0.04)",
-                  }}
-                >
-                  <Target size={24} style={{ color: "hsl(var(--primary))" }} />
-                </div>
-                {/* h3 — global: Inter 600 */}
-                <h3
-                  style={{
-                    fontSize: "1.35rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.06em",
-                    margin: 0,
-                  }}
-                >
-                  Our Mission
-                </h3>
-              </div>
-              <p
-                className="body-text"
-                style={{
-                  color: "hsl(var(--foreground) / 0.85)",
-                  marginBottom: "24px",
-                }}
-              >
-                Our mission is to provide reliable, energy-efficient, and
-                cost-effective air conditioning and industrial cooling solutions
-                tailored to residential, commercial, and industrial needs.
+            <Badge label="Our Story" />
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#051B30] tracking-tight mb-6 leading-tight">
+              Delivering Comfort, Building Trust
+            </h2>
+            
+            <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
+              <p>
+                Founded in 2012, <strong className="text-[#051B30] font-semibold">Perfect Air Solution</strong> began with a clear vision — to provide reliable, honest, and high-quality cooling solutions that customers can truly depend on. What started as a focused HVAC service initiative has steadily evolved into a trusted name in air conditioning and industrial cooling across multiple cities.
               </p>
-              <p
-                className="body-text"
-                style={{ color: "hsl(var(--foreground) / 0.85)" }}
-              >
-                We are committed to delivering quality workmanship, advanced
-                HVAC technology, and prompt service support to ensure long-term
-                customer satisfaction and dependable cooling performance.
+              <p>
+                Over the years, we have successfully installed and serviced thousands of climate control systems — from residential Split and Window AC units to advanced VRF systems, cold rooms, and large-scale industrial chiller plants. Our growth is driven by strong technical expertise, prompt service delivery, and an unwavering commitment to quality workmanship.
+              </p>
+              <p>
+                Today, with <span className="text-[#0284C7] font-bold">5,000+ satisfied customers</span> and <span className="text-[#0284C7] font-bold">500+ completed commercial projects</span>, we continue to focus on innovation, energy-efficient solutions, and long-term client partnerships.
               </p>
             </div>
           </motion.div>
+
+          {/* Right Stats Grid */}
+          <div className="lg:col-span-5">
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-lg shadow-sky-900/5 text-center hover:border-sky-300 transition-all"
+                >
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0284C7] mb-1">
+                    <CountUp
+                      from={0}
+                      to={s.value}
+                      duration={1.2}
+                      separator=","
+                      direction="up"
+                      startWhen={true}
+                    />
+                    {s.suffix}
+                  </div>
+                  <div className="text-xs sm:text-sm font-bold text-slate-700">
+                    {s.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    {/* ── Values ── */}
+    <section className="py-16 sm:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="text-center max-w-2xl mx-auto mb-14"
+        >
+          <Badge label="Our Core Values" />
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#051B30] tracking-tight">
+            What Drives Us Forward
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {values.map((v, i) => {
+            const IconComp = v.icon;
+            return (
+              <motion.div
+                key={v.title}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-sky-300 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-sky-100/80 text-[#0284C7] border border-sky-200/60 flex items-center justify-center mb-5 shadow-sm">
+                    <IconComp size={24} />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#051B30] mb-2">
+                    {v.title}
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                    {v.desc}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Milestones & Mission ── */}
+    <section className="py-16 sm:py-20 bg-gradient-to-b from-[#E6F4FA] via-[#F4FAFF] to-[#EEF8FF]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          {/* Milestones Timeline */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="mb-8"
+            >
+              <Badge label="Milestones" />
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#051B30] tracking-tight">
+                Our Growth Journey
+              </h2>
+            </motion.div>
+
+            <div className="space-y-6 relative pl-4 border-l-2 border-sky-200">
+              {milestones.map((m, i) => (
+                <motion.div
+                  key={m.year}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.4 }}
+                  className="relative pl-6"
+                >
+                  {/* Dot */}
+                  <div className="absolute -left-[25px] top-1.5 w-4 h-4 rounded-full bg-[#0284C7] border-4 border-white shadow-sm" />
+                  
+                  <div className="bg-white rounded-xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+                    <span className="inline-block text-xs font-extrabold text-[#0284C7] bg-sky-50 border border-sky-200 px-3 py-0.5 rounded-md mb-2">
+                      {m.year}
+                    </span>
+                    <p className="text-slate-700 text-xs sm:text-sm font-normal leading-relaxed">
+                      {m.text}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mission Card */}
+          <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between"
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] pointer-events-none" />
+
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-cyan-300 mb-6 backdrop-blur-md">
+                  <Target size={28} />
+                </div>
+                
+                <h3 className="text-2xl font-bold text-white uppercase tracking-wider mb-4">
+                  Our Mission
+                </h3>
+
+                <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-normal mb-4">
+                  Our mission is to provide reliable, energy-efficient, and cost-effective air conditioning and industrial cooling solutions tailored to residential, commercial, and industrial needs.
+                </p>
+
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
+                  We are committed to delivering quality workmanship, advanced HVAC technology, and prompt service support to ensure long-term customer satisfaction and dependable performance.
+                </p>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-white/15 flex items-center justify-between text-xs font-semibold text-cyan-300">
+                <span>Certified HVAC Engineers</span>
+                <span>Established 2012</span>
+              </div>
+            </motion.div>
+          </div>
+
         </div>
       </div>
     </section>
 
     {/* ── CTA ── */}
-    <div style={{ paddingBottom: "36px" }}>
+    <div className="py-6">
       <CTASection />
     </div>
   </main>

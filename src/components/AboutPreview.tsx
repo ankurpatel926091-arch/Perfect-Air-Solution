@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ShieldCheck, Wrench, Leaf, ArrowRight, Snowflake } from "lucide-react";
+import { Link } from "react-router-dom";
 import CountUp from "./ui/CountUp";
+import aboutImg from "../assets/about_ac_showcase.jpg";
 
 const stats = [
   { value: 5000, suffix: "+", label: "Customers" },
-  { value: 500, suffix: "+", label: "Commercial Projects" },
-  { value: 9, suffix: "+", label: "Years Experience" },
-  { value: 20, suffix: "+", label: "Cities" },
+  { value: 650, suffix: "+", label: "Commercial Projects" },
+  { value: 12, suffix: "+", label: "Years Experience" },
+  { value: 25, suffix: "+", label: "Cities" },
 ];
 
 const fadeUp = {
@@ -19,101 +21,112 @@ const fadeUp = {
 
 export default function AboutPreview() {
   return (
-    <section className="section-padding" style={{
-      background: "hsl(var(--brand-light))"
-    }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 5vw, 48px)" }}>
+    <section className="py-16 md:py-24 bg-sky-50/60 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Top 2-Column Section (Reference Photo 2 Layout) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-16">
+          
+          {/* LEFT COLUMN */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            
+            {/* Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100 border border-sky-200 text-[#0284C7] text-xs font-bold uppercase tracking-wider mb-5 shadow-sm">
+              <Snowflake size={14} className="text-[#0284C7]" />
+              <span>PERFECT AIR SOLUTION</span>
+            </div>
 
-        {/* Header */}
-        <div style={{ textAlign: "left", marginBottom: "20px" }}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }} transition={{ duration: 0.5 }}
-            style={{
-              display: "inline-block",
-              background: "hsl(var(--primary) / 0.1)",
-              border: "1px solid hsl(var(--primary) / 0.25)",
-              color: "hsl(var(--primary))",
-              fontWeight: 700, fontSize: "1rem",
-              letterSpacing: "0.18em", textTransform: "uppercase" as const,
-              padding: "5px 20px", borderRadius: "100px",
-            }}
-          >
-            LIMRA Sales &amp; Services
-          </motion.div>
+            {/* Main Title */}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-[1.2] mb-5">
+              Premier HVAC &amp; Cooling Experts{" "}
+              <span className="text-[#0284C7]">Uttar Pradesh</span>
+            </h2>
 
-          {/* h2 — global: DM Serif Display, 400, brand-dark */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.6 }}
-          >
-            Trusted HVAC &amp; Cooling Experts in Uttar Pradesh
-          </motion.h2>
+            {/* Description Paragraph */}
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-8 font-normal">
+              Perfect Air Solution is a leading HVAC and air conditioning solutions provider based in Uttar Pradesh, delivering reliable installation, maintenance, and large-scale commercial cooling projects across the state. With strong technical expertise and years of hands-on industry experience, we provide complete climate control solutions for residential, commercial, and industrial spaces.
+            </p>
 
-          {/* body-text */}
-          <motion.p
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-            viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}
-            className="body-text"
-            style={{ color: "hsl(var(--muted-foreground))", textAlign: "justify", marginTop: "16px", fontSize: "1rem" }}
-          >
-            LIMRA Sales &amp; Services is a leading HVAC and air conditioning solutions provider based in Uttar Pradesh, delivering reliable installation, maintenance, and large-scale commercial cooling projects across the state. With strong technical expertise and years of hands-on industry experience, we provide complete climate control solutions for residential, commercial, and industrial spaces.
-
-            From standard AC installations to advanced VRF systems, ducting, ventilation, cold rooms, ice plants, and chiller plants, our team ensures every project is executed with precision, safety, and efficiency. We specialize in the installation and servicing of Window, Split, Cassette, Ductable, Package AC, and AHU systems, along with copper piping and complete HVAC line work.
-
-            With a commitment to quality workmanship, transparent service, and long-term customer satisfaction, LIMRA Sales &amp; Services continues to build trust through performance and professionalism.
-          </motion.p>
-        </div>
-
-        {/* Stats */}
-        <div style={{ padding: "0 0 10px", margin: "0 auto", width: "100%" }}>
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            {stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                custom={i} initial="hidden" whileInView="visible"
-                viewport={{ once: true }} variants={fadeUp}
-                style={{
-                  color: "white",
-                  background: "linear-gradient(135deg, hsl(var(--brand-dark)) 0%, hsl(var(--primary)) 100%)",
-                  borderRadius: "16px", padding: "32px 24px", textAlign: "center",
-                  boxShadow: "0 4px 20px hsl(var(--primary) / 0.08)",
-                }}
-              >
-                {/* Stat number — DM Serif display, white */}
-                <div style={{
-                  fontFamily: "DM Serif Display",
-                  fontSize: "2.2rem", color: "white",
-                  lineHeight: 1, marginBottom: "8px", fontWeight: 400,
-                }}>
-                  <CountUp from={0} to={s.value} duration={1.2} separator="," direction="up" startWhen={true} />
-                  {s.suffix}
+            {/* 3 Feature Boxes (Photo 2 Reference) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mb-6">
+              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-sky-100 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-[#0284C7] flex-shrink-0">
+                  <ShieldCheck size={20} />
                 </div>
-                <div className="body-text" style={{ fontSize: "0.85rem", color: "white", fontWeight: 500 }}>
-                  {s.label}
+                <div>
+                  <h4 className="text-[#051B30] font-bold text-xs leading-tight">Precision Installation</h4>
+                  <p className="text-slate-500 text-[11px] mt-0.5">Best-in-class setup</p>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+
+              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-sky-100 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-[#0284C7] flex-shrink-0">
+                  <Wrench size={20} />
+                </div>
+                <div>
+                  <h4 className="text-[#051B30] font-bold text-xs leading-tight">Expert Technicians</h4>
+                  <p className="text-slate-500 text-[11px] mt-0.5">Skilled &amp; Certified</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-sky-100 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-[#0284C7] flex-shrink-0">
+                  <Leaf size={20} />
+                </div>
+                <div>
+                  <h4 className="text-[#051B30] font-bold text-xs leading-tight">Energy Efficient</h4>
+                  <p className="text-slate-500 text-[11px] mt-0.5">Sustainable Cooling</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Learn More Link */}
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 font-bold text-sm text-[#0284C7] hover:text-sky-700 transition-colors mt-2"
+            >
+              <span>Learn More About Us</span>
+              <ArrowRight size={16} />
+            </Link>
           </div>
+
+          {/* RIGHT COLUMN — FEATURED AC GRAPHIC CARD (Photo 2 Reference) */}
+          <div className="lg:col-span-5 w-full">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-sky-500/15 border-4 border-white bg-white group">
+              <img
+                src={aboutImg}
+                alt="Perfect Air Solution HVAC Cooling Setup Showcase"
+                className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#051B30]/40 via-transparent to-transparent opacity-60" />
+            </div>
+          </div>
+
         </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-          viewport={{ once: true }} transition={{ delay: 0.3 }}
-          style={{ textAlign: "center" }}
-        >
-          <a
-            href="/about"
-            style={{
-              display: "inline-flex", alignItems: "center", gap: "8px",
-              color: "hsl(var(--primary))", fontWeight: 700,
-              fontSize: "0.9rem", textDecoration: "none",
-            }}
-          >
-            Learn More About Us <ArrowRight size={16} />
-          </a>
-        </motion.div>
+        {/* BOTTOM STATS ROW (Photo 2 Reference) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="bg-gradient-to-br from-[#051B30] to-[#0284C7] text-white rounded-2xl p-6 text-center shadow-lg shadow-sky-900/20 flex flex-col items-center justify-center"
+            >
+              <div className="text-3xl sm:text-4xl font-extrabold text-white leading-none mb-2">
+                <CountUp from={0} to={s.value} duration={1.2} separator="," direction="up" startWhen={true} />
+                {s.suffix}
+              </div>
+              <div className="text-xs sm:text-sm font-semibold text-slate-200">
+                {s.label}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

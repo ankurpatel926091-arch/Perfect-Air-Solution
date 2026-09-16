@@ -1,35 +1,40 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BRAND } from "@/lib/colors";
-
 import { useGetProjectsQuery } from "@/store/api";
-import Loader from "@/components/ui/Loader";
 
-// ─── Per-card content animation variants ────────────────────────────────────
-const clientVariant = {
-  rest: { opacity: 0, x: -30 },
-  hover: { opacity: 1, x: 0, transition: { duration: 0.35, ease: "easeOut" } },
-};
+import commercialImg from "../assets/commercial.jpg";
+import residentialImg from "../assets/resedential.jpg";
+import cassetteImg from "../assets/cassette-ac.png";
+
+const fallbackProjects = [
+  {
+    _id: "p1",
+    title: "12-Story Commercial Office VRF System",
+    client: "Corporate IT Park",
+    location: "Central Business District",
+    featuredImage: commercialImg,
+  },
+  {
+    _id: "p2",
+    title: "Multi-Split Luxury Villa HVAC Installation",
+    client: "Executive Villa Estates",
+    location: "Green Avenue",
+    featuredImage: residentialImg,
+  },
+  {
+    _id: "p3",
+    title: "Hospitality Suite Ceiling Cassette AC Project",
+    client: "Grand Conference Hotel",
+    location: "Hospitality Zone",
+    featuredImage: cassetteImg,
+  },
+];
 
 const titleVariant = {
-  rest: { opacity: 0, y: 28 },
-  hover: { opacity: 1, y: 0, transition: { duration: 0.38, ease: "easeOut", delay: 0.07 } },
-};
-
-const locationVariant = {
-  rest: { opacity: 0, y: -20 },
-  hover: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut", delay: 0.14 } },
-};
-
-const arrowVariant = {
-  rest: { opacity: 0, x: 20 },
-  hover: { opacity: 1, x: 0, transition: { duration: 0.32, ease: "easeOut", delay: 0.2 } },
-};
-
-const overlayVariant = {
-  rest: { background: `linear-gradient(to top, rgba(10,10,20,0.55) 0%, rgba(10,10,20,0.10) 60%, transparent 100%)` },
-  hover: { background: `linear-gradient(to top, rgba(10,10,20,0.88) 0%, rgba(10,10,20,0.38) 55%, transparent 100%)` },
+  rest: { opacity: 0.9, y: 0 },
+  hover: { opacity: 1, y: -2, transition: { duration: 0.3 } },
 };
 
 const imageVariant = {
@@ -37,14 +42,11 @@ const imageVariant = {
   hover: { scale: 1.08, transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
-import { useNavigate } from "react-router-dom";
-
-// ─── Single Card ─────────────────────────────────────────────────────────────
 function ProjectCard({ project, i }: { project: any; i: number }) {
   const navigate = useNavigate();
   return (
     <motion.div
-      onClick={() => navigate("/case-studies")}
+      onClick={() => navigate("/gallery")}
       key={project._id || project.title}
       initial="rest"
       whileHover="hover"
@@ -53,26 +55,22 @@ function ProjectCard({ project, i }: { project: any; i: number }) {
         cursor: "pointer",
         borderRadius: "20px",
         overflow: "hidden",
-        boxShadow: `0 4px 24px ${BRAND.primary}1A`,
+        boxShadow: `0 4px 24px rgba(5, 27, 48, 0.1)`,
         background: BRAND.white,
         position: "relative",
       }}
     >
-      {/* Entry animation wrapper */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: i * 0.1 }}
         style={{ height: "100%" }}
       >
-        {/* Image container */}
         <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden" }}>
-
-          {/* Zoom image */}
           <motion.img
             variants={imageVariant}
-            src={project.featuredImage || project.images?.[0] || ""}
+            src={project.featuredImage || project.images?.[0] || commercialImg}
             alt={project.title}
             loading="lazy"
             style={{
@@ -80,18 +78,15 @@ function ProjectCard({ project, i }: { project: any; i: number }) {
               height: "100%",
               objectFit: "cover",
               display: "block",
-              transformOrigin: "center center",
             }}
           />
-
-          {/* Overlay darkens on hover */}
-          <motion.div
-            variants={overlayVariant}
-            transition={{ duration: 0.45 }}
-            style={{ position: "absolute", inset: 0 }}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(to top, rgba(5,27,48,0.85) 0%, rgba(5,27,48,0.2) 60%, transparent 100%)",
+            }}
           />
-
-          {/* Content layer */}
           <div
             style={{
               position: "absolute",
@@ -101,38 +96,35 @@ function ProjectCard({ project, i }: { project: any; i: number }) {
               padding: "24px 20px 20px",
             }}
           >
-            {/* Client — slides in from LEFT */}
-            
-
-            {/* Title — slides in from BOTTOM */}
+            {project.client && (
+              <span className="text-xs font-semibold text-cyan-300 uppercase tracking-wider block mb-1">
+                {project.client}
+              </span>
+            )}
             <motion.h3
               variants={titleVariant}
               style={{
                 color: BRAND.white,
-                fontSize: "1.25rem",
-                marginBottom: "4px",
+                fontSize: "1.15rem",
+                marginBottom: "8px",
                 fontWeight: 700,
-                lineHeight: 1.2,
+                lineHeight: 1.3,
               }}
             >
               {project.title}
             </motion.h3>
-
-            {/* Arrow CTA — slides in from RIGHT */}
-            <motion.div
-              variants={arrowVariant}
+            <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "6px",
-                color: BRAND.accentOnDark,
-                fontSize: "0.8rem",
+                color: "#38BDF8",
+                fontSize: "0.82rem",
                 fontWeight: 700,
-                letterSpacing: "0.05em",
               }}
             >
-              View Project <ArrowRight size={14} />
-            </motion.div>
+              Explore Gallery Showcase <ArrowRight size={14} />
+            </div>
           </div>
         </div>
       </motion.div>
@@ -140,80 +132,43 @@ function ProjectCard({ project, i }: { project: any; i: number }) {
   );
 }
 
-// ─── Main Section ─────────────────────────────────────────────────────────────
 export default function FeaturedProjects() {
-  const { data: projects = [], isLoading } = useGetProjectsQuery();
-  const featured = projects.slice(0, 3);
+  const navigate = useNavigate();
+  const { data: apiProjects = [] } = useGetProjectsQuery();
 
-  if (isLoading) return <Loader />;
-  if (featured.length === 0) return null;
+  const displayProjects = (apiProjects && apiProjects.length > 0)
+    ? apiProjects.slice(0, 3)
+    : fallbackProjects;
 
   return (
-    <section style={{ padding: "64px 0", background: "rgb(215 242 255 / 58%)", fontFamily: "'Inter', sans-serif" }}>
+    <section className="section-padding py-20 bg-slate-50">
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 5vw, 48px)" }}>
-
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{ textAlign: "center", marginBottom: "20px" }}
-        >
-          <div style={{
-            display: "inline-block",
-            background: `${BRAND.primary}1A`,
-            border: `1px solid ${BRAND.primary}40`,
-            color: BRAND.primary,
-            fontWeight: 700,
-            fontSize: "0.72rem",
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            padding: "5px 14px",
-            borderRadius: "100px",
-            marginBottom: "18px"
-          }}>
-            Portfolio
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div>
+            <span className="inline-block bg-sky-100 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
+              Proven Track Record
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#051B30] tracking-tight">
+              Featured Projects &amp; Installations
+            </h2>
           </div>
-
-          <h2 style={{
-            fontFamily: "'DM Serif Display', Georgia, serif",
-            fontWeight: 400,
-            fontSize: "clamp(2rem, 4vw, 3.2rem)",
-            color: BRAND.dark,
-            lineHeight: 1.15,
-            marginBottom: "16px"
-          }}>
-            Featured Projects
-          </h2>
-
-          <Link
-            to="/case-studies"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              color: BRAND.primary,
-              fontWeight: 700,
-              fontSize: "0.9rem",
-              textDecoration: "none"
-            }}
+          <button
+            onClick={() => navigate("/gallery")}
+            className="inline-flex items-center gap-2 font-bold text-sm text-[#0284C7] hover:text-sky-700 transition-colors"
           >
-            View All Projects <ArrowRight size={16} />
-          </Link>
-        </motion.div>
-
-        {/* Grid */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "24px",
-        }}>
-          {featured.map((project: any, i: number) => (
-            <ProjectCard key={project._id || project.title} project={project} i={i} />
-          ))}
+            <span>View Full Project Gallery</span>
+            <ArrowRight size={16} />
+          </button>
         </div>
 
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {displayProjects.map((p: any, i: number) => (
+            <ProjectCard key={p._id || i} project={p} i={i} />
+          ))}
+        </div>
       </div>
     </section>
   );

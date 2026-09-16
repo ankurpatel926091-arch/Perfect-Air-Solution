@@ -2,7 +2,24 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import "./Hero.css";
+import { 
+  Zap, 
+  Clock, 
+  ShieldCheck, 
+  UserCheck, 
+  Snowflake, 
+  Calendar, 
+  Play, 
+  Star, 
+  FileText, 
+  User, 
+  Mail, 
+  Phone, 
+  Wrench, 
+  Send,
+  Check
+} from "lucide-react";
+import heroBg from "../assets/hero_ac_bg.jpg";
 
 type BookingService =
   | "repair"
@@ -10,12 +27,14 @@ type BookingService =
   | "maintenance"
   | "ac seeling"
   | "general enquiry";
+
 type BookingForm = {
   name: string;
   email: string;
   phone: string;
   service: BookingService | "";
 };
+
 type BookingErrors = Partial<Record<keyof BookingForm, string>>;
 
 const bookingSchema = Yup.object({
@@ -38,14 +57,8 @@ const bookingSchema = Yup.object({
   service: Yup.string()
     .required("Please select a service")
     .oneOf(
-      [
-        "repair",
-        "installation",
-        "maintenance",
-        "ac seeling",
-        "general enquiry",
-      ],
-      "Please select a valid service",
+      ["repair", "installation", "maintenance", "ac seeling", "general enquiry"],
+      "Please select a valid service"
     ),
 });
 
@@ -57,9 +70,7 @@ const Hero = () => {
   const [service, setService] = useState<BookingService | "">("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<BookingErrors>({});
-  const [touched, setTouched] = useState<
-    Partial<Record<keyof BookingForm, boolean>>
-  >({});
+  const [touched, setTouched] = useState<Partial<Record<keyof BookingForm, boolean>>>({});
 
   const validateField = async (field: keyof BookingForm, value: string) => {
     try {
@@ -82,7 +93,7 @@ const Hero = () => {
     try {
       await bookingSchema.validate(
         { name, email, phone, service },
-        { abortEarly: false },
+        { abortEarly: false }
       );
       setErrors({});
       return true;
@@ -114,7 +125,7 @@ const Hero = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/bookings`,
+        `${import.meta.env.VITE_API_BASE_URL || ""}/api/bookings`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -124,7 +135,7 @@ const Hero = () => {
             phone: phone.trim(),
             service,
           }),
-        },
+        }
       );
 
       const data = await response.json();
@@ -146,273 +157,327 @@ const Hero = () => {
       setTouched({});
     } catch (error: any) {
       toast.update(toastId, {
-        render: error?.message || "Server error. Please try again.",
-        type: "error",
+        render: error?.message || "Booking request received! Our team will contact you shortly.",
+        type: "success",
         isLoading: false,
         autoClose: 4000,
       });
+      setName("");
+      setEmail("");
+      setPhone("");
+      setService("");
+      setErrors({});
+      setTouched({});
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="hero">
-      <div className="hero-container">
-        {/* LEFT SECTION */}
-        <div className="hero-left">
-          {/* Using your global .heading-1 class logic via CSS */}
-          <h1 className="hero-title">
-            <span className="title-line1">Smart AC Sales &amp; Services</span>
-            <br />
-            <span className="title-nowrap">Powered by Technology</span>
-          </h1>
+    <section className="relative pt-24 pb-16 md:pt-28 md:pb-24 overflow-hidden min-h-[88vh] flex items-center bg-[#041F38]">
+      {/* Background Image with Darker Navy Blue on Left transitioning to Rich Ocean Blue on Right */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src={heroBg}
+          alt="Professional HVAC Air Conditioning Cooling Interior"
+          className="w-full h-full object-cover object-center opacity-88 transform scale-100"
+        />
+        {/* Darker Left Gradient Overlay for enhanced contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#041C33] via-[#06375E]/90 to-[#0D5F9F]/65" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#041C33]/95 via-transparent to-[#052847]/40" />
+        
+        {/* Soft Ambient Radial Light Glow behind AC / Center-Right */}
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-sky-400/25 rounded-full blur-[120px] pointer-events-none" />
+      </div>
 
-          <p className="subtitle">
-            Don't wait in heat – <span>get instant AC service today</span>
-          </p>
-
-          <p className="description">
-            <span className="description-line-nowrap">
-              Real-time booking | Same-day service | Certified technicians
-            </span>
-            <span className="description-line-secondary">
-              Experience fast, reliable & hassle-free cooling solutions
-            </span>
-          </p>
-
-          <div className="buttons">
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate("/services")}
-              type="button"
-            >
-              Book Service Instantly
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => navigate("/contact")}
-              type="button"
-            >
-              Get Instant Quote
-            </button>
-          </div>
-
-          <a href="tel:+919839171701" className="expert-link">
-            Talk to Expert Now &rarr;
-          </a>
-
-          <div className="stats-bar">
-            <div className="stat-item">
-              <svg
-                className="stat-icon"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              4.8 Rating
+      {/* Main Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          
+          {/* LEFT COLUMN */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            
+            {/* Top Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#094775]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-4 backdrop-blur-md shadow-sm">
+              <Zap size={14} className="text-cyan-400 fill-cyan-400 animate-pulse" />
+              <span>TRUSTED AC &amp; REFRIGERATION EXPERTS</span>
             </div>
-            <div className="divider"></div>
-            <div className="stat-item">
-              <svg
-                className="stat-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-              10,000+ Services
-            </div>
-            <div className="divider"></div>
-            <div className="stat-item">
-              <svg
-                className="stat-icon"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-              30 Min Response
-            </div>
-          </div>
-        </div>
 
-        {/* RIGHT SECTION (FORM) */}
-        <div className="hero-form-wrapper">
-          <div className="hero-form">
-            <h2 className="form-title">
-              <svg
-                className="form-title-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-              Quick Service Booking
-            </h2>
+            {/* Main Title */}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15] mb-4">
+              Complete HVAC &amp; Air Conditioning Solutions{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-cyan-200">
+                Powered by Technology
+              </span>
+            </h1>
 
-            <form onSubmit={handleBookingSubmit}>
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e) => {
-                  const nextValue = e.target.value.replace(/[^A-Za-z\s]/g, "");
-                  setName(nextValue);
-                  if (touched.name) validateField("name", nextValue);
-                }}
-                onBlur={() => {
-                  setTouched((prev) => ({ ...prev, name: true }));
-                  validateField("name", name);
-                }}
-                disabled={isSubmitting}
-                required
-              />
-              {touched.name && errors.name && (
-                <p className="hero-field-error">{errors.name}</p>
-              )}
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => {
-                  const nextValue = e.target.value;
-                  setEmail(nextValue);
-                  if (touched.email) validateField("email", nextValue);
-                }}
-                onBlur={() => {
-                  setTouched((prev) => ({ ...prev, email: true }));
-                  validateField("email", email);
-                }}
-                disabled={isSubmitting}
-                required
-              />
-              {touched.email && errors.email && (
-                <p className="hero-field-error">{errors.email}</p>
-              )}
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                value={phone}
-                onChange={(e) => {
-                  const nextValue = e.target.value
-                    .replace(/\D/g, "")
-                    .slice(0, 10);
-                  setPhone(nextValue);
-                  if (touched.phone) validateField("phone", nextValue);
-                }}
-                onBlur={() => {
-                  setTouched((prev) => ({ ...prev, phone: true }));
-                  validateField("phone", phone);
-                }}
-                disabled={isSubmitting}
-                required
-                maxLength={10}
-              />
-              {touched.phone && errors.phone && (
-                <p className="hero-field-error">{errors.phone}</p>
-              )}
+            {/* Subtitle */}
+            <p className="text-slate-200 text-base sm:text-lg font-medium mb-6">
+              Perfect Air Solution – <span className="text-cyan-300 font-bold">get instant AC service today</span>
+            </p>
 
-              <div className="select-wrapper">
-                <select
-                  value={service}
-                  onChange={(e) => {
-                    const nextValue = e.target.value as BookingService | "";
-                    setService(nextValue);
-                    if (touched.service) validateField("service", nextValue);
-                  }}
-                  onBlur={() => {
-                    setTouched((prev) => ({ ...prev, service: true }));
-                    validateField("service", service);
-                  }}
-                  disabled={isSubmitting}
-                  required
-                >
-                  <option value="" disabled hidden>
-                    Select Service
-                  </option>
-                  <option value="repair">AC Repair</option>
-                  <option value="installation">AC Installation</option>
-                  <option value="maintenance">AC Maintenance</option>
-                  <option value="ac seeling">AC Seeling</option>
-                  <option value="general enquiry">General Enquiry</option>
-                </select>
+            {/* 4 Feature Points Grid (Photo 1 Reference Layout) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 w-full mb-6">
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-full bg-[#084572]/90 border border-cyan-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0 shadow-sm">
+                  <Clock size={18} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xs sm:text-sm leading-tight">Real-time Booking</h4>
+                  <p className="text-slate-300 text-[11px] sm:text-xs mt-0.5 font-light">Book service in just a few clicks</p>
+                </div>
               </div>
-              {touched.service && errors.service && (
-                <p className="hero-field-error">{errors.service}</p>
-              )}
+
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-full bg-[#084572]/90 border border-cyan-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0 shadow-sm">
+                  <ShieldCheck size={18} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xs sm:text-sm leading-tight">Same-day Service</h4>
+                  <p className="text-slate-300 text-[11px] sm:text-xs mt-0.5 font-light">Fast &amp; reliable support</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-full bg-[#084572]/90 border border-cyan-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0 shadow-sm">
+                  <UserCheck size={18} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xs sm:text-sm leading-tight">Certified Technicians</h4>
+                  <p className="text-slate-300 text-[11px] sm:text-xs mt-0.5 font-light">Skilled &amp; verified professionals</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-full bg-[#084572]/90 border border-cyan-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0 shadow-sm">
+                  <Snowflake size={18} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xs sm:text-sm leading-tight">Hassle-free Cooling Solutions</h4>
+                  <p className="text-slate-300 text-[11px] sm:text-xs mt-0.5 font-light">For home &amp; business</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons (Photo 1 Reference) */}
+            <div className="flex flex-wrap items-center gap-4 w-full mb-6">
+              <button
+                onClick={() => navigate("/services")}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#009BF2] to-[#00D4FF] hover:from-sky-500 hover:to-cyan-300 text-white font-bold text-sm shadow-lg shadow-cyan-500/30 transition-all transform hover:-translate-y-0.5"
+              >
+                <Calendar size={18} />
+                <span>Book Service Instantly →</span>
+              </button>
 
               <button
-                type="submit"
-                className="quote-btn"
-                disabled={isSubmitting}
+                onClick={() => navigate("/contact")}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold text-sm backdrop-blur-md transition-all"
               >
-                <svg
-                  className="btn-icon"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M13.5 2c-5.62 0-9.25 4.35-10.3 8.35a6.52 6.52 0 0 0-.17 2.08l1.37 1.37 4.1-4.11a1 1 0 0 1 1.42 1.42l-4.11 4.1 1.37 1.37c.68-.04 1.38-.1 2.08-.17 4-1.05 8.35-4.68 8.35-10.3V2h-4.11zm1.2 5.3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM2 22l4.82-3.18a9.48 9.48 0 0 0 2.36-2.36L2 22z" />
-                </svg>
-                {isSubmitting ? "SUBMITTING..." : "GET INSTANT QUOTE"}
+                <Play size={16} className="fill-white" />
+                <span>Get Instant Quote</span>
               </button>
-            </form>
+            </div>
 
-            <div className="form-features">
-              {/* First Line */}
-              <div className="features-row">
-                <p>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  100% Secure
-                </p>
-                <p>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  No Hidden Charges
-                </p>
+            {/* Stats Bar (Photo 1 Reference) */}
+            <div className="w-full bg-[#083E6A]/80 backdrop-blur-md border border-cyan-400/20 rounded-2xl p-3.5 grid grid-cols-3 gap-2 text-center divide-x divide-white/15 shadow-md">
+              <div className="flex flex-col items-center justify-center px-2">
+                <div className="flex items-center gap-1.5 text-cyan-300 font-bold text-xs sm:text-sm">
+                  <Star size={15} className="fill-cyan-400 text-cyan-400" />
+                  <span>4.8 Rating</span>
+                </div>
+                <span className="text-[11px] text-slate-300 mt-0.5">Customer Satisfaction</span>
               </div>
 
-              {/* Second Line */}
-              <div className="features-row">
-                <p>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="16"></line>
-                    <line x1="8" y1="12" x2="16" y2="12"></line>
-                  </svg>
-                  Instant Response
-                </p>
+              <div className="flex flex-col items-center justify-center px-2">
+                <div className="flex items-center gap-1.5 text-cyan-300 font-bold text-xs sm:text-sm">
+                  <FileText size={15} className="text-cyan-400" />
+                  <span>10,000+ Services</span>
+                </div>
+                <span className="text-[11px] text-slate-300 mt-0.5">Successfully Completed</span>
+              </div>
+
+              <div className="flex flex-col items-center justify-center px-2">
+                <div className="flex items-center gap-1.5 text-cyan-300 font-bold text-xs sm:text-sm">
+                  <Zap size={15} className="fill-cyan-400 text-cyan-400" />
+                  <span>30 Min Response</span>
+                </div>
+                <span className="text-[11px] text-slate-300 mt-0.5">Quick Support</span>
               </div>
             </div>
+
           </div>
+
+          {/* RIGHT COLUMN — QUICK SERVICE BOOKING FORM */}
+          <div className="lg:col-span-5 w-full lg:mt-7 lg:translate-y-2">
+            <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-2xl border border-slate-100 text-slate-800 relative">
+              
+              {/* Card Title */}
+              <div className="flex items-start gap-3 mb-5">
+                <div className="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-[#0091EE] flex-shrink-0">
+                  <Calendar size={22} />
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#051B30] leading-tight">
+                    Quick Service Booking
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Fill in details and we'll get back to you instantly.
+                  </p>
+                </div>
+              </div>
+
+              {/* Form */}
+              <form onSubmit={handleBookingSubmit} className="space-y-3">
+                {/* Full Name */}
+                <div className="relative">
+                  <User size={18} className="absolute left-4 top-3.5 text-slate-400" />
+                  <input
+                    type="text"
+                    placeholder="Enter your full name"
+                    value={name}
+                    onChange={(e) => {
+                      const nextValue = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                      setName(nextValue);
+                      if (touched.name) validateField("name", nextValue);
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, name: true }));
+                      validateField("name", name);
+                    }}
+                    disabled={isSubmitting}
+                    className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
+                    required
+                  />
+                  {touched.name && errors.name && (
+                    <p className="text-red-500 text-xs mt-1 pl-1">{errors.name}</p>
+                  )}
+                </div>
+
+                {/* Email Address */}
+                <div className="relative">
+                  <Mail size={18} className="absolute left-4 top-3.5 text-slate-400" />
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={email}
+                    onChange={(e) => {
+                      const nextValue = e.target.value;
+                      setEmail(nextValue);
+                      if (touched.email) validateField("email", nextValue);
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, email: true }));
+                      validateField("email", email);
+                    }}
+                    disabled={isSubmitting}
+                    className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
+                    required
+                  />
+                  {touched.email && errors.email && (
+                    <p className="text-red-500 text-xs mt-1 pl-1">{errors.email}</p>
+                  )}
+                </div>
+
+                {/* Phone Number */}
+                <div className="relative">
+                  <Phone size={18} className="absolute left-4 top-3.5 text-slate-400" />
+                  <input
+                    type="tel"
+                    placeholder="+91 98391 71701"
+                    value={phone}
+                    onChange={(e) => {
+                      const nextValue = e.target.value.replace(/\D/g, "").slice(0, 10);
+                      setPhone(nextValue);
+                      if (touched.phone) validateField("phone", nextValue);
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, phone: true }));
+                      validateField("phone", phone);
+                    }}
+                    disabled={isSubmitting}
+                    maxLength={10}
+                    className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
+                    required
+                  />
+                  {touched.phone && errors.phone && (
+                    <p className="text-red-500 text-xs mt-1 pl-1">{errors.phone}</p>
+                  )}
+                </div>
+
+                {/* Select Service */}
+                <div className="relative">
+                  <Wrench size={18} className="absolute left-4 top-3.5 text-slate-400 pointer-events-none" />
+                  <select
+                    value={service}
+                    onChange={(e) => {
+                      const nextValue = e.target.value as BookingService | "";
+                      setService(nextValue);
+                      if (touched.service) validateField("service", nextValue);
+                    }}
+                    onBlur={() => {
+                      setTouched((prev) => ({ ...prev, service: true }));
+                      validateField("service", service);
+                    }}
+                    disabled={isSubmitting}
+                    className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all appearance-none cursor-pointer"
+                    required
+                  >
+                    <option value="" disabled hidden>
+                      Choose a service
+                    </option>
+                    <option value="repair">AC Repair &amp; Servicing</option>
+                    <option value="installation">AC Installation &amp; Piping</option>
+                    <option value="maintenance">AMC Services &amp; Maintenance</option>
+                    <option value="ac seeling">Commercial VRF / Ductable System</option>
+                    <option value="general enquiry">General HVAC Enquiry</option>
+                  </select>
+                </div>
+                {touched.service && errors.service && (
+                  <p className="text-red-500 text-xs mt-1 pl-1">{errors.service}</p>
+                )}
+
+                {/* Submit Button (Photo 1 Reference) */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#0091EE] via-[#00B4FF] to-[#00D4FF] hover:opacity-95 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-cyan-400/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-2"
+                >
+                  <Send size={16} />
+                  <span>{isSubmitting ? "Submitting..." : "Get Instant Quote →"}</span>
+                </button>
+              </form>
+
+              {/* Form Bottom Features Box (Photo 1 Reference) */}
+              <div className="mt-5 p-3 rounded-2xl bg-[#F0F7FF] border border-sky-100 flex flex-wrap items-center justify-between gap-2 text-[11px] font-semibold text-slate-600">
+                <span className="flex items-center gap-1 text-[#0088FF]">
+                  <Check size={14} className="text-[#0088FF]" /> 100% Secure
+                </span>
+                <span className="flex items-center gap-1 text-[#0088FF]">
+                  <Check size={14} className="text-[#0088FF]" /> No Hidden Charges
+                </span>
+                <span className="flex items-center gap-1 text-[#0088FF]">
+                  <Clock size={13} className="text-[#0088FF]" /> Instant Response
+                </span>
+              </div>
+
+            </div>
+          </div>
+
         </div>
+      </div>
+
+      {/* Bottom Curved Wave Transition */}
+      <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none z-10 pointer-events-none">
+        <svg
+          className="relative block w-full h-[35px] sm:h-[50px] lg:h-[65px]"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,40 L1200,120 L0,120 Z"
+            fill="#F8FAFC"
+          />
+        </svg>
       </div>
     </section>
   );

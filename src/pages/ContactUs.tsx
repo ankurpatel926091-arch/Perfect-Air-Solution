@@ -125,9 +125,9 @@ const contactDetails = [
   {
     icon: <Mail size={20} />,
     label: "Email",
-    value: "info@limrasales.com",
+    value: "info@perfectairsolution.com",
     sub: "Reply within 24 hrs",
-    href: "mailto:info@limrasales.com",
+    href: "mailto:info@perfectairsolution.com",
     hoverColor: "rgba(59,130,246,0.08)",
     hoverBorder: "rgba(59,130,246,0.3)",
     iconColor: "#2563eb",

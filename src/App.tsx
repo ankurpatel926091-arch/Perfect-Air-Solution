@@ -26,6 +26,7 @@ import Register from "./pages/Register";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import RefundPolicy from "./pages/RefundPolicy";
+import Gallery from "./pages/Gallery";
 
 import HVACApplicationsDetailPage from "./pages/HVACApplicationsDetailPage";
 // Contexts
@@ -61,16 +62,18 @@ const App: React.FC = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/brand/:slug" element={<BrandDetail />} />
             <Route path="/order-success" element={<OrderSuccess />} />
             <Route path="/product" element={<ProductPage />} />
+            <Route path="/products" element={<ProductPage />} />
             <Route path="/brands" element={<Brand />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/service/:slug" element={<ServiceDetailPage />} />
-            <Route path="/hvac-applications" element={<HVACApplicationsDetailPage  />} />
+            <Route path="/hvac-applications" element={<HVACApplicationsDetailPage />} />
             <Route path="/hvac-applications/:slug" element={<HVACApplicationsDetailPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
