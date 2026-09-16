@@ -31,3 +31,7 @@ dist-ssr
 # Explicitly ignore env files in subfolders
 backend/.env
 **/.env
+
+# Ignore backend folder
+backend/
+
