@@ -262,7 +262,7 @@ const Hero = () => {
             </div>
 
             {/* Stats Bar (Photo 1 Reference) */}
-            <div className="w-full bg-[#083E6A]/80 backdrop-blur-md border border-cyan-400/20 rounded-2xl p-3.5 grid grid-cols-3 gap-2 text-center divide-x divide-white/15 shadow-md">
+            <div className="w-full bg-[#083E6A]/80 backdrop-blur-md border border-cyan-400/20 rounded-xl p-3.5 grid grid-cols-3 gap-2 text-center divide-x divide-white/15 shadow-md">
               <div className="flex flex-col items-center justify-center px-2">
                 <div className="flex items-center gap-1.5 text-cyan-300 font-bold text-xs sm:text-sm">
                   <Star size={15} className="fill-cyan-400 text-cyan-400" />
@@ -292,7 +292,7 @@ const Hero = () => {
 
           {/* RIGHT COLUMN — QUICK SERVICE BOOKING FORM */}
           <div className="lg:col-span-5 w-full lg:mt-7 lg:translate-y-2">
-            <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-2xl border border-slate-100 text-slate-800 relative">
+            <div className="bg-white rounded-xl p-6 sm:p-7 shadow-2xl border border-slate-100 text-slate-800 relative">
               
               {/* Card Title */}
               <div className="flex items-start gap-3 mb-5">
@@ -458,7 +458,7 @@ const Hero = () => {
         >
           <path
             d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,40 L1200,120 L0,120 Z"
-            fill="#F8FAFC"
+            fill="#E6F4FA"
           />
         </svg>
       </div>

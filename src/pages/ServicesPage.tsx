@@ -9,10 +9,10 @@ import { useGetServicesQuery } from "@/store/api";
 import Loader from "@/components/ui/Loader";
 import CTASection from "@/components/CTASection";
 
-import splitAcImg from "@/assets/split-ac.png";
-import repairImg from "@/assets/about_ac_showcase.jpg";
+import splitAcImg from "@/assets/categories/split-ac.png";
+import repairImg from "@/assets/why_choose_showcase.jpg";
 import amcImg from "@/assets/commercial.jpg";
-import vrfImg from "@/assets/vrv-vrf.png";
+import vrfImg from "@/assets/categories/vrf.png";
 import ductableImg from "@/assets/categories/ductable.jpg";
 import ahuImg from "@/assets/categories/air-handling-unit.png";
 import chillerImg from "@/assets/categories/chiller.jpg";
@@ -101,6 +101,15 @@ const staticServicesList: StaticService[] = [
     icon: MapPin,
     image: copperImg,
   },
+   {
+    slug: "ac-repair-maintenance",
+    title: "AC Servicing & Gas Refilling",
+    badge: "24/7 Emergency Support",
+    desc: "Complete servicing, high-pressure jet washing, eco-friendly gas top-up (R32/R410A), and compressor troubleshooting.",
+    bullets: ["Chemical Jet Washing", "Gas Leakage Detection", "Electrical & PCB Diagnostics"],
+    icon: Activity,
+    image: repairImg,
+  },
 ];
 
 const STATS = [
@@ -136,7 +145,7 @@ export default function ServicesPage(): React.ReactElement {
     <div className="relative min-h-screen bg-slate-50 font-sans">
 
       {/* Hero Banner */}
-      <section className="relative pt-24 pb-10 sm:pt-28 sm:pb-12 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-24 pb-8 sm:pt-28 sm:pb-9 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
         {/* Background Dot Grid */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle,rgba(255,255,255,0.3)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
@@ -145,7 +154,7 @@ export default function ServicesPage(): React.ReactElement {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest px-3.5 py-1 rounded-full mb-3 backdrop-blur-md"
+            className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest px-3.5 py-1 rounded-full mt-1.5 sm:mt-2 mb-2.5 backdrop-blur-md"
           >
             <Sparkles size={14} className="animate-pulse text-cyan-300" />
             <span>Complete HVAC Expertise</span>
@@ -191,14 +200,14 @@ export default function ServicesPage(): React.ReactElement {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.06, duration: 0.4 }}
                 onClick={() => navigate(`/service/${s.slug}`)}
-                className="group relative flex flex-col rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-md hover:shadow-2xl hover:border-[#0284C7]/40 transition-all duration-300 cursor-pointer"
+                className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/90 bg-white shadow-md hover:shadow-2xl hover:border-[#0284C7]/40 transition-all duration-300 cursor-pointer"
               >
                 {/* Visual Image Header */}
-                <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
+                <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100 flex items-center justify-center">
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   
                   {/* Floating Icon Badge */}

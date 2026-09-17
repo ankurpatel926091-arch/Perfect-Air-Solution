@@ -269,7 +269,7 @@ function ProductCard({
 
   return (
     <div
-      className="bg-card rounded-2xl overflow-hidden flex flex-col"
+      className="bg-card rounded-xl overflow-hidden flex flex-col"
       style={{
         border: "1px solid hsl(var(--border))",
         boxShadow: "0 4px 16px hsl(var(--brand-dark) / 0.07)",
@@ -545,13 +545,13 @@ export default function ProductsPage() {
     <div className="bg-slate-50 min-h-screen font-sans">
       
       {/* ── Hero Banner ── */}
-      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-24 pb-8 sm:pt-28 sm:pb-9 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-3 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-2.5 backdrop-blur-md">
             <Sparkles size={14} className="animate-pulse text-cyan-300" />
             <span>PREMIUM HVAC PRODUCTS</span>
           </div>

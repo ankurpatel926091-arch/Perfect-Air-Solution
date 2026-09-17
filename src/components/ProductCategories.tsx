@@ -110,7 +110,7 @@ export default function ProductCategories() {
               transition={{ delay: i * 0.08, duration: 0.4 }}
               whileHover={{ y: -5 }}
               onClick={() => navigate("/product")}
-              className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-md shadow-sky-900/5 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/10 transition-all duration-300 flex flex-col cursor-pointer"
+              className="group bg-white rounded-xl overflow-hidden border border-slate-200/80 shadow-md shadow-sky-900/5 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/10 transition-all duration-300 flex flex-col cursor-pointer"
             >
               {/* Image Box */}
               <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-100 flex items-center justify-center">

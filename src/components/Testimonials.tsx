@@ -86,7 +86,7 @@ export default function Testimonials() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.12, duration: 0.5 }}
               whileHover={{ y: -6 }}
-              className="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-xl shadow-sky-900/5 hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10 flex flex-col justify-between relative group transition-all duration-300"
+              className="bg-white rounded-xl p-8 border border-slate-200/80 shadow-xl shadow-sky-900/5 hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10 flex flex-col justify-between relative group transition-all duration-300"
             >
               <Quote className="absolute top-6 right-6 text-slate-200 group-hover:text-sky-400/40 transition-colors" size={36} />
 

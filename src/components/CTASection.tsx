@@ -22,7 +22,7 @@ const CTASection: React.FC<CTAProps> = ({
         width: "100%",
         background: "hsl(var(--background))",
         paddingTop: "24px",
-        paddingBottom: "24px",
+        paddingBottom: "64px",
         paddingLeft: "0",
         paddingRight: "0",
       }}
@@ -36,7 +36,7 @@ const CTASection: React.FC<CTAProps> = ({
           style={{
             position: "relative",
             overflow: "hidden",
-            borderRadius: "24px",
+            borderRadius: "14px",
             background: "linear-gradient(135deg, #051B30 0%, #0B2E4C 50%, #0284C7 100%)",
             paddingTop: "clamp(24px, 2.5vw, 36px)",
             paddingBottom: "clamp(24px, 2.5vw, 36px)",

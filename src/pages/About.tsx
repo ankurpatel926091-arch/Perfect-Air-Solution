@@ -79,13 +79,13 @@ const About = () => (
   <main className="bg-slate-50 font-sans min-h-screen">
     
     {/* ── Hero Banner ── */}
-    <section className="relative pt-20 pb-7 sm:pt-24 sm:pb-8 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+    <section className="relative pt-24 pb-8 sm:pt-28 sm:pb-9 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
       {/* Ambient background light */}
       <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-2.5 backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-2.5 backdrop-blur-md">
           <span>ABOUT PERFECT AIR SOLUTION</span>
         </div>
         
@@ -103,7 +103,7 @@ const About = () => (
           transition={{ delay: 0.15 }}
           className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-3"
         >
-          Uttar Pradesh's premier HVAC and climate control company — delivering energy-efficient cooling solutions, certified installation, and 24/7 AMC support for residential, commercial, and industrial facilities.
+         Uttar Pradesh’s premier HVAC company delivering energy-efficient cooling, certified installation, and 24/7 AMC support.
         </motion.p>
 
         {/* Inline Quick Badges */}
@@ -156,7 +156,7 @@ const About = () => (
                   whileInView="visible"
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.5 }}
-                  className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-lg shadow-sky-900/5 text-center hover:border-sky-300 transition-all"
+                  className="bg-white rounded-xl p-6 border border-slate-200/80 shadow-lg shadow-sky-900/5 text-center hover:border-sky-300 transition-all"
                 >
                   <div className="text-3xl sm:text-4xl font-extrabold text-[#0284C7] mb-1">
                     <CountUp
@@ -226,7 +226,7 @@ const About = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.45 }}
-                className="bg-white rounded-2xl p-6 border border-sky-100 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group"
+                className="bg-white rounded-xl p-6 border border-sky-100 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   {/* Top Row: Icon Badge & Tag */}
@@ -320,7 +320,7 @@ const About = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between"
+              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-xl p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] pointer-events-none" />
 

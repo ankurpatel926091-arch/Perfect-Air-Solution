@@ -51,7 +51,7 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
 
   return (
     <article
-      className="bg-card rounded-2xl overflow-hidden flex flex-col group h-full"
+      className="bg-card rounded-xl overflow-hidden flex flex-col group h-full"
       style={{
         border: "1px solid hsl(var(--border))",
         boxShadow: "0 4px 16px hsl(var(--brand-dark) / 0.07)",

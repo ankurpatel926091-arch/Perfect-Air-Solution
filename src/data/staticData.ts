@@ -252,6 +252,27 @@ export const staticServices: ServiceData[] = [
       { step: "03", title: "Filter & Blower Calibration", desc: "Static pressure check and HEPA filter integrity validation." },
     ],
   },
+  {
+    _id: "srv-9",
+    slug: "cleanroom-industrial-ventilation",
+    title: "Cleanroom & Industrial Ventilation",
+    badge: "HEPA & Cleanroom Air",
+    tagline: "Sterile Air Treatment & Positive Pressure Ventilation",
+    desc: "Turnkey cleanroom positive pressure ventilation, HEPA filtration, exhaust ducting, and industrial air treatment.",
+    longDesc: "Turnkey cleanroom ventilation for pharmaceutical plants, electronics manufacturing, and hospital surgical suites with HEPA air purification and positive pressure control.",
+    price: "Custom Quote",
+    duration: "Project Based",
+    rating: 4.96,
+    reviews: 142,
+    icon: "MapPin",
+    image: coldRoomImg,
+    highlights: ["HEPA Cleanroom Filtration", "Positive Pressure Airflow", "Industrial Exhaust Ducting", "NABH Compliance Audits"],
+    process: [
+      { step: "01", title: "Cleanroom Class Survey", desc: "ISO cleanroom classification and particle count measurement." },
+      { step: "02", title: "HEPA AHU Duct Layout", desc: "Sealed ductwork with HEPA filter modules." },
+      { step: "03", title: "Pressure & Particle Validation", desc: "Differential pressure balancing and zero-leakage certification." },
+    ],
+  },
 ];
 
 export const staticProjects: ProjectData[] = [

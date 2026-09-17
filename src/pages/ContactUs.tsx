@@ -184,40 +184,38 @@ const Field = ({
     <div className="relative flex flex-col gap-1">
       <div className="relative">
         <div
-          className="absolute inset-0 rounded-xl pointer-events-none transition-all duration-300"
-          style={{
-            boxShadow: hasError
-              ? "0 0 0 2px #ef4444, 0 0 16px 2px rgba(239,68,68,0.1)"
+          className={`absolute inset-0 rounded-xl pointer-events-none transition-all duration-300 ${
+            hasError
+              ? "border-2 border-red-500 ring-4 ring-red-500/10"
               : focused
-                ? "0 0 0 2px hsl(var(--primary)), 0 0 20px 2px hsl(var(--primary) / 0.15)"
-                : "0 0 0 1.5px hsl(var(--border))",
-          }}
+                ? "border-2 border-[#0284C7] ring-4 ring-[#0284C7]/15 bg-white shadow-md shadow-sky-500/5"
+                : "border border-slate-200/90 bg-slate-50/70"
+          }`}
         />
         <span
-          className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-200 z-10"
-          style={{
-            color: hasError ? "#ef4444" : focused ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
-          }}
+          className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-200 z-10 ${
+            hasError ? "text-red-500" : focused ? "text-[#0284C7]" : "text-slate-400"
+          }`}
         >
           {icon}
         </span>
         <label
           htmlFor={id}
-          className="absolute left-12 z-10 pointer-events-none font-semibold transition-all duration-200"
+          className="absolute left-11 z-10 pointer-events-none font-semibold transition-all duration-200"
           style={{
             ...(active
               ? {
-                top: "8px",
+                top: "7px",
                 fontSize: "10px",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase" as const,
-                color: hasError ? "#ef4444" : "hsl(var(--primary))",
+                color: hasError ? "#ef4444" : "#0284C7",
               }
               : {
                 top: "50%",
                 transform: "translateY(-50%)",
                 fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
+                color: "#64748b",
               }),
           }}
         >
@@ -229,12 +227,7 @@ const Field = ({
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => { setFocused(false); onBlur?.(); }}
-          className="w-full rounded-xl pl-12 pr-4 pt-6 pb-2 h-14 text-sm outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{
-            background: "hsl(var(--card))",
-            color: "hsl(var(--foreground))",
-            caretColor: "hsl(var(--primary))",
-          }}
+          className="w-full rounded-xl pl-11 pr-4 pt-6 pb-2 h-14 text-sm font-medium outline-none bg-transparent text-slate-900 placeholder:text-transparent disabled:opacity-50 disabled:cursor-not-allowed z-0 relative"
         />
       </div>
       <AnimatePresence>
@@ -267,39 +260,37 @@ const TextareaField = ({
     <div className="flex flex-col gap-1">
       <div className="relative">
         <div
-          className="absolute inset-0 rounded-xl pointer-events-none transition-all duration-300"
-          style={{
-            boxShadow: hasError
-              ? "0 0 0 2px #ef4444, 0 0 16px 2px rgba(239,68,68,0.1)"
+          className={`absolute inset-0 rounded-xl pointer-events-none transition-all duration-300 ${
+            hasError
+              ? "border-2 border-red-500 ring-4 ring-red-500/10"
               : focused
-                ? "0 0 0 2px hsl(var(--primary)), 0 0 20px 2px hsl(var(--primary) / 0.15)"
-                : "0 0 0 1.5px hsl(var(--border))",
-          }}
+                ? "border-2 border-[#0284C7] ring-4 ring-[#0284C7]/15 bg-white shadow-md shadow-sky-500/5"
+                : "border border-slate-200/90 bg-slate-50/70"
+          }`}
         />
         <span
-          className="absolute left-4 top-5 transition-colors duration-200 z-10"
-          style={{
-            color: hasError ? "#ef4444" : focused ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
-          }}
+          className={`absolute left-4 top-5 transition-colors duration-200 z-10 ${
+            hasError ? "text-red-500" : focused ? "text-[#0284C7]" : "text-slate-400"
+          }`}
         >
           {icon}
         </span>
         <label
           htmlFor={id}
-          className="absolute left-12 z-10 pointer-events-none font-semibold transition-all duration-200"
+          className="absolute left-11 z-10 pointer-events-none font-semibold transition-all duration-200"
           style={{
             ...(active
               ? {
-                top: "12px",
+                top: "10px",
                 fontSize: "10px",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase" as const,
-                color: hasError ? "#ef4444" : "hsl(var(--primary))",
+                color: hasError ? "#ef4444" : "#0284C7",
               }
               : {
                 top: "20px",
                 fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
+                color: "#64748b",
               }),
           }}
         >
@@ -310,12 +301,7 @@ const TextareaField = ({
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => { setFocused(false); onBlur?.(); }}
-          className="w-full rounded-xl pl-12 pr-4 pt-8 pb-4 text-sm outline-none resize-none disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{
-            background: "hsl(var(--card))",
-            color: "hsl(var(--foreground))",
-            caretColor: "hsl(var(--primary))",
-          }}
+          className="w-full rounded-xl pl-11 pr-4 pt-7 pb-4 text-sm font-medium outline-none resize-none bg-transparent text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed z-0 relative"
         />
       </div>
       <div className="flex justify-between items-center pl-1">
@@ -330,10 +316,7 @@ const TextareaField = ({
             </motion.p>
           )}
         </AnimatePresence>
-        <span
-          className="text-[10px] ml-auto"
-          style={{ color: "hsl(var(--muted-foreground))" }}
-        >
+        <span className="text-[11px] font-medium text-slate-400 ml-auto">
           {value.length}/500
         </span>
       </div>
@@ -344,38 +327,42 @@ const TextareaField = ({
 // ─── ServicePicker ────────────────────────────────────────────────────────────
 const ServicePicker = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
   <div>
-    <p
-      className="text-[10px] tracking-[0.14em] uppercase font-bold pl-0.5 mb-3"
-      style={{ color: "hsl(var(--muted-foreground))" }}
-    >
-      Select Service
-    </p>
+    <div className="flex items-center justify-between pl-0.5 mb-2.5">
+      <p className="text-[11px] tracking-wider uppercase font-bold text-slate-500">
+        SELECT SERVICE
+      </p>
+      {value && (
+        <span className="text-[11px] font-semibold text-[#0284C7] bg-sky-50 px-2 py-0.5 rounded-md">
+          1 Selected
+        </span>
+      )}
+    </div>
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
       {services.map((s) => {
         const sel = value === s.id;
         return (
           <button
-            key={s.id} type="button" onClick={() => onChange(sel ? "" : s.id)}
-            className="relative flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-            style={{
-              background: sel ? "hsl(var(--brand-light))" : "hsl(var(--card))",
-              border: sel
-                ? "1.5px solid hsl(var(--primary))"
-                : "1.5px solid hsl(var(--border))",
-              color: sel ? "hsl(var(--brand-dark))" : "hsl(var(--muted-foreground))",
-              boxShadow: sel ? "0 4px 12px hsl(var(--primary) / 0.12)" : "none",
-            }}
+            key={s.id}
+            type="button"
+            onClick={() => onChange(sel ? "" : s.id)}
+            className={`relative flex items-center gap-2.5 px-3.5 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 ${
+              sel
+                ? "bg-gradient-to-r from-[#0284C7] via-[#0091EE] to-[#00A8FF] text-white border-transparent shadow-lg shadow-sky-500/25 scale-[1.02]"
+                : "bg-slate-50 border border-slate-200 text-slate-700 hover:bg-sky-50/80 hover:border-sky-300 hover:text-[#0284C7]"
+            }`}
           >
-            <span style={{ color: sel ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))" }}>
+            <span className={sel ? "text-white" : "text-[#0284C7]"}>
               {s.icon}
             </span>
-            {s.label}
+            <span className="truncate">{s.label}</span>
             {sel && (
               <motion.span
-                layoutId="dot"
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full"
-                style={{ background: "hsl(var(--primary))" }}
-              />
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="ml-auto w-4 h-4 rounded-full bg-white/20 flex items-center justify-center text-white"
+              >
+                <CheckCircle size={12} className="text-white" />
+              </motion.span>
             )}
           </button>
         );
@@ -640,13 +627,13 @@ export default function ContactUs() {
       </div>
 
       {/* HERO - full width */}
-      <section className="relative pt-24 pb-10 sm:pt-28 sm:pb-12 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-24 pb-8 sm:pt-28 sm:pb-9 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-3 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-2.5 backdrop-blur-md">
             <span className="flex items-center gap-1.5"><MessageSquare size={13} /> GET IN TOUCH</span>
           </div>
           
@@ -690,7 +677,7 @@ export default function ContactUs() {
               style={{ border: "1px solid hsl(var(--border))", boxShadow: "0 10px 25px -5px hsl(var(--brand-dark) / 0.03)" }}
             >
               <h2 className="text-xl font-bold text-[#051B30] tracking-tight mb-4 flex items-center gap-2">
-                <Phone className="w-5 h-5 text-sky-600" /> Contact Details
+                <Phone className="w-5 h-5 text-[#0284C7]" /> Contact Details
               </h2>
               <div className="space-y-2">
                 {contactDetails.map((c, i) => (
@@ -701,15 +688,10 @@ export default function ContactUs() {
 
             {/* Brands card */}
             <div
-              className="rounded-2xl p-6"
-              style={{
-                background: "linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--brand-light)) 100%)",
-                border: "1px solid hsl(var(--primary) / 0.15)",
-              }}
+              className="rounded-xl p-6 bg-gradient-to-br from-white to-sky-50/60 border border-sky-100 shadow-sm"
             >
               <p
-                className="text-[10px] tracking-widest uppercase font-bold mb-4"
-                style={{ color: "hsl(var(--primary))" }}
+                className="text-[10px] tracking-widest uppercase font-extrabold mb-3 text-[#0284C7]"
               >
                 Authorized Dealers
               </p>
@@ -717,31 +699,25 @@ export default function ContactUs() {
                 {["Daikin", "Blue Star", "Hitachi", "Panasonic", "Mitsubishi", "Carrier", "Midea"].map((b) => (
                   <span
                     key={b}
-                    className="px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
-                    style={{
-                      background: "hsl(var(--card))",
-                      color: "hsl(var(--brand-dark))",
-                      border: "1px solid hsl(var(--primary) / 0.15)",
-                    }}
+                    className="px-3 py-1 rounded-full text-xs font-bold bg-white text-[#051B30] border border-sky-100 shadow-2xs"
                   >
                     {b}
                   </span>
                 ))}
               </div>
-              <p className="body-text text-xs" style={{ color: "hsl(var(--muted-foreground))" }}>
-                Authorized partner for sales & service — your factory warranty is always guaranteed.
+              <p className="text-slate-500 text-xs font-normal">
+                Authorized partner for sales &amp; service — your factory warranty is always guaranteed.
               </p>
             </div>
 
             {/* Trust card */}
             <div
-              className="rounded-2xl p-5 bg-card space-y-3"
-              style={{ border: "1px solid hsl(var(--border))" }}
+              className="rounded-xl p-5 bg-white border border-slate-200/90 space-y-3 shadow-xs"
             >
               {["5000+ satisfied clients across UP", "Response guaranteed within 24 hours", "Free site inspection for commercial projects"].map((t) => (
                 <div key={t} className="flex items-center gap-2.5">
-                  <CheckCircle size={14} style={{ color: "hsl(var(--primary))", flexShrink: 0 }} />
-                  <span className="text-xs font-medium" style={{ color: "hsl(var(--muted-foreground))" }}>
+                  <CheckCircle size={14} className="text-[#0284C7] shrink-0" />
+                  <span className="text-xs font-medium text-slate-600">
                     {t}
                   </span>
                 </div>
@@ -752,22 +728,25 @@ export default function ContactUs() {
           {/* ── RIGHT: Form ── */}
           <motion.div
             initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 rounded-2xl bg-card border border-slate-200/80 shadow-xl shadow-slate-900/5"
+            className="lg:col-span-3 rounded-xl bg-white border border-slate-200/90 shadow-2xl shadow-sky-950/5 relative overflow-hidden"
           >
+            <div className="absolute top-0 right-0 w-48 h-48 bg-sky-100/50 rounded-full blur-3xl pointer-events-none" />
+
             <AnimatePresence mode="wait">
               {submitted ? (
                 <SuccessScreen key="success" onReset={reset} />
               ) : (
                 <motion.form
                   key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                  onSubmit={handleSubmit} className="p-6 sm:p-8"
+                  onSubmit={handleSubmit} className="p-6 sm:p-9 relative z-10"
                 >
                   <div className="mb-6">
-                    <h2 className="text-2xl font-bold text-[#051B30] tracking-tight mb-1 flex items-center gap-2">
-                      <Send className="w-5 h-5 text-sky-600" /> Send Us a Message
+                    
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#051B30] tracking-tight leading-tight">
+                      Send Us a Message
                     </h2>
-                    <p className="text-slate-500 text-sm font-normal">
-                      Describe your needs and a real expert will call you back.
+                    <p className="text-slate-500 text-xs sm:text-sm mt-1 font-normal">
+                      Describe your needs and a senior HVAC expert will contact you shortly.
                     </p>
                   </div>
 
@@ -790,14 +769,11 @@ export default function ContactUs() {
 
                     <button
                       type="submit" disabled={!canSubmit}
-                      className="group relative w-full flex items-center justify-center gap-3 py-4 rounded-xl font-bold text-sm text-white tracking-wide overflow-hidden transition-all duration-300 mt-2"
+                      className="group relative w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-extrabold text-xs sm:text-sm text-white uppercase tracking-wider overflow-hidden transition-all duration-300 mt-3 shadow-lg shadow-sky-500/25 hover:shadow-xl hover:shadow-sky-500/35 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
                       style={{
                         background: canSubmit
-                          ? "linear-gradient(135deg, hsl(var(--brand-dark)) 0%, hsl(var(--primary)) 100%)"
-                          : "hsl(var(--muted))",
-                        color: canSubmit ? "white" : "hsl(var(--muted-foreground))",
-                        boxShadow: canSubmit ? "0 10px 20px -5px hsl(var(--primary) / 0.4)" : "none",
-                        cursor: canSubmit ? "pointer" : "not-allowed",
+                          ? "linear-gradient(135deg, #051B30 0%, #0284C7 50%, #00A8FF 100%)"
+                          : "#cbd5e1",
                       }}
                     >
                       {loading ? (
@@ -815,8 +791,8 @@ export default function ContactUs() {
                       )}
                     </button>
 
-                    <p className="text-center text-[11px] pt-2" style={{ color: "hsl(var(--muted-foreground))" }}>
-                      Privacy First: We never share your contact details with 3rd parties.
+                    <p className="text-center text-[11px] font-medium text-slate-400 pt-1">
+                      🔒 Privacy Guarantee: Your details remain 100% confidential.
                     </p>
                   </div>
                 </motion.form>

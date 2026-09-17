@@ -5,11 +5,11 @@ import { useGetServicesQuery } from "@/store/api";
 import Loader from "@/components/ui/Loader";
 import { Wrench, ShieldCheck, MapPin, Settings2, Wind, FileText, Building2, Activity, ArrowRight } from "lucide-react";
 
-import installationImg from "@/assets/split-ac.png";
-import repairImg from "@/assets/about_ac_showcase.jpg";
+import installationImg from "@/assets/categories/split-ac.png";
+import repairImg from "@/assets/why_choose_showcase.jpg";
 import amcImg from "@/assets/commercial.jpg";
 import designImg from "@/assets/categories/ductable.jpg";
-import commercialImg from "@/assets/categories/chiller.jpg";
+import commercialImg from "@/assets/categories/vrf.png";
 import preventiveImg from "@/assets/categories/air-handling-unit.png";
 
 const staticServices = [
@@ -61,6 +61,7 @@ const staticServices = [
     image: preventiveImg,
     badge: "Extended Equipment Life"
   },
+  
 ];
 
 const renderIcon = (iconName: string) => {
@@ -124,14 +125,14 @@ export default function Services() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
                 whileHover={{ y: -8 }}
-                className="group relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 bg-white shadow-xl shadow-sky-900/5 transition-all duration-300 cursor-pointer hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10"
+                className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/80 bg-white shadow-xl shadow-sky-900/5 transition-all duration-300 cursor-pointer hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10"
               >
                 {/* Visual Image Header */}
-                <div className="relative h-40 sm:h-44 overflow-hidden bg-slate-100">
+                <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100 flex items-center justify-center">
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-full object-cover object-center"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* Top Image Overlay Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />

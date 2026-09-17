@@ -47,6 +47,7 @@ const sectors = [
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
     slug: "offices"
   },
+  
 ];
 
 export default function HVACSolutions() {
@@ -102,7 +103,7 @@ export default function HVACSolutions() {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 whileHover={{ y: -6 }}
                 onClick={() => navigate(`/hvac-applications`)}
-                className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-xl shadow-sky-900/5 hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10 transition-all duration-300 flex flex-col cursor-pointer"
+                className="group bg-white rounded-xl overflow-hidden border border-slate-200/80 shadow-xl shadow-sky-900/5 hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10 transition-all duration-300 flex flex-col cursor-pointer"
               >
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden bg-slate-100">

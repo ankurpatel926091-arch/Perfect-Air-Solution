@@ -52,7 +52,7 @@ export default function AboutPreview() {
 
             {/* 3 Feature Boxes (Photo 2 Reference) */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mb-6">
-              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-sky-100 shadow-sm">
+              <div className="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-sky-100 shadow-sm">
                 <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-[#0284C7] flex-shrink-0">
                   <ShieldCheck size={20} />
                 </div>
@@ -62,7 +62,7 @@ export default function AboutPreview() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-sky-100 shadow-sm">
+              <div className="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-sky-100 shadow-sm">
                 <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-[#0284C7] flex-shrink-0">
                   <Wrench size={20} />
                 </div>
@@ -72,7 +72,7 @@ export default function AboutPreview() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-sky-100 shadow-sm">
+              <div className="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-sky-100 shadow-sm">
                 <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-[#0284C7] flex-shrink-0">
                   <Leaf size={20} />
                 </div>
@@ -95,7 +95,7 @@ export default function AboutPreview() {
 
           {/* RIGHT COLUMN — FEATURED AC GRAPHIC CARD (Photo 2 Reference) */}
           <div className="lg:col-span-5 w-full">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-sky-500/15 border-4 border-white bg-white group">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-sky-500/15 border-4 border-white bg-white group">
               <img
                 src={aboutImg}
                 alt="Perfect Air Solution HVAC Cooling Setup Showcase"
@@ -117,7 +117,7 @@ export default function AboutPreview() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="bg-gradient-to-br from-[#051B30] to-[#0284C7] text-white rounded-2xl p-6 text-center shadow-lg shadow-sky-900/20 flex flex-col items-center justify-center"
+              className="bg-gradient-to-br from-[#051B30] to-[#0284C7] text-white rounded-xl p-6 text-center shadow-lg shadow-sky-900/20 flex flex-col items-center justify-center"
             >
               <div className="text-3xl sm:text-4xl font-extrabold text-white leading-none mb-2">
                 <CountUp from={0} to={s.value} duration={1.2} separator="," direction="up" startWhen={true} />
