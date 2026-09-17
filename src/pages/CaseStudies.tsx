@@ -325,51 +325,39 @@ const CaseStudies = () => {
     <main className="bg-slate-50 font-sans min-h-screen">
       
       {/* ── Top Hero Banner ── */}
-      <section className="relative pt-24 pb-20 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-3.5 backdrop-blur-md">
             <FileText size={14} className="text-cyan-300" />
             <span>OUR PROJECTS &amp; CASE STUDIES</span>
           </div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight"
+            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3.5 leading-tight"
           >
-            HVAC Engineering Projects &amp; Case Studies
+            HVAC Engineering Projects &amp; <span className="text-cyan-300">Case Studies</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-slate-200 text-base sm:text-lg max-w-3xl mx-auto font-normal leading-relaxed mb-8"
+            transition={{ delay: 0.15 }}
+            className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-4"
           >
             Explore our portfolio of commercial, industrial, healthcare, and residential HVAC installations across Northern India. Download detailed technical project case studies in PDF format.
           </motion.p>
 
-          {/* Quick Metrics Bar */}
-          {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            {[
-              { label: "Projects Completed", value: "500+" },
-              { label: "Commercial Tonnes", value: "15,000+" },
-              { label: "Cities Served", value: "20+" },
-              { label: "Client Satisfaction", value: "100%" },
-            ].map((m) => (
-              <div
-                key={m.label}
-                className="bg-white/10 backdrop-blur-md border border-white/15 rounded-xl py-3 px-4 text-center"
-              >
-                <div className="text-xl sm:text-2xl font-black text-cyan-300">{m.value}</div>
-                <div className="text-xs text-slate-300 font-medium mt-0.5">{m.label}</div>
-              </div>
-            ))}
-          </div> */}
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-xl mx-auto">
+            <span>✓ 500+ Projects Completed</span>
+            <span>✓ 15,000+ Commercial Tonnes</span>
+            <span>✓ PDF Case Studies</span>
+          </div>
         </div>
       </section>
 

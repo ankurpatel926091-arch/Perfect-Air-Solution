@@ -30,8 +30,8 @@ export default function ServiceDetailPage() {
   const service = services.find((s: any) => s.slug === slug);
   if (!service) {
     return (
-      <div className="flex items-center justify-center min-h-screen" style={{ background: BRAND.bgSoft }}>
-        <p style={{ color: `${BRAND.dark}70`, fontFamily: "'DM Sans', sans-serif" }}>Service not found.</p>
+      <div className="flex items-center justify-center min-h-screen bg-slate-50">
+        <p className="text-slate-600 font-medium">Service not found.</p>
       </div>
     );
   }
@@ -40,40 +40,36 @@ export default function ServiceDetailPage() {
   const related = services.filter((s: any) => s.slug !== slug).slice(0, 3);
 
   return (
-    <div className="min-h-screen" style={{ background: BRAND.bgSoft, fontFamily: "'DM Sans', sans-serif" }}>
+    <div className="min-h-screen bg-slate-50 font-sans">
       {/* Hero Banner */}
-      <section className="relative overflow-hidden" style={{
-        background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.darkMid} 50%, ${BRAND.primary} 100%)`,
-        padding: "72px 0 56px",
-      }}>
-        <div className="absolute inset-0 opacity-40" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="relative z-10 max-w-[1100px] mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 rounded-full py-[5px] px-4 text-[0.68rem] font-bold tracking-[0.14em] uppercase mb-5 mt-5"
-              style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", color: BRAND.accentOnDark }}>
-              <Icon size={12} /> {service.badge || "Service"}
+            <div className="inline-flex items-center gap-2 rounded-full py-1 px-4 text-xs font-bold uppercase tracking-widest mb-4 bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 backdrop-blur-md">
+              <Icon size={13} /> {service.badge || "Service"}
             </div>
 
-            <h1 className="text-[clamp(2.2rem,5vw,3.4rem)] leading-[1.1] tracking-tight mb-3"
-              style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontWeight: 400, color: BRAND.white }}>
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3 leading-tight">
               {service.title}
             </h1>
-            <p className="text-[1rem] font-medium uppercase tracking-[0.06em] mb-5" style={{ color: BRAND.accentOnDark }}>{service.tagline}</p>
-            <p className="text-[0.95rem] leading-[1.8] max-w-[560px] mb-7" style={{ color: BRAND.textOnDark }}>{service.longDesc}</p>
+            <p className="text-sm sm:text-base font-semibold uppercase tracking-wider mb-3 text-cyan-300">{service.tagline}</p>
+            <p className="text-sm sm:text-base leading-relaxed max-w-2xl mb-6 text-slate-200">{service.longDesc}</p>
 
             <div className="flex flex-wrap gap-5 items-center">
-              <div className="flex items-center gap-2 text-[0.85rem]" style={{ color: BRAND.textOnDark }}>
+              <div className="flex items-center gap-2 text-sm text-slate-200">
                 <Star size={15} color="#d97706" fill="#d97706" />
-                <strong style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400 }}>{service.rating}</strong>
-                <span style={{ color: BRAND.textOnDarkMuted }}>({service.reviews} reviews)</span>
+                <strong className="font-bold">{service.rating}</strong>
+                <span className="text-slate-300">({service.reviews} reviews)</span>
               </div>
-              <div className="flex items-center gap-2 text-[0.85rem]" style={{ color: BRAND.textOnDarkMuted }}>
-                <Clock size={14} color={BRAND.accentOnDark} /> {service.duration}
+              <div className="flex items-center gap-2 text-sm text-slate-300">
+                <Clock size={14} className="text-cyan-300" /> {service.duration}
               </div>
-              <div className="flex items-center gap-2 text-[0.85rem]" style={{ color: BRAND.textOnDark }}>
-                <Zap size={14} color={BRAND.accentOnDark} />
-                <strong style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400 }}>{service.price}</strong>
+              <div className="flex items-center gap-2 text-sm text-slate-200">
+                <Zap size={14} className="text-cyan-300" />
+                <strong className="font-bold">{service.price}</strong>
               </div>
             </div>
           </motion.div>
@@ -117,8 +113,8 @@ export default function ServiceDetailPage() {
                       style={{ background: BRAND.white, border: `1px solid ${BRAND.slate100}`, boxShadow: "0 1px 3px rgba(6,149,205,0.05)" }}>
                       <div className="absolute top-3 right-4 text-[3.5rem] leading-none select-none"
                         style={{ fontFamily: "'DM Serif Display', serif", color: `${BRAND.primary}08` }}>{p.step}</div>
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3"
-                        style={{ background: BRAND.primaryPale, border: `1px solid ${BRAND.primarySky}`, color: BRAND.primary, fontSize: "0.7rem", fontWeight: 700 }}>{p.step}</div>
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3 font-bold text-xs"
+                        style={{ background: BRAND.primaryPale, border: `1px solid ${BRAND.primarySky}`, color: BRAND.primary }}>{p.step}</div>
                       <h4 className="text-base mb-2" style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, color: BRAND.dark }}>{p.title}</h4>
                       <p className="text-[0.84rem] leading-[1.75]" style={{ color: `${BRAND.dark}70` }}>{p.desc}</p>
                     </motion.div>

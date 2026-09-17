@@ -14,22 +14,34 @@ const values = [
   {
     icon: Shield,
     title: "Reliability & Trust",
+    tag: "100% Commitment",
     desc: "We stand behind every AC installation and industrial cooling project with dependable service, strong workmanship, and responsive after-sales support.",
+    bullets: ["24/7 Rapid Response", "Dependable Workmanship"],
+    gradient: "from-sky-500 to-blue-600",
   },
   {
     icon: Award,
     title: "Engineering Excellence",
+    tag: "Precision First",
     desc: "We deliver HVAC solutions with certified technicians, premium components, and no shortcuts. Every project reflects our technical precision.",
+    bullets: ["Certified Technicians", "OEM Parts Guarantee"],
+    gradient: "from-blue-600 to-indigo-600",
   },
   {
     icon: CheckCircle,
     title: "Strict Quality Assurance",
+    tag: "ISO Quality",
     desc: "Through rigorous performance testing, we guarantee reliable and energy-efficient air conditioning systems across all installations.",
+    bullets: ["Pressure Leakage Testing", "CFM Airflow Balancing"],
+    gradient: "from-emerald-500 to-teal-600",
   },
   {
     icon: Target,
     title: "Modern Innovation",
+    tag: "Smart Tech",
     desc: "We continuously adopt modern, energy-efficient, and smart HVAC technologies to deliver advanced cooling solutions for all sectors.",
+    bullets: ["Inverter & VRF Systems", "Eco-Smart Controls"],
+    gradient: "from-amber-500 to-orange-600",
   },
 ];
 
@@ -67,32 +79,39 @@ const About = () => (
   <main className="bg-slate-50 font-sans min-h-screen">
     
     {/* ── Hero Banner ── */}
-    <section className="relative pt-24 pb-20 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+    <section className="relative pt-24 pb-10 sm:pt-28 sm:pb-12 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
       {/* Ambient background light */}
-      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-3.5 backdrop-blur-md">
           <span>ABOUT PERFECT AIR SOLUTION</span>
         </div>
         
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight"
+          className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3.5 leading-tight max-w-4xl mx-auto"
         >
-          Building Comfort &amp; Engineering Trust Since 2012
+          Building Comfort &amp; Engineering Trust <span className="text-cyan-300 block sm:inline-block">Since 2012</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-slate-200 text-base sm:text-lg max-w-3xl mx-auto font-normal leading-relaxed"
+          transition={{ delay: 0.15 }}
+          className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-4"
         >
-          Perfect Air Solution is a premier HVAC and air conditioning company delivering reliable, energy-efficient cooling solutions for homes, offices, hospitals, hotels, and industrial facilities.
+          Uttar Pradesh's premier HVAC and climate control company — delivering energy-efficient cooling solutions, certified installation, and 24/7 AMC support for residential, commercial, and industrial facilities.
         </motion.p>
+
+        {/* Inline Quick Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-xl mx-auto">
+          <span>✓ 5,000+ Installations</span>
+          <span>✓ 500+ Commercial Projects</span>
+          <span>✓ 24/7 Rapid Response</span>
+        </div>
       </div>
     </section>
 
@@ -162,49 +181,89 @@ const About = () => (
       </div>
     </section>
 
-    {/* ── Values ── */}
-    <section className="py-16 sm:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* ── Core Values Section ── */}
+    <section className="py-20 sm:py-24 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] relative overflow-hidden font-sans">
+      {/* Background Decorative Glow Accents */}
+      <div className="absolute top-10 left-10 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="text-center max-w-2xl mx-auto mb-14"
+          className="text-center max-w-3xl mx-auto mb-14"
         >
-          <Badge label="Our Core Values" />
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#051B30] tracking-tight">
-            What Drives Us Forward
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] text-xs font-bold uppercase tracking-wider mb-3.5 shadow-sm">
+            <CheckCircle size={14} className="text-[#0284C7]" />
+            <span>Our Core Values</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4">
+            What Drives Us{" "}
+            <span className="text-[#0284C7] relative inline-block">
+              Forward
+              <span className="absolute bottom-1 left-0 w-full h-1.5 bg-[#0284C7]/20 rounded-full -z-10" />
+            </span>
           </h2>
+
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
+            The core principles and engineering ethics behind every HVAC installation, maintenance contract, and cooling solution we deliver.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 4-Column Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5 sm:gap-6">
           {values.map((v, i) => {
             const IconComp = v.icon;
             return (
               <motion.div
                 key={v.title}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-sky-300 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                transition={{ delay: i * 0.08, duration: 0.45 }}
+                className="bg-white rounded-2xl p-6 border border-sky-100 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-sky-100/80 text-[#0284C7] border border-sky-200/60 flex items-center justify-center mb-5 shadow-sm">
-                    <IconComp size={24} />
+                  {/* Top Row: Icon Badge & Tag */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${v.gradient} text-white flex items-center justify-center shadow-md shadow-sky-500/15`}>
+                      <IconComp size={22} />
+                    </div>
+                    <span className="px-2.5 py-0.5 rounded-full bg-sky-50 border border-sky-100 text-[#0284C7] text-[10px] font-bold">
+                      {v.tag}
+                    </span>
                   </div>
-                  <h3 className="text-lg font-bold text-[#051B30] mb-2">
+
+                  {/* Title */}
+                  <h3 className="text-lg font-bold text-[#051B30] group-hover:text-[#0284C7] transition-colors mb-2 leading-snug">
                     {v.title}
                   </h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+
+                  {/* Description */}
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal mb-4">
                     {v.desc}
                   </p>
+                </div>
+
+                {/* Bullet Highlights */}
+                <div className="pt-3 border-t border-slate-100 space-y-1.5">
+                  {v.bullets.map((b) => (
+                    <div key={b} className="flex items-center gap-1.5 text-[11px] font-medium text-slate-500">
+                      <CheckCircle size={13} className="text-emerald-500 shrink-0" />
+                      <span>{b}</span>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             );
           })}
         </div>
+
       </div>
     </section>
 

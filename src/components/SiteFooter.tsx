@@ -59,18 +59,14 @@ const linkItemVariants = {
 };
 
 const SiteFooter = () => {
-  const { data: services } = useGetServicesQuery();
-
-  const staticServicesList = [
-    { title: "AC Installation", slug: "ac-installation" },
-    { title: "AC Repair & Maintenance", slug: "ac-repair-maintenance" },
-    { title: "AMC Services", slug: "amc-services" },
-    { title: "HVAC Design & Consultation", slug: "hvac-design-consultation" },
-    { title: "Commercial HVAC Solutions", slug: "commercial-hvac-solutions" },
-    { title: "Preventive Maintenance", slug: "preventive-maintenance" },
+  const servicesList = [
+    { title: "AC Installation", to: "/contact?service=ac-installation" },
+    { title: "AC Repair & Maintenance", to: "/contact?service=ac-repair" },
+    { title: "AMC Services", to: "/contact?service=amc-service" },
+    { title: "HVAC Design & Consultation", to: "/services" },
+    { title: "Commercial HVAC Solutions", to: "/contact?service=commercial-hvac" },
+    { title: "Preventive Maintenance", to: "/contact?service=amc-service" },
   ];
-
-  const displayServices = (services && services.length > 0) ? services : staticServicesList;
 
   return (
     <motion.footer
@@ -118,7 +114,7 @@ const SiteFooter = () => {
               </Link>
 
               <p className="text-base leading-relaxed mb-3.5 text-slate-200 font-normal">
-                Perfect Air Solution is a premier HVAC and air conditioning company providing turnkey residential, commercial, and industrial climate control, VRF systems, AC installation, and maintenance.
+                Perfect Air Solution is a premier HVAC and air conditioning company providing turnkey residential, commercial, and industrial climate .
               </p>
 
               {/* Trust badges */}
@@ -176,10 +172,10 @@ const SiteFooter = () => {
               Our Services
             </p>
             <ul className="space-y-2">
-              {displayServices.slice(0, 6).map((s: any) => (
-                <li key={s.slug || s.title}>
+              {servicesList.map((s) => (
+                <li key={s.title}>
                   <Link
-                    to={`/service/${s.slug}`}
+                    to={s.to}
                     className="text-base font-semibold text-slate-200 hover:text-cyan-300 flex items-center gap-2.5 transition-all duration-200 text-decoration-none group"
                   >
                     <ChevronRight size={15} className="text-[#0284C7] group-hover:translate-x-1 transition-transform" />

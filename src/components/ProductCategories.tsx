@@ -100,7 +100,7 @@ export default function ProductCategories() {
         </div>
 
         {/* Compact Clean Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4.5">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.slug || cat.title}

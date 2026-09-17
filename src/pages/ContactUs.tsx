@@ -109,6 +109,12 @@ const slugToServiceId: Record<string, string> = {
   "vrf": "vrf",
   "cold-storage": "chiller",
   "commercial-hvac": "commercial",
+  "residential-ac": "residential",
+  "pump-down-services": "residential",
+  "ductable-ac": "commercial",
+  "ahu-chiller": "chiller",
+  "water-cooler": "other",
+  "modular-ot": "other",
 };
 
 const contactDetails = [
@@ -116,6 +122,7 @@ const contactDetails = [
     icon: <Phone size={20} />,
     label: "Call Us",
     value: "+91 98391 71701",
+    sub: "Available 24/7 Support",
     href: "tel:+919839171701",
     hoverColor: "rgba(34,197,94,0.08)",
     hoverBorder: "rgba(34,197,94,0.3)",
@@ -152,10 +159,10 @@ const contactDetails = [
     value: "9:00 AM – 7:00 PM",
     sub: "Monday to Saturday",
     href: null,
-    hoverColor: null,
-    hoverBorder: null,
+    hoverColor: "rgba(124,58,237,0.08)",
+    hoverBorder: "rgba(124,58,237,0.3)",
     iconColor: "#7c3aed",
-    actionLabel: null,
+    actionLabel: "Open Mon-Sat",
   },
 ];
 
@@ -439,37 +446,40 @@ const ContactDetailItem = ({
       initial={{ opacity: 0, x: -16 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.3 + index * 0.08 }}
-      onMouseEnter={() => detail.href && setHovered(true)}
+      onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="flex items-start gap-4 rounded-xl p-2 -mx-2 transition-all duration-200"
+      className="flex items-start gap-4 rounded-xl p-3 -mx-2 transition-all duration-300"
       style={{
         background: hovered && detail.hoverColor ? detail.hoverColor : "transparent",
+        border: `1px solid ${hovered && detail.hoverBorder ? detail.hoverBorder : "transparent"}`,
+        boxShadow: hovered ? "0 4px 14px -3px rgba(0,0,0,0.06)" : "none",
         cursor: detail.href ? "pointer" : "default",
       }}
     >
       <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200"
+        className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 transform"
         style={{
           background: hovered && detail.hoverColor ? detail.hoverColor : "hsl(var(--brand-light))",
           border: `1px solid ${hovered && detail.hoverBorder ? detail.hoverBorder : "hsl(var(--primary) / 0.15)"}`,
           color: detail.iconColor,
+          transform: hovered ? "scale(1.08)" : "scale(1)",
         }}
       >
         {detail.icon}
       </div>
       <div className="flex-1 min-w-0">
         <p
-          className="text-[10px] tracking-widest uppercase font-bold mb-0.5"
-          style={{ color: "hsl(var(--muted-foreground))" }}
+          className="text-[10px] tracking-widest uppercase font-bold mb-0.5 transition-colors duration-200"
+          style={{ color: hovered ? detail.iconColor : "hsl(var(--muted-foreground))" }}
         >
           {detail.label}
         </p>
         <div className="flex items-center gap-1.5">
           <p
-            className="font-bold leading-snug truncate transition-colors duration-200"
+            className="font-bold leading-snug truncate transition-colors duration-200 text-sm sm:text-base"
             style={{
               fontFamily: "Inter",
-              color: hovered && detail.href ? detail.iconColor : "hsl(var(--foreground))",
+              color: hovered ? detail.iconColor : "hsl(var(--foreground))",
             }}
           >
             {detail.value}
@@ -480,23 +490,23 @@ const ContactDetailItem = ({
               animate={{ opacity: 1, scale: 1 }}
               style={{ color: detail.iconColor }}
             >
-              <ExternalLink size={12} />
+              <ExternalLink size={13} />
             </motion.span>
           )}
         </div>
-        <p className="text-xs" style={{ color: "hsl(var(--muted-foreground))" }}>
-          {detail.sub}
+        <p
+          className="text-xs font-medium transition-colors duration-200 min-h-[18px] flex items-center gap-1 mt-0.5"
+          style={{ color: hovered ? detail.iconColor : "hsl(var(--muted-foreground))" }}
+        >
+          {hovered && detail.actionLabel ? (
+            <>
+              <span>{detail.actionLabel}</span>
+              <span className="transition-transform duration-200 transform translate-x-0.5">→</span>
+            </>
+          ) : (
+            <span>{detail.sub}</span>
+          )}
         </p>
-        {detail.actionLabel && hovered && (
-          <motion.p
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-[10px] font-semibold mt-0.5 tracking-wide"
-            style={{ color: detail.iconColor }}
-          >
-            {detail.actionLabel} →
-          </motion.p>
-        )}
       </div>
     </motion.div>
   );
@@ -635,50 +645,43 @@ export default function ContactUs() {
       </div>
 
       {/* HERO - full width */}
-      <section
-        className="bg-hero-gradient"
-        style={{
-          width: "100%",
-          padding: "120px 32px 80px 32px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* dot pattern */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            opacity: 0.08,
-            backgroundImage:
-              "radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          className="text-center"
-          style={{ maxWidth: "720px", margin: "0 auto", padding: "0 24px" }}
-        >
-          <h1 style={{ color: "white", marginBottom: "16px" }}>
-            Let's Build Your Perfect Climate
-          </h1>
-          <p
-            className="body-text"
-            style={{
-              color: "hsl(var(--brand-sky))",
-              maxWidth: "560px",
-              margin: "0 auto",
-              fontWeight: 300,
-            }}
+      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+        {/* Ambient background light */}
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-3 backdrop-blur-md">
+            <span className="flex items-center gap-1.5"><MessageSquare size={13} /> GET IN TOUCH</span>
+          </div>
+          
+          <motion.h1
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3 leading-tight"
           >
-            9+ years of HVAC expertise. Tell us what you need and we'll take care of the rest.
-          </p>
+            Let's Build Your <span className="text-cyan-300">Perfect Climate</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.15 }}
+            className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-4"
+          >
+            9+ years of HVAC expertise. Tell us what you need and our engineering experts will take care of the rest.
+          </motion.p>
+
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-xl mx-auto">
+            <span>✓ 24/7 Rapid Response</span>
+            <span>✓ Free Technical Site Inspection</span>
+            <span>✓ Guaranteed Solution</span>
+          </div>
         </div>
       </section>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid lg:grid-cols-5 gap-8 items-start">
 
           {/* ── LEFT ── */}
@@ -691,8 +694,8 @@ export default function ContactUs() {
               className="rounded-2xl p-6 bg-card"
               style={{ border: "1px solid hsl(var(--border))", boxShadow: "0 10px 25px -5px hsl(var(--brand-dark) / 0.03)" }}
             >
-              <h2 style={{ marginTop: 0, marginBottom: "1.5rem" }}>
-                Contact Details
+              <h2 className="text-xl font-bold text-[#051B30] tracking-tight mb-4 flex items-center gap-2">
+                <Phone className="w-5 h-5 text-sky-600" /> Contact Details
               </h2>
               <div className="space-y-2">
                 {contactDetails.map((c, i) => (
@@ -754,11 +757,7 @@ export default function ContactUs() {
           {/* ── RIGHT: Form ── */}
           <motion.div
             initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 rounded-2xl bg-card"
-            style={{
-              border: "1px solid hsl(var(--border))",
-              boxShadow: "0 20px 40px -15px hsl(var(--brand-dark) / 0.05)",
-            }}
+            className="lg:col-span-3 rounded-2xl bg-card border border-slate-200/80 shadow-xl shadow-slate-900/5"
           >
             <AnimatePresence mode="wait">
               {submitted ? (
@@ -766,13 +765,13 @@ export default function ContactUs() {
               ) : (
                 <motion.form
                   key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                  onSubmit={handleSubmit} className="p-6 sm:p-10"
+                  onSubmit={handleSubmit} className="p-6 sm:p-8"
                 >
-                  <div className="mb-8">
-                    <h2 style={{ marginTop: 0, marginBottom: "8px" }}>
-                      Send Us a Message
+                  <div className="mb-6">
+                    <h2 className="text-2xl font-bold text-[#051B30] tracking-tight mb-1 flex items-center gap-2">
+                      <Send className="w-5 h-5 text-sky-600" /> Send Us a Message
                     </h2>
-                    <p className="body-text text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
+                    <p className="text-slate-500 text-sm font-normal">
                       Describe your needs and a real expert will call you back.
                     </p>
                   </div>

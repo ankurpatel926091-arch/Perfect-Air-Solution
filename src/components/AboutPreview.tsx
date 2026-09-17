@@ -21,8 +21,11 @@ const fadeUp = {
 
 export default function AboutPreview() {
   return (
-    <section className="py-16 md:py-24 bg-sky-50/60 font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-[#E6F4FA] via-[#F4FAFF] to-[#E6F4FA] font-sans relative overflow-hidden">
+      {/* Background Dot Overlay */}
+      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle,rgba(2,132,199,0.12)_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Top 2-Column Section (Reference Photo 2 Layout) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-16">

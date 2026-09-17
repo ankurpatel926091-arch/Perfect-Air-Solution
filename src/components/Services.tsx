@@ -112,7 +112,7 @@ export default function Services() {
         </motion.div>
 
         {/* Visual Cards Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 350px), 1fr))", gap: "28px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "16px" }}>
           {displayServices.map((s: any, i: number) => {
             const IconComponent = typeof s.icon === 'function' ? s.icon : renderIcon(s.icon);
             return (
@@ -127,7 +127,7 @@ export default function Services() {
                 className="group relative flex flex-col rounded-3xl overflow-hidden border border-slate-200/80 bg-white shadow-xl shadow-sky-900/5 transition-all duration-300 cursor-pointer hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10"
               >
                 {/* Visual Image Header */}
-                <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
+                <div className="relative h-40 sm:h-44 overflow-hidden bg-slate-100">
                   <img
                     src={s.image}
                     alt={s.title}
@@ -137,34 +137,34 @@ export default function Services() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
                   
                   {/* Floating Icon Badge */}
-                  <div className="absolute top-4 left-4 w-11 h-11 rounded-2xl bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                    <IconComponent size={22} />
+                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-xl bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center shadow-md">
+                    <IconComponent size={18} />
                   </div>
 
                   {/* Top Tag Badge */}
                   {s.badge && (
-                    <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/95 border border-sky-100 text-[#0284C7] text-[11px] font-bold backdrop-blur-md shadow-sm">
+                    <div className="absolute top-3.5 right-3.5 px-2.5 py-0.5 rounded-full bg-white/95 border border-sky-100 text-[#0284C7] text-[10px] font-bold backdrop-blur-md shadow-sm">
                       {s.badge}
                     </div>
                   )}
                 </div>
 
                 {/* Card Content */}
-                <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between bg-white">
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-white">
                   <div>
-                    <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif" }} className="text-xl sm:text-2xl text-[#051B30] font-bold mb-3 group-hover:text-[#0284C7] transition-colors">
+                    <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif" }} className="text-base sm:text-lg text-[#051B30] font-bold mb-1.5 leading-snug group-hover:text-[#0284C7] transition-colors">
                       {s.title}
                     </h3>
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal line-clamp-3">
+                    <p className="text-slate-600 text-xs leading-relaxed font-normal line-clamp-2">
                       {s.desc}
                     </p>
                   </div>
 
                   {/* Action Link Footer */}
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0284C7] group-hover:text-sky-600">
+                  <div className="mt-3.5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0284C7] group-hover:text-sky-600">
                     <span>Explore Service Details</span>
-                    <div className="w-8 h-8 rounded-full bg-sky-50 group-hover:bg-[#0284C7] group-hover:text-white flex items-center justify-center transition-all">
-                      <ArrowRight size={15} />
+                    <div className="w-7 h-7 rounded-full bg-sky-50 group-hover:bg-[#0284C7] group-hover:text-white flex items-center justify-center transition-all">
+                      <ArrowRight size={14} />
                     </div>
                   </div>
                 </div>

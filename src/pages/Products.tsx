@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   Wind,
   Star,
@@ -15,6 +16,7 @@ import {
   Droplet,
   MessageSquare,
   LoaderCircle,
+  Sparkles,
 } from "lucide-react";
 import { toast } from "react-toastify";
 import SplitAcImg from "@/assets/categories/split-ac.png";
@@ -546,38 +548,68 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="bg-background min-h-screen">
-      <div className="bg-hero-gradient text-center" style={{ padding: "56px 24px", marginTop: "48px" }}>
-        <h1 style={{ color: "white", marginBottom: "12px", letterSpacing: "0.1rem" }}>
-          Our Products
-        </h1>
-        <p className="body-text" style={{ color: "rgba(255, 255, 255, 0.88)" }}>
-          Explore our wide range of air conditioning solutions.
-        </p>
-      </div>
+    <div className="bg-slate-50 min-h-screen font-sans">
+      
+      {/* ── Hero Banner ── */}
+      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+        {/* Ambient background light */}
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-      <div
-        className="bg-card sticky top-0 z-10"
-        style={{ borderBottom: "1px solid hsl(var(--border))", padding: "12px 24px" }}
-      >
-        <div className="flex gap-2 overflow-x-auto w-full px-2 no-scrollbar justify-start sm:justify-center">
-          {filters.map((f) => (
-            <button
-              key={f.id}
-              onClick={() => {
-                setActiveFilter(f.id);
-                setSelectedCategory("all");
-              }}
-              className="px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition"
-              style={{
-                background: activeFilter === f.id ? "hsl(var(--brand-dark))" : "transparent",
-                color: activeFilter === f.id ? "white" : "hsl(var(--foreground) / 0.7)",
-                border: `1px solid ${activeFilter === f.id ? "hsl(var(--brand-dark))" : "hsl(var(--border))"}`,
-              }}
-            >
-              {f.label}
-            </button>
-          ))}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-3 backdrop-blur-md">
+            <Sparkles size={14} className="animate-pulse text-cyan-300" />
+            <span>PREMIUM HVAC PRODUCTS</span>
+          </div>
+          
+          <motion.h1
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3.5 leading-tight"
+          >
+            Cooling Products &amp; <span className="text-cyan-300">Solutions</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.15 }}
+            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5"
+          >
+            Explore our comprehensive range of high-performance split, cassette, ductable, VRF, and industrial air conditioning systems engineered for maximum energy efficiency and long-term durability.
+          </motion.p>
+
+          {/* Inline Trust Highlights */}
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-2xl mx-auto">
+            <span>✓ 100% Genuine Brand Warranties</span>
+            <span>✓ Daikin, Blue Star, Voltas &amp; Carrier</span>
+            <span>✓ Free Site Consultation</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Sticky Category Filter Bar ── */}
+      <div className="bg-white/95 backdrop-blur-md sticky top-[64px] lg:top-[96px] z-[900] border-b border-sky-100 py-3.5 px-4 shadow-sm">
+        <div className="flex gap-2.5 overflow-x-auto w-full px-2 no-scrollbar justify-start sm:justify-center max-w-5xl mx-auto">
+          {filters.map((f) => {
+            const isActive = activeFilter === f.id;
+            return (
+              <button
+                key={f.id}
+                onClick={() => {
+                  setActiveFilter(f.id);
+                  setSelectedCategory("all");
+                }}
+                className={`px-5 py-2 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-300 shadow-sm ${
+                  isActive
+                    ? "bg-[#0284C7] text-white shadow-md shadow-sky-500/25 scale-105"
+                    : "bg-slate-100 text-slate-700 hover:bg-sky-50 hover:text-[#0284C7] border border-slate-200/80"
+                }`}
+              >
+                {f.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 

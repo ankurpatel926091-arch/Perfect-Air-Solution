@@ -114,40 +114,47 @@ export default function Gallery() {
     : galleryItems.filter((item) => item.category === activeCategory);
 
   return (
-    <main className="pt-24 pb-16 bg-slate-50 min-h-screen">
+    <main className="bg-slate-50 min-h-screen font-sans">
       {/* Header Banner */}
-      <section className="bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] text-white py-16 px-4 mb-12">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.span
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-block bg-white/10 backdrop-blur-md border border-white/20 text-cyan-300 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
-          >
-            Project Portfolio
-          </motion.span>
+      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden mb-10">
+        {/* Ambient background light */}
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-3.5 backdrop-blur-md">
+            <span>PROJECT PORTFOLIO</span>
+          </div>
+          
           <motion.h1
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4"
+            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3.5 leading-tight"
           >
-            Perfect Air Solution Showcase
+            Perfect Air Solution <span className="text-cyan-300">Showcase</span>
           </motion.h1>
+
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-slate-200 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.15 }}
+            className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-4"
           >
-            Explore our completed HVAC installations, commercial VRF systems, ductable air conditioning, and industrial climate solutions.
+            Explore our completed HVAC installations, commercial VRF systems, ductable air conditioning, and industrial climate solutions across UP &amp; All India.
           </motion.p>
+
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-xl mx-auto">
+            <span>✓ Verified Installations</span>
+            <span>✓ Commercial &amp; Residential</span>
+            <span>✓ Certified Engineers</span>
+          </div>
         </div>
       </section>
 
       {/* Main Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-6 sm:mb-8">
           {categories.map((cat) => (
             <button
               key={cat.key}
@@ -164,55 +171,35 @@ export default function Gallery() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4.5 lg:gap-5">
           {filteredItems.map((item, idx) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: idx * 0.05 }}
-              className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col cursor-pointer"
+              className="group relative flex flex-col h-64 sm:h-72 lg:h-80 rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer bg-white"
               onClick={() => setSelectedImage(item)}
             >
-              {/* Image Container */}
-              <div className="relative h-64 overflow-hidden bg-slate-900">
+              {/* Full Bright Card Image */}
+              <div className="relative flex-1 overflow-hidden bg-white">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                 
-                {/* Badge */}
-                <span className="absolute top-4 left-4 bg-[#051B30]/80 backdrop-blur-md text-cyan-300 text-xs font-bold px-3 py-1 rounded-md border border-cyan-500/30">
-                  {item.categoryLabel}
-                </span>
-
-                {/* Zoom Icon */}
-                <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-                  <ZoomIn size={18} />
+                {/* Zoom Icon (Blue Circle) */}
+                <div className="absolute top-3 right-3 bg-[#0284C7] p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-md z-10">
+                  <ZoomIn size={15} />
                 </div>
               </div>
 
-              {/* Card Content */}
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 mb-2">
-                    <MapPin size={14} className="text-[#0284C7]" />
-                    <span>{item.location}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#0284C7] transition-colors mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm line-clamp-2 leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-[#0284C7]">
-                  <span>View Project Details</span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </div>
+              {/* Bright Bottom Title Bar */}
+              <div className="bg-white px-4 py-3 border-t border-slate-100">
+                <h3 className="text-xs sm:text-sm font-bold text-slate-800 leading-snug line-clamp-1 group-hover:text-[#0284C7] transition-colors">
+                  {item.title}
+                </h3>
               </div>
             </motion.div>
           ))}

@@ -90,7 +90,7 @@ export default function HVACSolutions() {
         </div>
 
         {/* Industry Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4.5">
           {sectors.map((sector, index) => {
             const IconComponent = sector.icon;
             return (
