@@ -99,7 +99,7 @@ export default function AboutPreview() {
               <img
                 src={aboutImg}
                 alt="Perfect Air Solution HVAC Cooling Setup Showcase"
-                className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#051B30]/40 via-transparent to-transparent opacity-60" />
             </div>

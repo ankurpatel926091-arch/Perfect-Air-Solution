@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { sendQuoteViaWhatsApp } from "@/lib/whatsapp";
 import {
   Wind,
   Star,
@@ -18,7 +20,6 @@ import {
   LoaderCircle,
   Sparkles,
 } from "lucide-react";
-import { toast } from "react-toastify";
 import SplitAcImg from "@/assets/categories/split-ac.png";
 import WindowAcImg from "@/assets/categories/window-ac.png";
 import CassetteAcImg from "@/assets/categories/cassette-ac.png";
@@ -290,7 +291,7 @@ function ProductCard({
         >
           {cat.icon}
         </div>
-        <img src={cat.image} alt={cat.title} className="w-full h-full object-cover hover:scale-105 transition" />
+        <img src={cat.image} alt={cat.title} className="w-full h-full object-cover" />
       </div>
 
       <div className="p-5 flex flex-col flex-1">
@@ -504,26 +505,19 @@ export default function ProductsPage() {
     }
 
     setIsSubmittingEnquiry(true);
-    const toastId = toast.loading("Submitting enquiry...");
+    const toastId = toast.loading("Preparing product enquiry...");
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...enquiryForm,
-          service: selectedEnquiryProduct.title,
-          inquiryType: "product",
-          productTitle: selectedEnquiryProduct.title,
-          productPrice: selectedEnquiryProduct.price,
-        }),
+      sendQuoteViaWhatsApp({
+        name: enquiryForm.name.trim(),
+        phone: enquiryForm.phone.trim(),
+        email: enquiryForm.email.trim(),
+        service: `Product Enquiry: ${selectedEnquiryProduct.title}`,
+        notes: enquiryForm.message.trim(),
       });
 
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Failed to submit enquiry");
-
       toast.update(toastId, {
-        render: "Enquiry submitted successfully.",
+        render: "✅ Opening WhatsApp with product enquiry!",
         type: "success",
         isLoading: false,
         autoClose: 3000,
@@ -535,9 +529,9 @@ export default function ProductsPage() {
         phone: "",
         message: "",
       });
-    } catch (error: any) {
+    } catch (err: any) {
       toast.update(toastId, {
-        render: error.message || "Failed to submit enquiry.",
+        render: "❌ Failed to prepare product enquiry.",
         type: "error",
         isLoading: false,
         autoClose: 4000,
@@ -613,7 +607,7 @@ export default function ProductsPage() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {visible.map((cat) => (
             <ProductCard key={cat.id} cat={cat} onEnquireNow={setSelectedEnquiryProduct} />

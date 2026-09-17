@@ -60,12 +60,12 @@ const linkItemVariants = {
 
 const SiteFooter = () => {
   const servicesList = [
-    { title: "AC Installation", to: "/contact?service=ac-installation" },
-    { title: "AC Repair & Maintenance", to: "/contact?service=ac-repair" },
-    { title: "AMC Services", to: "/contact?service=amc-service" },
-    { title: "HVAC Design & Consultation", to: "/services" },
-    { title: "Commercial HVAC Solutions", to: "/contact?service=commercial-hvac" },
-    { title: "Preventive Maintenance", to: "/contact?service=amc-service" },
+    { title: "AC Installation", to: "/service/ac-installation" },
+    { title: "AC Repair & Maintenance", to: "/service/ac-repair-maintenance" },
+    { title: "AMC Services", to: "/service/amc-services" },
+    { title: "HVAC Design & Consultation", to: "/service/hvac-design-consultation" },
+    { title: "Commercial HVAC Solutions", to: "/service/commercial-hvac-solutions" },
+    { title: "Preventive Maintenance", to: "/service/preventive-maintenance" },
   ];
 
   return (
@@ -90,7 +90,7 @@ const SiteFooter = () => {
       />
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 pt-8 pb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 items-stretch">
           
           {/* Brand Column */}
@@ -234,8 +234,8 @@ const SiteFooter = () => {
       </div>
 
       {/* Bottom Copyright Bar */}
-      <div className="border-t border-slate-800/80 bg-slate-950/80 py-5 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+      <div className="border-t border-slate-800/80 bg-slate-950/80 py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-5">
           <p className="text-sm sm:text-base text-slate-200 font-semibold">
             © {new Date().getFullYear()} Perfect Air Solution. All rights reserved.
           </p>

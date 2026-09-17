@@ -1,10 +1,9 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Search, SlidersHorizontal, Grid, List, ExternalLink,
-  Truck, Award, ShieldCheck, CheckCircle, Star,
-  Wind, Zap, Phone, ShoppingCart, ChevronDown,
-  MessageCircle
+  Search, SlidersHorizontal, ExternalLink,
+  Truck, Award, ShieldCheck, Star,
+  Phone, ChevronDown, MessageCircle
 } from 'lucide-react';
 
 // --- TYPES ---
@@ -279,7 +278,7 @@ export default function Shop() {
                     <img
                       src={product.imageUrl}
                       alt={product.title}
-                      className="max-h-full object-contain mix-blend-multiply opacity-90 transition-transform hover:scale-105 duration-300"
+                      className="max-h-full object-contain mix-blend-multiply opacity-90"
                     />
                   </div>
 
@@ -317,7 +316,6 @@ export default function Shop() {
                     >
                       <Phone className="w-4 h-4" /> Call Now
                     </a>
-
 
                     <button
                       onClick={() => handleBuyNow(product)}

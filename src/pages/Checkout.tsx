@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
+import { sendOrderViaWhatsApp } from "@/lib/whatsapp";
 import { BRAND } from "@/lib/colors";
 
 // ✅ Validation Schema
@@ -132,28 +133,31 @@ export default function Checkout() {
     };
 
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/orders/create`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        },
-      );
+      sendOrderViaWhatsApp({
+        name: data.fullName,
+        phone: data.phone,
+        email: data.email,
+        address: data.address,
+        city: data.city,
+        pincode: data.pincode,
+        totalAmount,
+        itemsSummary: `${product.title} (${product.brand} ${product.model}) x ${quantity}`,
+      });
 
-      const result = await res.json();
+      const orderResult = {
+        orderId: `PAS-${Date.now().toString().slice(-6)}`,
+        customerName: data.fullName,
+        totalAmount,
+        items: [{ title: product.title, quantity, price: product.currentPrice }],
+      };
 
-      if (result.success) {
-        toast.success("🎉 Enquiry submitted! We'll contact you soon.");
-        setTimeout(() => {
-          navigate("/order-success", { state: result.order });
-        }, 1200);
-      } else {
-        toast.error(result.message || "Failed to place order");
-      }
+      toast.success("🎉 Order prepared & WhatsApp opened!");
+      setTimeout(() => {
+        navigate("/order-success", { state: orderResult });
+      }, 1000);
     } catch (error) {
       console.error("Checkout error:", error);
-      toast.error("Server error. Please try again.");
+      toast.error("Error processing request. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

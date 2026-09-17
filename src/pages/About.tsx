@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, Award, CheckCircle, Target, Phone, ArrowRight, Clock, Users, Building, MapPin } from "lucide-react";
+import { Shield, Award, CheckCircle, Target, Phone, ArrowRight, Clock, Users, Building, MapPin, Zap, ShieldCheck, CheckCircle2 } from "lucide-react";
 import CountUp from "@/components/ui/CountUp";
 import CTASection from "@/components/CTASection";
 
@@ -79,20 +79,20 @@ const About = () => (
   <main className="bg-slate-50 font-sans min-h-screen">
     
     {/* ── Hero Banner ── */}
-    <section className="relative pt-24 pb-10 sm:pt-28 sm:pb-12 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+    <section className="relative pt-20 pb-7 sm:pt-24 sm:pb-8 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
       {/* Ambient background light */}
       <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-3.5 backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-2.5 backdrop-blur-md">
           <span>ABOUT PERFECT AIR SOLUTION</span>
         </div>
         
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3.5 leading-tight max-w-4xl mx-auto"
+          className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-2.5 leading-tight max-w-4xl mx-auto"
         >
           Building Comfort &amp; Engineering Trust <span className="text-cyan-300 block sm:inline-block">Since 2012</span>
         </motion.h1>
@@ -101,13 +101,13 @@ const About = () => (
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.15 }}
-          className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-4"
+          className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-3"
         >
           Uttar Pradesh's premier HVAC and climate control company — delivering energy-efficient cooling solutions, certified installation, and 24/7 AMC support for residential, commercial, and industrial facilities.
         </motion.p>
 
         {/* Inline Quick Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-xl mx-auto">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs text-cyan-200 font-medium pt-2.5 border-t border-white/10 max-w-xl mx-auto">
           <span>✓ 5,000+ Installations</span>
           <span>✓ 500+ Commercial Projects</span>
           <span>✓ 24/7 Rapid Response</span>
@@ -337,9 +337,42 @@ const About = () => (
                   Our mission is to provide reliable, energy-efficient, and cost-effective air conditioning and industrial cooling solutions tailored to residential, commercial, and industrial needs.
                 </p>
 
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
+                {/* <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal mb-6">
                   We are committed to delivering quality workmanship, advanced HVAC technology, and prompt service support to ensure long-term customer satisfaction and dependable performance.
-                </p>
+                </p> */}
+
+                {/* Core Mission Pillars */}
+                <div className="space-y-3 pt-2 mb-6">
+                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                    <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Zap size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">Energy & Cost Optimization</h4>
+                      <p className="text-xs text-slate-300 leading-normal">Maximizing seasonal SEER ratings and lowering operational power costs by up to 40% using inverter VRF technology.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                    <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <ShieldCheck size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">Turnkey Engineering Precision</h4>
+                      <p className="text-xs text-slate-300 leading-normal">Delivering end-to-end heat load calculations, GI/PI duct fabrication, nitrogen leak testing, and BMS integration.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                    <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Clock size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">24/7 Breakdown & AMC Guarantee</h4>
+                      <p className="text-xs text-slate-300 leading-normal">Providing guaranteed emergency dispatch within 2 hours with 100% genuine spare parts for continuous cooling.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="mt-8 pt-6 border-t border-white/15 flex items-center justify-between text-xs font-semibold text-cyan-300">

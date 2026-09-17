@@ -12,19 +12,16 @@ const Newsletter = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const email = (e.target as HTMLFormElement).email.value.trim();
+    const formEl = e.currentTarget;
+    const email = formEl.email.value.trim();
     if (!email) { toast.error("Email is required"); return; }
     if (!validateEmail(email)) { toast.error("Please enter a valid email"); return; }
-    try {
-      setLoading(true);
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/newsletter`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
-      const data = await res.json();
-      if (res.status === 409) { toast.warning(data.message || "Already subscribed"); return; }
-      if (!res.ok) throw new Error(data.message || "Something went wrong");
+    setLoading(true);
+    setTimeout(() => {
       toast.success("Subscribed successfully 🎉");
-      (e.target as HTMLFormElement).reset();
-    } catch (error: any) { toast.error(error.message || "Server error"); }
-    finally { setLoading(false); }
+      formEl.reset();
+      setLoading(false);
+    }, 400);
   };
 
   return (

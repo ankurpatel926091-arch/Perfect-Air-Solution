@@ -97,7 +97,7 @@ export default function Services() {
       {/* Background Dot Overlay */}
       <div style={{ position: "absolute", inset: 0, opacity: 0.4, backgroundImage: "radial-gradient(circle, rgba(2, 132, 199, 0.12) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
 
-      <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "0 clamp(20px, 5vw, 40px)", position: "relative", zIndex: 10 }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: "center", marginBottom: "48px" }}>
           <div className="inline-block bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-5 py-1.5 rounded-full mb-4 shadow-sm">
@@ -131,7 +131,7 @@ export default function Services() {
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="w-full h-full object-cover object-center"
                   />
                   {/* Top Image Overlay Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
@@ -140,13 +140,6 @@ export default function Services() {
                   <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-xl bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center shadow-md">
                     <IconComponent size={18} />
                   </div>
-
-                  {/* Top Tag Badge */}
-                  {s.badge && (
-                    <div className="absolute top-3.5 right-3.5 px-2.5 py-0.5 rounded-full bg-white/95 border border-sky-100 text-[#0284C7] text-[10px] font-bold backdrop-blur-md shadow-sm">
-                      {s.badge}
-                    </div>
-                  )}
                 </div>
 
                 {/* Card Content */}

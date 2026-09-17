@@ -39,7 +39,7 @@ const titleVariant = {
 
 const imageVariant = {
   rest: { scale: 1 },
-  hover: { scale: 1.08, transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] } },
+  hover: { scale: 1 },
 };
 
 function ProjectCard({ project, i }: { project: any; i: number }) {
@@ -142,7 +142,7 @@ export default function FeaturedProjects() {
 
   return (
     <section className="section-padding py-20 bg-slate-50">
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 clamp(24px, 5vw, 48px)" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">

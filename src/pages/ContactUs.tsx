@@ -19,6 +19,7 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
+import { sendContactViaWhatsApp } from "@/lib/whatsapp";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type ServiceOption = { id: string; label: string; icon: React.ReactNode };
@@ -602,20 +603,14 @@ export default function ContactUs() {
     if (!isValid) return;
 
     setLoading(true);
-    const toastId = toast.loading("Sending your message...");
+    const toastId = toast.loading("Preparing your message...");
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Something went wrong");
-      toast.update(toastId, { render: "✅ Message sent successfully!", type: "success", isLoading: false, autoClose: 3000 });
+      sendContactViaWhatsApp(form);
+      toast.update(toastId, { render: "✅ Opening WhatsApp with your inquiry!", type: "success", isLoading: false, autoClose: 3000 });
       reset();
       setSubmitted(true);
     } catch (err: any) {
-      toast.update(toastId, { render: err.message || "❌ Failed to send message", type: "error", isLoading: false, autoClose: 4000 });
+      toast.update(toastId, { render: "❌ Failed to prepare message", type: "error", isLoading: false, autoClose: 4000 });
     } finally {
       setLoading(false);
     }
@@ -645,7 +640,7 @@ export default function ContactUs() {
       </div>
 
       {/* HERO - full width */}
-      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-24 pb-10 sm:pt-28 sm:pb-12 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
@@ -681,7 +676,7 @@ export default function ContactUs() {
       </section>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid lg:grid-cols-5 gap-8 items-start">
 
           {/* ── LEFT ── */}

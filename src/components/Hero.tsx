@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { sendQuoteViaWhatsApp } from "@/lib/whatsapp";
 import { 
   Zap, 
   Clock, 
@@ -121,40 +122,22 @@ const Hero = () => {
     }
 
     setIsSubmitting(true);
-    const toastId = toast.loading("Submitting booking...");
+    const toastId = toast.loading("Preparing your booking...");
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL || ""}/api/bookings`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: name.trim(),
-            email: email.trim(),
-            phone: phone.trim(),
-            service,
-          }),
-        }
-      );
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data?.message || "Failed to submit booking.");
-      }
+      sendQuoteViaWhatsApp({
+        name: name.trim(),
+        phone: phone.trim(),
+        email: email.trim(),
+        service: serviceOptions.find(s => s.value === service)?.label || service,
+      });
 
       toast.update(toastId, {
-        render: "Booking submitted successfully.",
+        render: "✅ Opening WhatsApp with your booking details!",
         type: "success",
         isLoading: false,
         autoClose: 3000,
       });
-      setName("");
-      setEmail("");
-      setPhone("");
-      setService("");
-      setErrors({});
-      setTouched({});
     } catch (error: any) {
       toast.update(toastId, {
         render: error?.message || "Booking request received! Our team will contact you shortly.",

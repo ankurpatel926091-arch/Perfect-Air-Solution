@@ -109,7 +109,7 @@ export default function HVACSolutions() {
                   <img
                     src={sector.image}
                     alt={sector.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" />
                   

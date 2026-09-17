@@ -136,16 +136,16 @@ export default function ServicesPage(): React.ReactElement {
     <div className="relative min-h-screen bg-slate-50 font-sans">
 
       {/* Hero Banner */}
-      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-24 pb-10 sm:pt-28 sm:pb-12 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
         {/* Background Dot Grid */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle,rgba(255,255,255,0.3)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-cyan-300 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
+            className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest px-3.5 py-1 rounded-full mb-3 backdrop-blur-md"
           >
             <Sparkles size={14} className="animate-pulse text-cyan-300" />
             <span>Complete HVAC Expertise</span>
@@ -155,40 +155,25 @@ export default function ServicesPage(): React.ReactElement {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white"
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-3.5 text-white"
           >
-            Comprehensive HVAC &amp; Cooling Services
+            Comprehensive HVAC &amp; <span className="text-cyan-300">Cooling Services</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-slate-200 text-sm sm:text-lg max-w-3xl mx-auto font-normal leading-relaxed mb-10"
+            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-4"
           >
             From precision AC installation and scheduled AMC to commercial VRF central plants and cleanroom AHU systems — Perfect Air Solution delivers engineered comfort you can depend on.
           </motion.p>
 
-          {/* Stats Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto p-4 sm:p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 shadow-xl"
-          >
-            {STATS.map((s) => (
-              <div key={s.num} className="flex items-center justify-center gap-3 p-2">
-                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                  {s.icon}
-                </div>
-                <div className="text-left">
-                  <span className="text-base sm:text-lg font-extrabold text-white block leading-tight">{s.num}</span>
-                  <span className="text-[11px] text-slate-300 font-medium">{s.label}</span>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-2xl mx-auto">
+            <span>✓ 5,000+ Projects Delivered</span>
+            <span>✓ 4.9/5 Customer Rating</span>
+            <span>✓ &lt; 2 Hrs Emergency AMC Response</span>
+          </div>
         </div>
       </section>
 
@@ -213,7 +198,7 @@ export default function ServicesPage(): React.ReactElement {
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover"
                   />
                   
                   {/* Floating Icon Badge */}

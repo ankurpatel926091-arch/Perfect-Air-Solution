@@ -86,7 +86,7 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
           decoding="async"
           width="600"
           height="350"
-          className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+          className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
       </div>

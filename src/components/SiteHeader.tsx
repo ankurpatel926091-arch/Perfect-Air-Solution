@@ -50,8 +50,8 @@ const SiteHeader = () => {
         }`}
       >
         {/* Top Info Strip */}
-        <div className="hidden lg:block bg-[#051B30] text-slate-300 text-xs py-1.5 px-6 border-b border-slate-800">
-          <div className="max-w-[1240px] mx-auto flex justify-between items-center">
+        <div className="hidden lg:block bg-[#051B30] text-slate-300 text-xs py-1.5 border-b border-slate-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <div className="flex items-center gap-6">
               <span className="flex items-center gap-1.5 text-cyan-400 font-medium">
                 <ShieldCheck size={14} /> Certified HVAC Engineers & Technicians
@@ -70,7 +70,7 @@ const SiteHeader = () => {
         </div>
 
         {/* Inner flex row */}
-        <div className="w-full max-w-[1240px] mx-auto flex items-center justify-between gap-3 px-4 sm:px-5 md:px-6 lg:px-8 h-[64px] sm:h-[68px] md:h-[72px]">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-[64px] sm:h-[68px] md:h-[72px]">
 
           {/* Perfect Air Solution Brand Logo */}
           <Link

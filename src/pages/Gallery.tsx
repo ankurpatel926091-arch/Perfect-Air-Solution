@@ -116,7 +116,7 @@ export default function Gallery() {
   return (
     <main className="bg-slate-50 min-h-screen font-sans">
       {/* Header Banner */}
-      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-14 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden mb-10">
+      <section className="relative pt-24 pb-10 sm:pt-28 sm:pb-12 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden mb-8">
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
@@ -186,7 +186,7 @@ export default function Gallery() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover"
                 />
                 
                 {/* Zoom Icon (Blue Circle) */}

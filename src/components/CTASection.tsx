@@ -21,13 +21,13 @@ const CTASection: React.FC<CTAProps> = ({
       style={{
         width: "100%",
         background: "hsl(var(--background))",
-        paddingTop: "40px",
-        paddingBottom: "40px",
+        paddingTop: "24px",
+        paddingBottom: "24px",
         paddingLeft: "0",
         paddingRight: "0",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -36,13 +36,13 @@ const CTASection: React.FC<CTAProps> = ({
           style={{
             position: "relative",
             overflow: "hidden",
-            borderRadius: "32px",
+            borderRadius: "24px",
             background: "linear-gradient(135deg, #051B30 0%, #0B2E4C 50%, #0284C7 100%)",
-            paddingTop: "clamp(36px, 4vw, 56px)",
-            paddingBottom: "clamp(36px, 4vw, 56px)",
-            paddingLeft: "clamp(32px, 5vw, 64px)",
-            paddingRight: "clamp(32px, 5vw, 64px)",
-            boxShadow: "0 20px 40px rgba(5, 27, 48, 0.25)",
+            paddingTop: "clamp(24px, 2.5vw, 36px)",
+            paddingBottom: "clamp(24px, 2.5vw, 36px)",
+            paddingLeft: "clamp(24px, 4vw, 48px)",
+            paddingRight: "clamp(24px, 4vw, 48px)",
+            boxShadow: "0 16px 32px rgba(5, 27, 48, 0.2)",
           }}
         >
           {/* Subtle Background Elements */}
@@ -82,19 +82,19 @@ const CTASection: React.FC<CTAProps> = ({
                 border: "1px solid rgba(255,255,255,0.25)",
                 color: "#38BDF8",
                 fontWeight: 700,
-                fontSize: "0.75rem",
-                letterSpacing: "0.18em",
+                fontSize: "0.72rem",
+                letterSpacing: "0.15em",
                 textTransform: "uppercase" as const,
-                padding: "6px 18px",
+                padding: "4px 14px",
                 borderRadius: "100px",
-                marginBottom: "16px",
+                marginBottom: "10px",
               }}
             >
               Get In Touch With Perfect Air Solution
             </div>
 
             {/* Title */}
-            <h2 style={{ color: "white", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 800, marginBottom: "16px", marginTop: 0, lineHeight: 1.2 }}>
+            <h2 style={{ color: "white", fontSize: "clamp(1.5rem, 2.8vw, 2.3rem)", fontWeight: 800, marginBottom: "10px", marginTop: 0, lineHeight: 1.2 }}>
               Ready for Turnkey Commercial &amp; Residential HVAC Solutions?
             </h2>
 
@@ -103,10 +103,10 @@ const CTASection: React.FC<CTAProps> = ({
               style={{
                 color: "rgba(224, 242, 254, 0.9)",
                 maxWidth: "600px",
-                margin: "0 auto 32px",
-                fontSize: "1.05rem",
+                margin: "0 auto 20px",
+                fontSize: "0.95rem",
                 fontWeight: 400,
-                lineHeight: 1.6,
+                lineHeight: 1.5,
               }}
             >
               Contact our HVAC engineering specialists for site inspection, load calculations, VRF system layout, and AMC plans.
