@@ -7,15 +7,12 @@ import {
   Facebook,
   Instagram,
   Youtube,
-  UserCheck,
-  ArrowRight,
   Clock,
   ShieldCheck,
   ChevronRight,
   Wind,
 } from "lucide-react";
 import cclogo from "../assets/cc-logo.png";
-import { useGetServicesQuery } from "@/store/api";
 
 const quickLinks = [
   { label: "Home", to: "/" },
@@ -53,11 +50,6 @@ const colVariants = {
   },
 };
 
-const linkItemVariants = {
-  hidden: { opacity: 0, x: -12 },
-  visible: { opacity: 1, x: 0 },
-};
-
 const SiteFooter = () => {
   const servicesList = [
     { title: "AC Installation", to: "/service/ac-installation" },
@@ -74,7 +66,7 @@ const SiteFooter = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.01 }}
       variants={containerVariants}
-      className="bg-[#051B30] text-slate-200 border-t border-slate-800 mt-12 sm:mt-16 md:mt-20"
+      className="bg-[#051B30] text-slate-200 border-t border-slate-800 mt-0"
     >
       {/* Top accent line */}
       <motion.div
@@ -113,17 +105,17 @@ const SiteFooter = () => {
                 </div>
               </Link>
 
-             <p className="text-[14px] leading-relaxed mb-3.5 text-slate-200 font-normal">
-  Perfect Air Solution is a leading HVAC and air conditioning company offering turnkey residential, commercial, and industrial solutions.
-</p>
+              <p className="text-[14px] leading-relaxed mb-3.5 text-slate-200 font-normal">
+                Perfect Air Solution is a leading HVAC and air conditioning company offering turnkey residential, commercial, and industrial solutions.
+              </p>
 
               {/* Trust badges */}
-              <div className="flex flex-col  gap-2 mb-3.5 ">
+              <div className="flex flex-col gap-2 mb-3.5">
                 {[
                   { icon: ShieldCheck, text: "Certified HVAC Engineers & Technicians" },
                   { icon: Clock, text: "Mon – Sat: 9:00 AM – 7:00 PM" },
                 ].map(({ icon: Icon, text }) => (
-                  <div key={text} className="flex items-center gap-2.5 text-sm font-medium text-slate-200 ">
+                  <div key={text} className="flex items-center gap-2.5 text-sm font-medium text-slate-200">
                     <Icon size={17} className="text-[#38BDF8] flex-shrink-0" />
                     <span>{text}</span>
                   </div>

@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
-import { Shield, Award, CheckCircle, Target, Phone, ArrowRight, Clock, Users, Building, MapPin, Zap, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { Shield, Award, CheckCircle, Target, ArrowRight, Clock, Users, Building, MapPin, Zap, ShieldCheck, Sparkles, HeartHandshake } from "lucide-react";
 import CountUp from "@/components/ui/CountUp";
 import CTASection from "@/components/CTASection";
 
 const stats = [
-  { value: 5000, suffix: "+", label: "Happy Customers" },
-  { value: 500, suffix: "+", label: "Commercial Projects" },
-  { value: 14, suffix: "+", label: "Years Experience" },
-  { value: 20, suffix: "+", label: "Cities Covered" },
+  { value: 5000, suffix: "+", label: "Happy Customers", icon: Users, color: "from-[#0091FF] to-[#00D4FF]", shadow: "rgba(0,180,255,0.4)" },
+  { value: 500, suffix: "+", label: "Commercial Projects", icon: Building, color: "from-[#00C9A7] to-[#00E5BC]", shadow: "rgba(0,210,180,0.4)" },
+  { value: 14, suffix: "+", label: "Years Experience", icon: Award, color: "from-[#903AFF] to-[#B666FF]", shadow: "rgba(160,85,255,0.4)" },
+  { value: 20, suffix: "+", label: "Cities Covered", icon: MapPin, color: "from-[#FF9F1C] to-[#FFC107]", shadow: "rgba(255,159,28,0.4)" },
 ];
 
 const values = [
@@ -69,30 +69,25 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const Badge = ({ label }: { label: string }) => (
-  <div className="inline-block bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3 shadow-sm">
-    {label}
-  </div>
-);
-
 const About = () => (
   <main className="bg-slate-50 font-sans min-h-screen">
     
     {/* ── Hero Banner ── */}
-    <section className="relative pt-24 pb-8 sm:pt-28 sm:pb-9 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+    <section className="relative pt-24 pb-10 sm:pt-28 sm:pb-12 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
       {/* Ambient background light */}
       <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-2.5 backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
+          <Sparkles size={14} className="animate-pulse text-cyan-300" />
           <span>ABOUT PERFECT AIR SOLUTION</span>
         </div>
         
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-2.5 leading-tight max-w-4xl mx-auto"
+          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3 leading-tight max-w-4xl mx-auto font-sans"
         >
           Building Comfort &amp; Engineering Trust <span className="text-cyan-300 block sm:inline-block">Since 2012</span>
         </motion.h1>
@@ -101,13 +96,13 @@ const About = () => (
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.15 }}
-          className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-3"
+          className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-4"
         >
-         Uttar Pradesh’s premier HVAC company delivering energy-efficient cooling, certified installation, and 24/7 AMC support.
+          Uttar Pradesh’s premier HVAC company delivering energy-efficient cooling, certified installation, and 24/7 AMC support.
         </motion.p>
 
         {/* Inline Quick Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs text-cyan-200 font-medium pt-2.5 border-t border-white/10 max-w-xl mx-auto">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-xl mx-auto">
           <span>✓ 5,000+ Installations</span>
           <span>✓ 500+ Commercial Projects</span>
           <span>✓ 24/7 Rapid Response</span>
@@ -116,64 +111,94 @@ const About = () => (
     </section>
 
     {/* ── Our Story ── */}
-    <section className="py-16 sm:py-20 bg-gradient-to-b from-[#EEF8FF] via-[#F4FAFF] to-[#E6F4FA]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section className="py-16 sm:py-24 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] relative overflow-hidden">
+      {/* Background Ambient Glows */}
+      <div className="absolute top-1/3 left-0 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
-          {/* Left Text */}
+          {/* Left Column: Story Content */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="lg:col-span-7"
+            className="lg:col-span-7 flex flex-col items-start"
           >
-            <Badge label="Our Story" />
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#051B30] tracking-tight mb-6 leading-tight">
-              Delivering Comfort, Building Trust
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100 border border-sky-200 text-[#0284C7] font-extrabold text-xs uppercase tracking-wider mb-4 shadow-sm">
+              <HeartHandshake size={15} className="text-[#0284C7]" />
+              <span>OUR STORY</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight mb-6 leading-[1.18] font-sans">
+              Delivering Comfort, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-sky-500 to-cyan-400">Building Trust</span>
             </h2>
             
-            <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
-              <p>
-                Founded in 2012, <strong className="text-[#051B30] font-semibold">Perfect Air Solution</strong> began with a clear vision — to provide reliable, honest, and high-quality cooling solutions that customers can truly depend on. What started as a focused HVAC service initiative has steadily evolved into a trusted name in air conditioning and industrial cooling across multiple cities.
-              </p>
-              <p>
-                Over the years, we have successfully installed and serviced thousands of climate control systems — from residential Split and Window AC units to advanced VRF systems, cold rooms, and large-scale industrial chiller plants. Our growth is driven by strong technical expertise, prompt service delivery, and an unwavering commitment to quality workmanship.
-              </p>
-              <p>
-                Today, with <span className="text-[#0284C7] font-bold">5,000+ satisfied customers</span> and <span className="text-[#0284C7] font-bold">500+ completed commercial projects</span>, we continue to focus on innovation, energy-efficient solutions, and long-term client partnerships.
-              </p>
+            <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed font-normal w-full">
+              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 border-l-4 border-l-[#0284C7] shadow-sm hover:shadow-md transition-shadow">
+                <p>
+                  Founded in 2012, <strong className="text-[#051B30] font-bold">Perfect Air Solution</strong> began with a clear vision — to provide reliable, honest, and high-quality cooling solutions that customers can truly depend on. What started as a focused HVAC service initiative has steadily evolved into a trusted name in air conditioning and industrial cooling across multiple cities.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 border-l-4 border-l-sky-500 shadow-sm hover:shadow-md transition-shadow">
+                <p>
+                  Over the years, we have successfully installed and serviced thousands of climate control systems — from residential Split and Window AC units to advanced VRF systems, cold rooms, and large-scale industrial chiller plants. Our growth is driven by strong technical expertise, prompt service delivery, and an unwavering commitment to quality workmanship.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 border-l-4 border-l-cyan-400 shadow-sm hover:shadow-md transition-shadow">
+                <p>
+                  Today, with <span className="text-[#0284C7] font-extrabold">5,000+ satisfied customers</span> and <span className="text-[#0284C7] font-extrabold">500+ completed commercial projects</span>, we continue to focus on innovation, energy-efficient solutions, and long-term client partnerships.
+                </p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Right Stats Grid */}
+          {/* Right Column: 4 Modern Highlight Cards */}
           <div className="lg:col-span-5">
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                  className="bg-white rounded-xl p-6 border border-slate-200/80 shadow-lg shadow-sky-900/5 text-center hover:border-sky-300 transition-all"
-                >
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0284C7] mb-1">
-                    <CountUp
-                      from={0}
-                      to={s.value}
-                      duration={1.2}
-                      separator=","
-                      direction="up"
-                      startWhen={true}
-                    />
-                    {s.suffix}
-                  </div>
-                  <div className="text-xs sm:text-sm font-bold text-slate-700">
-                    {s.label}
-                  </div>
-                </motion.div>
-              ))}
+            <div className="grid grid-cols-2 gap-4 sm:gap-5">
+              {stats.map((s, i) => {
+                const IconComp = s.icon;
+                return (
+                  <motion.div
+                    key={s.label}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                    className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col items-start justify-between group transform hover:-translate-y-1"
+                  >
+                    {/* Glowing Icon Badge */}
+                    <div
+                      className={`w-11 h-11 rounded-xl bg-gradient-to-tr ${s.color} flex items-center justify-center text-white mb-4 shadow-md group-hover:scale-108 transition-transform`}
+                      style={{ boxShadow: `0 8px 20px ${s.shadow}` }}
+                    >
+                      <IconComp size={22} />
+                    </div>
+
+                    {/* Number CountUp */}
+                    <div className="text-3xl sm:text-4xl font-extrabold text-[#051B30] mb-1 font-sans group-hover:text-[#0284C7] transition-colors">
+                      <CountUp
+                        from={0}
+                        to={s.value}
+                        duration={1.2}
+                        separator=","
+                        direction="up"
+                        startWhen={true}
+                      />
+                      <span className="text-cyan-500">{s.suffix}</span>
+                    </div>
+
+                    {/* Label */}
+                    <div className="text-xs sm:text-sm font-bold text-slate-600">
+                      {s.label}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
 
@@ -202,7 +227,7 @@ const About = () => (
             <span>Our Core Values</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4 font-sans">
             What Drives Us{" "}
             <span className="text-[#0284C7] relative inline-block">
               Forward
@@ -226,7 +251,7 @@ const About = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.45 }}
-                className="bg-white rounded-xl p-6 border border-sky-100 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group"
+                className="bg-white rounded-2xl p-6 border border-sky-100 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group transform hover:-translate-y-1"
               >
                 <div>
                   {/* Top Row: Icon Badge & Tag */}
@@ -240,7 +265,7 @@ const About = () => (
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-bold text-[#051B30] group-hover:text-[#0284C7] transition-colors mb-2 leading-snug">
+                  <h3 className="text-lg font-bold text-[#051B30] group-hover:text-[#0284C7] transition-colors mb-2 leading-snug font-sans">
                     {v.title}
                   </h3>
 
@@ -281,8 +306,10 @@ const About = () => (
               variants={fadeUp}
               className="mb-8"
             >
-              <Badge label="Milestones" />
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#051B30] tracking-tight">
+              <div className="inline-block bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3 shadow-sm">
+                Milestones
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#051B30] tracking-tight font-sans">
                 Our Growth Journey
               </h2>
             </motion.div>
@@ -300,7 +327,7 @@ const About = () => (
                   {/* Dot */}
                   <div className="absolute -left-[25px] top-1.5 w-4 h-4 rounded-full bg-[#0284C7] border-4 border-white shadow-sm" />
                   
-                  <div className="bg-white rounded-xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
                     <span className="inline-block text-xs font-extrabold text-[#0284C7] bg-sky-50 border border-sky-200 px-3 py-0.5 rounded-md mb-2">
                       {m.year}
                     </span>
@@ -320,7 +347,7 @@ const About = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-xl p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between"
+              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-2xl p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between border border-cyan-400/20"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] pointer-events-none" />
 
@@ -329,17 +356,13 @@ const About = () => (
                   <Target size={28} />
                 </div>
                 
-                <h3 className="text-2xl font-bold text-white uppercase tracking-wider mb-4">
+                <h3 className="text-2xl font-extrabold text-white uppercase tracking-wider mb-4 font-sans">
                   Our Mission
                 </h3>
 
                 <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-normal mb-4">
                   Our mission is to provide reliable, energy-efficient, and cost-effective air conditioning and industrial cooling solutions tailored to residential, commercial, and industrial needs.
                 </p>
-
-                {/* <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal mb-6">
-                  We are committed to delivering quality workmanship, advanced HVAC technology, and prompt service support to ensure long-term customer satisfaction and dependable performance.
-                </p> */}
 
                 {/* Core Mission Pillars */}
                 <div className="space-y-3 pt-2 mb-6">
@@ -348,7 +371,7 @@ const About = () => (
                       <Zap size={18} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">Energy & Cost Optimization</h4>
+                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">Energy &amp; Cost Optimization</h4>
                       <p className="text-xs text-slate-300 leading-normal">Maximizing seasonal SEER ratings and lowering operational power costs by up to 40% using inverter VRF technology.</p>
                     </div>
                   </div>
@@ -368,7 +391,7 @@ const About = () => (
                       <Clock size={18} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">24/7 Breakdown & AMC Guarantee</h4>
+                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">24/7 Breakdown &amp; AMC Guarantee</h4>
                       <p className="text-xs text-slate-300 leading-normal">Providing guaranteed emergency dispatch within 2 hours with 100% genuine spare parts for continuous cooling.</p>
                     </div>
                   </div>
@@ -387,7 +410,7 @@ const About = () => (
     </section>
 
     {/* ── CTA ── */}
-    <div className="py-6">
+    <div className="py-2">
       <CTASection />
     </div>
   </main>

@@ -22,19 +22,29 @@ const ScrollToTopButton = () => {
           transition={{ type: "spring", stiffness: 300, damping: 22 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Scroll to top"
+          title="Scroll to top"
           style={{
-            position: "fixed", bottom: "96px", right: "24px",
-            zIndex: 50, width: "46px", height: "46px", borderRadius: "50%",
+            position: "fixed",
+            bottom: "148px",
+            right: "24px",
+            zIndex: 999,
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
             background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.primary} 100%)`,
-            color: BRAND.white, border: "none", cursor: "pointer",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: `0 8px 24px ${BRAND.primary}59`,
+            color: BRAND.white,
+            border: "1.5px solid rgba(255,255,255,0.2)",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: `0 8px 24px ${BRAND.primary}75`,
             fontFamily: "'Inter', sans-serif",
           }}
-          whileHover={{ scale: 1.1, boxShadow: `0 12px 32px ${BRAND.primary}73` }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.12 }}
+          whileTap={{ scale: 0.92 }}
         >
-          <ArrowUp size={20} />
+          <ArrowUp size={22} />
         </motion.button>
       )}
     </AnimatePresence>

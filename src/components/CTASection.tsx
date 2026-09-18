@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Phone, ArrowRight, ShieldCheck } from "lucide-react";
+import { Phone, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface CTAProps {
@@ -17,16 +17,7 @@ const CTASection: React.FC<CTAProps> = ({
     onConsultationClick || (() => navigate("/contact"));
 
   return (
-    <section
-      style={{
-        width: "100%",
-        background: "hsl(var(--background))",
-        paddingTop: "24px",
-        paddingBottom: "64px",
-        paddingLeft: "0",
-        paddingRight: "0",
-      }}
-    >
+    <section className="w-full bg-background pt-10 pb-8 sm:pt-12 sm:pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -36,10 +27,10 @@ const CTASection: React.FC<CTAProps> = ({
           style={{
             position: "relative",
             overflow: "hidden",
-            borderRadius: "14px",
+            borderRadius: "16px",
             background: "linear-gradient(135deg, #051B30 0%, #0B2E4C 50%, #0284C7 100%)",
-            paddingTop: "clamp(24px, 2.5vw, 36px)",
-            paddingBottom: "clamp(24px, 2.5vw, 36px)",
+            paddingTop: "40px",
+            paddingBottom: "40px",
             paddingLeft: "clamp(24px, 4vw, 48px)",
             paddingRight: "clamp(24px, 4vw, 48px)",
             boxShadow: "0 16px 32px rgba(5, 27, 48, 0.2)",
@@ -85,16 +76,16 @@ const CTASection: React.FC<CTAProps> = ({
                 fontSize: "0.72rem",
                 letterSpacing: "0.15em",
                 textTransform: "uppercase" as const,
-                padding: "4px 14px",
+                padding: "5px 16px",
                 borderRadius: "100px",
-                marginBottom: "10px",
+                marginBottom: "14px",
               }}
             >
               Get In Touch With Perfect Air Solution
             </div>
 
             {/* Title */}
-            <h2 style={{ color: "white", fontSize: "clamp(1.5rem, 2.8vw, 2.3rem)", fontWeight: 800, marginBottom: "10px", marginTop: 0, lineHeight: 1.2 }}>
+            <h2 style={{ color: "white", fontSize: "clamp(1.5rem, 2.8vw, 2.3rem)", fontWeight: 800, marginBottom: "12px", marginTop: 0, lineHeight: 1.2 }}>
               Ready for Turnkey Commercial &amp; Residential HVAC Solutions?
             </h2>
 
@@ -103,7 +94,7 @@ const CTASection: React.FC<CTAProps> = ({
               style={{
                 color: "rgba(224, 242, 254, 0.9)",
                 maxWidth: "600px",
-                margin: "0 auto 20px",
+                margin: "0 auto 22px",
                 fontSize: "0.95rem",
                 fontWeight: 400,
                 lineHeight: 1.5,

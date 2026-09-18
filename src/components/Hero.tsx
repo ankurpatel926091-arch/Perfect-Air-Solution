@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { sendQuoteViaWhatsApp } from "@/lib/whatsapp";
-import { 
-  Zap, 
-  Clock, 
-  ShieldCheck, 
-  UserCheck, 
-  Snowflake, 
-  Calendar, 
-  Play, 
-  Star, 
-  FileText, 
-  User, 
-  Mail, 
-  Phone, 
-  Wrench, 
+import {
+  Wind,
+  Snowflake,
+  Wrench,
+  ShieldCheck,
+  Zap,
+  ArrowRight,
+  Calendar,
+  User,
+  Mail,
+  Phone,
   Send,
-  Check
+  Check,
+  Clock
 } from "lucide-react";
 import heroBg from "../assets/hero_ac_bg.jpg";
 
@@ -38,12 +36,19 @@ type BookingForm = {
 
 type BookingErrors = Partial<Record<keyof BookingForm, string>>;
 
+const serviceOptions = [
+  { value: "repair", label: "AC Repair & Servicing" },
+  { value: "installation", label: "AC Installation & Piping" },
+  { value: "maintenance", label: "AMC Services & Maintenance" },
+  { value: "ac seeling", label: "Commercial VRF / Ductable System" },
+  { value: "general enquiry", label: "General HVAC Enquiry" },
+];
+
 const bookingSchema = Yup.object({
   name: Yup.string()
     .required("Full name is required")
     .trim()
     .matches(/^[A-Za-z\s]+$/, "Name can only contain letters and spaces")
-    .matches(/^(?!.*\s{2,})/, "Name cannot contain multiple consecutive spaces")
     .min(2, "Name must be at least 2 characters")
     .max(50, "Name must be at most 50 characters"),
   email: Yup.string()
@@ -138,6 +143,13 @@ const Hero = () => {
         isLoading: false,
         autoClose: 3000,
       });
+
+      setName("");
+      setEmail("");
+      setPhone("");
+      setService("");
+      setErrors({});
+      setTouched({});
     } catch (error: any) {
       toast.update(toastId, {
         render: error?.message || "Booking request received! Our team will contact you shortly.",
@@ -145,175 +157,168 @@ const Hero = () => {
         isLoading: false,
         autoClose: 4000,
       });
-      setName("");
-      setEmail("");
-      setPhone("");
-      setService("");
-      setErrors({});
-      setTouched({});
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="relative pt-24 pb-16 md:pt-28 md:pb-24 overflow-hidden min-h-[88vh] flex items-center bg-[#041F38]">
-      {/* Background Image with Darker Navy Blue on Left transitioning to Rich Ocean Blue on Right */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+    <section className="relative pt-28 pb-20 md:pt-32 md:pb-28 lg:pt-36 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center bg-[#03172C] text-white">
+      {/* Background Image & Layered Dark Gradient Overlays */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Crisp & High-Visibility AC Room Background Image */}
         <img
           src={heroBg}
-          alt="Professional HVAC Air Conditioning Cooling Interior"
-          className="w-full h-full object-cover object-center opacity-88 transform scale-100"
+          alt="Modern HVAC Air Conditioning Interior Background"
+          className="w-full h-full object-cover object-[75%_25%] opacity-90 brightness-110 contrast-[1.05] transition-all duration-700"
         />
-        {/* Darker Left Gradient Overlay for enhanced contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#041C33] via-[#06375E]/90 to-[#0D5F9F]/65" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#041C33]/95 via-transparent to-[#052847]/40" />
-        
-        {/* Soft Ambient Radial Light Glow behind AC / Center-Right */}
-        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-sky-400/25 rounded-full blur-[120px] pointer-events-none" />
+
+        {/* Deep Navy to Ocean Blue Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#03172C] via-[#042442]/85 to-[#0B5A96]/35" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#03172C] via-transparent to-transparent" />
+
+        {/* Ambient Cyan Light Glow Spotlights */}
+        <div className="absolute top-5 right-1/4 w-[500px] h-[500px] bg-sky-400/25 rounded-full blur-[120px]" />
+        <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-[120px]" />
       </div>
 
-      {/* Main Container */}
+      {/* Main Grid Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
-          {/* LEFT COLUMN */}
+          {/* LEFT COLUMN: Main Copy, Highlights & CTAs */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             
-            {/* Top Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#094775]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-4 backdrop-blur-md shadow-sm">
-              <Zap size={14} className="text-cyan-400 fill-cyan-400 animate-pulse" />
-              <span>TRUSTED AC &amp; REFRIGERATION EXPERTS</span>
+            {/* Small Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#083A63]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-5 backdrop-blur-md shadow-lg shadow-cyan-950/50">
+              <Wind size={15} className="text-cyan-400 animate-pulse" />
+              <span>HVAC &amp; AIR CONDITIONING SOLUTIONS</span>
             </div>
 
-            {/* Main Title */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15] mb-4">
-              Complete HVAC &amp; Air Conditioning Solutions{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-cyan-200">
-                Powered by Technology
+            {/* Main Heading */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] mb-3">
+              Perfect{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-cyan-100">
+                Air Solution
               </span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-slate-200 text-base sm:text-lg font-medium mb-6">
-              Perfect Air Solution – <span className="text-cyan-300 font-bold">get instant AC service today</span>
+            {/* Subheading */}
+            <h2 className="text-cyan-300 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-3 drop-shadow-sm">
+              Comfort You Can Count On
+            </h2>
+
+            {/* Short Description */}
+            <p className="text-slate-200 text-base sm:text-lg max-w-xl font-normal leading-relaxed mb-8 drop-shadow-sm">
+              Reliable HVAC solutions for homes, offices &amp; businesses.Expert installation, maintenance & complete cooling solutions.
             </p>
 
-            {/* 4 Feature Points Grid (Photo 1 Reference Layout) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 w-full mb-6">
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-full bg-[#084572]/90 border border-cyan-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0 shadow-sm">
-                  <Clock size={18} />
+            {/* 4 Compact Service Highlights */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 w-full max-w-xl mb-10">
+              
+              {/* 1. Cooling Solutions */}
+              <div
+                onClick={() => navigate("/services")}
+                className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0091FF] to-[#00D4FF] flex items-center justify-center text-white shadow-[0_0_16px_rgba(0,180,255,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
+                    <Snowflake size={18} className="text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs sm:text-sm">Cooling Solutions</span>
                 </div>
-                <div>
-                  <h4 className="text-white font-bold text-xs sm:text-sm leading-tight">Real-time Booking</h4>
-                  <p className="text-slate-300 text-[11px] sm:text-xs mt-0.5 font-light">Book service in just a few clicks</p>
-                </div>
+                <ArrowRight size={16} className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0" />
               </div>
 
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-full bg-[#084572]/90 border border-cyan-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0 shadow-sm">
-                  <ShieldCheck size={18} />
+              {/* 2. Expert Installation */}
+              <div
+                onClick={() => navigate("/services")}
+                className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#00C9A7] to-[#00E5BC] flex items-center justify-center text-white shadow-[0_0_16px_rgba(0,210,180,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
+                    <Wrench size={18} className="text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs sm:text-sm">Expert Installation</span>
                 </div>
-                <div>
-                  <h4 className="text-white font-bold text-xs sm:text-sm leading-tight">Same-day Service</h4>
-                  <p className="text-slate-300 text-[11px] sm:text-xs mt-0.5 font-light">Fast &amp; reliable support</p>
-                </div>
+                <ArrowRight size={16} className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0" />
               </div>
 
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-full bg-[#084572]/90 border border-cyan-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0 shadow-sm">
-                  <UserCheck size={18} />
+              {/* 3. Trusted Service */}
+              <div
+                onClick={() => navigate("/services")}
+                className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#903AFF] to-[#B666FF] flex items-center justify-center text-white shadow-[0_0_16px_rgba(160,85,255,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
+                    <ShieldCheck size={18} className="text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs sm:text-sm">Trusted Service</span>
                 </div>
-                <div>
-                  <h4 className="text-white font-bold text-xs sm:text-sm leading-tight">Certified Technicians</h4>
-                  <p className="text-slate-300 text-[11px] sm:text-xs mt-0.5 font-light">Skilled &amp; verified professionals</p>
-                </div>
+                <ArrowRight size={16} className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0" />
               </div>
 
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-full bg-[#084572]/90 border border-cyan-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0 shadow-sm">
-                  <Snowflake size={18} />
+              {/* 4. Energy Efficient */}
+              <div
+                onClick={() => navigate("/services")}
+                className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#FF9F1C] to-[#FFC107] flex items-center justify-center text-white shadow-[0_0_16px_rgba(255,159,28,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
+                    <Zap size={18} className="text-white" />
+                  </div>
+                  <span className="text-white font-bold text-xs sm:text-sm">Energy Efficient</span>
                 </div>
-                <div>
-                  <h4 className="text-white font-bold text-xs sm:text-sm leading-tight">Hassle-free Cooling Solutions</h4>
-                  <p className="text-slate-300 text-[11px] sm:text-xs mt-0.5 font-light">For home &amp; business</p>
-                </div>
+                <ArrowRight size={16} className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0" />
               </div>
+
             </div>
 
-            {/* Action Buttons (Photo 1 Reference) */}
-            <div className="flex flex-wrap items-center gap-4 w-full mb-6">
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4 w-full">
               <button
                 onClick={() => navigate("/services")}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#009BF2] to-[#00D4FF] hover:from-sky-500 hover:to-cyan-300 text-white font-bold text-sm shadow-lg shadow-cyan-500/30 transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#009BF2] via-[#00B4FF] to-[#00D4FF] hover:opacity-95 text-white font-bold text-sm sm:text-base shadow-lg shadow-cyan-500/30 transition-all transform hover:-translate-y-0.5 cursor-pointer"
               >
-                <Calendar size={18} />
-                <span>Book Service Instantly →</span>
+                <span>Explore Our Services</span>
+                <ArrowRight size={18} />
               </button>
 
               <button
                 onClick={() => navigate("/contact")}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold text-sm backdrop-blur-md transition-all"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-cyan-400/40 text-white font-bold text-sm sm:text-base backdrop-blur-md transition-all transform hover:-translate-y-0.5 cursor-pointer shadow-md"
               >
-                <Play size={16} className="fill-white" />
-                <span>Get Instant Quote</span>
+                <span>Get a Quote</span>
+                <ArrowRight size={18} />
               </button>
-            </div>
-
-            {/* Stats Bar (Photo 1 Reference) */}
-            <div className="w-full bg-[#083E6A]/80 backdrop-blur-md border border-cyan-400/20 rounded-xl p-3.5 grid grid-cols-3 gap-2 text-center divide-x divide-white/15 shadow-md">
-              <div className="flex flex-col items-center justify-center px-2">
-                <div className="flex items-center gap-1.5 text-cyan-300 font-bold text-xs sm:text-sm">
-                  <Star size={15} className="fill-cyan-400 text-cyan-400" />
-                  <span>4.8 Rating</span>
-                </div>
-                <span className="text-[11px] text-slate-300 mt-0.5">Customer Satisfaction</span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center px-2">
-                <div className="flex items-center gap-1.5 text-cyan-300 font-bold text-xs sm:text-sm">
-                  <FileText size={15} className="text-cyan-400" />
-                  <span>10,000+ Services</span>
-                </div>
-                <span className="text-[11px] text-slate-300 mt-0.5">Successfully Completed</span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center px-2">
-                <div className="flex items-center gap-1.5 text-cyan-300 font-bold text-xs sm:text-sm">
-                  <Zap size={15} className="fill-cyan-400 text-cyan-400" />
-                  <span>30 Min Response</span>
-                </div>
-                <span className="text-[11px] text-slate-300 mt-0.5">Quick Support</span>
-              </div>
             </div>
 
           </div>
 
-          {/* RIGHT COLUMN — QUICK SERVICE BOOKING FORM */}
-          <div className="lg:col-span-5 w-full lg:mt-7 lg:translate-y-2">
-            <div className="bg-white rounded-xl p-6 sm:p-7 shadow-2xl border border-slate-100 text-slate-800 relative">
+          {/* RIGHT COLUMN: Quick Service Booking Form Card (Offset from top) */}
+          <div className="lg:col-span-5 w-full lg:mt-12 lg:translate-y-3">
+            <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-2xl border border-slate-100 text-slate-800 relative">
               
-              {/* Card Title */}
-              <div className="flex items-start gap-3 mb-5">
-                <div className="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-[#0091EE] flex-shrink-0">
+              {/* Card Header */}
+              <div className="flex items-start gap-3.5 mb-5">
+                <div className="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-[#0091EE] flex-shrink-0 shadow-sm">
                   <Calendar size={22} />
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-[#051B30] leading-tight">
                     Quick Service Booking
                   </h3>
-                  <p className="text-xs text-slate-500 mt-0.5">
+                  <p className="text-xs text-slate-500 mt-0.5 font-normal">
                     Fill in details and we'll get back to you instantly.
                   </p>
                 </div>
               </div>
 
-              {/* Form */}
-              <form onSubmit={handleBookingSubmit} className="space-y-3">
-                {/* Full Name */}
+              {/* Form Body */}
+              <form onSubmit={handleBookingSubmit} className="space-y-3.5">
+                {/* Full Name Input */}
                 <div className="relative">
-                  <User size={18} className="absolute left-4 top-3.5 text-slate-400" />
+                  <User size={18} className="absolute left-4 top-3.5 text-slate-400 pointer-events-none" />
                   <input
                     type="text"
                     placeholder="Enter your full name"
@@ -328,7 +333,7 @@ const Hero = () => {
                       validateField("name", name);
                     }}
                     disabled={isSubmitting}
-                    className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
                     required
                   />
                   {touched.name && errors.name && (
@@ -336,9 +341,9 @@ const Hero = () => {
                   )}
                 </div>
 
-                {/* Email Address */}
+                {/* Email Address Input */}
                 <div className="relative">
-                  <Mail size={18} className="absolute left-4 top-3.5 text-slate-400" />
+                  <Mail size={18} className="absolute left-4 top-3.5 text-slate-400 pointer-events-none" />
                   <input
                     type="email"
                     placeholder="Enter your email address"
@@ -353,7 +358,7 @@ const Hero = () => {
                       validateField("email", email);
                     }}
                     disabled={isSubmitting}
-                    className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
                     required
                   />
                   {touched.email && errors.email && (
@@ -361,9 +366,9 @@ const Hero = () => {
                   )}
                 </div>
 
-                {/* Phone Number */}
+                {/* Phone Number Input */}
                 <div className="relative">
-                  <Phone size={18} className="absolute left-4 top-3.5 text-slate-400" />
+                  <Phone size={18} className="absolute left-4 top-3.5 text-slate-400 pointer-events-none" />
                   <input
                     type="tel"
                     placeholder="+91 98391 71701"
@@ -379,7 +384,7 @@ const Hero = () => {
                     }}
                     disabled={isSubmitting}
                     maxLength={10}
-                    className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
                     required
                   />
                   {touched.phone && errors.phone && (
@@ -387,7 +392,7 @@ const Hero = () => {
                   )}
                 </div>
 
-                {/* Select Service */}
+                {/* Service Selection Dropdown */}
                 <div className="relative">
                   <Wrench size={18} className="absolute left-4 top-3.5 text-slate-400 pointer-events-none" />
                   <select
@@ -402,36 +407,36 @@ const Hero = () => {
                       validateField("service", service);
                     }}
                     disabled={isSubmitting}
-                    className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all appearance-none cursor-pointer"
+                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all appearance-none cursor-pointer"
                     required
                   >
                     <option value="" disabled hidden>
                       Choose a service
                     </option>
-                    <option value="repair">AC Repair &amp; Servicing</option>
-                    <option value="installation">AC Installation &amp; Piping</option>
-                    <option value="maintenance">AMC Services &amp; Maintenance</option>
-                    <option value="ac seeling">Commercial VRF / Ductable System</option>
-                    <option value="general enquiry">General HVAC Enquiry</option>
+                    {serviceOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 {touched.service && errors.service && (
                   <p className="text-red-500 text-xs mt-1 pl-1">{errors.service}</p>
                 )}
 
-                {/* Submit Button (Photo 1 Reference) */}
+                {/* Form Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#0091EE] via-[#00B4FF] to-[#00D4FF] hover:opacity-95 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-cyan-400/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-2"
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#0091EE] via-[#00B4FF] to-[#00D4FF] hover:opacity-95 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-cyan-400/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-2 cursor-pointer"
                 >
                   <Send size={16} />
-                  <span>{isSubmitting ? "Submitting..." : "Get Instant Quote →"}</span>
+                  <span>{isSubmitting ? "Submitting..." : "GET INSTANT QUOTE →"}</span>
                 </button>
               </form>
 
-              {/* Form Bottom Features Box (Photo 1 Reference) */}
-              <div className="mt-5 p-3 rounded-2xl bg-[#F0F7FF] border border-sky-100 flex flex-wrap items-center justify-between gap-2 text-[11px] font-semibold text-slate-600">
+              {/* Bottom Security Highlights Pill Box */}
+              <div className="mt-5 p-3 rounded-xl bg-[#F0F7FF] border border-sky-100 flex items-center justify-between gap-1 text-[11px] font-semibold text-slate-600">
                 <span className="flex items-center gap-1 text-[#0088FF]">
                   <Check size={14} className="text-[#0088FF]" /> 100% Secure
                 </span>
@@ -449,10 +454,10 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Bottom Curved Wave Transition */}
+      {/* Bottom Soft Curved Transition */}
       <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none z-10 pointer-events-none">
         <svg
-          className="relative block w-full h-[35px] sm:h-[50px] lg:h-[65px]"
+          className="relative block w-full h-[32px] sm:h-[48px] lg:h-[60px]"
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >

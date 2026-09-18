@@ -131,14 +131,14 @@
    ============================================================ */
 @layer components {
   .heading-1 {
-    font-family: "DM Serif Display";
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.15;
     letter-spacing: inherit;
   }
 
   .heading-2 {
-    font-family: "DM Serif Display";
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     letter-spacing: inherit;
   }
@@ -191,6 +191,16 @@
   /* Global Section Padding */
   .section-padding {
     @apply py-[70px];
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
