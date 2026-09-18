@@ -19,6 +19,11 @@ import {
   MessageSquare,
   LoaderCircle,
   Sparkles,
+  User,
+  Phone,
+  Mail,
+  CheckCircle2,
+  X,
 } from "lucide-react";
 import SplitAcImg from "@/assets/categories/split-ac.png";
 import WindowAcImg from "@/assets/categories/window-ac.png";
@@ -68,6 +73,8 @@ interface EnquiryFormState {
   name: string;
   email: string;
   phone: string;
+  brand: string;
+  city: string;
   message: string;
 }
 
@@ -258,12 +265,11 @@ function StarRating({ count }: { count: number }) {
 
 function ProductCard({
   cat,
-  onEnquireNow,
+  onGetQuote,
 }: {
   cat: Category;
-  onEnquireNow: (product: Category) => void;
+  onGetQuote: (product: Category, brand?: string) => void;
 }) {
-  const navigate = useNavigate();
   const isCommercialProduct = Boolean(cat.price);
 
   return (
@@ -308,12 +314,15 @@ function ProductCard({
           </p>
           <div className="flex flex-wrap gap-1.5">
             {cat.brands.map((b) => (
-              <span
+              <button
                 key={b}
-                className="text-xs px-2.5 py-1 rounded-full font-semibold bg-slate-100 text-slate-700 border border-slate-200/70 hover:bg-sky-50 hover:text-[#0284C7] hover:border-sky-200 transition-colors"
+                type="button"
+                onClick={() => onGetQuote(cat, b)}
+                className="text-xs px-2.5 py-1 rounded-full font-semibold bg-slate-100 text-slate-700 border border-slate-200/70 hover:bg-sky-50 hover:text-[#0284C7] hover:border-sky-200 transition-colors cursor-pointer"
+                title={`Get quote for ${b} ${cat.title}`}
               >
                 {b}
-              </span>
+              </button>
             ))}
           </div>
         </div>
@@ -333,7 +342,8 @@ function ProductCard({
         {/* Action Button */}
         {isCommercialProduct ? (
           <button
-            onClick={() => onEnquireNow(cat)}
+            type="button"
+            onClick={() => onGetQuote(cat)}
             className="mt-auto w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-sky-600/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
             <MessageSquare size={15} />
@@ -342,7 +352,8 @@ function ProductCard({
           </button>
         ) : (
           <button
-            onClick={() => navigate("/contact")}
+            type="button"
+            onClick={() => onGetQuote(cat)}
             className="mt-auto w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer shadow-sm"
           >
             <MessageSquare size={15} />
@@ -357,16 +368,42 @@ function ProductCard({
 
 export default function ProductsPage() {
   const [searchParams] = useSearchParams();
+  const getSavedCustomer = () => {
+    try {
+      const saved = localStorage.getItem("pas_customer_info");
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return { name: "", email: "", phone: "", city: "" };
+  };
+
   const [activeFilter, setActiveFilter] = useState("residential");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedEnquiryProduct, setSelectedEnquiryProduct] = useState<Category | null>(null);
+  const [selectedBrand, setSelectedBrand] = useState<string>("");
   const [isSubmittingEnquiry, setIsSubmittingEnquiry] = useState(false);
   const [enquiryForm, setEnquiryForm] = useState<EnquiryFormState>({
     name: "",
     email: "",
     phone: "",
+    brand: "",
+    city: "",
     message: "",
   });
+
+  const handleOpenQuoteModal = (cat: Category, brandPreset?: string) => {
+    const saved = getSavedCustomer();
+    const initialBrand = brandPreset || (cat.brands && cat.brands.length > 0 ? cat.brands[0] : "All Brands");
+    setSelectedEnquiryProduct(cat);
+    setSelectedBrand(initialBrand);
+    setEnquiryForm({
+      name: saved.name || "",
+      email: saved.email || "",
+      phone: saved.phone || "",
+      city: saved.city || "",
+      brand: initialBrand,
+      message: `Hi, I would like to request a quote for ${cat.title}${initialBrand && initialBrand !== "All Brands" ? ` (${initialBrand})` : ""}. Please share pricing, product options, and installation details.`,
+    });
+  };
 
   const filters = [
     { id: "residential", label: "Residential Solution" },
@@ -431,48 +468,53 @@ export default function ProductsPage() {
   const closeEnquiryDialog = () => {
     if (isSubmittingEnquiry) return;
     setSelectedEnquiryProduct(null);
-    setEnquiryForm({
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
   };
 
   const handleEnquirySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!selectedEnquiryProduct || isSubmittingEnquiry) return;
-    if (!enquiryForm.name.trim() || !enquiryForm.email.trim() || !enquiryForm.phone.trim() || !enquiryForm.message.trim()) {
-      toast.error("All fields are required.");
+    if (!enquiryForm.name.trim() || !enquiryForm.phone.trim()) {
+      toast.error("Please provide your name and mobile number.");
+      return;
+    }
+    if (enquiryForm.phone.trim().length < 10) {
+      toast.error("Please enter a valid 10-digit mobile number.");
       return;
     }
 
     setIsSubmittingEnquiry(true);
-    const toastId = toast.loading("Preparing product enquiry...");
+    const toastId = toast.loading("Preparing quote enquiry...");
+
+    // Persist details for future convenience
+    try {
+      localStorage.setItem(
+        "pas_customer_info",
+        JSON.stringify({
+          name: enquiryForm.name.trim(),
+          email: enquiryForm.email.trim(),
+          phone: enquiryForm.phone.trim(),
+          city: enquiryForm.city.trim(),
+        })
+      );
+    } catch {}
 
     try {
       sendQuoteViaWhatsApp({
         name: enquiryForm.name.trim(),
         phone: enquiryForm.phone.trim(),
-        email: enquiryForm.email.trim(),
-        service: `Product Enquiry: ${selectedEnquiryProduct.title}`,
-        notes: enquiryForm.message.trim(),
+        email: enquiryForm.email.trim() || "Not specified",
+        service: `Product Quote: ${selectedEnquiryProduct.title} (Brand: ${selectedBrand || "All Brands"})`,
+        notes: `${enquiryForm.message.trim()}${enquiryForm.city.trim() ? `\n📍 Location: ${enquiryForm.city.trim()}` : ""}`,
       });
 
       toast.update(toastId, {
-        render: "✅ Opening WhatsApp with product enquiry!",
+        render: "✅ Opening WhatsApp with your quote enquiry!",
         type: "success",
         isLoading: false,
         autoClose: 3000,
       });
       setSelectedEnquiryProduct(null);
-      setEnquiryForm({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
     } catch (err: any) {
       toast.update(toastId, {
         render: "❌ Failed to prepare product enquiry.",
@@ -489,13 +531,13 @@ export default function ProductsPage() {
     <div className="bg-slate-50 min-h-screen font-sans">
       
       {/* ── Hero Banner ── */}
-      <section className="relative pt-24 pb-8 sm:pt-28 sm:pb-9 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-2.5 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
             <Sparkles size={14} className="animate-pulse text-cyan-300" />
             <span>PREMIUM HVAC PRODUCTS</span>
           </div>
@@ -503,7 +545,7 @@ export default function ProductsPage() {
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3.5 leading-tight font-sans"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
           >
             Cooling Products &amp; <span className="text-cyan-300">Solutions</span>
           </motion.h1>
@@ -554,77 +596,197 @@ export default function ProductsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {visible.map((cat) => (
-            <ProductCard key={cat.id} cat={cat} onEnquireNow={setSelectedEnquiryProduct} />
+            <ProductCard key={cat.id} cat={cat} onGetQuote={handleOpenQuoteModal} />
           ))}
         </div>
       </div>
 
       <Dialog open={Boolean(selectedEnquiryProduct)} onOpenChange={(open) => !open && closeEnquiryDialog()}>
-        <DialogContent className="z-[120] sm:max-w-[460px] p-0 overflow-hidden">
-          <DialogHeader>
-            <div className="px-5 pt-5 text-center sm:text-center">
-              <DialogTitle className="font-extrabold text-slate-900">Enquire Now</DialogTitle>
-              <DialogDescription className="mt-2 text-slate-500">
-                {selectedEnquiryProduct
-                  ? `Share your details for ${selectedEnquiryProduct.title}. Our team will contact you shortly.`
-                  : "Share your details and our team will contact you shortly."}
-              </DialogDescription>
+        <DialogContent className="z-[9999] sm:max-w-[500px] p-0 overflow-hidden rounded-2xl max-h-[85vh] sm:max-h-[88vh] flex flex-col border border-slate-200 shadow-2xl">
+          {/* Modal Header */}
+          <div className="bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white p-5 sm:p-6 pb-6 relative flex-shrink-0">
+            <button
+              type="button"
+              onClick={closeEnquiryDialog}
+              className="absolute right-4 top-4 z-30 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-colors cursor-pointer"
+              aria-label="Close"
+            >
+              <X size={16} />
+            </button>
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-cyan-400/20 border border-cyan-400/30 text-cyan-300 text-[10px] font-bold uppercase tracking-wider mb-2">
+              <Sparkles size={12} className="text-cyan-300" />
+              <span>Free Instant Quote</span>
             </div>
-          </DialogHeader>
+            <DialogTitle className="text-xl sm:text-2xl font-extrabold tracking-tight text-white pr-8">
+              Get Quote &amp; Consultation
+            </DialogTitle>
+            <DialogDescription className="text-xs sm:text-sm text-cyan-100/90 mt-1 pr-6">
+              {selectedEnquiryProduct
+                ? `Get estimated pricing, best model recommendations, and site support for ${selectedEnquiryProduct.title}.`
+                : "Enter your contact details below to receive a personalized quote."}
+            </DialogDescription>
+          </div>
 
-          {selectedEnquiryProduct ? (
-            <form className="grid gap-3.5 px-5 pb-5" onSubmit={handleEnquirySubmit}>
-              <div className="rounded-xl border border-sky-100 bg-sky-50 px-3 py-2.5 text-center">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-sky-700">
-                  Selected Product
-                </p>
-                <p className="mt-0.5 text-base font-extrabold text-[#051B30]">
-                  {selectedEnquiryProduct.title}
-                </p>
-              </div>
+          {/* Form and product summary - Scrollable area */}
+          <div className="p-5 sm:p-6 overflow-y-auto flex-1 bg-white">
+            {selectedEnquiryProduct && (
+              <form className="space-y-4" onSubmit={handleEnquirySubmit}>
+                {/* Pre-filled Product Card Highlight */}
+                <div className="rounded-xl border border-sky-100 bg-sky-50/70 p-3 flex items-center gap-3">
+                  <div className="w-14 h-14 rounded-lg bg-white border border-sky-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
+                    <img
+                      src={selectedEnquiryProduct.image}
+                      alt={selectedEnquiryProduct.title}
+                      className="w-full h-full object-cover rounded"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0284C7]/10 text-[#0284C7]">
+                        {activeFilter === "commercial" ? "Commercial HVAC" : "Residential Solution"}
+                      </span>
+                      {selectedEnquiryProduct.price && (
+                        <span className="text-[11px] font-bold text-slate-700">
+                          {selectedEnquiryProduct.price}
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="font-extrabold text-[#051B30] text-sm sm:text-base truncate mt-0.5">
+                      {selectedEnquiryProduct.title}
+                    </h4>
+                    <p className="text-[11px] text-slate-500 line-clamp-1">
+                      {selectedEnquiryProduct.description}
+                    </p>
+                  </div>
+                </div>
 
-              <input
-                type="text"
-                value={enquiryForm.name}
-                onChange={(e) => updateEnquiryField("name", e.target.value)}
-                placeholder="Your Name"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
-                required
-              />
-              <input
-                type="email"
-                value={enquiryForm.email}
-                onChange={(e) => updateEnquiryField("email", e.target.value)}
-                placeholder="Your Email"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
-                required
-              />
-              <input
-                type="tel"
-                value={enquiryForm.phone}
-                onChange={(e) => updateEnquiryField("phone", e.target.value)}
-                placeholder="Phone Number"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
-                required
-              />
-              <textarea
-                value={enquiryForm.message}
-                onChange={(e) => updateEnquiryField("message", e.target.value)}
-                placeholder="Write your requirement"
-                className="min-h-[92px] w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
-                required
-              />
+                {/* Pre-selected / Available Brand selection */}
+                {selectedEnquiryProduct.brands && selectedEnquiryProduct.brands.length > 0 && (
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                      <span>Preferred Brand</span>
+                      <span className="text-[11px] font-normal text-[#0284C7] font-semibold">Pre-filled</span>
+                    </label>
+                    <select
+                      value={selectedBrand}
+                      onChange={(e) => {
+                        const newBrand = e.target.value;
+                        setSelectedBrand(newBrand);
+                        setEnquiryForm((prev) => ({
+                          ...prev,
+                          brand: newBrand,
+                          message: `Hi, I would like to request a quote for ${selectedEnquiryProduct.title} (${newBrand}). Please share pricing, product options, and installation details.`,
+                        }));
+                      }}
+                      className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:border-transparent transition-all cursor-pointer"
+                    >
+                      <option value="All Brands / Best Recommendation">All Brands / Best Recommendation</option>
+                      {selectedEnquiryProduct.brands.map((brand) => (
+                        <option key={brand} value={brand}>
+                          {brand}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
 
-              <button
-                type="submit"
-                disabled={isSubmittingEnquiry}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-extrabold text-white transition bg-gradient-to-r from-[#051B30] to-[#0284C7] hover:opacity-95 shadow-md shadow-sky-600/20 cursor-pointer"
-              >
-                {isSubmittingEnquiry ? <LoaderCircle size={16} className="animate-spin" /> : <MessageSquare size={16} />}
-                {isSubmittingEnquiry ? "Submitting..." : "Submit Enquiry"}
-              </button>
-            </form>
-          ) : null}
+                {/* Name Field */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Your Full Name <span className="text-rose-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <User size={16} className="absolute left-3.5 top-3 text-slate-400 pointer-events-none" />
+                    <input
+                      type="text"
+                      value={enquiryForm.name}
+                      onChange={(e) => updateEnquiryField("name", e.target.value)}
+                      placeholder="e.g. Ramesh Kumar"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* Phone & Email */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Phone Number <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <Phone size={16} className="absolute left-3.5 top-3 text-slate-400 pointer-events-none" />
+                      <input
+                        type="tel"
+                        value={enquiryForm.phone}
+                        onChange={(e) => updateEnquiryField("phone", e.target.value)}
+                        placeholder="10-digit mobile"
+                        maxLength={10}
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Email Address
+                    </label>
+                    <div className="relative">
+                      <Mail size={16} className="absolute left-3.5 top-3 text-slate-400 pointer-events-none" />
+                      <input
+                        type="email"
+                        value={enquiryForm.email}
+                        onChange={(e) => updateEnquiryField("email", e.target.value)}
+                        placeholder="name@example.com"
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Requirement / Message (Pre-filled) */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center justify-between">
+                    <span>Requirement / Message</span>
+                    <span className="text-[11px] font-normal text-[#0284C7] font-semibold">Pre-filled</span>
+                  </label>
+                  <textarea
+                    value={enquiryForm.message}
+                    onChange={(e) => updateEnquiryField("message", e.target.value)}
+                    rows={3}
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all leading-relaxed"
+                    required
+                  />
+                </div>
+
+                {/* Trust Highlight */}
+                <div className="flex items-center justify-center gap-4 text-[11px] font-medium text-slate-500 pt-1">
+                  <span className="flex items-center gap-1 text-emerald-600 font-semibold">
+                    <CheckCircle2 size={13} /> 100% Free Consultation
+                  </span>
+                  <span>•</span>
+                  <span>Direct WhatsApp Quotation</span>
+                </div>
+
+                {/* Submit button */}
+                <button
+                  type="submit"
+                  disabled={isSubmittingEnquiry}
+                  className="w-full rounded-xl py-3 px-4 bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20 hover:shadow-sky-600/30 transition-all cursor-pointer active:scale-[0.99]"
+                >
+                  {isSubmittingEnquiry ? (
+                    <LoaderCircle size={18} className="animate-spin" />
+                  ) : (
+                    <MessageSquare size={18} />
+                  )}
+                  <span>
+                    {isSubmittingEnquiry ? "Preparing Quotation..." : "Get Free Quote on WhatsApp"}
+                  </span>
+                </button>
+              </form>
+            )}
+          </div>
         </DialogContent>
       </Dialog>
     </div>

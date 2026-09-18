@@ -10,7 +10,7 @@ const navLinks = [
   { name: "Services", path: "/services" },
   { name: "Projects", path: "/case-studies" },
   { name: "Gallery", path: "/gallery" },
-  { name: "Contact Us", path: "/contact" },
+  // { name: "Contact Us", path: "/contact" },
 ];
 
 const SiteHeader = () => {
@@ -119,7 +119,7 @@ const SiteHeader = () => {
               onClick={() => navigate("/contact")}
               className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-[#051B30] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold rounded-full text-xs xl:text-sm px-5 py-2.5 shadow-md shadow-sky-600/25 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
             >
-              <span>Get a Quote</span>
+              <span>Contact Us</span>
             </button>
 
             {/* Mobile Hamburger */}

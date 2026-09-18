@@ -15,7 +15,7 @@ import {
 import cclogo from "../assets/cc-logo.png";
 
 const quickLinks = [
-  
+  { label: "Home", to: "/" },
   { label: "About Us", to: "/about" },
   { label: "Products", to: "/product" },
   { label: "Services", to: "/services" },
@@ -105,22 +105,16 @@ const SiteFooter = () => {
                 </div>
               </Link>
 
-              <p className="text-[14px] leading-relaxed mb-3.5 text-slate-200 font-normal">
+              <p className="text-[14px] leading-relaxed mb-2 text-slate-200 font-normal">
                 Perfect Air Solution is a leading HVAC and air conditioning company offering turnkey residential, commercial, and industrial solutions.
+                
+              </p>
+              <p className="text-[14px] leading-relaxed mb-1 text-slate-200 font-normal">
+                Certified HVAC Engineers & Technicians
+                
               </p>
 
-              {/* Trust badges */}
-              <div className="flex flex-col gap-2 mb-3.5">
-                {[
-                  { icon: ShieldCheck, text: "Certified HVAC Engineers & Technicians" },
-                 
-                ].map(({ icon: Icon, text }) => (
-                  <div key={text} className="flex items-center gap-2.5 text-sm font-medium text-slate-200">
-                    <Icon size={17} className="text-[#38BDF8] flex-shrink-0" />
-                    <span>{text}</span>
-                  </div>
-                ))}
-              </div>
+              
             </div>
 
             {/* Social Links */}

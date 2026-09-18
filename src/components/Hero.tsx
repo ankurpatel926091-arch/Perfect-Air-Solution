@@ -21,7 +21,7 @@ import {
   ChevronRight
 } from "lucide-react";
 import heroBg1 from "../assets/hero_ac_bg.jpg";
-import heroBg2 from "../assets/about_ac_showcase.jpg";
+import heroBg2 from "../assets/herobackgroung2.png";
 import heroBg3 from "../assets/why_choose_indoor.jpg";
 
 const heroBackgrounds = [
