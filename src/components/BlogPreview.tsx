@@ -39,7 +39,7 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
   }
 
   return (
-    <article className="bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-sky-300 transition-all duration-300 group font-sans h-full transform hover:-translate-y-1.5">
+    <article className="bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-sky-300 transition-all duration-300 group font-sans h-full">
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden bg-slate-100">
         {/* Category Icon Badge */}
@@ -202,10 +202,9 @@ export default function BlogPreview() {
   if (isLoading || error || recentPosts.length === 0) return null;
 
   return (
-    <section className="py-16 sm:py-24 bg-gradient-to-b from-[#E6F4FA] via-[#F4FAFF] to-[#F8FAFC] relative overflow-hidden font-sans">
-      {/* Background Decorative Glow Accents */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
+    <section className="py-16 sm:py-15 bg-gradient-to-b from-[#EBF5FA] via-[#F4FAFE] to-[#F8FAFC] text-slate-800 relative overflow-hidden font-sans">
+      {/* Background Dot overlay */}
+      <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#0284C7_1px,transparent_1px)] [background-size:28px_28px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -215,7 +214,7 @@ export default function BlogPreview() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14"
+          className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100 border border-sky-200 text-[#0284C7] font-extrabold text-xs uppercase tracking-wider mb-3.5 shadow-sm">
             <Sparkles size={14} className="text-[#0284C7]" />
@@ -224,7 +223,7 @@ export default function BlogPreview() {
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight font-sans leading-tight mb-4">
             Latest{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-sky-500 to-cyan-400">
+            <span className="text-[#0284C7]">
               Insights &amp; Updates
             </span>
           </h2>
@@ -249,8 +248,8 @@ export default function BlogPreview() {
             <MobileCarousel posts={recentPosts} />
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {recentPosts.map((post: ApiBlogPost, i: number) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {recentPosts.map((post: any, i: number) => (
               <motion.div
                 key={post._id || post.id}
                 initial={{ opacity: 0, y: 40 }}

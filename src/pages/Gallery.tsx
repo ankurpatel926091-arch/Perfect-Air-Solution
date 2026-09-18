@@ -232,14 +232,14 @@ export default function Gallery() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4.5 lg:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredItems.map((item, idx) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: idx * 0.05 }}
-              className="group relative h-64 sm:h-72 lg:h-80 rounded-xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer bg-white"
+              className="group relative h-64 sm:h-72 lg:h-80 rounded-xl overflow-hidden border border-slate-200/90 shadow-none transition-all duration-300 cursor-pointer bg-white"
               onClick={() => setSelectedIndex(idx)}
             >
               {/* Full Bright Card Image */}

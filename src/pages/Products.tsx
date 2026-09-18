@@ -267,7 +267,7 @@ function ProductCard({
   const isCommercialProduct = Boolean(cat.price);
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 group font-sans">
+    <div className="bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group font-sans">
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden bg-slate-100">
         {/* Category Icon Badge */}
@@ -552,7 +552,7 @@ export default function ProductsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {visible.map((cat) => (
             <ProductCard key={cat.id} cat={cat} onEnquireNow={setSelectedEnquiryProduct} />
           ))}

@@ -52,7 +52,7 @@ const MegaSale = () => (
         <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground mt-3">AC Rental Plans</h2>
       </motion.div>
 
-      <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
         {rentalPlans.map((plan, i) => (
           <motion.div
             key={plan.name}
@@ -60,7 +60,7 @@ const MegaSale = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
-            whileHover={{ y: -10, boxShadow: "0 25px 60px -15px hsl(32 95% 52% / 0.25)" }}
+            whileHover={{ boxShadow: "0 25px 60px -15px hsl(32 95% 52% / 0.25)" }}
             className={`relative p-8 rounded-xl border transition-all duration-300 ${
               plan.popular
                 ? "bg-card border-accent shadow-glow-accent"

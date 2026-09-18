@@ -9,7 +9,7 @@ const BrandCard: React.FC<{ brand: any; index: number }> = ({ brand, index }) =>
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-60px" }}
     transition={{ duration: 0.5, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-    whileHover={{ scale: 1.06, y: -6 }}
+    whileHover={{ scale: 1.06 }}
     style={{
       background: BRAND.white,
       border: `1px solid ${BRAND.slate100}`,

@@ -15,7 +15,7 @@ import {
 import cclogo from "../assets/cc-logo.png";
 
 const quickLinks = [
-  { label: "Home", to: "/" },
+  
   { label: "About Us", to: "/about" },
   { label: "Products", to: "/product" },
   { label: "Services", to: "/services" },
@@ -113,7 +113,7 @@ const SiteFooter = () => {
               <div className="flex flex-col gap-2 mb-3.5">
                 {[
                   { icon: ShieldCheck, text: "Certified HVAC Engineers & Technicians" },
-                  { icon: Clock, text: "Mon – Sat: 9:00 AM – 7:00 PM" },
+                 
                 ].map(({ icon: Icon, text }) => (
                   <div key={text} className="flex items-center gap-2.5 text-sm font-medium text-slate-200">
                     <Icon size={17} className="text-[#38BDF8] flex-shrink-0" />

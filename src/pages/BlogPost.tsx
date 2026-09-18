@@ -1,9 +1,13 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   ArrowLeft,
   Tag,
+  Clock,
+  Calendar,
+  User,
+  Share2,
   Facebook,
   Twitter,
   Linkedin,
@@ -12,61 +16,31 @@ import {
 import { useGetBlogsQuery } from "@/store/api";
 import CTASection from "@/components/CTASection";
 
-const SplitHeading = ({ text }: { text: string }) => (
-  <h1
-    style={{
-      color: "white",
-      marginBottom: "2rem",
-      letterSpacing: "-0.02em",
-      fontSize: "2.2rem",
-    }}
-  >
-    {text.split("").map((char, i) => (
-      <motion.span
-        key={i}
-        initial={{ opacity: 0, y: 40, rotateX: -90 }}
-        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-        transition={{ delay: 0.02 * i, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        style={{ display: char === " " ? "inline" : "inline-block" }}
-      >
-        {char === " " ? "\u00A0" : char}
-      </motion.span>
-    ))}
-  </h1>
-);
-
 const BlogPost = () => {
   const { slug } = useParams();
   const { data: blogPosts = [], isLoading } = useGetBlogsQuery();
 
   const post = blogPosts.find((p: any) => p.slug === slug || String(p._id) === slug);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
-
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroOpacity = useTransform(heroProgress, [0, 0.8], [1, 0]);
-
   useEffect(() => {
+    window.scrollTo(0, 0);
     const handleScroll = () => setShowScrollTop(window.scrollY > 500);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [slug]);
 
-  if (isLoading)
+  if (isLoading) {
     return (
-      <div
-        className="min-h-screen flex items-center justify-center"
-        style={{ color: "hsl(var(--muted-foreground))" }}
-      >
-        Loading article...
+      <div className="min-h-screen flex items-center justify-center bg-[#03172C] text-cyan-300 font-sans">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm font-medium">Loading article...</span>
+        </div>
       </div>
     );
+  }
+
   if (!post) return <Navigate to="/blog" replace />;
 
   const relatedPosts = blogPosts
@@ -77,232 +51,135 @@ const BlogPost = () => {
   const encodedUrl = encodeURIComponent(currentUrl);
   const encodedTitle = encodeURIComponent(post.title || "");
 
+  // Format read time without duplicated "READ"
+  const rawReadTime = post.readTime || "5 min read";
+  const formattedReadTime = rawReadTime.toLowerCase().includes("read")
+    ? rawReadTime
+    : `${rawReadTime} read`;
+
   const socialButtons = [
     {
       Icon: Facebook,
       href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
       label: "Share on Facebook",
-      hoverBg: "#1877F2",
+      color: "hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white",
     },
     {
       Icon: Twitter,
       href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
       label: "Share on Twitter / X",
-      hoverBg: "#1DA1F2",
+      color: "hover:bg-[#1DA1F2] hover:border-[#1DA1F2] hover:text-white",
     },
     {
       Icon: Linkedin,
       href: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}`,
       label: "Share on LinkedIn",
-      hoverBg: "#0A66C2",
+      color: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white",
     },
   ];
 
   return (
-    <div
-      className="bg-background min-h-screen"
-      style={{ color: "hsl(var(--foreground))" }}
-      ref={containerRef}
-    >
-      {/* ── HERO ── */}
-      <section
-        ref={heroRef}
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "60vh",          /* ← reduced from 85vh */
-          minHeight: "420px",      /* ← reduced from 600px */
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",    /* ← changed from flex-end to center */
-          overflow: "hidden",
-          background: "var(--hero-gradient)",
-        }}
-      >
-        {/* Orbs */}
-        <div
-          style={{
-            position: "absolute",
-            top: "25%",
-            left: "25%",
-            width: "500px",
-            height: "500px",
-            background: "hsl(0 0% 100% / 0.1)",
-            borderRadius: "50%",
-            filter: "blur(100px)",
-            pointerEvents: "none",
-            animation: "pulse 3s infinite",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "25%",
-            right: "25%",
-            width: "400px",
-            height: "400px",
-            background: "hsl(var(--brand-sky) / 0.1)",
-            borderRadius: "50%",
-            filter: "blur(80px)",
-            pointerEvents: "none",
-          }}
-        />
+    <div className="bg-slate-50 min-h-screen font-sans">
+      {/* ── HERO HEADER ── */}
+      <section className="relative pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-20 sm:pb-28 bg-[#03172C] text-white overflow-hidden">
+        {/* Ambient Gradient Glows */}
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-sky-500/15 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-[450px] h-[450px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#03172C] via-[#052848] to-[#041E38]" />
 
-        {/* Bottom fade */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to top, hsl(var(--brand-dark) / 0.8), transparent)",
-          }}
-        />
-
-        <motion.div
-          style={{
-            opacity: heroOpacity,
-            position: "relative",
-            zIndex: 10,
-            width: "100%",
-            maxWidth: "64rem",
-            padding: "0 1.5rem 2rem",   /* ← reduced bottom padding from 6rem to 2rem */
-          }}
-        >
-          <Link
-            to="/blog"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              color: "hsl(var(--brand-sky))",
-              textDecoration: "none",
-              marginBottom: "2rem",
-              fontSize: "0.875rem",
-             
-              letterSpacing: "0.05em",
-              marginTop: "2rem",
-            }}
-            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "white")}
-            onMouseLeave={e =>
-              ((e.currentTarget as HTMLElement).style.color = "hsl(var(--brand-sky))")
-            }
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Back to Blog Button */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
           >
-            <ArrowLeft size={16} /> Back to Blog
-          </Link>
-
-          <div>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "6px 16px",
-                borderRadius: "100px",
-                border: "1px solid hsl(0 0% 100% / 0.3)",
-                background: "hsl(0 0% 100% / 0.1)",
-                color: "white",
-                fontSize: "0.7rem",
-               
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                backdropFilter: "blur(12px)",
-                marginBottom: "1.5rem",
-              }}
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 hover:text-white text-xs sm:text-sm font-semibold transition-all duration-200 mb-6 backdrop-blur-md shadow-sm group"
             >
-              <Tag size={12} /> {post.category}
-            </motion.span>
+              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+              <span>Back to Blog</span>
+            </Link>
+          </motion.div>
 
-            <SplitHeading text={post.title} />
-          </div>
-        </motion.div>
+          {/* Category & Meta */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="flex flex-wrap items-center gap-3 mb-4"
+          >
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
+              <Tag size={13} className="text-cyan-400" />
+              {post.category || "HVAC Tech"}
+            </span>
+            <span className="inline-flex items-center gap-1 text-slate-300 text-xs sm:text-sm">
+              <Clock size={14} className="text-cyan-400" />
+              {formattedReadTime}
+            </span>
+            {post.date && (
+              <span className="inline-flex items-center gap-1 text-slate-300 text-xs sm:text-sm">
+                <Calendar size={14} className="text-cyan-400" />
+                {post.date}
+              </span>
+            )}
+          </motion.div>
+
+          {/* Article Title (Word wrapping fixed, clean heading) */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.2] mb-6 font-sans break-words"
+          >
+            {post.title}
+          </motion.h1>
+
+          {/* Author info */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex items-center gap-3 text-slate-300 text-xs sm:text-sm"
+          >
+            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#0284C7] to-[#00B4FF] flex items-center justify-center text-white font-bold text-xs shadow-md border border-white/20">
+              <User size={16} />
+            </div>
+            <div>
+              <span className="font-semibold text-white block">Perfect Air HVAC Team</span>
+              <span className="text-slate-400 text-[11px]">Engineering & Climate Control Experts</span>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* ── ARTICLE CARD ── */}
-      <main
-        style={{
-          position: "relative",
-          zIndex: 20,
-          width: "100%",
-          maxWidth: "72rem",
-          margin: "0 auto",
-          padding: "0 1rem 0.5rem",
-          marginTop: "-4rem",
-        }}
-      >
+      {/* ── ARTICLE CONTENT CARD ── */}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-10 sm:-mt-16 pb-16">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          style={{
-            background: "hsl(var(--card))",
-            borderRadius: "calc(var(--radius) * 2)",
-            boxShadow: "0 25px 60px hsl(var(--brand-dark) / 0.1)",
-            padding: "clamp(1.5rem, 4vw, 4rem)",
-            border: "1px solid hsl(var(--border))",
-            position: "relative",
-          }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-200/80 shadow-2xl relative"
         >
-          {/* Top gradient accent */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: "4px",
-              background: "linear-gradient(to right, hsl(var(--brand-dark)), hsl(var(--primary)))",
-              borderRadius: "calc(var(--radius) * 2) calc(var(--radius) * 2) 0 0",
-            }}
-          />
+          {/* Top color gradient highlight bar */}
+          <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#051B30] via-[#0284C7] to-cyan-400 rounded-t-3xl" />
 
-          {/* Read time badge */}
-          <div
-            style={{
-              position: "absolute",
-              top: "-16px",
-              right: "2rem",
-              background: "hsl(var(--brand-dark))",
-              color: "white",
-              padding: "6px 20px",
-              borderRadius: "100px",
-              fontSize: "0.7rem",
-             
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              boxShadow: "0 8px 20px hsl(var(--brand-dark) / 0.2)",
-            }}
-          >
-            {post.readTime} Read
+          {/* Read time floating pill badge */}
+          <div className="absolute -top-4 right-6 sm:right-10 px-4 py-1.5 rounded-full bg-[#051B30] text-white text-xs font-bold uppercase tracking-wider shadow-lg border border-cyan-400/30 flex items-center gap-1.5">
+            <Clock size={13} className="text-cyan-400" />
+            <span>{formattedReadTime}</span>
           </div>
 
-          {/* ── Share strip ── */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "1rem",
-              paddingBottom: "2rem",
-              marginBottom: "2.5rem",
-              borderBottom: "1px solid hsl(var(--border))",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "0.7rem",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "hsl(var(--muted-foreground))",
-              }}
-            >
-              Share this article
-            </span>
-            <div style={{ display: "flex", gap: "12px" }}>
-              {socialButtons.map(({ Icon, href, label, hoverBg }, i) => (
+          {/* Share Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-200/80">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+              <Share2 size={15} className="text-[#0284C7]" />
+              <span>Share Article</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {socialButtons.map(({ Icon, href, label, color }, i) => (
                 <a
                   key={i}
                   href={href}
@@ -310,30 +187,7 @@ const BlogPost = () => {
                   rel="noopener noreferrer"
                   aria-label={label}
                   title={label}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    border: "1px solid hsl(var(--border))",
-                    color: "hsl(var(--muted-foreground))",
-                    textDecoration: "none",
-                    transition: "all 0.3s",
-                  }}
-                  onMouseEnter={e => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = hoverBg;
-                    el.style.borderColor = hoverBg;
-                    el.style.color = "white";
-                  }}
-                  onMouseLeave={e => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = "transparent";
-                    el.style.borderColor = "hsl(var(--border))";
-                    el.style.color = "hsl(var(--muted-foreground))";
-                  }}
+                  className={`w-9 h-9 rounded-full border border-slate-200 text-slate-500 flex items-center justify-center transition-all duration-300 ${color}`}
                 >
                   <Icon size={16} />
                 </a>
@@ -341,279 +195,112 @@ const BlogPost = () => {
             </div>
           </div>
 
-          {/* ── Article body ── */}
-          <div
-            className="body-text"
-            style={{
-              color: "hsl(var(--foreground) / 0.75)",
-              fontWeight: 300,
-              maxWidth: "56rem",
-              margin: "0 auto",
-            }}
-          >
+          {/* Featured Header Image if present */}
+          {post.image && (
+            <div className="mb-8 rounded-2xl overflow-hidden border border-slate-200/80 shadow-md max-h-[460px]">
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+
+          {/* Article Text Body */}
+          <div className="prose prose-slate max-w-none text-slate-700 text-base sm:text-lg leading-relaxed space-y-6 font-sans">
             {post.content && Array.isArray(post.content) ? (
               post.content.map((para: string, i: number) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6 }}
-                  style={{ marginBottom: "2rem" }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5 }}
                 >
-                  {i === 0 ? (
-                    <p
-                      style={{ margin: 0 }}
-                      className="first-letter:text-6xl sm:first-letter:text-7xl first-letter:font-serif first-letter:font-bold first-letter:pr-3 first-letter:mt-2 first-letter:float-left first-line:tracking-wide"
-                    >
-                      {para}
-                    </p>
-                  ) : (
-                    <p style={{ margin: 0 }}>{para}</p>
-                  )}
+                  <p className={i === 0 ? "text-lg sm:text-xl font-normal text-slate-800 leading-relaxed" : ""}>
+                    {para}
+                  </p>
 
+                  {/* Highlight Blockquote */}
                   {i === 1 && para.length > 50 && (
-                    <blockquote
-                      style={{
-                        margin: "3rem 0",
-                        paddingLeft: "2rem",
-                        paddingTop: "1.5rem",
-                        paddingBottom: "1.5rem",
-                        borderLeft: "4px solid hsl(var(--primary))",
-                        background: "hsl(var(--brand-light))",
-                        borderRadius: "0 calc(var(--radius) * 1.5) calc(var(--radius) * 1.5) 0",
-                      }}
-                    >
-                      <p
-                        className="heading-3"
-                        style={{
-                          fontStyle: "italic",
-                          color: "hsl(var(--brand-dark))",
-                          lineHeight: 1.4,
-                          margin: 0,
-                        }}
-                      >
-                        "{para.slice(0, 120)}..."
+                    <blockquote className="my-8 p-6 sm:p-7 rounded-2xl bg-sky-50/80 border-l-4 border-[#0284C7] shadow-sm">
+                      <p className="text-base sm:text-lg font-medium italic text-[#051B30] leading-relaxed m-0">
+                        "{para.slice(0, 140)}..."
                       </p>
                     </blockquote>
-                  )}
-
-                  {i === 1 && post.image && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.7 }}
-                      style={{
-                        margin: "2.5rem 0",
-                        borderRadius: "calc(var(--radius) * 1.5)",
-                        overflow: "hidden",
-                        boxShadow: "0 20px 40px hsl(var(--brand-dark) / 0.1)",
-                        border: "1px solid hsl(var(--border))",
-                      }}
-                    >
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        style={{
-                          width: "100%",
-                          height: "auto",
-                          objectFit: "cover",
-                          maxHeight: "520px",
-                          display: "block",
-                        }}
-                      />
-                    </motion.div>
                   )}
                 </motion.div>
               ))
             ) : (
-              <p>{post.content}</p>
+              <p className="text-base sm:text-lg leading-relaxed">{post.content}</p>
             )}
           </div>
 
-          {/* ── Tags ── */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "12px",
-              marginTop: "4rem",
-              paddingTop: "2rem",
-              borderTop: "1px solid hsl(var(--border))",
-            }}
-          >
-            {["HVAC", post.category, "Tips", "Expert Advice", "Home Comfort"].map(tag => (
+          {/* Article Tags */}
+          <div className="flex flex-wrap gap-2 mt-10 pt-6 border-t border-slate-200/80">
+            {["HVAC", post.category, "Energy Saving", "Climate Control", "Expert Advice"].map((tag) => (
               <span
                 key={tag}
-                style={{
-                  padding: "6px 20px",
-                  borderRadius: "100px",
-                  border: "1px solid hsl(var(--border))",
-                  fontSize: "0.7rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "hsl(var(--muted-foreground))",
-                  background: "hsl(var(--muted))",
-                  cursor: "pointer",
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = "hsl(var(--primary))";
-                  el.style.color = "hsl(var(--primary))";
-                  el.style.background = "hsl(var(--brand-light))";
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.borderColor = "hsl(var(--border))";
-                  el.style.color = "hsl(var(--muted-foreground))";
-                  el.style.background = "hsl(var(--muted))";
-                }}
+                className="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-[#0284C7] hover:text-white border border-slate-200/80 text-slate-600 text-xs font-bold uppercase tracking-wider cursor-pointer transition-all duration-200"
               >
-                {tag}
+                #{tag}
               </span>
             ))}
           </div>
 
-          {/* CTA */}
-          <CTASection />
+          {/* CTA Banner */}
+          <div className="mt-10">
+            <CTASection />
+          </div>
         </motion.div>
       </main>
 
-      {/* ── Related Articles ── */}
+      {/* ── RELATED ARTICLES ── */}
       {relatedPosts.length > 0 && (
-        <section
-          style={{
-            width: "100%",
-            maxWidth: "72rem",
-            margin: "0 auto",
-            padding: "2.5rem 1.5rem",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              gap: "1.5rem",
-              marginBottom: "3rem",
-            }}
-          >
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="flex items-center justify-between gap-4 mb-8">
             <div>
-              <h2 style={{ marginBottom: "8px", marginTop: 0 }}>
-                Read Next
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#051B30] tracking-tight font-sans">
+                Recommended Articles
               </h2>
-              <p className="body-text" style={{ color: "hsl(var(--muted-foreground))", margin: 0 }}>
-                Discover more expert insights from our team
+              <p className="text-slate-600 text-sm mt-1">
+                Explore more expert insights from Perfect Air Solution
               </p>
             </div>
             <Link
               to="/blog"
-              style={{
-                padding: "10px 24px",
-                borderRadius: "100px",
-                border: "1px solid hsl(var(--border))",
-                color: "hsl(var(--foreground))",
-                textDecoration: "none",
-                fontWeight: 700,
-                fontSize: "0.875rem",
-                letterSpacing: "0.03em",
-                transition: "background 0.2s",
-              }}
-              onMouseEnter={e =>
-                ((e.currentTarget as HTMLElement).style.background = "hsl(var(--muted))")
-              }
-              onMouseLeave={e =>
-                ((e.currentTarget as HTMLElement).style.background = "transparent")
-              }
+              className="px-5 py-2.5 rounded-full border border-slate-300 text-slate-700 hover:bg-[#051B30] hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-200"
             >
               View All Posts
             </Link>
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: "2rem",
-            }}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedPosts.map((rp: any, i: number) => (
               <motion.div
                 key={rp.slug || rp._id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
+                transition={{ delay: i * 0.1, duration: 0.4 }}
               >
                 <Link
                   to={`/blog/${rp.slug || rp._id}`}
-                  style={{ textDecoration: "none", display: "block", height: "100%" }}
+                  className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-md hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col h-full"
                 >
-                  <div
-                    style={{
-                      background: "hsl(var(--card))",
-                      borderRadius: "calc(var(--radius) * 1.5)",
-                      overflow: "hidden",
-                      border: "1px solid hsl(var(--border))",
-                      boxShadow: "0 2px 8px hsl(var(--brand-dark) / 0.06)",
-                      transition: "all 0.5s",
-                      height: "100%",
-                    }}
-                    onMouseEnter={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.transform = "translateY(-8px)";
-                      el.style.boxShadow = "0 24px 48px hsl(var(--brand-dark) / 0.12)";
-                    }}
-                    onMouseLeave={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.transform = "translateY(0)";
-                      el.style.boxShadow = "0 2px 8px hsl(var(--brand-dark) / 0.06)";
-                    }}
-                  >
-                    <div style={{ aspectRatio: "16/10", overflow: "hidden" }}>
-                      <img
-                        src={rp.image}
-                        alt={rp.title}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          transition: "transform 0.7s ease-out",
-                          display: "block",
-                        }}
-                        onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
-                        onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
-                      />
-                    </div>
-                    <div style={{ padding: "1.5rem 2rem" }}>
-                      <span
-                        style={{
-                          fontSize: "0.7rem",
-                          fontWeight: 700,
-                          letterSpacing: "0.1em",
-                          textTransform: "uppercase",
-                          color: "hsl(var(--primary))",
-                          display: "block",
-                          marginBottom: "0.75rem",
-                        }}
-                      >
+                  <div className="relative h-48 overflow-hidden bg-slate-100">
+                    <img
+                      src={rp.image}
+                      alt={rp.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-6 flex flex-col justify-between flex-grow">
+                    <div>
+                      <span className="text-[#0284C7] text-xs font-bold uppercase tracking-wider block mb-2">
                         {rp.category}
                       </span>
-                      <h3
-                        style={{
-                          fontSize: "1.1rem",
-                          lineHeight: 1.4,
-                          display: "-webkit-box",
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                          margin: 0,
-                        }}
-                      >
+                      <h3 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#0284C7] transition-colors line-clamp-2">
                         {rp.title}
                       </h3>
                     </div>
@@ -625,7 +312,16 @@ const BlogPost = () => {
         </section>
       )}
 
-     
+      {/* Scroll to Top Floating Button */}
+      {showScrollTop && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Scroll to Top"
+          className="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-[#051B30] text-white flex items-center justify-center shadow-xl border border-cyan-400/40 hover:bg-[#0284C7] transition-all duration-300 cursor-pointer"
+        >
+          <ChevronUp size={20} />
+        </button>
+      )}
     </div>
   );
 };

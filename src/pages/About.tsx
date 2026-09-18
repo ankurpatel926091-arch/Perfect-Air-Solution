@@ -169,7 +169,7 @@ const About = () => (
                     whileInView="visible"
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
-                    className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col items-start justify-between group transform hover:-translate-y-1"
+                    className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col items-start justify-between group"
                   >
                     {/* Glowing Icon Badge */}
                     <div
@@ -241,7 +241,7 @@ const About = () => (
         </motion.div>
 
         {/* 4-Column Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {values.map((v, i) => {
             const IconComp = v.icon;
             return (
@@ -251,7 +251,7 @@ const About = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.45 }}
-                className="bg-white rounded-2xl p-6 border border-sky-100 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group transform hover:-translate-y-1"
+                className="bg-white rounded-2xl p-6 border border-sky-100 shadow-sm hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   {/* Top Row: Icon Badge & Tag */}

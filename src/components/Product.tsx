@@ -72,7 +72,7 @@ export function CommercialApplications() {
               key={i}
               initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }} transition={{ delay: i * 0.06, duration: 0.5 }}
-              whileHover={{ y: -6, scale: 1.04, boxShadow: "0 12px 32px hsl(var(--primary) / 0.14)" }}
+              whileHover={{ scale: 1.04, boxShadow: "0 12px 32px hsl(var(--primary) / 0.14)" }}
               onClick={() => navigate(`/hvac-applications/${app.slug}`)}
               style={{
                 display: "flex", flexDirection: "column", alignItems: "center",

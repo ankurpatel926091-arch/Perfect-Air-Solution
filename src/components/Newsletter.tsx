@@ -39,7 +39,7 @@ const Newsletter = () => {
         <div style={{ display: "inline-block", background: `${BRAND.primary}1A`, border: `1px solid ${BRAND.primary}40`, color: BRAND.primary, fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.18em", textTransform: "uppercase", padding: "5px 14px", borderRadius: "100px", marginBottom: "20px" }}>
           Newsletter
         </div>
-        <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontWeight: 400, fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", color: BRAND.dark, lineHeight: 1.15, marginBottom: "12px" }}>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight font-sans mb-3">
           Stay Updated with Latest HVAC Trends
         </h2>
         <p style={{ color: BRAND.slate400, fontSize: "1.05rem", lineHeight: 1.75, marginBottom: "24px", fontWeight: 400 }}>

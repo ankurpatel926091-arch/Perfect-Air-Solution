@@ -83,7 +83,7 @@ const metrics = [
 
 export default function Testimonials() {
   return (
-    <section className="py-20 sm:py-24 bg-gradient-to-b from-[#F0F8FF] via-[#F6FBFF] to-[#EBF5FA] text-slate-800 relative overflow-hidden font-sans">
+    <section className="py-16 sm:py-15 bg-gradient-to-b from-[#F0F8FF] via-[#F6FBFF] to-[#EBF5FA] text-slate-800 relative overflow-hidden font-sans">
       {/* Background glow and dot matrix decoration */}
       <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#0284C7_1px,transparent_1px)] [background-size:28px_28px]" />
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-cyan-400/10 rounded-full filter blur-3xl pointer-events-none" />
@@ -92,15 +92,15 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500/10 via-cyan-500/15 to-sky-500/10 border border-sky-300/40 text-[#0284C7] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4 shadow-sm"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500/10 via-cyan-500/15 to-sky-500/10 border border-sky-300/40 text-[#0284C7] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3.5 shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5 text-cyan-600 animate-pulse" />
-            <span>Client Feedback</span>
+            <span>CLIENT FEEDBACK</span>
           </motion.div>
 
           <motion.h2
@@ -108,10 +108,10 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
           >
             Trusted by Commercial &amp;{" "}
-            <span className="bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-700 bg-clip-text text-transparent">
+            <span className="text-[#0284C7]">
               Residential Clients
             </span>
           </motion.h2>
@@ -121,14 +121,14 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-slate-600 text-base sm:text-lg mt-4 font-medium leading-relaxed"
+            className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"
           >
             See what property managers, hospital administrators, and hotel owners say about our engineering excellence.
           </motion.p>
         </div>
 
         {/* Testimonials Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {testimonials.map((t, idx) => {
             const SectorIcon = t.icon;
             return (
@@ -138,7 +138,6 @@ export default function Testimonials() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.12, duration: 0.5 }}
-                whileHover={{ y: -8 }}
                 className="bg-white/90 backdrop-blur-md rounded-2xl p-7 sm:p-8 border border-slate-200/90 shadow-xl shadow-sky-950/5 hover:border-cyan-300 hover:shadow-2xl hover:shadow-cyan-500/10 flex flex-col justify-between relative group transition-all duration-300 overflow-hidden"
               >
                 {/* Top color gradient highlight bar on hover */}
@@ -197,7 +196,7 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-16 bg-white/80 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-xl shadow-sky-950/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+          className="mt-16 bg-white/80 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-xl shadow-sky-950/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {metrics.map((m, i) => {
             const MetricIcon = m.icon;

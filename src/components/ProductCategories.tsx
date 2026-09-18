@@ -74,25 +74,26 @@ export default function ProductCategories() {
   const categories = staticCategories;
 
   return (
-    <section className="py-16 bg-gradient-to-b from-[#F4FAFF] via-[#EEF8FF] to-[#E6F4FA] font-sans relative overflow-hidden">
+    <section className="py-16 sm:py-24 bg-gradient-to-b from-[#F4FAFF] via-[#EEF8FF] to-[#E6F4FA] font-sans relative overflow-hidden">
       {/* Background dot grid overlay */}
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#0284C7_1px,transparent_1px)] [background-size:24px_24px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 sm:mb-16">
           <div>
-            <div className="inline-block bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3 shadow-sm">
-              SHOP BY TOP CATEGORIES
+            <div className="inline-flex items-center gap-2 bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3.5 shadow-sm">
+              <span>SHOP BY TOP CATEGORIES</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight">
-              Don’t Miss Out – Shop Trending Cooling Products Today
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight">
+              Don’t Miss Out – Shop Trending{" "}
+              <span className="text-[#0284C7]">Cooling Products</span>
             </h2>
           </div>
 
           <button
             onClick={() => navigate("/product")}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-slate-200 text-[#0284C7] font-bold text-xs shadow-sm hover:shadow-md hover:border-sky-300 transition-all self-start md:self-auto"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-slate-200 text-[#0284C7] font-bold text-xs shadow-sm hover:shadow-md hover:border-sky-300 transition-all self-start md:self-auto cursor-pointer"
           >
             <span>View all products</span>
             <ArrowRight size={14} />
@@ -100,7 +101,7 @@ export default function ProductCategories() {
         </div>
 
         {/* Compact Clean Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.slug || cat.title}
@@ -108,7 +109,6 @@ export default function ProductCategories() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
-              whileHover={{ y: -5 }}
               onClick={() => navigate("/product")}
               className="group bg-white rounded-xl overflow-hidden border border-slate-200/80 shadow-md shadow-sky-900/5 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/10 transition-all duration-300 flex flex-col cursor-pointer"
             >

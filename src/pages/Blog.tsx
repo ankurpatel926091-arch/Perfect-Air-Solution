@@ -35,7 +35,7 @@ const Blog = () => {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-            gap: "24px",
+            gap: "16px",
           }}
         >
           {blogPosts.map((post: any, i: number) => (
@@ -124,11 +124,9 @@ const Blog = () => {
                       flexDirection: "column",
                     }}
                   >
-                    {/* h3: override font to DM Serif for editorial card title feel */}
                     <h3
+                      className="font-sans font-extrabold"
                       style={{
-                        fontFamily: "'DM Serif Display', Georgia, serif",
-                        fontWeight: 400,
                         color: "hsl(var(--brand-dark))",
                         fontSize: "1.1rem",
                         lineHeight: 1.4,

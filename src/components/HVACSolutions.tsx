@@ -52,7 +52,7 @@ export default function HVACSolutions() {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 sm:py-24 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] text-slate-800 relative overflow-hidden font-sans">
+    <section className="py-16 sm:py-15 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] text-slate-800 relative overflow-hidden font-sans">
       {/* Background Decorative Glow Accents */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -60,7 +60,7 @@ export default function HVACSolutions() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -76,10 +76,10 @@ export default function HVACSolutions() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight font-sans leading-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
           >
             Engineered Cooling for Every{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-sky-500 to-cyan-400">
+            <span className="text-[#0284C7]">
               Industry
             </span>
           </motion.h2>
@@ -89,14 +89,14 @@ export default function HVACSolutions() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-slate-600 text-base sm:text-lg mt-4 font-normal leading-relaxed"
+            className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"
           >
             Perfect Air Solution provides customized HVAC design, VRF systems, cassette units, and maintenance contracts engineered for diverse corporate and industrial requirements.
           </motion.p>
         </div>
 
         {/* Industry Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {sectors.map((sector, index) => {
             const IconComponent = sector.icon;
             return (
@@ -107,7 +107,7 @@ export default function HVACSolutions() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.5 }}
                 onClick={() => navigate(`/hvac-applications`)}
-                className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-sky-300 hover:-translate-y-1.5 transition-all duration-300 flex flex-col cursor-pointer font-sans"
+                className="group bg-white rounded-sm overflow-hidden border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-sky-300 transition-all duration-300 flex flex-col cursor-pointer font-sans"
               >
                 {/* Image Container */}
                 <div className="relative h-52 overflow-hidden bg-slate-100">
@@ -135,7 +135,7 @@ export default function HVACSolutions() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0284C7] group-hover:text-sky-600">
+                  <div className="mt-3 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0284C7] group-hover:text-sky-600">
                     <span>Explore Sector Solutions</span>
                     <ArrowRight size={15} className="group-hover:translate-x-1.5 transition-transform text-[#0284C7]" />
                   </div>

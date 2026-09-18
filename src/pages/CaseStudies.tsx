@@ -392,7 +392,7 @@ const CaseStudies = () => {
         </div>
 
         {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((study: any, i: number) => (
               <motion.article

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { BRAND } from "@/lib/colors";
 import { useGetServicesQuery } from "@/store/api";
 import Loader from "@/components/ui/Loader";
-import { Wrench, ShieldCheck, MapPin, Settings2, Wind, FileText, Building2, Activity, ArrowRight } from "lucide-react";
+import { Wrench, ShieldCheck, MapPin, Settings2, Wind, FileText, Building2, Activity, ArrowRight, Sparkles } from "lucide-react";
 
 import installationImg from "@/assets/categories/split-ac.png";
 import repairImg from "@/assets/why_choose_showcase.jpg";
@@ -92,25 +92,46 @@ export default function Services() {
   if (isLoading && (!apiServices || apiServices.length === 0)) return <Loader />;
 
   return (
-    <section className="section-padding py-20 relative overflow-hidden bg-gradient-to-b from-[#EEF8FF] via-[#F4FAFF] to-[#E6F4FA]" style={{  
-      fontFamily: "'DM Sans', sans-serif"
-    }}>
+    <section className="py-16 sm:py-15 bg-gradient-to-b from-[#EEF8FF] via-[#F4FAFF] to-[#E6F4FA] font-sans relative overflow-hidden">
       {/* Background Dot Overlay */}
       <div style={{ position: "absolute", inset: 0, opacity: 0.4, backgroundImage: "radial-gradient(circle, rgba(2, 132, 199, 0.12) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: "center", marginBottom: "48px" }}>
-          <div className="inline-block bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-5 py-1.5 rounded-full mb-4 shadow-sm">
-            OUR CORE HVAC EXPERTISE
-          </div>
-          <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif" }} className="text-3xl sm:text-4xl lg:text-5xl text-[#051B30] font-normal leading-tight">
-            Comprehensive HVAC Services
-          </h2>
-          <p className="text-slate-600 text-sm md:text-base max-w-2xl mx-auto mt-3 font-normal">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] font-bold text-xs uppercase tracking-widest mb-3.5 shadow-sm"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#0284C7] animate-pulse" />
+            <span>OUR CORE HVAC EXPERTISE</span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
+          >
+            Comprehensive{" "}
+            <span className="text-[#0284C7] relative inline-block">
+              HVAC Services
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"
+          >
             From emergency repairs and scheduled AMC to full-scale commercial VRF central plants, Perfect Air Solution ensures optimal climate control.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
         {/* Visual Cards Grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "16px" }}>
@@ -124,7 +145,6 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
-                whileHover={{ y: -8 }}
                 className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/80 bg-white shadow-xl shadow-sky-900/5 transition-all duration-300 cursor-pointer hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10"
               >
                 {/* Visual Image Header */}
@@ -146,7 +166,7 @@ export default function Services() {
                 {/* Card Content */}
                 <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-white">
                   <div>
-                    <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif" }} className="text-base sm:text-lg text-[#051B30] font-bold mb-1.5 leading-snug group-hover:text-[#0284C7] transition-colors">
+                    <h3 className="text-lg sm:text-xl font-extrabold text-[#051B30] group-hover:text-[#0284C7] transition-colors mb-1.5 leading-snug font-sans tracking-tight">
                       {s.title}
                     </h3>
                     <p className="text-slate-600 text-xs leading-relaxed font-normal line-clamp-2">

@@ -39,7 +39,7 @@ const StatCard: React.FC<StatCardProps> = ({
   label, count, loading, icon: Icon,
   accent, accentBg, accentBorder, path, addPath,
 }) => (
-  <div className={`relative overflow-hidden rounded-2xl border ${accentBorder} bg-white group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}>
+  <div className={`relative overflow-hidden rounded-2xl border ${accentBorder} bg-white group transition-all duration-300 hover:shadow-xl`}>
     {/* subtle top stripe */}
     <div className={`h-1 w-full ${accent.replace("text-", "bg-")}`} />
 

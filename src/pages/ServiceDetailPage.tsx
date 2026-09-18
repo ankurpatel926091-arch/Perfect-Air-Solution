@@ -105,7 +105,7 @@ export default function ServiceDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* ── LEFT COLUMN (Main Details) ── */}
-          <div className="lg:col-span-8 space-y-10">
+          <div className="lg:col-span-8 space-y-4">
             
             {/* Service Feature Image Hero Card */}
             {service.image && (
@@ -114,7 +114,7 @@ export default function ServiceDetailPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="relative rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-900 aspect-[16/9] sm:aspect-[2/1] max-h-[360px]"
+                className="relative w-full rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-900 h-64 sm:h-80 md:h-[340px] lg:h-[360px]"
               >
                 <img
                   src={service.image}
@@ -190,7 +190,7 @@ export default function ServiceDetailPage() {
                   <span>Standard Operating Execution Process</span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {service.process.map((p: any, idx: number) => (
                     <div
                       key={idx}

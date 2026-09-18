@@ -85,7 +85,7 @@ const CTASection: React.FC<CTAProps> = ({
             </div>
 
             {/* Title */}
-            <h2 style={{ color: "white", fontSize: "clamp(1.5rem, 2.8vw, 2.3rem)", fontWeight: 800, marginBottom: "12px", marginTop: 0, lineHeight: 1.2 }}>
+            <h2 style={{ color: "white", fontSize: "clamp(1.5rem, 2.8vw, 2rem)", fontWeight: 800, marginBottom: "12px", marginTop: 0, lineHeight: 1.2 }}>
               Ready for Turnkey Commercial &amp; Residential HVAC Solutions?
             </h2>
 

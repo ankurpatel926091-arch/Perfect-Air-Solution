@@ -141,22 +141,22 @@ export default function FeaturedProjects() {
     : fallbackProjects;
 
   return (
-    <section className="section-padding py-20 bg-slate-50">
+    <section className="py-16 sm:py-24 bg-slate-50 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4">
           <div>
-            <span className="inline-block bg-sky-100 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
-              Proven Track Record
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#051B30] tracking-tight">
-              Featured Projects &amp; Installations
+            <div className="inline-flex items-center gap-2 bg-sky-100 border border-sky-200 text-[#0284C7] font-extrabold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3.5 shadow-sm">
+              <span>PROVEN TRACK RECORD</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight">
+              Featured Projects &amp; <span className="text-[#0284C7]">Installations</span>
             </h2>
           </div>
           <button
             onClick={() => navigate("/gallery")}
-            className="inline-flex items-center gap-2 font-bold text-sm text-[#0284C7] hover:text-sky-700 transition-colors"
+            className="inline-flex items-center gap-2 font-bold text-xs sm:text-sm text-[#0284C7] hover:text-sky-700 transition-colors cursor-pointer"
           >
             <span>View Full Project Gallery</span>
             <ArrowRight size={16} />
@@ -164,7 +164,7 @@ export default function FeaturedProjects() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {displayProjects.map((p: any, i: number) => (
             <ProjectCard key={p._id || i} project={p} i={i} />
           ))}

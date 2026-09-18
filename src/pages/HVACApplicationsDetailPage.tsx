@@ -378,7 +378,7 @@ export function HVACApplicationsDetailPage() {
 
         {/* Industry Cards Grid */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {Object.entries(applicationData).map(([key, item], idx) => (
               <motion.div
                 key={key}
@@ -386,7 +386,7 @@ export function HVACApplicationsDetailPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
                 onClick={() => navigate(`/hvac-applications/${key}`)}
-                className="group relative bg-white rounded-2xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+                className="group relative bg-white rounded-2xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
               >
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
@@ -481,7 +481,7 @@ export function HVACApplicationsDetailPage() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.cards.map((card, i) => (
             <motion.div
               key={i}
@@ -489,7 +489,7 @@ export function HVACApplicationsDetailPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.08 }}
-              className="group relative bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+              className="group relative bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="w-12 h-12 rounded-xl bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">

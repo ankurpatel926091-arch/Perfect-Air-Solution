@@ -64,7 +64,7 @@ const fadeUp = {
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] font-sans relative overflow-hidden">
+    <section className="py-300 md:py-14 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] font-sans relative overflow-hidden">
       {/* Background Soft Glow Accents */}
       <div className="absolute top-12 left-10 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -72,7 +72,7 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0695CD] text-xs font-bold uppercase tracking-wider mb-3.5 shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-[#0695CD] animate-pulse" />
             <span>Why Choose Us</span>
@@ -91,7 +91,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* 2-Column Showcase Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
           
           {/* LEFT COLUMN: Clean Visual Photo Showcase Card */}
           <motion.div
@@ -99,7 +99,7 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="lg:col-span-5 relative flex flex-col justify-between"
+            className="lg:col-span-1 relative flex flex-col justify-between"
           >
             {/* Main Visual Image Wrapper */}
             <div className="relative w-full h-full min-h-[460px] lg:min-h-[580px] rounded-xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900">
@@ -132,16 +132,7 @@ export default function WhyChooseUs() {
                 <span>12+ Years Exp.</span>
               </div>
 
-              {/* Middle-Left Glass Badge: Energy Savings */}
-              <div className="absolute top-1/2 left-4 -translate-y-1/2 z-20 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-emerald-100 shadow-xl flex items-center gap-3 max-w-[220px]">
-                <div className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center shrink-0">
-                  <Zap className="w-4 h-4 fill-emerald-500 text-emerald-500" />
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-emerald-700 block leading-tight">Up to 40% Savings</span>
-                  <span className="text-[10px] text-slate-500 font-medium">Inverter & VRF Systems</span>
-                </div>
-              </div>
+             
 
               {/* Bottom-Right Inset Thumbnail: Indoor AC Showcase */}
               <div className="absolute bottom-4 right-4 z-20 w-36 sm:w-44 rounded-xl overflow-hidden border-2 border-white shadow-2xl bg-slate-900">
@@ -170,7 +161,7 @@ export default function WhyChooseUs() {
           </motion.div>
 
           {/* RIGHT COLUMN: Clean Feature Cards List */}
-          <div className="lg:col-span-7 flex flex-col justify-between space-y-3.5">
+          <div className="lg:col-span-1 flex flex-col justify-between space-y-4">
             {features.map((f, i) => {
               const IconComp = f.icon;
               return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
@@ -16,9 +16,28 @@ import {
   Phone,
   Send,
   Check,
-  Clock
+  Clock,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
-import heroBg from "../assets/hero_ac_bg.jpg";
+import heroBg1 from "../assets/hero_ac_bg.jpg";
+import heroBg2 from "../assets/about_ac_showcase.jpg";
+import heroBg3 from "../assets/why_choose_indoor.jpg";
+
+const heroBackgrounds = [
+  {
+    src: heroBg1,
+    alt: "Modern HVAC Air Conditioning Interior Background",
+  },
+  {
+    src: heroBg2,
+    alt: "Premium Indoor Climate & Cooling Solutions",
+  },
+  {
+    src: heroBg3,
+    alt: "Commercial VRF & Industrial HVAC Ducting Plant",
+  },
+];
 
 type BookingService =
   | "repair"
@@ -77,6 +96,22 @@ const Hero = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<BookingErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof BookingForm, boolean>>>({});
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroBackgrounds.length);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroBackgrounds.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroBackgrounds.length) % heroBackgrounds.length);
+  };
 
   const validateField = async (field: keyof BookingForm, value: string) => {
     try {
@@ -164,22 +199,31 @@ const Hero = () => {
 
   return (
     <section className="relative pt-28 pb-20 md:pt-32 md:pb-28 lg:pt-36 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center bg-[#03172C] text-white">
-      {/* Background Image & Layered Dark Gradient Overlays */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Crisp & High-Visibility AC Room Background Image */}
-        <img
-          src={heroBg}
-          alt="Modern HVAC Air Conditioning Interior Background"
-          className="w-full h-full object-cover object-[75%_25%] opacity-90 brightness-110 contrast-[1.05] transition-all duration-700"
-        />
+      {/* Background Image Slider & Layered Dark Gradient Overlays */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {heroBackgrounds.map((bg, idx) => (
+          <div
+            key={idx}
+            style={{ transitionDuration: "1000ms" }}
+            className={`absolute inset-0 transition-all ease-in-out ${
+              idx === currentSlide ? "opacity-90 scale-105" : "opacity-0 scale-100"
+            }`}
+          >
+            <img
+              src={bg.src}
+              alt={bg.alt}
+              className="w-full h-full object-cover object-[75%_25%] brightness-110 contrast-[1.05]"
+            />
+          </div>
+        ))}
 
         {/* Deep Navy to Ocean Blue Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#03172C] via-[#042442]/85 to-[#0B5A96]/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#03172C] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#03172C] via-[#042442]/85 to-[#0B5A96]/35 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#03172C] via-transparent to-transparent pointer-events-none" />
 
         {/* Ambient Cyan Light Glow Spotlights */}
-        <div className="absolute top-5 right-1/4 w-[500px] h-[500px] bg-sky-400/25 rounded-full blur-[120px]" />
-        <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-[120px]" />
+        <div className="absolute top-5 right-1/4 w-[500px] h-[500px] bg-sky-400/25 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
       </div>
 
       {/* Main Grid Container */}
@@ -452,6 +496,40 @@ const Hero = () => {
           </div>
 
         </div>
+      </div>
+
+      {/* Background Slider Indicator Dots & Navigation Controls */}
+      <div className="absolute bottom-10 sm:bottom-14 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 px-4 py-2 rounded-full bg-[#03172C]/70 backdrop-blur-md border border-cyan-400/30 shadow-xl">
+        <button
+          onClick={prevSlide}
+          aria-label="Previous Slide"
+          className="w-7 h-7 rounded-full bg-white/10 hover:bg-cyan-500/80 text-white flex items-center justify-center transition-all cursor-pointer"
+        >
+          <ChevronLeft size={16} />
+        </button>
+        
+        <div className="flex items-center gap-2">
+          {heroBackgrounds.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentSlide(idx)}
+              aria-label={`Go to background slide ${idx + 1}`}
+              className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
+                idx === currentSlide
+                  ? "w-8 bg-cyan-400 shadow-[0_0_12px_#00D4FF]"
+                  : "w-2.5 bg-white/30 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={nextSlide}
+          aria-label="Next Slide"
+          className="w-7 h-7 rounded-full bg-white/10 hover:bg-cyan-500/80 text-white flex items-center justify-center transition-all cursor-pointer"
+        >
+          <ChevronRight size={16} />
+        </button>
       </div>
 
       {/* Bottom Soft Curved Transition */}

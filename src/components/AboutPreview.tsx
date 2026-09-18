@@ -83,14 +83,6 @@ export default function AboutPreview() {
               </div>
             </div>
 
-            {/* Learn More Link */}
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 font-bold text-sm text-[#0284C7] hover:text-sky-700 transition-colors mt-2"
-            >
-              <span>Learn More About Us</span>
-              <ArrowRight size={16} />
-            </Link>
           </div>
 
           {/* RIGHT COLUMN — FEATURED AC GRAPHIC CARD (Photo 2 Reference) */}
