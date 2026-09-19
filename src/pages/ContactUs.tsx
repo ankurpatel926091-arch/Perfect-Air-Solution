@@ -627,20 +627,20 @@ export default function ContactUs() {
       </div>
 
       {/* HERO - full width */}
-      <section className="relative pt-24 pb-8 sm:pt-28 sm:pb-9 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-2.5 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
             <span className="flex items-center gap-1.5"><MessageSquare size={13} /> GET IN TOUCH</span>
           </div>
           
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
           >
             Let's Build Your <span className="text-cyan-300">Perfect Climate</span>
           </motion.h1>
@@ -649,12 +649,12 @@ export default function ContactUs() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-4"
+            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5"
           >
             9+ years of HVAC expertise. Tell us what you need and our engineering experts will take care of the rest.
           </motion.p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-xl mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-2xl mx-auto">
             <span>✓ 24/7 Rapid Response</span>
             <span>✓ Free Technical Site Inspection</span>
             <span>✓ Guaranteed Solution</span>
@@ -742,7 +742,7 @@ export default function ContactUs() {
                 >
                   <div className="mb-6">
                     
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#051B30] tracking-tight leading-tight">
+                    <h2 className="text-xl sm:text-2xl font-extrabold text-[#051B30] tracking-tight leading-tight">
                       Send Us a Message
                     </h2>
                     <p className="text-slate-500 text-xs sm:text-sm mt-1 font-normal">

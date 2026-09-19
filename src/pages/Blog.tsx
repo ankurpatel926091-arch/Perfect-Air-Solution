@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { useGetBlogsQuery } from "@/store/api";
 import React from "react";
 import Loader from "@/components/ui/Loader";
@@ -13,21 +13,42 @@ const Blog = () => {
   return (
     <div className="bg-background min-h-screen">
 
-      {/* ── HERO ── */}
-      <div
-        className="bg-hero-gradient text-center"
-        style={{ padding: "56px 24px", marginTop: "48px" }}
-      >
-        {/* h1 global: DM Serif Display, 400, clamp size, brand-dark — override only color for hero */}
-        <h1 style={{ color: "white", marginBottom: "12px" }}>
-          HVAC Insights &amp; Tips
-        </h1>
+      {/* ── Hero Banner ── */}
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+        {/* Ambient background light */}
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* body-text class: Inter, base/lg, leading-relaxed */}
-        <p className="body-text" style={{ color: "hsl(var(--brand-sky))" }}>
-          Expert advice on air conditioning, maintenance, and energy efficiency.
-        </p>
-      </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
+            <Sparkles size={14} className="animate-pulse text-cyan-300" />
+            <span>EXPERT HVAC ARTICLES</span>
+          </div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
+          >
+            HVAC Insights &amp; <span className="text-cyan-300">Tips</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.15 }}
+            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5"
+          >
+            Expert advice on air conditioning, maintenance, and energy efficiency.
+          </motion.p>
+
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-2xl mx-auto">
+            <span>✓ Maintenance Tips</span>
+            <span>✓ Energy Saving Advice</span>
+            <span>✓ Commercial &amp; Residential</span>
+          </div>
+        </div>
+      </section>
 
       {/* ── BLOG GRID ── */}
       <div style={{ maxWidth: "1152px", margin: "0 auto", padding: "40px 24px" }}>
@@ -56,21 +77,18 @@ const Blog = () => {
                     borderRadius: "var(--radius)",
                     overflow: "hidden",
                     border: "1px solid hsl(var(--border))",
-                    boxShadow: "0 4px 16px hsl(var(--brand-dark) / 0.07)",
                     display: "flex",
                     flexDirection: "column",
                     height: "100%",
-                    transition: "box-shadow 0.3s, transform 0.3s",
+                    transition: "border-color 0.3s, transform 0.3s",
                   }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-                    (e.currentTarget as HTMLElement).style.boxShadow =
-                      "0 12px 32px hsl(var(--brand-dark) / 0.13)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--brand-cyan))";
                   }}
                   onMouseLeave={e => {
                     (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                    (e.currentTarget as HTMLElement).style.boxShadow =
-                      "0 4px 16px hsl(var(--brand-dark) / 0.07)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--border))";
                   }}
                 >
                   {/* Image */}

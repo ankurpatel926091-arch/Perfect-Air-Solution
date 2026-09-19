@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Star, Quote, CheckCircle2, ShieldCheck, Clock, Award, ThumbsUp, Sparkles, Building2, Stethoscope, Hotel } from "lucide-react";
+import { Star, CheckCircle2, ShieldCheck, Clock, Award, ThumbsUp, Sparkles, Building2, Stethoscope, Hotel } from "lucide-react";
 
 type Testimonial = {
   id: string;
@@ -108,7 +108,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
           >
             Trusted by Commercial &amp;{" "}
             <span className="text-[#0284C7]">
@@ -138,13 +138,10 @@ export default function Testimonials() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.12, duration: 0.5 }}
-                className="bg-white/90 backdrop-blur-md rounded-2xl p-7 sm:p-8 border border-slate-200/90 shadow-xl shadow-sky-950/5 hover:border-cyan-300 hover:shadow-2xl hover:shadow-cyan-500/10 flex flex-col justify-between relative group transition-all duration-300 overflow-hidden"
+                className="bg-white/90 backdrop-blur-md rounded-2xl p-7 sm:p-8 border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none flex flex-col justify-between relative group transition-all duration-300 overflow-hidden"
               >
                 {/* Top color gradient highlight bar on hover */}
                 <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${t.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl`} />
-
-                {/* Subtle watermark quote icon */}
-                <Quote className="absolute top-6 right-6 text-slate-150 group-hover:text-cyan-400/25 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 w-10 h-10 pointer-events-none" />
 
                 <div>
                   {/* Sector Tag & Rating */}
@@ -172,7 +169,7 @@ export default function Testimonials() {
 
                 {/* Author Info */}
                 <div className="pt-5 border-t border-slate-100/90 flex items-center gap-3.5">
-                  <div className={`w-11 h-11 rounded-full bg-gradient-to-tr ${t.gradient} flex items-center justify-center text-white font-bold text-base shadow-md shadow-sky-900/15 shrink-0`}>
+                  <div className={`w-11 h-11 rounded-full bg-gradient-to-tr ${t.gradient} flex items-center justify-center text-white font-bold text-base shrink-0`}>
                     {t.avatarLetter}
                   </div>
                   <div className="min-w-0">

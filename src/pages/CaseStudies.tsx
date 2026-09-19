@@ -325,13 +325,13 @@ const CaseStudies = () => {
     <main className="bg-slate-50 font-sans min-h-screen">
       
       {/* ── Top Hero Banner ── */}
-      <section className="relative pt-24 pb-8 sm:pt-28 sm:pb-9 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-2.5 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
             <FileText size={14} className="text-cyan-300" />
             <span>OUR PROJECTS &amp; CASE STUDIES</span>
           </div>
@@ -339,7 +339,7 @@ const CaseStudies = () => {
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3.5 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
           >
             HVAC Engineering Projects &amp; <span className="text-cyan-300">Case Studies</span>
           </motion.h1>
@@ -348,12 +348,12 @@ const CaseStudies = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto font-normal leading-relaxed mb-4"
+            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5"
           >
             Explore our portfolio of commercial, industrial, healthcare, and residential HVAC installations across Northern India. Download detailed technical project case studies in PDF format.
           </motion.p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-xl mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-2xl mx-auto">
             <span>✓ 500+ Projects Completed</span>
             <span>✓ 15,000+ Commercial Tonnes</span>
             <span>✓ PDF Case Studies</span>
@@ -402,7 +402,7 @@ const CaseStudies = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+                className="bg-white rounded-2xl border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 overflow-hidden flex flex-col justify-between group"
               >
                 {/* Header Image */}
                 <div>
@@ -416,7 +416,7 @@ const CaseStudies = () => {
                     
                     {/* Top Badges */}
                     <div className="absolute top-4 left-4 flex items-center gap-2">
-                      <span className="bg-[#0284C7] text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-md">
+                      <span className="bg-[#0284C7] text-white text-xs font-bold px-3.5 py-1.5 rounded-full">
                         {study.category}
                       </span>
                     </div>
@@ -446,7 +446,7 @@ const CaseStudies = () => {
 
                   {/* Body Content */}
                   <div className="p-6 sm:p-7">
-                    <h2 className="text-xl sm:text-2xl font-extrabold text-[#051B30] group-hover:text-[#0284C7] transition-colors leading-snug mb-4">
+                    <h2 className="text-lg sm:text-xl font-bold text-[#051B30] group-hover:text-[#0284C7] transition-colors leading-snug mb-3">
                       {study.title}
                     </h2>
 

@@ -64,10 +64,9 @@ const sections = [
 const TermsConditions = () => (
   <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
     <section
-      className="relative overflow-hidden"
+      className="relative overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 text-white"
       style={{
         background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.darkMid} 50%, ${BRAND.primary} 100%)`,
-        padding: "100px 0 60px",
       }}
     >
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">

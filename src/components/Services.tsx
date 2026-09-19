@@ -114,7 +114,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
           >
             Comprehensive{" "}
             <span className="text-[#0284C7] relative inline-block">
@@ -145,7 +145,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
-                className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/80 bg-white shadow-xl shadow-sky-900/5 transition-all duration-300 cursor-pointer hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10"
+                className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/90 bg-white transition-all duration-300 cursor-pointer hover:border-[#0284C7] shadow-none hover:shadow-none"
               >
                 {/* Visual Image Header */}
                 <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100 flex items-center justify-center">
@@ -158,7 +158,7 @@ export default function Services() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
                   
                   {/* Floating Icon Badge */}
-                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-xl bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center shadow-md">
+                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-xl bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center">
                     <IconComponent size={18} />
                   </div>
                 </div>

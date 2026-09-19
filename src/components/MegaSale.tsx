@@ -26,7 +26,7 @@ const MegaSale = () => (
                 MEGA SALE
               </span>
             </div>
-            <h2 className="font-display text-3xl sm:text-5xl font-bold text-primary-foreground mb-3">
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-foreground mb-3">
               End of Season Sale
             </h2>
             <p className="text-primary-foreground/70 text-lg">
@@ -49,7 +49,7 @@ const MegaSale = () => (
         className="text-center mb-14"
       >
         <span className="text-sm font-semibold uppercase tracking-widest text-accent">Flexible Options</span>
-        <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground mt-3">AC Rental Plans</h2>
+        <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mt-3">AC Rental Plans</h2>
       </motion.div>
 
       <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">

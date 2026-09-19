@@ -78,7 +78,7 @@ export default function WhyChooseUs() {
             <span>Why Choose Us</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#082A45] tracking-tight leading-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#082A45] tracking-tight leading-tight mb-4">
             Why Choose{" "}
             <span className="text-[#0695CD] relative inline-block">
               Perfect Air Solution
@@ -172,10 +172,10 @@ export default function WhyChooseUs() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={fadeUp}
-                  className="p-4 sm:p-5 rounded-xl bg-white border border-sky-100/90 shadow-sm hover:shadow-md hover:border-[#0695CD]/40 transition-all duration-300 flex flex-col sm:flex-row items-start gap-4 group"
+                  className="p-4 sm:p-5 rounded-xl bg-white border border-sky-100/90 shadow-none hover:shadow-none hover:border-[#0695CD]/60 transition-all duration-300 flex flex-col sm:flex-row items-start gap-4 group"
                 >
                   {/* Icon Box */}
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${f.color} text-white flex items-center justify-center shrink-0 shadow-md shadow-sky-500/15`}>
+                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${f.color} text-white flex items-center justify-center shrink-0`}>
                     <IconComp className="w-5 h-5" />
                   </div>
 
@@ -224,7 +224,7 @@ export default function WhyChooseUs() {
             return (
               <div
                 key={tp.label}
-                className="p-3.5 rounded-xl bg-white/90 border border-sky-100 flex items-center gap-3 shadow-sm hover:shadow transition-shadow"
+                className="p-3.5 rounded-xl bg-white/90 border border-sky-100 flex items-center gap-3 shadow-none hover:shadow-none transition-colors"
               >
                 <div className="w-9 h-9 rounded-xl bg-sky-100/70 text-[#0695CD] flex items-center justify-center shrink-0">
                   <TpIcon className="w-4 h-4" />

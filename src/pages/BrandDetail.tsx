@@ -58,11 +58,12 @@ export default function BrandDetail() {
       <div style={{ width: "100%", background: BRAND.white }}>
 
         {/* ── Hero ── */}
-        <section style={{
-          background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.darkMid} 50%, ${BRAND.primary} 100%)`,
-          padding: "80px 24px",
-          position: "relative", overflow: "hidden"
-        }}>
+        <section
+          className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 overflow-hidden"
+          style={{
+            background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.darkMid} 50%, ${BRAND.primary} 100%)`,
+          }}
+        >
           <div style={{
             position: "absolute", inset: 0, opacity: 0.07,
             backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px)",
@@ -152,7 +153,7 @@ export default function BrandDetail() {
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 padding: "5px 14px", borderRadius: "100px", marginBottom: "16px"
               }}>Why Choose</div>
-              <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)", color: BRAND.dark, fontWeight: 800 }}>
+              <h2 style={{ fontSize: "clamp(1.4rem, 2.4vw, 2rem)", color: BRAND.dark, fontWeight: 800 }}>
                 {brand.brandName} in Hardoi
               </h2>
               <div style={{ width: "48px", height: "3px", background: `linear-gradient(90deg, ${BRAND.dark}, ${BRAND.primary})`, borderRadius: "2px", margin: "16px auto 0" }} />
@@ -193,7 +194,7 @@ export default function BrandDetail() {
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 padding: "5px 14px", borderRadius: "100px", marginBottom: "16px"
               }}>Our Collection</div>
-              <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)", color: BRAND.dark, fontWeight: 800 }}>
+              <h2 style={{ fontSize: "clamp(1.4rem, 2.4vw, 2rem)", color: BRAND.dark, fontWeight: 800 }}>
                 {brand.brandName} Product Range
               </h2>
               <div style={{ width: "48px", height: "3px", background: `linear-gradient(90deg, ${BRAND.dark}, ${BRAND.primary})`, borderRadius: "2px", margin: "16px auto 0" }} />
@@ -264,7 +265,7 @@ export default function BrandDetail() {
           }} />
           <motion.div style={{ maxWidth: "580px", margin: "0 auto", position: "relative", zIndex: 2 }}
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: BRAND.white, marginBottom: "16px", fontWeight: 800 }}>
+            <h2 style={{ fontSize: "clamp(1.4rem, 2.5vw, 2.1rem)", color: BRAND.white, marginBottom: "16px", fontWeight: 800 }}>
               Ready to Experience <span style={{ color: BRAND.accentOnDark }}>{brand.brandName}</span>?
             </h2>
             <p style={{ color: BRAND.textOnDark, marginBottom: "36px", fontSize: "1.05rem", fontWeight: 300 }}>

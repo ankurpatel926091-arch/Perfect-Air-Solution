@@ -39,16 +39,16 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
   }
 
   return (
-    <article className="bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-sky-300 transition-all duration-300 group font-sans h-full">
+    <article className="bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 group font-sans h-full">
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden bg-slate-100">
         {/* Category Icon Badge */}
-        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-xl bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white shadow-lg shadow-sky-600/30 border border-white/20">
+        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-xl bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
           {getCategoryIcon(post.category)}
         </div>
         
         {post.featured && (
-          <div className="absolute top-4 right-4 z-10 text-white text-xs font-extrabold px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 shadow-md">
+          <div className="absolute top-4 right-4 z-10 text-white text-xs font-extrabold px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500">
             Featured
           </div>
         )}
@@ -80,7 +80,7 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
         <Link
           aria-label={`Read article: ${post.title}`}
           to={`/blog/${post.slug || post._id}`}
-          className="mt-auto w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer shadow-sm text-decoration-none"
+          className="mt-auto w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer text-decoration-none"
         >
           <BookOpen size={15} />
           <span>Read Article</span>
@@ -221,7 +221,7 @@ export default function BlogPreview() {
             <span>OUR BLOG</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight font-sans leading-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight font-sans leading-tight mb-4">
             Latest{" "}
             <span className="text-[#0284C7]">
               Insights &amp; Updates
@@ -230,7 +230,7 @@ export default function BlogPreview() {
 
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-sky-50 border border-sky-200 text-[#0284C7] font-extrabold text-xs uppercase tracking-wider shadow-sm hover:shadow transition-all group text-decoration-none"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-sky-50 border border-sky-200 text-[#0284C7] font-extrabold text-xs uppercase tracking-wider transition-all group text-decoration-none"
           >
             <span>View All Articles</span>
             <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform text-[#0284C7]" />

@@ -55,7 +55,7 @@ function ProjectCard({ project, i }: { project: any; i: number }) {
         cursor: "pointer",
         borderRadius: "12px",
         overflow: "hidden",
-        boxShadow: `0 4px 24px rgba(5, 27, 48, 0.1)`,
+        border: "1px solid #e2e8f0",
         background: BRAND.white,
         position: "relative",
       }}
@@ -150,7 +150,7 @@ export default function FeaturedProjects() {
             <div className="inline-flex items-center gap-2 bg-sky-100 border border-sky-200 text-[#0284C7] font-extrabold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3.5 shadow-sm">
               <span>PROVEN TRACK RECORD</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight">
               Featured Projects &amp; <span className="text-[#0284C7]">Installations</span>
             </h2>
           </div>

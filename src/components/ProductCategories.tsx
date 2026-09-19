@@ -82,10 +82,10 @@ export default function ProductCategories() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 sm:mb-16">
           <div>
-            <div className="inline-flex items-center gap-2 bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3.5 shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3.5">
               <span>SHOP BY TOP CATEGORIES</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight">
               Don’t Miss Out – Shop Trending{" "}
               <span className="text-[#0284C7]">Cooling Products</span>
             </h2>
@@ -93,7 +93,7 @@ export default function ProductCategories() {
 
           <button
             onClick={() => navigate("/product")}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-slate-200 text-[#0284C7] font-bold text-xs shadow-sm hover:shadow-md hover:border-sky-300 transition-all self-start md:self-auto cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-slate-200 text-[#0284C7] font-bold text-xs hover:border-sky-300 transition-all self-start md:self-auto cursor-pointer"
           >
             <span>View all products</span>
             <ArrowRight size={14} />
@@ -110,7 +110,7 @@ export default function ProductCategories() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
               onClick={() => navigate("/product")}
-              className="group bg-white rounded-xl overflow-hidden border border-slate-200/80 shadow-md shadow-sky-900/5 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/10 transition-all duration-300 flex flex-col cursor-pointer"
+              className="group bg-white rounded-xl overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col cursor-pointer"
             >
               {/* Image Box */}
               <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-100 flex items-center justify-center">
@@ -122,7 +122,7 @@ export default function ProductCategories() {
                 
                 {/* Badge */}
                 {cat.badge && (
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 border border-sky-100 text-[#0284C7] text-[10px] font-extrabold uppercase tracking-wider backdrop-blur-md shadow-sm">
+                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 border border-sky-100 text-[#0284C7] text-[10px] font-extrabold uppercase tracking-wider backdrop-blur-md">
                     {cat.badge}
                   </div>
                 )}

@@ -151,14 +151,14 @@ export default function Shop() {
     <>
       <div className="min-h-screen bg-[#F4FAFE] font-sans text-slate-800 pb-12">
         {/* Header Section */}
-        <div className="bg-[#E8F6FC] pt-12 pb-8 px-4 flex flex-col items-center text-center">
+        <div className="bg-[#E8F6FC] pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 px-4 flex flex-col items-center text-center">
           <h1
             style={displayFont}
-            className="text-3xl md:text-4xl text-slate-900 mb-4 mt-14"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-4 leading-tight"
           >
-            Shop Premium Air Conditioners & HVAC Products
+            Shop Premium Air Conditioners &amp; HVAC Products
           </h1>
-          <p className="text-slate-500 max-w-2xl mb-8">
+          <p className="text-slate-600 text-sm sm:text-base max-w-3xl mb-8">
             Find the perfect solution for your home with our wide selection of energy-efficient
             HVAC products from top brands.
           </p>

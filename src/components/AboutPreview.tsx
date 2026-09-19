@@ -40,7 +40,7 @@ export default function AboutPreview() {
             </div>
 
             {/* Main Title */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-[1.2] mb-5">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-[1.2] mb-4">
               Premier HVAC &amp; Cooling Experts{" "}
               <span className="text-[#0284C7]">Uttar Pradesh</span>
             </h2>

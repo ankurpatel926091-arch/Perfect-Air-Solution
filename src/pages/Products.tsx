@@ -273,11 +273,11 @@ function ProductCard({
   const isCommercialProduct = Boolean(cat.price);
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group font-sans">
+    <div className="bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 group font-sans">
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden bg-slate-100">
         {/* Category Icon Badge */}
-        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-xl bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white shadow-lg shadow-sky-600/30 border border-white/20">
+        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-xl bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
           {cat.icon}
         </div>
         <img
@@ -344,7 +344,7 @@ function ProductCard({
           <button
             type="button"
             onClick={() => onGetQuote(cat)}
-            className="mt-auto w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-sky-600/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            className="mt-auto w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
             <MessageSquare size={15} />
             <span>Enquire Now</span>
@@ -354,7 +354,7 @@ function ProductCard({
           <button
             type="button"
             onClick={() => onGetQuote(cat)}
-            className="mt-auto w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer shadow-sm"
+            className="mt-auto w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
           >
             <MessageSquare size={15} />
             <span>Get Quote</span>
@@ -569,7 +569,7 @@ export default function ProductsPage() {
       </section>
 
       {/* ── Sticky Category Filter Bar ── */}
-      <div className="bg-white/95 backdrop-blur-md sticky top-[64px] lg:top-[96px] z-[900] border-b border-sky-100 py-3.5 px-4 shadow-sm">
+      <div className="bg-white/95 backdrop-blur-md sticky top-[64px] lg:top-[96px] z-[900] border-b border-sky-100 py-3.5 px-4">
         <div className="flex gap-2.5 overflow-x-auto w-full px-2 no-scrollbar justify-start sm:justify-center max-w-5xl mx-auto">
           {filters.map((f) => {
             const isActive = activeFilter === f.id;
@@ -580,9 +580,9 @@ export default function ProductsPage() {
                   setActiveFilter(f.id);
                   setSelectedCategory("all");
                 }}
-                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-300 shadow-sm cursor-pointer ${
+                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? "bg-[#0284C7] text-white shadow-md shadow-sky-500/25 scale-105"
+                    ? "bg-[#0284C7] text-white scale-105"
                     : "bg-slate-100 text-slate-700 hover:bg-sky-50 hover:text-[#0284C7] border border-slate-200/80"
                 }`}
               >

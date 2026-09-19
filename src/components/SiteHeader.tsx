@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
-  { name: "Products / Solutions", path: "/product" },
+  { name: "Products", path: "/product" },
   { name: "Services", path: "/services" },
   { name: "Projects", path: "/case-studies" },
   { name: "Gallery", path: "/gallery" },
@@ -45,8 +45,8 @@ const SiteHeader = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-[1000] bg-white/95 backdrop-blur-xl transition-shadow duration-300 ${
-          scrolled ? "shadow-[0_4px_24px_rgba(5,27,48,0.12)] border-b border-slate-100" : "border-b border-slate-100/80"
+        className={`fixed top-0 left-0 right-0 z-[1000] bg-white/95 backdrop-blur-xl transition-colors duration-300 ${
+          scrolled ? "border-b border-slate-200" : "border-b border-slate-100/80"
         }`}
       >
         {/* Top Info Strip */}
@@ -78,7 +78,7 @@ const SiteHeader = () => {
             aria-label="Perfect Air Solution – Home"
             className="flex items-center gap-2.5 group flex-shrink-0 text-decoration-none"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#051B30] via-[#0B2E4C] to-[#0284C7] flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform duration-300">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#051B30] via-[#0B2E4C] to-[#0284C7] flex items-center justify-center text-white group-hover:scale-105 transition-transform duration-300">
               <Wind size={22} className="text-cyan-300 animate-pulse" />
             </div>
             <div className="flex flex-col">
@@ -117,7 +117,7 @@ const SiteHeader = () => {
           <div className="flex items-center gap-3 flex-shrink-0">
             <button
               onClick={() => navigate("/contact")}
-              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-[#051B30] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold rounded-full text-xs xl:text-sm px-5 py-2.5 shadow-md shadow-sky-600/25 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-[#051B30] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold rounded-full text-xs xl:text-sm px-5 py-2.5 transition-all duration-300 transform hover:-translate-y-0.5"
             >
               <span>Contact Us</span>
             </button>
@@ -156,7 +156,7 @@ const SiteHeader = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.28, ease: "easeInOut" }}
-              className="overflow-hidden bg-white lg:hidden border-t border-slate-100 shadow-xl"
+              className="overflow-hidden bg-white lg:hidden border-t border-b border-slate-200"
             >
               <div className="px-4 pt-3 pb-6 flex flex-col gap-1.5">
                 {navLinks.map((link, i) => (

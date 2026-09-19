@@ -76,7 +76,7 @@ export default function HVACSolutions() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
           >
             Engineered Cooling for Every{" "}
             <span className="text-[#0284C7]">
@@ -107,7 +107,7 @@ export default function HVACSolutions() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.5 }}
                 onClick={() => navigate(`/hvac-applications`)}
-                className="group bg-white rounded-sm overflow-hidden border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-sky-300 transition-all duration-300 flex flex-col cursor-pointer font-sans"
+                className="group bg-white rounded-sm overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col cursor-pointer font-sans"
               >
                 {/* Image Container */}
                 <div className="relative h-52 overflow-hidden bg-slate-100">
@@ -119,7 +119,7 @@ export default function HVACSolutions() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60" />
                   
                   {/* Glowing Icon Badge */}
-                  <div className="absolute top-4 left-4 z-10 w-11 h-11 rounded-xl bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white shadow-lg shadow-sky-600/30 border border-white/20">
+                  <div className="absolute top-4 left-4 z-10 w-11 h-11 rounded-xl bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
                     <IconComponent size={22} />
                   </div>
                 </div>

@@ -466,7 +466,7 @@ export const staticBlogs: BlogData[] = [
     category: "Maintenance Tips",
     excerpt: "Is your air conditioner blowing warm air or forming ice on the coils? Learn the 5 warning signs of refrigerant gas leakage and how timely servicing saves your compressor.",
     readTime: "4 min read",
-    date: "Aug 28, 2024",
+    date: "Aug 28, 2026",
     author: "Rajesh Kumar",
     image: repairImg,
     tags: ["Gas Refill", "AC Servicing", "Compressor Health", "Preventive Care"],

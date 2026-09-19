@@ -81,13 +81,13 @@ const BlogPost = () => {
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
       {/* ── HERO HEADER ── */}
-      <section className="relative pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-20 sm:pb-28 bg-[#03172C] text-white overflow-hidden">
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
         {/* Ambient Gradient Glows */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-sky-500/15 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-10 w-[450px] h-[450px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#03172C] via-[#052848] to-[#041E38]" />
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Back to Blog Button */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -96,7 +96,7 @@ const BlogPost = () => {
           >
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 hover:text-white text-xs sm:text-sm font-semibold transition-all duration-200 mb-6 backdrop-blur-md shadow-sm group"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 hover:text-white text-xs sm:text-sm font-semibold transition-all duration-200 mb-6 backdrop-blur-md group"
             >
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
               <span>Back to Blog</span>
@@ -143,7 +143,7 @@ const BlogPost = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex items-center gap-3 text-slate-300 text-xs sm:text-sm"
           >
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#0284C7] to-[#00B4FF] flex items-center justify-center text-white font-bold text-xs shadow-md border border-white/20">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#0284C7] to-[#00B4FF] flex items-center justify-center text-white font-bold text-xs border border-white/20">
               <User size={16} />
             </div>
             <div>
@@ -155,18 +155,18 @@ const BlogPost = () => {
       </section>
 
       {/* ── ARTICLE CONTENT CARD ── */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-10 sm:-mt-16 pb-16">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-10 sm:-mt-16 pb-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-200/80 shadow-2xl relative"
+          className="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-none hover:shadow-none relative"
         >
           {/* Top color gradient highlight bar */}
           <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#051B30] via-[#0284C7] to-cyan-400 rounded-t-3xl" />
 
           {/* Read time floating pill badge */}
-          <div className="absolute -top-4 right-6 sm:right-10 px-4 py-1.5 rounded-full bg-[#051B30] text-white text-xs font-bold uppercase tracking-wider shadow-lg border border-cyan-400/30 flex items-center gap-1.5">
+          <div className="absolute -top-4 right-6 sm:right-10 px-4 py-1.5 rounded-full bg-[#051B30] text-white text-xs font-bold uppercase tracking-wider border border-cyan-400/30 flex items-center gap-1.5">
             <Clock size={13} className="text-cyan-400" />
             <span>{formattedReadTime}</span>
           </div>
@@ -197,7 +197,7 @@ const BlogPost = () => {
 
           {/* Featured Header Image if present */}
           {post.image && (
-            <div className="mb-8 rounded-2xl overflow-hidden border border-slate-200/80 shadow-md max-h-[460px]">
+            <div className="mb-8 rounded-2xl overflow-hidden border border-slate-200/80 max-h-[500px]">
               <img
                 src={post.image}
                 alt={post.title}
@@ -223,7 +223,7 @@ const BlogPost = () => {
 
                   {/* Highlight Blockquote */}
                   {i === 1 && para.length > 50 && (
-                    <blockquote className="my-8 p-6 sm:p-7 rounded-2xl bg-sky-50/80 border-l-4 border-[#0284C7] shadow-sm">
+                    <blockquote className="my-8 p-6 sm:p-7 rounded-2xl bg-sky-50/80 border-l-4 border-[#0284C7]">
                       <p className="text-base sm:text-lg font-medium italic text-[#051B30] leading-relaxed m-0">
                         "{para.slice(0, 140)}..."
                       </p>
@@ -260,7 +260,7 @@ const BlogPost = () => {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center justify-between gap-4 mb-8">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#051B30] tracking-tight font-sans">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#051B30] tracking-tight font-sans">
                 Recommended Articles
               </h2>
               <p className="text-slate-600 text-sm mt-1">
@@ -286,7 +286,7 @@ const BlogPost = () => {
               >
                 <Link
                   to={`/blog/${rp.slug || rp._id}`}
-                  className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-md hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col h-full"
+                  className="group bg-white rounded-2xl overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col h-full"
                 >
                   <div className="relative h-48 overflow-hidden bg-slate-100">
                     <img
