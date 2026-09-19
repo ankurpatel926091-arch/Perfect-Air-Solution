@@ -39,11 +39,11 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
   }
 
   return (
-    <article className="bg-white rounded-md overflow-hidden flex flex-col border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 group font-sans h-full">
+    <article className="bg-white rounded-xl overflow-hidden flex flex-col border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 group font-sans h-full">
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden bg-slate-100">
         {/* Category Icon Badge */}
-        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-md bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
+        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-lg bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
           {getCategoryIcon(post.category)}
         </div>
         
@@ -80,7 +80,7 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
         <Link
           aria-label={`Read article: ${post.title}`}
           to={`/blog/${post.slug || post._id}`}
-          className="mt-auto w-full py-3 px-4 rounded-md bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer text-decoration-none"
+          className="mt-auto w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer text-decoration-none"
         >
           <BookOpen size={15} />
           <span>Read Article</span>

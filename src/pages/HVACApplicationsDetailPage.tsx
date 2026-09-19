@@ -397,10 +397,10 @@ export function HVACApplicationsDetailPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
                 onClick={() => navigate(`/hvac-applications/${key}`)}
-                className="group relative bg-white rounded-md p-6 border border-slate-200 shadow-none hover:shadow-sm transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                className="group relative bg-white rounded-xl p-6 border border-slate-200 shadow-none hover:shadow-sm transition-all duration-300 cursor-pointer flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-md bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
+                  <div className="w-12 h-12 rounded-lg bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
                     {item.icon}
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-[#0284C7] transition-colors">
@@ -510,10 +510,10 @@ export function HVACApplicationsDetailPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.08 }}
-              className="group relative bg-white rounded-md p-6 sm:p-7 border border-slate-200 shadow-none hover:shadow-sm transition-all duration-300 flex flex-col justify-between"
+              className="group relative bg-white rounded-xl p-6 sm:p-7 border border-slate-200 shadow-none hover:shadow-sm transition-all duration-300 flex flex-col justify-between"
             >
               <div>
-                <div className="w-12 h-12 rounded-md bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
+                <div className="w-12 h-12 rounded-lg bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
                   {card.icon}
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-[#0284C7] transition-colors">
@@ -535,7 +535,7 @@ export function HVACApplicationsDetailPage() {
 
       {/* ── Call to Action Banner ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20">
-        <div className="bg-gradient-to-br from-[#051B30] via-[#08355B] to-[#0F4C81] rounded-md p-8 sm:p-12 text-white text-center shadow-none relative overflow-hidden">
+        <div className="bg-gradient-to-br from-[#051B30] via-[#08355B] to-[#0F4C81] rounded-xl p-8 sm:p-12 text-white text-center shadow-none relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto">
             <h2 className="text-xl sm:text-2xl font-extrabold mb-3 leading-tight">
               Need Expert HVAC Design for Your Facility?
@@ -546,7 +546,7 @@ export function HVACApplicationsDetailPage() {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <button
                 onClick={() => navigate("/contact")}
-                className="inline-flex items-center gap-2 bg-[#0284C7] hover:bg-sky-500 text-white font-bold px-7 py-3.5 rounded-md text-sm sm:text-base transition-all shadow-sm hover:shadow-sky-500/30 transform hover:-translate-y-0.5 cursor-pointer"
+                className="inline-flex items-center gap-2 bg-[#0284C7] hover:bg-sky-500 text-white font-bold px-7 py-3.5 rounded-lg text-sm sm:text-base transition-all shadow-sm hover:shadow-sky-500/30 transform hover:-translate-y-0.5 cursor-pointer"
               >
                 <span>Get Free Consultation</span>
                 <ArrowRight size={18} />

@@ -181,11 +181,11 @@ const About = () => (
                     whileInView="visible"
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
-                    className="bg-white rounded-md p-6 border border-slate-200/90 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col items-start justify-between group"
+                    className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col items-start justify-between group"
                   >
                     {/* Glowing Icon Badge */}
                     <div
-                      className={`w-11 h-11 rounded-md bg-gradient-to-tr ${s.color} flex items-center justify-center text-white mb-4 group-hover:scale-108 transition-transform`}
+                      className={`w-11 h-11 rounded-lg bg-gradient-to-tr ${s.color} flex items-center justify-center text-white mb-4 group-hover:scale-108 transition-transform`}
                     >
                       <IconComp size={22} />
                     </div>
@@ -262,12 +262,12 @@ const About = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.45 }}
-                className="bg-white rounded-md p-6 border border-sky-100 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col justify-between group"
+                className="bg-white rounded-xl p-6 border border-sky-100 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   {/* Top Row: Icon Badge & Tag */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className={`w-12 h-12 rounded-md bg-gradient-to-br ${v.gradient} text-white flex items-center justify-center`}>
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${v.gradient} text-white flex items-center justify-center`}>
                       <IconComp size={22} />
                     </div>
                     <span className="px-2.5 py-0.5 rounded-full bg-sky-50 border border-sky-100 text-[#0284C7] text-[10px] font-bold">
@@ -338,7 +338,7 @@ const About = () => (
                   {/* Dot */}
                   <div className="absolute -left-[25px] top-2 w-4 h-4 rounded-full bg-[#0284C7] border-4 border-white" />
                   
-                  <div className="bg-white rounded-md p-5 sm:p-6 border border-slate-200/90 shadow-none hover:shadow-none transition-shadow">
+                  <div className="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/90 shadow-none hover:shadow-none transition-shadow">
                     <span className="inline-block text-xs sm:text-sm font-bold text-[#0284C7] bg-sky-50 border border-sky-200 px-3 py-1 rounded-md mb-2.5">
                       {m.year}
                     </span>
@@ -358,12 +358,12 @@ const About = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-md p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between border border-cyan-400/20"
+              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-xl p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between border border-cyan-400/20"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div>
-                <div className="w-14 h-14 rounded-md bg-white/10 border border-white/20 flex items-center justify-center text-cyan-300 mb-6 backdrop-blur-md">
+                <div className="w-14 h-14 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-cyan-300 mb-6 backdrop-blur-md">
                   <Target size={28} />
                 </div>
                 
@@ -377,7 +377,7 @@ const About = () => (
 
                 {/* Core Mission Pillars */}
                 <div className="space-y-3 pt-2 mb-6">
-                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-md border border-white/10 backdrop-blur-sm">
+                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-lg border border-white/10 backdrop-blur-sm">
                     <div className="w-8 h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Zap size={18} />
                     </div>
@@ -387,7 +387,7 @@ const About = () => (
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-md border border-white/10 backdrop-blur-sm">
+                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-lg border border-white/10 backdrop-blur-sm">
                     <div className="w-8 h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <ShieldCheck size={18} />
                     </div>
@@ -397,7 +397,7 @@ const About = () => (
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-md border border-white/10 backdrop-blur-sm">
+                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-lg border border-white/10 backdrop-blur-sm">
                     <div className="w-8 h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Clock size={18} />
                     </div>

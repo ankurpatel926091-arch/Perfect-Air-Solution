@@ -173,11 +173,11 @@ export default function BrandDetail() {
                   style={{
                     display: "flex", alignItems: "flex-start", gap: "18px",
                     padding: "24px", background: BRAND.white,
-                    border: `1px solid ${BRAND.slate100}`, borderRadius: "6px",
+                    border: `1px solid ${BRAND.slate100}`, borderRadius: "12px",
                     boxShadow: `0 2px 12px ${BRAND.primary}14`,
                     transition: "all 0.3s"
                   }}>
-                  <div style={{ padding: "12px", borderRadius: "6px", background: BRAND.primarySky, flexShrink: 0 }}>
+                  <div style={{ padding: "12px", borderRadius: "10px", background: BRAND.primarySky, flexShrink: 0 }}>
                     {renderIcon(feature.icon || "star")}
                   </div>
                   <div>
@@ -213,7 +213,7 @@ export default function BrandDetail() {
                 <motion.div key={idx} custom={idx} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
                   style={{
                     background: BRAND.white, border: `1px solid ${BRAND.slate100}`,
-                    borderRadius: "6px", overflow: "hidden",
+                    borderRadius: "12px", overflow: "hidden",
                     boxShadow: `0 2px 16px ${BRAND.primary}14`,
                     transition: "all 0.3s"
                   }}

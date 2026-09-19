@@ -174,10 +174,10 @@ const BlogPost = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-md p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-none hover:shadow-none relative"
+          className="bg-white rounded-xl p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-none hover:shadow-none relative"
         >
           {/* Top color gradient highlight bar */}
-          <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#051B30] via-[#0284C7] to-cyan-400 rounded-t-md" />
+          <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#051B30] via-[#0284C7] to-cyan-400 rounded-t-xl" />
 
           {/* Read time floating pill badge */}
           <div className="absolute -top-4 right-6 sm:right-10 px-4 py-1.5 rounded-full bg-[#051B30] text-white text-xs font-bold uppercase tracking-wider border border-cyan-400/30 flex items-center gap-1.5">
@@ -211,7 +211,7 @@ const BlogPost = () => {
 
           {/* Featured Header Image if present */}
           {post.image && (
-            <div className="mb-8 rounded-md overflow-hidden border border-slate-200/80 max-h-[500px]">
+            <div className="mb-8 rounded-xl overflow-hidden border border-slate-200/80 max-h-[500px]">
               <img
                 src={post.image}
                 alt={post.title}
@@ -295,7 +295,7 @@ const BlogPost = () => {
               >
                 <Link
                   to={`/blog/${rp.slug || rp._id}`}
-                  className="group bg-white rounded-md overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col h-full"
+                  className="group bg-white rounded-xl overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col h-full"
                 >
                   <div className="relative h-48 overflow-hidden bg-slate-100">
                     <img

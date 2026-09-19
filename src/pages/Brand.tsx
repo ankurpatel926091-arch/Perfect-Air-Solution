@@ -15,7 +15,7 @@ const BrandCard: React.FC<{ brand: any; index: number }> = ({ brand, index }) =>
     style={{
       background: BRAND.white,
       border: `1px solid ${BRAND.slate100}`,
-      borderRadius: "6px",
+      borderRadius: "12px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",

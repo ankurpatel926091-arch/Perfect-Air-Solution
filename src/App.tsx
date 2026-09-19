@@ -29,6 +29,8 @@ import RefundPolicy from "./pages/RefundPolicy";
 import Gallery from "./pages/Gallery";
 
 import HVACApplicationsDetailPage from "./pages/HVACApplicationsDetailPage";
+import CategoryDetailPage from "./pages/CategoryDetailPage";
+import ScrollToTop from "./components/ScrollToTop";
 // Contexts
 import { UserAuthProvider } from "./context/AuthContext";
 import { AuthProvider } from "./context/AdminAuthContext";
@@ -51,6 +53,7 @@ const App: React.FC = () => (
       <ToastContainer position="top-right" autoClose={3000} />
 
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route element={
             <UserAuthProvider>
@@ -68,6 +71,8 @@ const App: React.FC = () => (
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/brand/:slug" element={<BrandDetail />} />
             <Route path="/order-success" element={<OrderSuccess />} />
+            <Route path="/category/:slug" element={<CategoryDetailPage />} />
+            <Route path="/product-category/:slug" element={<CategoryDetailPage />} />
             <Route path="/product" element={<ProductPage />} />
             <Route path="/products" element={<ProductPage />} />
             <Route path="/brands" element={<Brand />} />

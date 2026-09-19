@@ -17,7 +17,7 @@ function BrandCard({ brand }: { brand: any }) {
         width: "180px",
         background: BRAND.white,
         border: `1px solid ${BRAND.slate100}`,
-        borderRadius: "6px",
+        borderRadius: "12px",
         cursor: "pointer",
         textAlign: "center",
         padding: "14px 12px",

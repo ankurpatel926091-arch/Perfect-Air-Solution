@@ -53,7 +53,7 @@ function ProjectCard({ project, i }: { project: any; i: number }) {
       animate="rest"
       style={{
         cursor: "pointer",
-        borderRadius: "6px",
+        borderRadius: "12px",
         overflow: "hidden",
         border: "1px solid #e2e8f0",
         background: BRAND.white,

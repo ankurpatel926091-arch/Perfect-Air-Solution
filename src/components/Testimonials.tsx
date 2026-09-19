@@ -138,10 +138,10 @@ export default function Testimonials() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.12, duration: 0.5 }}
-                className="bg-white/90 backdrop-blur-md rounded-md p-7 sm:p-8 border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none flex flex-col justify-between relative group transition-all duration-300 overflow-hidden"
+                className="bg-white/90 backdrop-blur-md rounded-xl p-7 sm:p-8 border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none flex flex-col justify-between relative group transition-all duration-300 overflow-hidden"
               >
                 {/* Top color gradient highlight bar on hover */}
-                <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${t.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-md`} />
+                <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${t.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-xl`} />
 
                 <div>
                   {/* Sector Tag & Rating */}
@@ -193,13 +193,13 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-8 bg-white/80 backdrop-blur-md rounded-md p-6 sm:p-8 border border-slate-200/90 shadow-xl shadow-sky-950/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="mt-8 bg-white/80 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-slate-200/90 shadow-xl shadow-sky-950/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {metrics.map((m, i) => {
             const MetricIcon = m.icon;
             return (
               <div key={i} className="flex items-start gap-4 p-2 group">
-                <div className="w-12 h-12 rounded-md bg-gradient-to-tr from-sky-50 to-cyan-100 border border-cyan-200/60 flex items-center justify-center text-[#0284C7] shrink-0 group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-tr from-sky-50 to-cyan-100 border border-cyan-200/60 flex items-center justify-center text-[#0284C7] shrink-0 group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-sm">
                   <MetricIcon className="w-6 h-6" />
                 </div>
                 <div>

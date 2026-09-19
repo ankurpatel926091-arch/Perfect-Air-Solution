@@ -145,7 +145,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
-                className="group relative flex flex-col rounded-lg overflow-hidden border border-slate-200/90 bg-white transition-all duration-300 cursor-pointer hover:border-[#0284C7] shadow-none hover:shadow-none"
+                className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/90 bg-white transition-all duration-300 cursor-pointer hover:border-[#0284C7] shadow-none hover:shadow-none"
               >
                 {/* Visual Image Header */}
                 <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100 flex items-center justify-center">

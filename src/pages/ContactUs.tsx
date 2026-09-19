@@ -673,7 +673,7 @@ export default function ContactUs() {
           >
             {/* Contact details card */}
             <div
-              className="rounded-md p-6 bg-card"
+              className="rounded-xl p-6 bg-card"
               style={{ border: "1px solid hsl(var(--border))", boxShadow: "0 10px 25px -5px hsl(var(--brand-dark) / 0.03)" }}
             >
               <h2 className="text-xl font-bold text-[#051B30] tracking-tight mb-4 flex items-center gap-2">
@@ -688,7 +688,7 @@ export default function ContactUs() {
 
             {/* Brands card */}
             <div
-              className="rounded-md p-6 bg-gradient-to-br from-white to-sky-50/60 border border-sky-100 shadow-sm"
+              className="rounded-xl p-6 bg-gradient-to-br from-white to-sky-50/60 border border-sky-100 shadow-sm"
             >
               <p
                 className="text-[10px] tracking-widest uppercase font-extrabold mb-3 text-[#0284C7]"
@@ -712,7 +712,7 @@ export default function ContactUs() {
 
             {/* Trust card */}
             <div
-              className="rounded-md p-5 bg-white border border-slate-200/90 space-y-3 shadow-xs"
+              className="rounded-xl p-5 bg-white border border-slate-200/90 space-y-3 shadow-xs"
             >
               {["5000+ satisfied clients across UP", "Response guaranteed within 24 hours", "Free site inspection for commercial projects"].map((t) => (
                 <div key={t} className="flex items-center gap-2.5">
@@ -728,7 +728,7 @@ export default function ContactUs() {
           {/* ── RIGHT: Form ── */}
           <motion.div
             initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 rounded-md bg-white border border-slate-200/90 shadow-2xl shadow-sky-950/5 relative overflow-hidden"
+            className="lg:col-span-3 rounded-xl bg-white border border-slate-200/90 shadow-2xl shadow-sky-950/5 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-sky-100/50 rounded-full blur-3xl pointer-events-none" />
 

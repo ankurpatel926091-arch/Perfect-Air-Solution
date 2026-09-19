@@ -177,7 +177,7 @@ export default function Checkout() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-6">
             {/* Personal Information */}
-            <div className="bg-white rounded-md shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
+            <div className="bg-white rounded-xl shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
               <h2 className="flex items-center gap-2 text-lg font-semibold mb-6" style={{ color: BRAND.dark }}>
                 <User className="w-5 h-5" style={{ color: BRAND.primary }} /> Personal Information
               </h2>
@@ -230,7 +230,7 @@ export default function Checkout() {
             </div>
 
             {/* Delivery Address */}
-            <div className="bg-white rounded-md shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
+            <div className="bg-white rounded-xl shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
               <h2 className="flex items-center gap-2 text-lg font-semibold mb-6" style={{ color: BRAND.dark }}>
                 <MapPin className="w-5 h-5" style={{ color: BRAND.primary }} /> Delivery Address
               </h2>
@@ -302,7 +302,7 @@ export default function Checkout() {
             </div>
 
             {/* Terms and Checkout Button */}
-            <div className="bg-white rounded-md shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
+            <div className="bg-white rounded-xl shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
               <label className="flex items-start gap-3 cursor-pointer mb-6">
                 <input
                   type="checkbox"
@@ -318,7 +318,7 @@ export default function Checkout() {
               <button
                 type="submit"
                 disabled={!agreedToTerms || isSubmitting}
-                className="w-full py-4 rounded-md font-bold text-lg transition-all duration-200"
+                className="w-full py-4 rounded-xl font-bold text-lg transition-all duration-200"
                 style={{
                   background: agreedToTerms && !isSubmitting
                     ? `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.primary} 100%)`

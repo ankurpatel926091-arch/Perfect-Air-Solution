@@ -212,7 +212,7 @@ export default function ServicesPage(): React.ReactElement {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.06, duration: 0.4 }}
                 onClick={() => navigate(`/service/${s.slug}`)}
-                className="group relative flex flex-col rounded-md overflow-hidden border border-slate-200/90 bg-white hover:border-[#0284C7] transition-all duration-300 cursor-pointer shadow-none hover:shadow-none"
+                className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/90 bg-white hover:border-[#0284C7] transition-all duration-300 cursor-pointer shadow-none hover:shadow-none"
               >
                 {/* Visual Image Header */}
                 <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100 flex items-center justify-center">
@@ -223,7 +223,7 @@ export default function ServicesPage(): React.ReactElement {
                   />
                   
                   {/* Floating Icon Badge */}
-                  <div className="absolute top-3.5 left-3.5 w-10 h-10 rounded-md bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center">
+                  <div className="absolute top-3.5 left-3.5 w-10 h-10 rounded-lg bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center">
                     <IconComp size={20} />
                   </div>
 

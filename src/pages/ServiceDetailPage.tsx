@@ -126,7 +126,7 @@ export default function ServiceDetailPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="relative w-full rounded-md overflow-hidden shadow-none border border-slate-200/80 bg-slate-900 h-64 sm:h-80 md:h-[340px] lg:h-[360px]"
+                className="relative w-full rounded-xl overflow-hidden shadow-none border border-slate-200/80 bg-slate-900 h-64 sm:h-80 md:h-[340px] lg:h-[360px]"
               >
                 <img
                   src={service.image}
@@ -147,7 +147,7 @@ export default function ServiceDetailPage() {
 
                   <button
                     onClick={handleBooking}
-                    className="bg-white hover:bg-slate-100 text-[#051B30] font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-md shadow-sm transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer"
+                    className="bg-white hover:bg-slate-100 text-[#051B30] font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-lg shadow-sm transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer"
                   >
                     <span>Instant Booking</span>
                     <ArrowRight size={15} className="text-[#0284C7]" />
@@ -163,7 +163,7 @@ export default function ServiceDetailPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/80 shadow-none"
+                className="bg-white rounded-xl p-6 sm:p-8 border border-slate-200/80 shadow-none"
               >
                 <div className="flex items-center gap-2.5 text-[#051B30] font-extrabold text-xl mb-6 pb-3 border-b border-slate-100">
                   <ShieldCheck size={24} className="text-[#0284C7]" />
@@ -174,7 +174,7 @@ export default function ServiceDetailPage() {
                   {service.highlights.map((h: string, idx: number) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-3.5 p-4 rounded-md bg-slate-50 border border-slate-100 hover:border-sky-200 transition-colors"
+                      className="flex items-start gap-3.5 p-4 rounded-lg bg-slate-50 border border-slate-100 hover:border-sky-200 transition-colors"
                     >
                       <div className="w-8 h-8 rounded-md bg-sky-100 text-[#0284C7] flex items-center justify-center flex-shrink-0 mt-0.5">
                         <CheckCircle2 size={18} />
@@ -195,7 +195,7 @@ export default function ServiceDetailPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/80 shadow-none"
+                className="bg-white rounded-xl p-6 sm:p-8 border border-slate-200/80 shadow-none"
               >
                 <div className="flex items-center gap-2.5 text-[#051B30] font-extrabold text-xl mb-6 pb-3 border-b border-slate-100">
                   <Wrench size={24} className="text-[#0284C7]" />
@@ -206,7 +206,7 @@ export default function ServiceDetailPage() {
                   {service.process.map((p: any, idx: number) => (
                     <div
                       key={idx}
-                      className="relative p-5 rounded-md bg-gradient-to-br from-slate-50 to-sky-50/50 border border-slate-200/80 flex flex-col justify-between hover:border-sky-300 transition-all group"
+                      className="relative p-5 rounded-lg bg-gradient-to-br from-slate-50 to-sky-50/50 border border-slate-200/80 flex flex-col justify-between hover:border-sky-300 transition-all group"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
@@ -237,7 +237,7 @@ export default function ServiceDetailPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/80 shadow-none"
+                className="bg-white rounded-xl p-6 sm:p-8 border border-slate-200/80 shadow-none"
               >
                 <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100">
                   <h3 className="text-xl font-extrabold text-[#051B30]">
@@ -259,7 +259,7 @@ export default function ServiceDetailPage() {
                       <div
                         key={r.slug}
                         onClick={() => navigate(`/service/${r.slug}`)}
-                        className="p-4 rounded-md border border-slate-200/80 hover:border-sky-300 bg-slate-50 hover:bg-white transition-all cursor-pointer group flex flex-col justify-between"
+                        className="p-4 rounded-lg border border-slate-200/80 hover:border-sky-300 bg-slate-50 hover:bg-white transition-all cursor-pointer group flex flex-col justify-between"
                       >
                         <div>
                           <div className="w-10 h-10 rounded-md bg-sky-100 text-[#0284C7] flex items-center justify-center mb-3 group-hover:bg-[#0284C7] group-hover:text-white transition-colors">
@@ -291,7 +291,7 @@ export default function ServiceDetailPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white rounded-md p-5 sm:p-6 border border-slate-200/90 shadow-none relative overflow-hidden"
+              className="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/90 shadow-none relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-sky-400/10 rounded-full blur-2xl pointer-events-none" />
 
@@ -312,7 +312,7 @@ export default function ServiceDetailPage() {
               <div className="space-y-3 mb-6">
                 <button
                   onClick={handleBooking}
-                  className="w-full bg-gradient-to-r from-[#0284C7] to-[#0369A1] hover:from-[#0369A1] hover:to-[#075985] text-white font-extrabold text-sm py-3.5 px-5 rounded-md flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
+                  className="w-full bg-gradient-to-r from-[#0284C7] to-[#0369A1] hover:from-[#0369A1] hover:to-[#075985] text-white font-extrabold text-sm py-3.5 px-5 rounded-lg flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
                 >
                   <Calendar size={18} />
                   <span>Book Service Now</span>
@@ -320,7 +320,7 @@ export default function ServiceDetailPage() {
 
                 <a
                   href="tel:+919839171701"
-                  className="w-full bg-slate-100 hover:bg-slate-200 text-[#051B30] font-bold text-sm py-3 px-5 rounded-md flex items-center justify-center gap-2 transition-all text-decoration-none"
+                  className="w-full bg-slate-100 hover:bg-slate-200 text-[#051B30] font-bold text-sm py-3 px-5 rounded-lg flex items-center justify-center gap-2 transition-all text-decoration-none"
                 >
                   <Phone size={16} className="text-[#0284C7]" />
                   <span>Call +91 98391 71701</span>
@@ -344,7 +344,7 @@ export default function ServiceDetailPage() {
               </div>
 
               {/* Free Inspection Callout */}
-              <div className="mt-6 p-4 rounded-md bg-sky-50/80 border border-sky-100 text-center">
+              <div className="mt-6 p-4 rounded-lg bg-sky-50/80 border border-sky-100 text-center">
                 <p className="text-xs font-bold text-[#051B30] mb-1">
                   Need a Custom Commercial BOQ?
                 </p>

@@ -251,7 +251,7 @@ export default function Gallery() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: idx * 0.05 }}
-              className="group relative h-64 sm:h-72 lg:h-80 rounded-md overflow-hidden border border-slate-200/90 shadow-none transition-all duration-300 cursor-pointer bg-white"
+              className="group relative h-64 sm:h-72 lg:h-80 rounded-xl overflow-hidden border border-slate-200/90 shadow-none transition-all duration-300 cursor-pointer bg-white"
               onClick={() => setSelectedIndex(idx)}
             >
               {/* Full Bright Card Image */}
@@ -288,7 +288,7 @@ export default function Gallery() {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.15, ease: "easeInOut" }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative max-w-4xl w-full h-[65vh] sm:h-[75vh] md:h-[80vh] flex items-center justify-center rounded-md bg-black border border-white/10 shadow-2xl overflow-hidden"
+                className="relative max-w-4xl w-full h-[65vh] sm:h-[75vh] md:h-[80vh] flex items-center justify-center rounded-xl bg-black border border-white/10 shadow-2xl overflow-hidden"
               >
                 {/* Close Button */}
                 <button

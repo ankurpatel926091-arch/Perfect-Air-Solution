@@ -276,11 +276,11 @@ function ProductCard({
   const isCommercialProduct = Boolean(cat.price);
 
   return (
-    <div className="bg-white rounded-md overflow-hidden flex flex-col border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 group font-sans">
+    <div className="bg-white rounded-xl overflow-hidden flex flex-col border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 group font-sans">
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden bg-slate-100">
         {/* Category Icon Badge */}
-        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-md bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
+        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-lg bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
           {cat.icon}
         </div>
         <img
@@ -615,7 +615,7 @@ export default function ProductsPage() {
       </div>
 
       <Dialog open={Boolean(selectedEnquiryProduct)} onOpenChange={(open) => !open && closeEnquiryDialog()}>
-        <DialogContent hideCloseButton className="z-[9999] sm:max-w-[500px] p-0 overflow-hidden rounded-md max-h-[85vh] sm:max-h-[88vh] flex flex-col border border-slate-200 shadow-2xl">
+        <DialogContent hideCloseButton className="z-[9999] sm:max-w-[500px] p-0 overflow-hidden rounded-xl max-h-[85vh] sm:max-h-[88vh] flex flex-col border border-slate-200 shadow-2xl">
           {/* Modal Header */}
           <div className="bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white p-5 sm:p-6 pb-6 relative flex-shrink-0">
             <button
@@ -645,8 +645,8 @@ export default function ProductsPage() {
             {selectedEnquiryProduct && (
               <form className="space-y-4" onSubmit={handleEnquirySubmit}>
                 {/* Pre-filled Product Card Highlight */}
-                <div className="rounded-md border border-sky-100 bg-sky-50/70 p-3 flex items-center gap-3">
-                  <div className="w-14 h-14 rounded-md bg-white border border-sky-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
+                <div className="rounded-xl border border-sky-100 bg-sky-50/70 p-3 flex items-center gap-3">
+                  <div className="w-14 h-14 rounded-lg bg-white border border-sky-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
                     <img
                       src={selectedEnquiryProduct.image}
                       alt={selectedEnquiryProduct.title}
