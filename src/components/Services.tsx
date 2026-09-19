@@ -98,12 +98,12 @@ export default function Services() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] font-bold text-xs uppercase tracking-widest mb-3.5 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] font-bold text-xs uppercase tracking-widest mb-3 shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#0284C7] animate-pulse" />
             <span>OUR CORE HVAC EXPERTISE</span>
@@ -114,7 +114,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-2"
           >
             Comprehensive{" "}
             <span className="text-[#0284C7] relative inline-block">
@@ -145,7 +145,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
-                className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/90 bg-white transition-all duration-300 cursor-pointer hover:border-[#0284C7] shadow-none hover:shadow-none"
+                className="group relative flex flex-col rounded-lg overflow-hidden border border-slate-200/90 bg-white transition-all duration-300 cursor-pointer hover:border-[#0284C7] shadow-none hover:shadow-none"
               >
                 {/* Visual Image Header */}
                 <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100 flex items-center justify-center">
@@ -158,7 +158,7 @@ export default function Services() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
                   
                   {/* Floating Icon Badge */}
-                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-xl bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center">
+                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-lg bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center">
                     <IconComponent size={18} />
                   </div>
                 </div>

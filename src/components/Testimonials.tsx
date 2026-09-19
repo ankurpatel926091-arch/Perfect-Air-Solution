@@ -92,12 +92,12 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500/10 via-cyan-500/15 to-sky-500/10 border border-sky-300/40 text-[#0284C7] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3.5 shadow-sm"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500/10 via-cyan-500/15 to-sky-500/10 border border-sky-300/40 text-[#0284C7] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-0 shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5 text-cyan-600 animate-pulse" />
             <span>CLIENT FEEDBACK</span>
@@ -108,7 +108,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-3"
           >
             Trusted by Commercial &amp;{" "}
             <span className="text-[#0284C7]">
@@ -138,10 +138,10 @@ export default function Testimonials() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.12, duration: 0.5 }}
-                className="bg-white/90 backdrop-blur-md rounded-2xl p-7 sm:p-8 border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none flex flex-col justify-between relative group transition-all duration-300 overflow-hidden"
+                className="bg-white/90 backdrop-blur-md rounded-md p-7 sm:p-8 border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none flex flex-col justify-between relative group transition-all duration-300 overflow-hidden"
               >
                 {/* Top color gradient highlight bar on hover */}
-                <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${t.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl`} />
+                <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${t.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-md`} />
 
                 <div>
                   {/* Sector Tag & Rating */}
@@ -151,7 +151,7 @@ export default function Testimonials() {
                       <span>{t.tag}</span>
                     </div>
 
-                    <div className="flex items-center gap-1 bg-amber-50 border border-amber-200/60 px-2.5 py-1 rounded-lg">
+                    <div className="flex items-center gap-1 bg-amber-50 border border-amber-200/60 px-2.5 py-1 rounded-md">
                       <div className="flex text-amber-400">
                         {Array.from({ length: t.rating }).map((_, i) => (
                           <Star key={i} size={13} fill="currentColor" />
@@ -193,13 +193,13 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-16 bg-white/80 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-xl shadow-sky-950/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="mt-8 bg-white/80 backdrop-blur-md rounded-md p-6 sm:p-8 border border-slate-200/90 shadow-xl shadow-sky-950/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {metrics.map((m, i) => {
             const MetricIcon = m.icon;
             return (
               <div key={i} className="flex items-start gap-4 p-2 group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-50 to-cyan-100 border border-cyan-200/60 flex items-center justify-center text-[#0284C7] shrink-0 group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="w-12 h-12 rounded-md bg-gradient-to-tr from-sky-50 to-cyan-100 border border-cyan-200/60 flex items-center justify-center text-[#0284C7] shrink-0 group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-sm">
                   <MetricIcon className="w-6 h-6" />
                 </div>
                 <div>

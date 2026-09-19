@@ -75,7 +75,7 @@ export default function WhyChooseUs() {
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0695CD] text-xs font-bold uppercase tracking-wider mb-3.5 shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-[#0695CD] animate-pulse" />
-            <span>Why Choose Us</span>
+            <span>Why Choose Perfect Air Solution</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#082A45] tracking-tight leading-tight mb-4">
@@ -102,7 +102,7 @@ export default function WhyChooseUs() {
             className="lg:col-span-1 relative flex flex-col justify-between"
           >
             {/* Main Visual Image Wrapper */}
-            <div className="relative w-full h-full min-h-[460px] lg:min-h-[580px] rounded-xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900">
+            <div className="relative w-full h-full min-h-[460px] lg:min-h-[580px] rounded-md overflow-hidden shadow-2xl border-4 border-white bg-slate-900">
               <img
                 src={showcaseImg}
                 alt="HVAC Engineer Testing VRF Outdoor System"
@@ -113,8 +113,8 @@ export default function WhyChooseUs() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#082A45]/90 via-[#082A45]/30 to-slate-900/40" />
 
               {/* Top-Left Glass Badge: Rating & Happy Clients */}
-              <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-white/80 shadow-xl flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center">
+              <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-md border border-white/80 shadow-xl flex items-center gap-3">
+                <div className="w-9 h-9 rounded-md bg-amber-500/15 text-amber-500 flex items-center justify-center">
                   <Star className="w-5 h-5 fill-amber-500 text-amber-500" />
                 </div>
                 <div>
@@ -127,7 +127,7 @@ export default function WhyChooseUs() {
               </div>
 
               {/* Top-Right Badge: Experience Seal */}
-              <div className="absolute top-4 right-4 z-20 bg-[#082A45]/85 backdrop-blur-md px-3 py-2 rounded-xl border border-white/20 text-white flex items-center gap-2 text-xs font-semibold shadow-md">
+              <div className="absolute top-4 right-4 z-20 bg-[#082A45]/85 backdrop-blur-md px-3 py-2 rounded-md border border-white/20 text-white flex items-center gap-2 text-xs font-semibold shadow-md">
                 <ShieldCheck className="w-4 h-4 text-[#0695CD]" />
                 <span>12+ Years Exp.</span>
               </div>
@@ -135,7 +135,7 @@ export default function WhyChooseUs() {
              
 
               {/* Bottom-Right Inset Thumbnail: Indoor AC Showcase */}
-              <div className="absolute bottom-4 right-4 z-20 w-36 sm:w-44 rounded-xl overflow-hidden border-2 border-white shadow-2xl bg-slate-900">
+              <div className="absolute bottom-4 right-4 z-20 w-36 sm:w-44 rounded-md overflow-hidden border-2 border-white shadow-2xl bg-slate-900">
                 <img
                   src={indoorImg}
                   alt="Modern Indoor Air Conditioning Cooling"
@@ -172,10 +172,10 @@ export default function WhyChooseUs() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={fadeUp}
-                  className="p-4 sm:p-5 rounded-xl bg-white border border-sky-100/90 shadow-none hover:shadow-none hover:border-[#0695CD]/60 transition-all duration-300 flex flex-col sm:flex-row items-start gap-4 group"
+                  className="p-4 sm:p-5 rounded-md bg-white border border-sky-100/90 shadow-none hover:shadow-none hover:border-[#0695CD]/60 transition-all duration-300 flex flex-col sm:flex-row items-start gap-4 group"
                 >
                   {/* Icon Box */}
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${f.color} text-white flex items-center justify-center shrink-0`}>
+                  <div className={`w-11 h-11 rounded-md bg-gradient-to-br ${f.color} text-white flex items-center justify-center shrink-0`}>
                     <IconComp className="w-5 h-5" />
                   </div>
 
@@ -224,9 +224,9 @@ export default function WhyChooseUs() {
             return (
               <div
                 key={tp.label}
-                className="p-3.5 rounded-xl bg-white/90 border border-sky-100 flex items-center gap-3 shadow-none hover:shadow-none transition-colors"
+                className="p-3.5 rounded-md bg-white/90 border border-sky-100 flex items-center gap-3 shadow-none hover:shadow-none transition-colors"
               >
-                <div className="w-9 h-9 rounded-xl bg-sky-100/70 text-[#0695CD] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-md bg-sky-100/70 text-[#0695CD] flex items-center justify-center shrink-0">
                   <TpIcon className="w-4 h-4" />
                 </div>
                 <div>

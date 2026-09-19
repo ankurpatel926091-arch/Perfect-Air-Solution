@@ -165,7 +165,7 @@ export default function Shop() {
 
           {/* Trust Badges */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <div className="bg-white rounded-xl shadow-sm px-6 py-4 flex items-center gap-4 min-w-[200px] relative">
+            <div className="bg-white rounded-md shadow-sm px-6 py-4 flex items-center gap-4 min-w-[200px] relative border border-slate-100">
               <ExternalLink className="absolute top-2 right-2 w-4 h-4 text-slate-300" />
               <div className="font-bold text-3xl text-orange-500">Jd</div>
               <div className="text-left">
@@ -173,7 +173,7 @@ export default function Shop() {
                 <div className="text-xs text-slate-400">400+ ratings</div>
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-sm px-6 py-4 flex items-center gap-4 min-w-[200px] relative">
+            <div className="bg-white rounded-md shadow-sm px-6 py-4 flex items-center gap-4 min-w-[200px] relative border border-slate-100">
               <ExternalLink className="absolute top-2 right-2 w-4 h-4 text-slate-300" />
               <div className="font-bold text-2xl text-red-600">IndiaMART</div>
               <div className="text-left">
@@ -181,7 +181,7 @@ export default function Shop() {
                 <div className="text-xs text-slate-400">Trusted Seller</div>
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-sm px-6 py-4 flex items-center gap-4 min-w-[200px] relative">
+            <div className="bg-white rounded-md shadow-sm px-6 py-4 flex items-center gap-4 min-w-[200px] relative border border-slate-100">
               <ExternalLink className="absolute top-2 right-2 w-4 h-4 text-slate-300" />
               <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                 <span className="text-blue-500 font-bold">G</span>
@@ -195,13 +195,13 @@ export default function Shop() {
 
           {/* Feature Pills */}
           <div className="flex flex-wrap justify-center gap-3">
-            <span className="bg-[#e2e8f0] text-slate-700 text-xs font-medium px-4 py-2 rounded-full flex items-center gap-2">
+            <span className="bg-[#e2e8f0] text-slate-700 text-xs font-medium px-4 py-2 rounded-md flex items-center gap-2">
               <Truck className="w-4 h-4" /> Free Shipping All Over UP
             </span>
-            <span className="bg-[#e2e8f0] text-slate-700 text-xs font-medium px-4 py-2 rounded-full flex items-center gap-2">
+            <span className="bg-[#e2e8f0] text-slate-700 text-xs font-medium px-4 py-2 rounded-md flex items-center gap-2">
               <Award className="w-4 h-4" /> Best Price Guaranteed
             </span>
-            <span className="bg-[#e2e8f0] text-slate-700 text-xs font-medium px-4 py-2 rounded-full flex items-center gap-2">
+            <span className="bg-[#e2e8f0] text-slate-700 text-xs font-medium px-4 py-2 rounded-md flex items-center gap-2">
               <ShieldCheck className="w-4 h-4" /> Warranty On All Products
             </span>
           </div>
@@ -209,7 +209,7 @@ export default function Shop() {
 
         {/* Search and Filters */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-          <div className="bg-white rounded-xl shadow-sm p-4 mb-6 border border-slate-100">
+          <div className="bg-white rounded-md shadow-none p-4 mb-6 border border-slate-200">
             <div className="flex flex-col md:flex-row gap-4 mb-4">
               <div className="relative flex-grow">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -218,17 +218,17 @@ export default function Shop() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for ACs by brand, model, or features..."
-                  className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-              <button className="bg-[#082A45] text-white px-8 py-2 rounded-lg font-medium hover:bg-[#0E3D5E] transition-colors">
+              <button className="bg-[#082A45] text-white px-8 py-2 rounded-md font-medium hover:bg-[#0E3D5E] transition-colors cursor-pointer">
                 Search
               </button>
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-4">
               <div className="flex flex-wrap gap-3">
-                <button className="flex items-center gap-2 border border-slate-200 px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">
+                <button className="flex items-center gap-2 border border-slate-200 px-4 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer">
                   <SlidersHorizontal className="w-4 h-4" /> Filters
                 </button>
 
@@ -236,7 +236,7 @@ export default function Shop() {
                   <select
                     value={selectedBrand}
                     onChange={(e) => setSelectedBrand(e.target.value)}
-                    className="appearance-none flex items-center gap-2 border border-slate-200 pl-4 pr-10 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 bg-white outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                    className="appearance-none flex items-center gap-2 border border-slate-200 pl-4 pr-10 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-50 bg-white outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
                   >
                     {brands.map(brand => (
                       <option key={brand} value={brand}>{brand}</option>
@@ -249,7 +249,7 @@ export default function Shop() {
                   <select
                     value={selectedRating}
                     onChange={(e) => setSelectedRating(e.target.value)}
-                    className="appearance-none flex items-center gap-2 border border-slate-200 pl-4 pr-10 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 bg-white outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                    className="appearance-none flex items-center gap-2 border border-slate-200 pl-4 pr-10 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-50 bg-white outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
                   >
                     {ratings.map(rating => (
                       <option key={rating} value={rating}>{rating}</option>
@@ -263,16 +263,16 @@ export default function Shop() {
 
           {/* Product Grid */}
           {filteredProducts.length === 0 ? (
-            <div className="text-center py-12 bg-white rounded-xl border border-slate-200">
+            <div className="text-center py-12 bg-white rounded-md border border-slate-200">
               <Search className="w-12 h-12 text-slate-300 mx-auto mb-3" />
               <h3 style={displayFont} className="text-xl text-slate-700">No products found</h3>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
-                <div key={product.id} className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
+                <div key={product.id} className="bg-white border border-slate-200 rounded-md overflow-hidden hover:shadow-md transition-shadow flex flex-col">
                   <div className="relative p-4 pt-6 h-56 flex items-center justify-center bg-white">
-                    <div className="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full z-10">
+                    <div className="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md z-10">
                       -{product.discountPercentage}% OFF
                     </div>
                     <img
@@ -284,7 +284,7 @@ export default function Shop() {
 
                   <div className="p-5 flex-grow flex flex-col border-t border-slate-100">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-xs border border-slate-200 text-slate-500 px-2 py-1 rounded-full">
+                      <span className="text-xs border border-slate-200 text-slate-500 px-2 py-1 rounded-md">
                         {product.brand}
                       </span>
                       <div className="flex items-center gap-1">
@@ -311,7 +311,7 @@ export default function Shop() {
                   <div className="p-4 grid grid-cols-2 gap-3 border-t border-slate-100">
                     <a
                       href="tel:+919839171701"
-                      className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 py-2 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors"
+                      className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 py-2 rounded-md text-sm font-semibold hover:bg-slate-50 transition-colors"
                       style={{ textDecoration: 'none' }}
                     >
                       <Phone className="w-4 h-4" /> Call Now
@@ -319,7 +319,7 @@ export default function Shop() {
 
                     <button
                       onClick={() => handleBuyNow(product)}
-                      className="flex items-center justify-center gap-2 bg-[#f97316] text-white py-2 rounded-lg text-sm font-semibold hover:bg-[#ea580c] transition-colors shadow-sm shadow-orange-200"
+                      className="flex items-center justify-center gap-2 bg-[#f97316] text-white py-2 rounded-md text-sm font-semibold hover:bg-[#ea580c] transition-colors shadow-sm cursor-pointer"
                     >
                       <MessageCircle className="w-4 h-4" /> Enquiry
                     </button>

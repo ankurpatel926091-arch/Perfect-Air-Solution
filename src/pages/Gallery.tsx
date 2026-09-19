@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Filter, X, ZoomIn, MapPin, Building, ArrowRight, Phone, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Breadcrumb from "@/components/Breadcrumb";
 
 import commercialImg from "@/assets/commercial.jpg";
 import residentialImg from "@/assets/categories/split-ac.png";
@@ -12,6 +13,7 @@ import ahuImg from "@/assets/categories/air-handling-unit.png";
 import chillerImg from "@/assets/categories/chiller.jpg";
 import maintenanceImg from "@/assets/cold-room.png";
 import indoor from "@/assets/why_choose_indoor.jpg";
+import galleryHeaderBg from "@/assets/HeaderBackgroundImg/GalleryBackground.png";
 
 type GalleryItem = {
   id: string;
@@ -174,20 +176,30 @@ export default function Gallery() {
   return (
     <main className="bg-slate-50 min-h-screen font-sans">
       {/* Header Banner */}
-      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden mb-8">
-        {/* Ambient background light */}
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden mb-8">
+        {/* Background Image with Clear Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={galleryHeaderBg}
+            alt="Gallery Perfect Air Solution"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Balanced soft gradient overlay so interior installation is vividly visible */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/70 via-[#03172C]/30 to-[#03172C]/85" />
+        </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
+          <div className="flex justify-center mb-3">
+            <Breadcrumb variant="dark" />
+          </div>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#03172C]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md shadow-sm">
             <span>PROJECT PORTFOLIO</span>
           </div>
           
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
           >
             Perfect Air Solution <span className="text-cyan-300">Showcase</span>
           </motion.h1>
@@ -196,7 +208,7 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5"
+            className="text-slate-100 text-sm sm:text-base max-w-3xl mx-auto font-medium leading-relaxed mb-5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
           >
             Explore our completed HVAC installations, commercial VRF systems, ductable air conditioning, and industrial climate solutions across UP &amp; All India.
           </motion.p>
@@ -220,7 +232,7 @@ export default function Gallery() {
                 setActiveCategory(cat.key);
                 setSelectedIndex(null);
               }}
-              className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 shadow-sm ${
+              className={`px-5 py-2.5 rounded-md font-semibold text-sm transition-all duration-300 shadow-sm ${
                 activeCategory === cat.key
                   ? "bg-[#0284C7] text-white shadow-lg shadow-sky-500/30 scale-105"
                   : "bg-white text-slate-700 hover:bg-slate-100 hover:text-[#0284C7] border border-slate-200"
@@ -239,7 +251,7 @@ export default function Gallery() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: idx * 0.05 }}
-              className="group relative h-64 sm:h-72 lg:h-80 rounded-xl overflow-hidden border border-slate-200/90 shadow-none transition-all duration-300 cursor-pointer bg-white"
+              className="group relative h-64 sm:h-72 lg:h-80 rounded-md overflow-hidden border border-slate-200/90 shadow-none transition-all duration-300 cursor-pointer bg-white"
               onClick={() => setSelectedIndex(idx)}
             >
               {/* Full Bright Card Image */}
@@ -276,7 +288,7 @@ export default function Gallery() {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.15, ease: "easeInOut" }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative max-w-4xl w-full h-[65vh] sm:h-[75vh] md:h-[80vh] flex items-center justify-center rounded-2xl bg-black border border-white/10 shadow-2xl overflow-hidden"
+                className="relative max-w-4xl w-full h-[65vh] sm:h-[75vh] md:h-[80vh] flex items-center justify-center rounded-md bg-black border border-white/10 shadow-2xl overflow-hidden"
               >
                 {/* Close Button */}
                 <button
@@ -311,7 +323,7 @@ export default function Gallery() {
                     key={selectedItem.id}
                     src={selectedItem.image}
                     alt={selectedItem.title}
-                    className="w-full h-full object-cover object-center rounded-2xl select-none transition-opacity duration-150"
+                    className="w-full h-full object-cover object-center rounded-md select-none transition-opacity duration-150"
                   />
                 </div>
 
@@ -325,7 +337,7 @@ export default function Gallery() {
         </AnimatePresence>
 
         {/* CTA Box */}
-        <div className="mt-20 mb-12 sm:mb-20 bg-gradient-to-br from-[#051B30] to-[#0F4C81] rounded-xl p-8 md:p-12 text-white text-center shadow-xl relative overflow-hidden">
+        <div className="mt-20 mb-12 sm:mb-20 bg-gradient-to-br from-[#051B30] to-[#0F4C81] rounded-md p-8 md:p-12 text-white text-center shadow-xl relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto">
             <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold mb-4">
               Need Custom HVAC System Design or Installation?
@@ -335,7 +347,7 @@ export default function Gallery() {
             </p>
             <button
               onClick={() => navigate("/contact")}
-              className="inline-flex items-center gap-2 bg-[#0284C7] hover:bg-sky-500 text-white font-bold px-8 py-4 rounded-full text-base transition-all shadow-lg hover:shadow-sky-500/30 transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-[#0284C7] hover:bg-sky-500 text-white font-bold px-8 py-4 rounded-md text-base transition-all shadow-lg hover:shadow-sky-500/30 transform hover:-translate-y-0.5"
             >
               <span>Get Free HVAC Quote</span>
               <ArrowRight size={18} />

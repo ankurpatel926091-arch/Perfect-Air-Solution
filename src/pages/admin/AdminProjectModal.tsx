@@ -13,7 +13,7 @@ const emptyForm = {
   slug: '', title: '', description: '', location: '', completionDate: '',
 };
 
-const inputClass = "w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all";
+const inputClass = "w-full border border-neutral-200 rounded-md px-3 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all";
 const labelClass = "block text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5";
 
 const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, project }) => {
@@ -137,12 +137,12 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl p-0 gap-0 bg-white rounded-2xl overflow-hidden border border-neutral-200 shadow-xl">
+      <DialogContent className="max-w-2xl p-0 gap-0 bg-white rounded-md overflow-hidden border border-neutral-200 shadow-md">
 
         {/* ── Header ── */}
         <DialogHeader className="px-6 pt-6 pb-4 border-b border-neutral-100">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-neutral-900 flex items-center justify-center flex-shrink-0">
+            <div className="w-9 h-9 rounded-md bg-neutral-900 flex items-center justify-center flex-shrink-0">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
@@ -158,13 +158,13 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-1 mt-4 bg-neutral-100 rounded-xl p-1">
+          <div className="flex gap-1 mt-4 bg-neutral-100 rounded-md p-1">
             {tabs.map(tab => (
               <button
                 key={tab.key}
                 type="button"
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all duration-200 ${
+                className={`flex-1 py-2 text-xs font-semibold rounded-md transition-all duration-200 cursor-pointer ${
                   activeTab === tab.key
                     ? 'bg-white text-neutral-900 shadow-sm'
                     : 'text-neutral-500 hover:text-neutral-700'
@@ -224,9 +224,9 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                 <div>
                   <label className={labelClass}>Featured Image</label>
                   {featuredPreview ? (
-                    <div className="rounded-xl border border-neutral-200 bg-neutral-50 overflow-hidden">
+                    <div className="rounded-md border border-neutral-200 bg-neutral-50 overflow-hidden">
                       <div className="flex items-center justify-center p-4 min-h-[140px]">
-                        <img src={featuredPreview} alt="Featured" className="max-h-32 max-w-full object-contain drop-shadow-sm rounded" />
+                        <img src={featuredPreview} alt="Featured" className="max-h-32 max-w-full object-contain drop-shadow-sm rounded-md" />
                       </div>
                       <div className="flex items-center justify-between px-4 py-2.5 border-t border-neutral-200 bg-white">
                         <div className="flex items-center gap-2 min-w-0">
@@ -240,8 +240,8 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                           </span>
                         </div>
                         <div className="flex gap-1 ml-2 flex-shrink-0">
-                          <button type="button" onClick={() => featuredInputRef.current?.click()} className="text-xs text-neutral-600 hover:text-neutral-900 font-medium px-2 py-1 hover:bg-neutral-100 rounded-lg transition-colors">Replace</button>
-                          <button type="button" onClick={removeFeatured} className="text-xs text-red-500 hover:text-red-700 font-medium px-2 py-1 hover:bg-red-50 rounded-lg transition-colors">Remove</button>
+                          <button type="button" onClick={() => featuredInputRef.current?.click()} className="text-xs text-neutral-600 hover:text-neutral-900 font-medium px-2 py-1 hover:bg-neutral-100 rounded-md transition-colors cursor-pointer">Replace</button>
+                          <button type="button" onClick={removeFeatured} className="text-xs text-red-500 hover:text-red-700 font-medium px-2 py-1 hover:bg-red-50 rounded-md transition-colors cursor-pointer">Remove</button>
                         </div>
                       </div>
                     </div>
@@ -251,11 +251,11 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                       onDragOver={(e) => { e.preventDefault(); setIsDraggingFeatured(true); }}
                       onDragLeave={() => setIsDraggingFeatured(false)}
                       onClick={() => featuredInputRef.current?.click()}
-                      className={`flex flex-col items-center justify-center min-h-[120px] rounded-xl border-2 border-dashed cursor-pointer transition-all duration-200 ${
+                      className={`flex flex-col items-center justify-center min-h-[120px] rounded-md border-2 border-dashed cursor-pointer transition-all duration-200 ${
                         isDraggingFeatured ? 'border-neutral-900 bg-neutral-50 scale-[1.01]' : 'border-neutral-300 hover:border-neutral-400 bg-neutral-50 hover:bg-white'
                       }`}
                     >
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-2 transition-colors ${isDraggingFeatured ? 'bg-neutral-900' : 'bg-neutral-200'}`}>
+                      <div className={`w-10 h-10 rounded-md flex items-center justify-center mb-2 transition-colors ${isDraggingFeatured ? 'bg-neutral-900' : 'bg-neutral-200'}`}>
                         <svg className={`w-5 h-5 transition-colors ${isDraggingFeatured ? 'text-white' : 'text-neutral-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
@@ -283,7 +283,7 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                       onDragOver={(e) => { e.preventDefault(); setIsDraggingGallery(true); }}
                       onDragLeave={() => setIsDraggingGallery(false)}
                       onClick={() => galleryInputRef.current?.click()}
-                      className={`flex flex-col items-center justify-center min-h-[90px] rounded-xl border-2 border-dashed cursor-pointer transition-all duration-200 mb-3 ${
+                      className={`flex flex-col items-center justify-center min-h-[90px] rounded-md border-2 border-dashed cursor-pointer transition-all duration-200 mb-3 ${
                         isDraggingGallery ? 'border-neutral-900 bg-neutral-50 scale-[1.01]' : 'border-neutral-300 hover:border-neutral-400 bg-neutral-50 hover:bg-white'
                       }`}
                     >
@@ -299,12 +299,12 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                       <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wide mb-2">Current Images</p>
                       <div className="grid grid-cols-5 gap-2">
                         {existingGalleryUrls.map((url, i) => (
-                          <div key={i} className="relative group aspect-square rounded-lg overflow-hidden border border-neutral-200 bg-neutral-100">
+                          <div key={i} className="relative group aspect-square rounded-md overflow-hidden border border-neutral-200 bg-neutral-100">
                             <img src={url} alt={`Gallery ${i + 1}`} className="w-full h-full object-cover" />
                             <button
                               type="button"
                               onClick={() => removeExistingGalleryUrl(i)}
-                              className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
+                              className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer"
                             >
                               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -322,7 +322,7 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                       <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wide mb-2">New Images to Upload</p>
                       <div className="grid grid-cols-5 gap-2">
                         {galleryFiles.map((file, i) => (
-                          <div key={i} className="relative group aspect-square rounded-lg overflow-hidden border border-neutral-200 bg-neutral-100">
+                          <div key={i} className="relative group aspect-square rounded-md overflow-hidden border border-neutral-200 bg-neutral-100">
                             <img src={URL.createObjectURL(file)} alt={file.name} className="w-full h-full object-cover" />
                             <div className="absolute bottom-0 inset-x-0 bg-green-500/80 flex items-center justify-center py-0.5">
                               <span className="text-white text-[9px] font-semibold">NEW</span>
@@ -330,7 +330,7 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                             <button
                               type="button"
                               onClick={() => removeNewGalleryFile(i)}
-                              className="absolute top-0 right-0 bg-black/50 opacity-0 group-hover:opacity-100 p-0.5 transition-opacity rounded-bl-lg"
+                              className="absolute top-0 right-0 bg-black/50 opacity-0 group-hover:opacity-100 p-0.5 transition-opacity rounded-bl-md cursor-pointer"
                             >
                               <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -369,7 +369,7 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                 <button
                   type="button"
                   onClick={() => setActiveTab('info')}
-                  className="px-4 py-2.5 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-xl transition-colors"
+                  className="px-4 py-2.5 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-md transition-colors cursor-pointer"
                 >
                   ← Back
                 </button>
@@ -378,7 +378,7 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                 <button
                   type="button"
                   onClick={() => setActiveTab('images')}
-                  className="px-5 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold rounded-xl transition-all active:scale-95"
+                  className="px-5 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold rounded-md transition-all active:scale-95 cursor-pointer"
                 >
                   Next →
                 </button>
@@ -386,7 +386,7 @@ const AdminProjectModal: React.FC<AdminProjectModalProps> = ({ isOpen, onClose, 
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold rounded-xl transition-all duration-200 disabled:opacity-60 active:scale-95"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold rounded-md transition-all duration-200 disabled:opacity-60 active:scale-95 cursor-pointer"
                 >
                   {isLoading ? (
                     <>

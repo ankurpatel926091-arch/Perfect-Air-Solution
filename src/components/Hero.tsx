@@ -243,7 +243,7 @@ const Hero = () => {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] mb-3">
               Perfect{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-cyan-100">
-                Air Solution
+                Air Solutions
               </span>
             </h1>
 
@@ -263,7 +263,7 @@ const Hero = () => {
               {/* 1. Cooling Solutions */}
               <div
                 onClick={() => navigate("/services")}
-                className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+                className="flex items-center justify-between p-3 sm:p-3.5 rounded-md bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0091FF] to-[#00D4FF] flex items-center justify-center text-white shadow-[0_0_16px_rgba(0,180,255,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
@@ -277,7 +277,7 @@ const Hero = () => {
               {/* 2. Expert Installation */}
               <div
                 onClick={() => navigate("/services")}
-                className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+                className="flex items-center justify-between p-3 sm:p-3.5 rounded-md bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#00C9A7] to-[#00E5BC] flex items-center justify-center text-white shadow-[0_0_16px_rgba(0,210,180,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
@@ -291,7 +291,7 @@ const Hero = () => {
               {/* 3. Trusted Service */}
               <div
                 onClick={() => navigate("/services")}
-                className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+                className="flex items-center justify-between p-3 sm:p-3.5 rounded-md bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#903AFF] to-[#B666FF] flex items-center justify-center text-white shadow-[0_0_16px_rgba(160,85,255,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
@@ -305,7 +305,7 @@ const Hero = () => {
               {/* 4. Energy Efficient */}
               <div
                 onClick={() => navigate("/services")}
-                className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+                className="flex items-center justify-between p-3 sm:p-3.5 rounded-md bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#FF9F1C] to-[#FFC107] flex items-center justify-center text-white shadow-[0_0_16px_rgba(255,159,28,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
@@ -341,11 +341,11 @@ const Hero = () => {
 
           {/* RIGHT COLUMN: Quick Service Booking Form Card (Offset from top) */}
           <div className="lg:col-span-5 w-full lg:mt-12 lg:translate-y-3">
-            <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-2xl border border-slate-100 text-slate-800 relative">
+            <div className="bg-white rounded-md p-6 sm:p-7 shadow-2xl border border-slate-100 text-slate-800 relative">
               
               {/* Card Header */}
               <div className="flex items-start gap-3.5 mb-5">
-                <div className="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-[#0091EE] flex-shrink-0 shadow-sm">
+                <div className="w-11 h-11 rounded-md bg-sky-50 border border-sky-100 flex items-center justify-center text-[#0091EE] flex-shrink-0 shadow-sm">
                   <Calendar size={22} />
                 </div>
                 <div>
@@ -377,7 +377,7 @@ const Hero = () => {
                       validateField("name", name);
                     }}
                     disabled={isSubmitting}
-                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-md bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
                     required
                   />
                   {touched.name && errors.name && (
@@ -402,7 +402,7 @@ const Hero = () => {
                       validateField("email", email);
                     }}
                     disabled={isSubmitting}
-                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-md bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
                     required
                   />
                   {touched.email && errors.email && (
@@ -428,7 +428,7 @@ const Hero = () => {
                     }}
                     disabled={isSubmitting}
                     maxLength={10}
-                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-md bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all"
                     required
                   />
                   {touched.phone && errors.phone && (
@@ -451,7 +451,7 @@ const Hero = () => {
                       validateField("service", service);
                     }}
                     disabled={isSubmitting}
-                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all appearance-none cursor-pointer"
+                    className="w-full pl-11 pr-4 py-3 rounded-md bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0091EE] focus:bg-white transition-all appearance-none cursor-pointer"
                     required
                   >
                     <option value="" disabled hidden>
@@ -472,7 +472,7 @@ const Hero = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#0091EE] via-[#00B4FF] to-[#00D4FF] hover:opacity-95 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-cyan-400/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-2 cursor-pointer"
+                  className="w-full py-3.5 px-6 rounded-md bg-gradient-to-r from-[#0091EE] via-[#00B4FF] to-[#00D4FF] hover:opacity-95 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-cyan-400/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-2 cursor-pointer"
                 >
                   <Send size={16} />
                   <span>{isSubmitting ? "Submitting..." : "GET INSTANT QUOTE →"}</span>
@@ -480,7 +480,7 @@ const Hero = () => {
               </form>
 
               {/* Bottom Security Highlights Pill Box */}
-              <div className="mt-5 p-3 rounded-xl bg-[#F0F7FF] border border-sky-100 flex items-center justify-between gap-1 text-[11px] font-semibold text-slate-600">
+              <div className="mt-5 p-3 rounded-md bg-[#F0F7FF] border border-sky-100 flex items-center justify-between gap-1 text-[11px] font-semibold text-slate-600">
                 <span className="flex items-center gap-1 text-[#0088FF]">
                   <Check size={14} className="text-[#0088FF]" /> 100% Secure
                 </span>

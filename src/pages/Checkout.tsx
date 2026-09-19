@@ -98,7 +98,7 @@ export default function Checkout() {
         <button
           onClick={() => navigate("/")}
           style={{ background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.primary} 100%)` }}
-          className="text-white px-6 py-2 rounded-lg"
+          className="text-white px-6 py-2 rounded-md"
         >
           Return to Shop
         </button>
@@ -177,7 +177,7 @@ export default function Checkout() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-6">
             {/* Personal Information */}
-            <div className="bg-white rounded-xl shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
+            <div className="bg-white rounded-md shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
               <h2 className="flex items-center gap-2 text-lg font-semibold mb-6" style={{ color: BRAND.dark }}>
                 <User className="w-5 h-5" style={{ color: BRAND.primary }} /> Personal Information
               </h2>
@@ -189,7 +189,7 @@ export default function Checkout() {
                     placeholder="Enter your full name"
                     {...register("fullName")}
                     onKeyDown={allowOnlyLetters}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
                       errors.fullName ? "border-red-400 bg-red-50" : ""
                     }`}
                     style={{ borderColor: errors.fullName ? undefined : BRAND.slate100 }}
@@ -203,7 +203,7 @@ export default function Checkout() {
                     type="email"
                     placeholder="Enter your email"
                     {...register("email")}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
                       errors.email ? "border-red-400 bg-red-50" : ""
                     }`}
                     style={{ borderColor: errors.email ? undefined : BRAND.slate100 }}
@@ -219,7 +219,7 @@ export default function Checkout() {
                     {...register("mobile")}
                     onKeyDown={allowOnlyNumbers}
                     maxLength={10}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
                       errors.mobile ? "border-red-400 bg-red-50" : ""
                     }`}
                     style={{ borderColor: errors.mobile ? undefined : BRAND.slate100 }}
@@ -230,7 +230,7 @@ export default function Checkout() {
             </div>
 
             {/* Delivery Address */}
-            <div className="bg-white rounded-xl shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
+            <div className="bg-white rounded-md shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
               <h2 className="flex items-center gap-2 text-lg font-semibold mb-6" style={{ color: BRAND.dark }}>
                 <MapPin className="w-5 h-5" style={{ color: BRAND.primary }} /> Delivery Address
               </h2>
@@ -242,7 +242,7 @@ export default function Checkout() {
                     placeholder="House/Flat No., Building, Street, Area, Landmark"
                     {...register("address")}
                     onKeyDown={allowAddressChars}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 resize-none ${
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 resize-none ${
                       errors.address ? "border-red-400 bg-red-50" : ""
                     }`}
                     style={{ borderColor: errors.address ? undefined : BRAND.slate100 }}
@@ -257,7 +257,7 @@ export default function Checkout() {
                     placeholder="Enter city"
                     {...register("city")}
                     onKeyDown={allowOnlyLetters}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
                       errors.city ? "border-red-400 bg-red-50" : ""
                     }`}
                     style={{ borderColor: errors.city ? undefined : BRAND.slate100 }}
@@ -269,7 +269,7 @@ export default function Checkout() {
                   <label className="text-sm font-medium" style={{ color: BRAND.darkMid }}>State *</label>
                   <select
                     {...register("state")}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 appearance-none bg-white ${
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 appearance-none bg-white ${
                       errors.state ? "border-red-400 bg-red-50" : ""
                     }`}
                     style={{ borderColor: errors.state ? undefined : BRAND.slate100 }}
@@ -291,7 +291,7 @@ export default function Checkout() {
                     {...register("pinCode")}
                     onKeyDown={allowOnlyNumbers}
                     maxLength={6}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
                       errors.pinCode ? "border-red-400 bg-red-50" : ""
                     }`}
                     style={{ borderColor: errors.pinCode ? undefined : BRAND.slate100 }}
@@ -302,7 +302,7 @@ export default function Checkout() {
             </div>
 
             {/* Terms and Checkout Button */}
-            <div className="bg-white rounded-xl shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
+            <div className="bg-white rounded-md shadow-sm p-6" style={{ border: `1px solid ${BRAND.slate100}` }}>
               <label className="flex items-start gap-3 cursor-pointer mb-6">
                 <input
                   type="checkbox"
@@ -318,7 +318,7 @@ export default function Checkout() {
               <button
                 type="submit"
                 disabled={!agreedToTerms || isSubmitting}
-                className="w-full py-4 rounded-lg font-bold text-lg transition-all duration-200"
+                className="w-full py-4 rounded-md font-bold text-lg transition-all duration-200"
                 style={{
                   background: agreedToTerms && !isSubmitting
                     ? `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.primary} 100%)`

@@ -38,7 +38,7 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "rgb(215 242 255 / 58%)" }}>
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden p-8 border border-neutral-200 transition-all">
+      <div className="max-w-md w-full bg-white rounded-md shadow-md overflow-hidden p-8 border border-neutral-200 transition-all">
 
         {/* Header */}
         <div className="text-center mb-8">
@@ -62,7 +62,7 @@ const AdminLogin = () => {
               required
               autoFocus
               disabled={isLoading}
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed"
+              className="w-full px-4 py-3 rounded-md border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed"
               placeholder="admin@perfectairsolution.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -85,7 +85,7 @@ const AdminLogin = () => {
                 type={showPassword ? 'text' : 'password'}
                 required
                 disabled={isLoading}
-                className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors pr-12 disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed"
+                className="w-full px-4 py-3 rounded-md border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors pr-12 disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -94,7 +94,7 @@ const AdminLogin = () => {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 disabled={isLoading}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-neutral-400 hover:text-neutral-600 focus:outline-none disabled:opacity-50"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-neutral-400 hover:text-neutral-600 focus:outline-none disabled:opacity-50 cursor-pointer"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -106,7 +106,7 @@ const AdminLogin = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full flex items-center justify-center gap-2 bg-brand-blue text-black py-3 rounded-xl font-medium hover:bg-brand-blue-dark transition-all active:scale-[0.98] disabled:opacity-70 disabled:pointer-events-none"
+            className="w-full flex items-center justify-center gap-2 bg-brand-blue text-black py-3 rounded-md font-medium hover:bg-brand-blue-dark transition-all active:scale-[0.98] disabled:opacity-70 disabled:pointer-events-none cursor-pointer"
           >
             {isLoading ? (
               <>

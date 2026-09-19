@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { BRAND } from "@/lib/colors";
 import Loader from "@/components/ui/Loader";
+import productHeaderBg from "@/assets/HeaderBackgroundImg/ProductBackground.png";
 
 const BrandCard: React.FC<{ brand: any; index: number }> = ({ brand, index }) => (
   <motion.div
@@ -14,7 +15,7 @@ const BrandCard: React.FC<{ brand: any; index: number }> = ({ brand, index }) =>
     style={{
       background: BRAND.white,
       border: `1px solid ${BRAND.slate100}`,
-      borderRadius: "18px",
+      borderRadius: "6px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -42,7 +43,17 @@ const Brand: React.FC = () => {
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
       {/* ── Hero Banner ── */}
-      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+        {/* Background Image with Clear Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={productHeaderBg}
+            alt="Authorised HVAC Partners"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/75 via-[#03172C]/35 to-[#03172C]/90" />
+        </div>
+
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />

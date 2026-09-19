@@ -83,12 +83,12 @@ const AdminBrandModal: React.FC<AdminBrandModalProps> = ({ isOpen, onClose, bran
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md p-0 gap-0 bg-white rounded-2xl overflow-hidden border border-neutral-200 shadow-xl">
+      <DialogContent className="max-w-md p-0 gap-0 bg-white rounded-md overflow-hidden border border-neutral-200 shadow-md">
 
         {/* ── Header ── */}
         <DialogHeader className="px-6 pt-6 pb-4 border-b border-neutral-100">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-neutral-900 flex items-center justify-center flex-shrink-0">
+            <div className="w-9 h-9 rounded-md bg-neutral-900 flex items-center justify-center flex-shrink-0">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
@@ -110,7 +110,7 @@ const AdminBrandModal: React.FC<AdminBrandModalProps> = ({ isOpen, onClose, bran
 
             {previewUrl ? (
               /* ── Preview State ── */
-              <div className="relative rounded-xl border border-neutral-200 bg-neutral-50 overflow-hidden">
+              <div className="relative rounded-md border border-neutral-200 bg-neutral-50 overflow-hidden">
                 <div className="flex items-center justify-center p-6 min-h-[160px]">
                   <img
                     src={previewUrl}
@@ -138,14 +138,14 @@ const AdminBrandModal: React.FC<AdminBrandModalProps> = ({ isOpen, onClose, bran
                     <button
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
-                      className="text-xs text-neutral-600 hover:text-neutral-900 font-medium px-2 py-1 hover:bg-neutral-100 rounded-lg transition-colors"
+                      className="text-xs text-neutral-600 hover:text-neutral-900 font-medium px-2 py-1 hover:bg-neutral-100 rounded-md transition-colors cursor-pointer"
                     >
                       Replace
                     </button>
                     <button
                       type="button"
                       onClick={handleRemoveImage}
-                      className="text-xs text-red-500 hover:text-red-700 font-medium px-2 py-1 hover:bg-red-50 rounded-lg transition-colors"
+                      className="text-xs text-red-500 hover:text-red-700 font-medium px-2 py-1 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
                     >
                       Remove
                     </button>
@@ -160,14 +160,14 @@ const AdminBrandModal: React.FC<AdminBrandModalProps> = ({ isOpen, onClose, bran
                 onDragLeave={handleDragLeave}
                 onClick={() => fileInputRef.current?.click()}
                 className={`
-                  relative flex flex-col items-center justify-center min-h-[160px] rounded-xl border-2 border-dashed cursor-pointer transition-all duration-200
+                  relative flex flex-col items-center justify-center min-h-[160px] rounded-md border-2 border-dashed cursor-pointer transition-all duration-200
                   ${isDragging
                     ? 'border-neutral-900 bg-neutral-50 scale-[1.01]'
                     : 'border-neutral-300 hover:border-neutral-400 bg-neutral-50 hover:bg-white'
                   }
                 `}
               >
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-3 transition-colors duration-200 ${isDragging ? 'bg-neutral-900' : 'bg-neutral-200'}`}>
+                <div className={`w-12 h-12 rounded-md flex items-center justify-center mb-3 transition-colors duration-200 ${isDragging ? 'bg-neutral-900' : 'bg-neutral-200'}`}>
                   <svg
                     className={`w-5 h-5 transition-colors duration-200 ${isDragging ? 'text-white' : 'text-neutral-500'}`}
                     fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -196,7 +196,7 @@ const AdminBrandModal: React.FC<AdminBrandModalProps> = ({ isOpen, onClose, bran
 
             {/* Keep existing notice */}
             {isEditing && !imageFile && brand?.heroImage && (
-              <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg">
+              <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-md">
                 <svg className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -211,14 +211,14 @@ const AdminBrandModal: React.FC<AdminBrandModalProps> = ({ isOpen, onClose, bran
               type="button"
               onClick={onClose}
               disabled={isLoading}
-              className="px-4 py-2.5 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-xl transition-colors disabled:opacity-50"
+              className="px-4 py-2.5 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-md transition-colors disabled:opacity-50 cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isLoading}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold rounded-xl transition-all duration-200 disabled:opacity-60 active:scale-95"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold rounded-md transition-all duration-200 disabled:opacity-60 active:scale-95 cursor-pointer"
             >
               {isLoading ? (
                 <>

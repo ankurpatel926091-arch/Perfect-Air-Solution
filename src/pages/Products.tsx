@@ -43,6 +43,7 @@ import AhuImg from "@/assets/categories/air-handling-unit.png";
 import DuctableAcImg from "@/assets/categories/ductable.jpg";
 import HeatPumpImg from "@/assets/categories/heat-pump.jpg";
 import VentilationImg from "@/assets/categories/ventilation.jpg";
+import productHeaderBg from "@/assets/HeaderBackgroundImg/ProductBackground.png";
 import {  
   Dialog,
   DialogContent,
@@ -50,6 +51,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import CTASection from "@/components/CTASection";
+import Breadcrumb from "@/components/Breadcrumb";
 
 interface Product {
   name: string;
@@ -273,11 +276,11 @@ function ProductCard({
   const isCommercialProduct = Boolean(cat.price);
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 group font-sans">
+    <div className="bg-white rounded-md overflow-hidden flex flex-col border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 group font-sans">
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden bg-slate-100">
         {/* Category Icon Badge */}
-        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-xl bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
+        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-md bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
           {cat.icon}
         </div>
         <img
@@ -302,7 +305,7 @@ function ProductCard({
 
         {/* Price / Starting tag if commercial */}
         {cat.price && (
-          <div className="mb-3.5 px-3 py-1.5 rounded-lg bg-sky-50 border border-sky-100 inline-block w-fit">
+          <div className="mb-3.5 px-3 py-1.5 rounded-md bg-sky-50 border border-sky-100 inline-block w-fit">
             <span className="text-xs font-extrabold text-[#0284C7]">{cat.price}</span>
           </div>
         )}
@@ -344,7 +347,7 @@ function ProductCard({
           <button
             type="button"
             onClick={() => onGetQuote(cat)}
-            className="mt-auto w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            className="mt-auto w-full py-3 px-4 rounded-md bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
             <MessageSquare size={15} />
             <span>Enquire Now</span>
@@ -354,7 +357,7 @@ function ProductCard({
           <button
             type="button"
             onClick={() => onGetQuote(cat)}
-            className="mt-auto w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
+            className="mt-auto w-full py-3 px-4 rounded-md bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
           >
             <MessageSquare size={15} />
             <span>Get Quote</span>
@@ -531,13 +534,23 @@ export default function ProductsPage() {
     <div className="bg-slate-50 min-h-screen font-sans">
       
       {/* ── Hero Banner ── */}
-      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
-        {/* Ambient background light */}
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+        {/* Background Image with Clear Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={productHeaderBg}
+            alt="Products Perfect Air Solution"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Balanced soft gradient overlay so equipment image is vividly visible while text has high contrast */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/70 via-[#03172C]/30 to-[#03172C]/85" />
+        </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
+          <div className="flex justify-center mb-3">
+            <Breadcrumb variant="dark" />
+          </div>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#03172C]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md shadow-sm">
             <Sparkles size={14} className="animate-pulse text-cyan-300" />
             <span>PREMIUM HVAC PRODUCTS</span>
           </div>
@@ -545,7 +558,7 @@ export default function ProductsPage() {
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
           >
             Cooling Products &amp; <span className="text-cyan-300">Solutions</span>
           </motion.h1>
@@ -554,7 +567,7 @@ export default function ProductsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5"
+            className="text-slate-100 text-sm sm:text-base max-w-3xl mx-auto font-medium leading-relaxed mb-5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
           >
             Explore our comprehensive range of high-performance split, cassette, ductable, VRF, and industrial air conditioning systems engineered for maximum energy efficiency and long-term durability.
           </motion.p>
@@ -602,7 +615,7 @@ export default function ProductsPage() {
       </div>
 
       <Dialog open={Boolean(selectedEnquiryProduct)} onOpenChange={(open) => !open && closeEnquiryDialog()}>
-        <DialogContent className="z-[9999] sm:max-w-[500px] p-0 overflow-hidden rounded-2xl max-h-[85vh] sm:max-h-[88vh] flex flex-col border border-slate-200 shadow-2xl">
+        <DialogContent hideCloseButton className="z-[9999] sm:max-w-[500px] p-0 overflow-hidden rounded-md max-h-[85vh] sm:max-h-[88vh] flex flex-col border border-slate-200 shadow-2xl">
           {/* Modal Header */}
           <div className="bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white p-5 sm:p-6 pb-6 relative flex-shrink-0">
             <button
@@ -632,8 +645,8 @@ export default function ProductsPage() {
             {selectedEnquiryProduct && (
               <form className="space-y-4" onSubmit={handleEnquirySubmit}>
                 {/* Pre-filled Product Card Highlight */}
-                <div className="rounded-xl border border-sky-100 bg-sky-50/70 p-3 flex items-center gap-3">
-                  <div className="w-14 h-14 rounded-lg bg-white border border-sky-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
+                <div className="rounded-md border border-sky-100 bg-sky-50/70 p-3 flex items-center gap-3">
+                  <div className="w-14 h-14 rounded-md bg-white border border-sky-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
                     <img
                       src={selectedEnquiryProduct.image}
                       alt={selectedEnquiryProduct.title}
@@ -678,7 +691,7 @@ export default function ProductsPage() {
                           message: `Hi, I would like to request a quote for ${selectedEnquiryProduct.title} (${newBrand}). Please share pricing, product options, and installation details.`,
                         }));
                       }}
-                      className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:border-transparent transition-all cursor-pointer"
+                      className="w-full rounded-md border border-slate-200 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:border-transparent transition-all cursor-pointer"
                     >
                       <option value="All Brands / Best Recommendation">All Brands / Best Recommendation</option>
                       {selectedEnquiryProduct.brands.map((brand) => (
@@ -702,7 +715,7 @@ export default function ProductsPage() {
                       value={enquiryForm.name}
                       onChange={(e) => updateEnquiryField("name", e.target.value)}
                       placeholder="e.g. Ramesh Kumar"
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
+                      className="w-full rounded-md border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
                       required
                     />
                   </div>
@@ -722,7 +735,7 @@ export default function ProductsPage() {
                         onChange={(e) => updateEnquiryField("phone", e.target.value)}
                         placeholder="10-digit mobile"
                         maxLength={10}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
+                        className="w-full rounded-md border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
                         required
                       />
                     </div>
@@ -739,7 +752,7 @@ export default function ProductsPage() {
                         value={enquiryForm.email}
                         onChange={(e) => updateEnquiryField("email", e.target.value)}
                         placeholder="name@example.com"
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
+                        className="w-full rounded-md border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
                       />
                     </div>
                   </div>
@@ -755,7 +768,7 @@ export default function ProductsPage() {
                     value={enquiryForm.message}
                     onChange={(e) => updateEnquiryField("message", e.target.value)}
                     rows={3}
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all leading-relaxed"
+                    className="w-full rounded-md border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all leading-relaxed"
                     required
                   />
                 </div>
@@ -763,7 +776,7 @@ export default function ProductsPage() {
                 {/* Trust Highlight */}
                 <div className="flex items-center justify-center gap-4 text-[11px] font-medium text-slate-500 pt-1">
                   <span className="flex items-center gap-1 text-emerald-600 font-semibold">
-                    <CheckCircle2 size={13} /> 100% Free Consultation
+                    <CheckCircle2 size={13} /> Free Consultation
                   </span>
                   <span>•</span>
                   <span>Direct WhatsApp Quotation</span>
@@ -773,7 +786,7 @@ export default function ProductsPage() {
                 <button
                   type="submit"
                   disabled={isSubmittingEnquiry}
-                  className="w-full rounded-xl py-3 px-4 bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20 hover:shadow-sky-600/30 transition-all cursor-pointer active:scale-[0.99]"
+                  className="w-full rounded-md py-3 px-4 bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20 hover:shadow-sky-600/30 transition-all cursor-pointer active:scale-[0.99]"
                 >
                   {isSubmittingEnquiry ? (
                     <LoaderCircle size={18} className="animate-spin" />
@@ -789,6 +802,8 @@ export default function ProductsPage() {
           </div>
         </DialogContent>
       </Dialog>
+      
     </div>
+    
   );
 }

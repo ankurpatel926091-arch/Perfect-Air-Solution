@@ -21,6 +21,7 @@ import {
   Phone,
 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
+import servicesHeaderBg from "@/assets/HeaderBackgroundImg/ServicesBackground.png";
 
 // ─── Application Data ──────────────────────────────────────────────────────────
 type ApplicationItem = {
@@ -347,7 +348,17 @@ export function HVACApplicationsDetailPage() {
     return (
       <main className="bg-slate-50 font-sans min-h-screen">
         {/* Hero Banner */}
-        <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+        <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+          {/* Background Image with Clear Visibility */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <img
+              src={servicesHeaderBg}
+              alt="Industries & Applications"
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/75 via-[#03172C]/35 to-[#03172C]/90" />
+          </div>
+
           <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
@@ -386,10 +397,10 @@ export function HVACApplicationsDetailPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
                 onClick={() => navigate(`/hvac-applications/${key}`)}
-                className="group relative bg-white rounded-2xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                className="group relative bg-white rounded-md p-6 border border-slate-200 shadow-none hover:shadow-sm transition-all duration-300 cursor-pointer flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
+                  <div className="w-12 h-12 rounded-md bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
                     {item.icon}
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-[#0284C7] transition-colors">
@@ -416,7 +427,17 @@ export function HVACApplicationsDetailPage() {
   return (
     <main className="bg-slate-50 font-sans min-h-screen">
       {/* ── Top Hero Banner (Matches Header Standard) ── */}
-      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+        {/* Background Image with Clear Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={servicesHeaderBg}
+            alt={data.label}
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/75 via-[#03172C]/35 to-[#03172C]/90" />
+        </div>
+
         {/* Ambient background light grid */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
@@ -489,10 +510,10 @@ export function HVACApplicationsDetailPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.08 }}
-              className="group relative bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="group relative bg-white rounded-md p-6 sm:p-7 border border-slate-200 shadow-none hover:shadow-sm transition-all duration-300 flex flex-col justify-between"
             >
               <div>
-                <div className="w-12 h-12 rounded-xl bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
+                <div className="w-12 h-12 rounded-md bg-sky-50 text-[#0284C7] border border-sky-100 flex items-center justify-center mb-4 group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
                   {card.icon}
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-[#0284C7] transition-colors">
@@ -514,7 +535,7 @@ export function HVACApplicationsDetailPage() {
 
       {/* ── Call to Action Banner ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20">
-        <div className="bg-gradient-to-br from-[#051B30] via-[#08355B] to-[#0F4C81] rounded-2xl p-8 sm:p-12 text-white text-center shadow-xl relative overflow-hidden">
+        <div className="bg-gradient-to-br from-[#051B30] via-[#08355B] to-[#0F4C81] rounded-md p-8 sm:p-12 text-white text-center shadow-none relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto">
             <h2 className="text-xl sm:text-2xl font-extrabold mb-3 leading-tight">
               Need Expert HVAC Design for Your Facility?
@@ -525,14 +546,14 @@ export function HVACApplicationsDetailPage() {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <button
                 onClick={() => navigate("/contact")}
-                className="inline-flex items-center gap-2 bg-[#0284C7] hover:bg-sky-500 text-white font-bold px-7 py-3.5 rounded-full text-sm sm:text-base transition-all shadow-lg hover:shadow-sky-500/30 transform hover:-translate-y-0.5 cursor-pointer"
+                className="inline-flex items-center gap-2 bg-[#0284C7] hover:bg-sky-500 text-white font-bold px-7 py-3.5 rounded-md text-sm sm:text-base transition-all shadow-sm hover:shadow-sky-500/30 transform hover:-translate-y-0.5 cursor-pointer"
               >
                 <span>Get Free Consultation</span>
                 <ArrowRight size={18} />
               </button>
               <a
                 href="tel:+919839171701"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-full text-sm sm:text-base transition-all border border-white/20 backdrop-blur-md cursor-pointer"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-md text-sm sm:text-base transition-all border border-white/20 backdrop-blur-md cursor-pointer"
               >
                 <Phone size={16} className="text-cyan-300" />
                 <span>Call +91 98391 71701</span>

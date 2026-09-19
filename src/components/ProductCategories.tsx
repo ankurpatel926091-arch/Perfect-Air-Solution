@@ -74,13 +74,13 @@ export default function ProductCategories() {
   const categories = staticCategories;
 
   return (
-    <section className="py-16 sm:py-24 bg-gradient-to-b from-[#F4FAFF] via-[#EEF8FF] to-[#E6F4FA] font-sans relative overflow-hidden">
+    <section className="py-16 sm:py-20 bg-gradient-to-b from-[#F4FAFF] via-[#EEF8FF] to-[#E6F4FA] font-sans relative overflow-hidden">
       {/* Background dot grid overlay */}
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#0284C7_1px,transparent_1px)] [background-size:24px_24px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 sm:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 sm:mb-10">
           <div>
             <div className="inline-flex items-center gap-2 bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3.5">
               <span>SHOP BY TOP CATEGORIES</span>
@@ -110,7 +110,7 @@ export default function ProductCategories() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
               onClick={() => navigate("/product")}
-              className="group bg-white rounded-xl overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col cursor-pointer"
+              className="group bg-white rounded-md overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col cursor-pointer"
             >
               {/* Image Box */}
               <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-100 flex items-center justify-center">

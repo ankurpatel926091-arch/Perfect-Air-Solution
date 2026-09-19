@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Shield, Award, CheckCircle, Target, ArrowRight, Clock, Users, Building, MapPin, Zap, ShieldCheck, Sparkles, HeartHandshake } from "lucide-react";
 import CountUp from "@/components/ui/CountUp";
 import CTASection from "@/components/CTASection";
+import Breadcrumb from "@/components/Breadcrumb";
+import aboutHeaderBg from "@/assets/HeaderBackgroundImg/AboutBackground.png";
 
 const stats = [
   { value: 5000, suffix: "+", label: "Happy Customers", icon: Users, color: "from-[#0091FF] to-[#00D4FF]", shadow: "rgba(0,180,255,0.4)" },
@@ -73,13 +75,23 @@ const About = () => (
   <main className="bg-slate-50 font-sans min-h-screen">
     
     {/* ── Hero Banner ── */}
-    <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
-      {/* Ambient background light */}
-      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+      {/* Background Image with Clear Visibility */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <img
+          src={aboutHeaderBg}
+          alt="About Perfect Air Solution"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Balanced soft gradient overlay so image is vividly visible while text has high contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/70 via-[#03172C]/30 to-[#03172C]/85" />
+      </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
+        <div className="flex justify-center mb-3">
+          <Breadcrumb variant="dark" />
+        </div>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#03172C]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md shadow-sm">
           <Sparkles size={14} className="animate-pulse text-cyan-300" />
           <span>ABOUT PERFECT AIR SOLUTION</span>
         </div>
@@ -87,7 +99,7 @@ const About = () => (
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
         >
           Building Comfort &amp; Engineering Trust <span className="text-cyan-300 block sm:inline-block">Since 2012</span>
         </motion.h1>
@@ -96,7 +108,7 @@ const About = () => (
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.15 }}
-          className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5"
+          className="text-slate-100 text-sm sm:text-base max-w-3xl mx-auto font-medium leading-relaxed mb-5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
         >
           Uttar Pradesh’s premier HVAC company delivering energy-efficient cooling, certified installation, and 24/7 AMC support.
         </motion.p>
@@ -111,7 +123,7 @@ const About = () => (
     </section>
 
     {/* ── Our Story ── */}
-    <section className="py-16 sm:py-24 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] relative overflow-hidden">
+    <section className="py-16 sm:py-18 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] relative overflow-hidden">
       {/* Background Ambient Glows */}
       <div className="absolute top-1/3 left-0 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -137,19 +149,19 @@ const About = () => (
             </h2>
             
             <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed font-normal w-full">
-              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 border-l-4 border-l-[#0284C7] shadow-none hover:shadow-none transition-shadow">
+              <div className="p-5 rounded-md bg-white border border-slate-200/80 border-l-4 border-l-[#0284C7] shadow-none hover:shadow-none transition-shadow">
                 <p>
                   Founded in 2012, <strong className="text-[#051B30] font-bold">Perfect Air Solution</strong> began with a clear vision — to provide reliable, honest, and high-quality cooling solutions that customers can truly depend on. What started as a focused HVAC service initiative has steadily evolved into a trusted name in air conditioning and industrial cooling across multiple cities.
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 border-l-4 border-l-sky-500 shadow-none hover:shadow-none transition-shadow">
+              <div className="p-5 rounded-md bg-white border border-slate-200/80 border-l-4 border-l-sky-500 shadow-none hover:shadow-none transition-shadow">
                 <p>
                   Over the years, we have successfully installed and serviced thousands of climate control systems — from residential Split and Window AC units to advanced VRF systems, cold rooms, and large-scale industrial chiller plants. Our growth is driven by strong technical expertise, prompt service delivery, and an unwavering commitment to quality workmanship.
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 border-l-4 border-l-cyan-400 shadow-none hover:shadow-none transition-shadow">
+              <div className="p-5 rounded-md bg-white border border-slate-200/80 border-l-4 border-l-cyan-400 shadow-none hover:shadow-none transition-shadow">
                 <p>
                   Today, with <span className="text-[#0284C7] font-extrabold">5,000+ satisfied customers</span> and <span className="text-[#0284C7] font-extrabold">500+ completed commercial projects</span>, we continue to focus on innovation, energy-efficient solutions, and long-term client partnerships.
                 </p>
@@ -169,11 +181,11 @@ const About = () => (
                     whileInView="visible"
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
-                    className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col items-start justify-between group"
+                    className="bg-white rounded-md p-6 border border-slate-200/90 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col items-start justify-between group"
                   >
                     {/* Glowing Icon Badge */}
                     <div
-                      className={`w-11 h-11 rounded-xl bg-gradient-to-tr ${s.color} flex items-center justify-center text-white mb-4 group-hover:scale-108 transition-transform`}
+                      className={`w-11 h-11 rounded-md bg-gradient-to-tr ${s.color} flex items-center justify-center text-white mb-4 group-hover:scale-108 transition-transform`}
                     >
                       <IconComp size={22} />
                     </div>
@@ -206,7 +218,7 @@ const About = () => (
     </section>
 
     {/* ── Core Values Section ── */}
-    <section className="py-20 sm:py-24 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] relative overflow-hidden font-sans">
+    <section className="py-20 sm:py-16 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] relative overflow-hidden font-sans">
       {/* Background Decorative Glow Accents */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -219,9 +231,9 @@ const About = () => (
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="text-center max-w-3xl mx-auto mb-14"
+          className="text-center max-w-3xl mx-auto mb-10"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] text-xs font-bold uppercase tracking-wider mb-3.5 shadow-sm">
+          <div className="inline-flex items-center  gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] text-xs font-bold uppercase tracking-wider mb-3.5 shadow-sm">
             <CheckCircle size={14} className="text-[#0284C7]" />
             <span>Our Core Values</span>
           </div>
@@ -250,12 +262,12 @@ const About = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.45 }}
-                className="bg-white rounded-2xl p-6 border border-sky-100 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col justify-between group"
+                className="bg-white rounded-md p-6 border border-sky-100 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   {/* Top Row: Icon Badge & Tag */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${v.gradient} text-white flex items-center justify-center`}>
+                    <div className={`w-12 h-12 rounded-md bg-gradient-to-br ${v.gradient} text-white flex items-center justify-center`}>
                       <IconComp size={22} />
                     </div>
                     <span className="px-2.5 py-0.5 rounded-full bg-sky-50 border border-sky-100 text-[#0284C7] text-[10px] font-bold">
@@ -326,8 +338,8 @@ const About = () => (
                   {/* Dot */}
                   <div className="absolute -left-[25px] top-2 w-4 h-4 rounded-full bg-[#0284C7] border-4 border-white" />
                   
-                  <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/90 shadow-none hover:shadow-none transition-shadow">
-                    <span className="inline-block text-xs sm:text-sm font-bold text-[#0284C7] bg-sky-50 border border-sky-200 px-3 py-1 rounded-lg mb-2.5">
+                  <div className="bg-white rounded-md p-5 sm:p-6 border border-slate-200/90 shadow-none hover:shadow-none transition-shadow">
+                    <span className="inline-block text-xs sm:text-sm font-bold text-[#0284C7] bg-sky-50 border border-sky-200 px-3 py-1 rounded-md mb-2.5">
                       {m.year}
                     </span>
                     <p className="text-slate-700 text-sm sm:text-base font-normal leading-relaxed">
@@ -346,12 +358,12 @@ const About = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-2xl p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between border border-cyan-400/20"
+              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-md p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between border border-cyan-400/20"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-cyan-300 mb-6 backdrop-blur-md">
+                <div className="w-14 h-14 rounded-md bg-white/10 border border-white/20 flex items-center justify-center text-cyan-300 mb-6 backdrop-blur-md">
                   <Target size={28} />
                 </div>
                 
@@ -365,8 +377,8 @@ const About = () => (
 
                 {/* Core Mission Pillars */}
                 <div className="space-y-3 pt-2 mb-6">
-                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-2xl border border-white/10 backdrop-blur-sm">
-                    <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-md border border-white/10 backdrop-blur-sm">
+                    <div className="w-8 h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Zap size={18} />
                     </div>
                     <div>
@@ -375,8 +387,8 @@ const About = () => (
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-2xl border border-white/10 backdrop-blur-sm">
-                    <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-md border border-white/10 backdrop-blur-sm">
+                    <div className="w-8 h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <ShieldCheck size={18} />
                     </div>
                     <div>
@@ -385,8 +397,8 @@ const About = () => (
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-2xl border border-white/10 backdrop-blur-sm">
-                    <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-md border border-white/10 backdrop-blur-sm">
+                    <div className="w-8 h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Clock size={18} />
                     </div>
                     <div>

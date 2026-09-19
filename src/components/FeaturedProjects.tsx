@@ -53,7 +53,7 @@ function ProjectCard({ project, i }: { project: any; i: number }) {
       animate="rest"
       style={{
         cursor: "pointer",
-        borderRadius: "12px",
+        borderRadius: "6px",
         overflow: "hidden",
         border: "1px solid #e2e8f0",
         background: BRAND.white,
@@ -141,7 +141,7 @@ export default function FeaturedProjects() {
     : fallbackProjects;
 
   return (
-    <section className="py-16 sm:py-24 bg-slate-50 font-sans">
+    <section className="py-16 sm:py-18 bg-slate-50 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

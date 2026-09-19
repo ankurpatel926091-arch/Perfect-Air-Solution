@@ -60,7 +60,7 @@ export default function HVACSolutions() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ export default function HVACSolutions() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.5 }}
                 onClick={() => navigate(`/hvac-applications`)}
-                className="group bg-white rounded-sm overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col cursor-pointer font-sans"
+                className="group bg-white rounded-md overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col cursor-pointer font-sans"
               >
                 {/* Image Container */}
                 <div className="relative h-52 overflow-hidden bg-slate-100">
@@ -119,7 +119,7 @@ export default function HVACSolutions() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60" />
                   
                   {/* Glowing Icon Badge */}
-                  <div className="absolute top-4 left-4 z-10 w-11 h-11 rounded-xl bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
+                  <div className="absolute top-4 left-4 z-10 w-11 h-11 rounded-md bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
                     <IconComponent size={22} />
                   </div>
                 </div>

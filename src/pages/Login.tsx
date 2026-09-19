@@ -18,7 +18,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen py-24 flex items-center justify-center bg-neutral-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-sm border border-neutral-200 p-8">
+      <div className="max-w-md w-full bg-white rounded-md shadow-sm border border-neutral-200 p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold font-syne text-brand-blue tracking-tight">Welcome Back</h1>
           <p className="text-neutral-500 mt-2">Sign in to your account</p>
@@ -30,7 +30,7 @@ const Login = () => {
             <input
               type="email"
               required
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
+              className="w-full px-4 py-3 rounded-md border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -42,7 +42,7 @@ const Login = () => {
             <input
               type="password"
               required
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
+              className="w-full px-4 py-3 rounded-md border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -51,7 +51,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-brand-blue text-white py-3 rounded-xl font-medium hover:bg-brand-blue-dark transition-colors"
+            className="w-full bg-brand-blue text-white py-3 rounded-md font-medium hover:bg-brand-blue-dark transition-colors cursor-pointer"
           >
             Sign In
           </button>

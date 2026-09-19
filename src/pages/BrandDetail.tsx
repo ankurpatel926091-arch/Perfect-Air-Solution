@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 import { BRAND } from '@/lib/colors';
 import Loader from '@/components/ui/Loader';
+import productHeaderBg from '@/assets/HeaderBackgroundImg/ProductBackground.png';
 
 const renderIcon = (iconName: string): React.ReactNode => {
   const style = { color: BRAND.primary };
@@ -43,7 +44,7 @@ export default function BrandDetail() {
           <p style={{ color: BRAND.slate400, marginBottom: "24px" }}>We couldn't find details for "{slug}".</p>
           <Link to="/" style={{
             background: `linear-gradient(135deg, ${BRAND.dark}, ${BRAND.primary})`,
-            color: BRAND.white, padding: "10px 24px", borderRadius: "8px",
+            color: BRAND.white, padding: "10px 24px", borderRadius: "6px",
             textDecoration: "none", fontWeight: 600
           }}>
             Go Back Home
@@ -59,11 +60,18 @@ export default function BrandDetail() {
 
         {/* ── Hero ── */}
         <section
-          className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 overflow-hidden"
-          style={{
-            background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.darkMid} 50%, ${BRAND.primary} 100%)`,
-          }}
+          className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 overflow-hidden bg-[#03172C]"
         >
+          {/* Background Image with Clear Visibility */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <img
+              src={productHeaderBg}
+              alt={brand.brandName}
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/80 via-[#03172C]/45 to-[#03172C]/95" />
+          </div>
+
           <div style={{
             position: "absolute", inset: 0, opacity: 0.07,
             backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px)",
@@ -103,7 +111,7 @@ export default function BrandDetail() {
               <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
                 <a href="tel:+919839171701" style={{
                   background: BRAND.white, color: BRAND.dark,
-                  padding: "12px 24px", borderRadius: "10px", fontWeight: 700,
+                  padding: "12px 24px", borderRadius: "6px", fontWeight: 700,
                   display: "inline-flex", alignItems: "center", gap: "8px",
                   textDecoration: "none", fontSize: "0.9rem",
                   boxShadow: "0 6px 20px rgba(0,0,0,0.2)"
@@ -115,7 +123,7 @@ export default function BrandDetail() {
                   style={{
                     background: "rgba(255,255,255,0.1)", color: BRAND.white,
                     border: "1px solid rgba(255,255,255,0.25)",
-                    padding: "12px 24px", borderRadius: "10px", fontWeight: 600,
+                    padding: "12px 24px", borderRadius: "6px", fontWeight: 600,
                     display: "inline-flex", alignItems: "center", gap: "8px",
                     textDecoration: "none", fontSize: "0.9rem"
                   }}>
@@ -134,7 +142,7 @@ export default function BrandDetail() {
                   borderRadius: "20px", filter: "blur(24px)"
                 }} />
                 <img src={brand.heroImage} alt={brand.title}
-                  style={{ width: "100%", borderRadius: "16px", boxShadow: "0 24px 60px rgba(0,0,0,0.3)", position: "relative", zIndex: 1, display: "block" }}
+                  style={{ width: "100%", borderRadius: "6px", boxShadow: "0 24px 60px rgba(0,0,0,0.3)", position: "relative", zIndex: 1, display: "block" }}
                 />
               </div>
             </motion.div>
@@ -165,11 +173,11 @@ export default function BrandDetail() {
                   style={{
                     display: "flex", alignItems: "flex-start", gap: "18px",
                     padding: "24px", background: BRAND.white,
-                    border: `1px solid ${BRAND.slate100}`, borderRadius: "16px",
+                    border: `1px solid ${BRAND.slate100}`, borderRadius: "6px",
                     boxShadow: `0 2px 12px ${BRAND.primary}14`,
                     transition: "all 0.3s"
                   }}>
-                  <div style={{ padding: "12px", borderRadius: "12px", background: BRAND.primarySky, flexShrink: 0 }}>
+                  <div style={{ padding: "12px", borderRadius: "6px", background: BRAND.primarySky, flexShrink: 0 }}>
                     {renderIcon(feature.icon || "star")}
                   </div>
                   <div>
@@ -205,7 +213,7 @@ export default function BrandDetail() {
                 <motion.div key={idx} custom={idx} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
                   style={{
                     background: BRAND.white, border: `1px solid ${BRAND.slate100}`,
-                    borderRadius: "20px", overflow: "hidden",
+                    borderRadius: "6px", overflow: "hidden",
                     boxShadow: `0 2px 16px ${BRAND.primary}14`,
                     transition: "all 0.3s"
                   }}
@@ -239,7 +247,7 @@ export default function BrandDetail() {
                     <a href="tel:+919839171701" style={{
                       width: "100%", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px",
                       background: `linear-gradient(135deg, ${BRAND.dark}, ${BRAND.primary})`,
-                      color: BRAND.white, padding: "11px", borderRadius: "10px",
+                      color: BRAND.white, padding: "11px", borderRadius: "6px",
                       textDecoration: "none", fontWeight: 600, fontSize: "0.875rem",
                       boxShadow: `0 4px 14px ${BRAND.primary}40`
                     }}>
@@ -274,7 +282,7 @@ export default function BrandDetail() {
             <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "14px" }}>
               <a href="tel:+919839171701" style={{
                 background: BRAND.white, color: BRAND.dark,
-                padding: "13px 28px", borderRadius: "10px", fontWeight: 700,
+                padding: "13px 28px", borderRadius: "6px", fontWeight: 700,
                 display: "inline-flex", alignItems: "center", gap: "8px",
                 textDecoration: "none", fontSize: "0.95rem",
                 boxShadow: "0 8px 24px rgba(0,0,0,0.2)"
@@ -284,7 +292,7 @@ export default function BrandDetail() {
               <Link to="/contact" style={{
                 background: "rgba(255,255,255,0.1)", color: BRAND.white,
                 border: "1px solid rgba(255,255,255,0.25)",
-                padding: "13px 28px", borderRadius: "10px", fontWeight: 600,
+                padding: "13px 28px", borderRadius: "6px", fontWeight: 600,
                 display: "inline-flex", alignItems: "center", gap: "8px",
                 textDecoration: "none", fontSize: "0.95rem"
               }}>

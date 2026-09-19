@@ -17,7 +17,7 @@ const CTASection: React.FC<CTAProps> = ({
     onConsultationClick || (() => navigate("/contact"));
 
   return (
-    <section className="w-full bg-background pt-10 pb-8 sm:pt-12 sm:pb-10">
+    <section className="w-full bg-background pt-2 pb-8 sm:pt-4 sm:pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -27,7 +27,7 @@ const CTASection: React.FC<CTAProps> = ({
           style={{
             position: "relative",
             overflow: "hidden",
-            borderRadius: "16px",
+            borderRadius: "6px",
             background: "linear-gradient(135deg, #051B30 0%, #0B2E4C 50%, #0284C7 100%)",
             paddingTop: "40px",
             paddingBottom: "40px",
@@ -123,7 +123,7 @@ const CTASection: React.FC<CTAProps> = ({
                   color: "#051B30",
                   fontWeight: 700,
                   fontSize: "0.95rem",
-                  borderRadius: "12px",
+                  borderRadius: "6px",
                   border: "none",
                   cursor: "pointer",
                   transition: "all 0.2s",
@@ -144,7 +144,7 @@ const CTASection: React.FC<CTAProps> = ({
                   color: "white",
                   fontWeight: 700,
                   fontSize: "0.95rem",
-                  borderRadius: "12px",
+                  borderRadius: "6px",
                   border: "1.5px solid rgba(255,255,255,0.3)",
                   cursor: "pointer",
                   textDecoration: "none",

@@ -8,7 +8,7 @@ const navLinks = [
   { name: "About Us", path: "/about" },
   { name: "Products", path: "/product" },
   { name: "Services", path: "/services" },
-  { name: "Projects", path: "/case-studies" },
+  // { name: "Projects", path: "/case-studies" },
   { name: "Gallery", path: "/gallery" },
   // { name: "Contact Us", path: "/contact" },
 ];
@@ -78,7 +78,7 @@ const SiteHeader = () => {
             aria-label="Perfect Air Solution – Home"
             className="flex items-center gap-2.5 group flex-shrink-0 text-decoration-none"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#051B30] via-[#0B2E4C] to-[#0284C7] flex items-center justify-center text-white group-hover:scale-105 transition-transform duration-300">
+            <div className="w-10 h-10 rounded-md bg-gradient-to-tr from-[#051B30] via-[#0B2E4C] to-[#0284C7] flex items-center justify-center text-white group-hover:scale-105 transition-transform duration-300">
               <Wind size={22} className="text-cyan-300 animate-pulse" />
             </div>
             <div className="flex flex-col">
@@ -101,7 +101,7 @@ const SiteHeader = () => {
                 key={link.name}
                 to={link.path}
                 className={`
-                  relative whitespace-nowrap rounded-lg transition-all duration-200 font-semibold text-xs xl:text-sm px-2.5 py-2
+                  relative whitespace-nowrap rounded-md transition-all duration-200 font-semibold text-xs xl:text-sm px-2.5 py-2
                   ${isActive(link.path)
                     ? "text-[#0284C7] bg-sky-50 font-bold"
                     : "text-slate-700 hover:text-[#0284C7] hover:bg-slate-50"
@@ -117,14 +117,14 @@ const SiteHeader = () => {
           <div className="flex items-center gap-3 flex-shrink-0">
             <button
               onClick={() => navigate("/contact")}
-              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-[#051B30] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold rounded-full text-xs xl:text-sm px-5 py-2.5 transition-all duration-300 transform hover:-translate-y-0.5"
+              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-[#051B30] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold rounded-md text-xs xl:text-sm px-5 py-2.5 transition-all duration-300 transform hover:-translate-y-0.5"
             >
               <span>Contact Us</span>
             </button>
 
             {/* Mobile Hamburger */}
             <button
-              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 border-0 cursor-pointer text-[#051B30] active:bg-slate-200 transition-colors"
+              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-md bg-slate-100 border-0 cursor-pointer text-[#051B30] active:bg-slate-200 transition-colors"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
@@ -169,7 +169,7 @@ const SiteHeader = () => {
                     <Link
                       to={link.path}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center justify-between px-4 py-3 rounded-xl font-semibold text-sm transition-all ${
+                      className={`flex items-center justify-between px-4 py-3 rounded-md font-semibold text-sm transition-all ${
                         isActive(link.path)
                           ? "bg-sky-50 text-[#0284C7] font-bold"
                           : "text-slate-700 hover:bg-slate-50 hover:text-[#0284C7]"
@@ -194,7 +194,7 @@ const SiteHeader = () => {
                       setMenuOpen(false);
                       navigate("/contact");
                     }}
-                    className="w-full flex justify-center items-center gap-2 px-5 py-3.5 bg-gradient-to-r from-[#051B30] to-[#0284C7] text-white font-bold text-sm rounded-xl shadow-lg shadow-sky-500/20 active:opacity-90 transition-all"
+                    className="w-full flex justify-center items-center gap-2 px-5 py-3.5 bg-gradient-to-r from-[#051B30] to-[#0284C7] text-white font-bold text-sm rounded-md shadow-lg shadow-sky-500/20 active:opacity-90 transition-all"
                   >
                     <Phone size={16} />
                     <span>Get a Quote / Call Now</span>

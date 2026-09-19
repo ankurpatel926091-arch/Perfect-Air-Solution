@@ -26,7 +26,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen py-24 flex items-center justify-center bg-neutral-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-sm border border-neutral-200 p-8">
+      <div className="max-w-md w-full bg-white rounded-md shadow-sm border border-neutral-200 p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold font-syne text-brand-blue tracking-tight">Create an Account</h1>
           <p className="text-neutral-500 mt-2">Join us to get started</p>
@@ -38,7 +38,7 @@ const Register = () => {
             <input
               type="text"
               required
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
+              className="w-full px-4 py-3 rounded-md border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
               placeholder="John Doe"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -50,7 +50,7 @@ const Register = () => {
             <input
               type="email"
               required
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
+              className="w-full px-4 py-3 rounded-md border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -62,7 +62,7 @@ const Register = () => {
             <input
               type="password"
               required
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
+              className="w-full px-4 py-3 rounded-md border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -74,7 +74,7 @@ const Register = () => {
             <input
               type="password"
               required
-              className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
+              className="w-full px-4 py-3 rounded-md border border-neutral-300 focus:ring-2 focus:ring-brand-blue focus:border-brand-blue transition-colors"
               placeholder="••••••••"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -83,7 +83,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full bg-brand-orange text-white py-3 rounded-xl font-medium hover:bg-orange-600 transition-colors"
+            className="w-full bg-brand-orange text-white py-3 rounded-md font-medium hover:bg-orange-600 transition-colors cursor-pointer"
           >
             Sign Up
           </button>

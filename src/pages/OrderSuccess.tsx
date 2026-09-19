@@ -67,7 +67,7 @@ export default function OrderSuccess() {
         <button
           onClick={() => navigate('/')}
           style={{ background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.primary} 100%)` }}
-          className="text-white px-6 py-2 rounded-lg"
+          className="text-white px-6 py-2 rounded-md"
         >
           Return to Shop
         </button>
@@ -130,7 +130,7 @@ export default function OrderSuccess() {
 
           {/* Order ID Banner */}
           <div
-            className="rounded-xl p-5 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3"
+            className="rounded-md p-5 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3"
             style={{
               background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.primary} 100%)`,
               color: BRAND.white,
@@ -151,7 +151,7 @@ export default function OrderSuccess() {
 
           {/* Product Details */}
           <div
-            className="bg-white rounded-xl shadow-sm p-6 mb-6"
+            className="bg-white rounded-md shadow-sm p-6 mb-6"
             style={{
               border: `1px solid ${BRAND.slate100}`,
               opacity: animateIn ? 1 : 0,
@@ -164,7 +164,7 @@ export default function OrderSuccess() {
             </h2>
             <div className="flex gap-4 items-start">
               {order.product?.imageUrl && (
-                <div className="w-20 h-20 rounded-lg p-2 flex items-center justify-center flex-shrink-0" style={{ background: BRAND.primaryPale, border: `1px solid ${BRAND.slate100}` }}>
+                <div className="w-20 h-20 rounded-md p-2 flex items-center justify-center flex-shrink-0" style={{ background: BRAND.primaryPale, border: `1px solid ${BRAND.slate100}` }}>
                   <img src={order.product.imageUrl} alt={order.product.title} className="max-w-full max-h-full object-contain mix-blend-multiply" />
                 </div>
               )}
@@ -184,7 +184,7 @@ export default function OrderSuccess() {
           {/* Delivery Info + Address */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div
-              className="bg-white rounded-xl shadow-sm p-6"
+              className="bg-white rounded-md shadow-sm p-6"
               style={{
                 border: `1px solid ${BRAND.slate100}`,
                 opacity: animateIn ? 1 : 0,
@@ -195,7 +195,7 @@ export default function OrderSuccess() {
               <h2 className="flex items-center gap-2 text-base font-semibold mb-4" style={{ color: BRAND.dark }}>
                 <Truck className="w-5 h-5" style={{ color: BRAND.primary }} /> Estimated Delivery
               </h2>
-              <div className="rounded-lg p-4 text-center" style={{ background: BRAND.primaryPale, border: `1px solid ${BRAND.primarySky}` }}>
+              <div className="rounded-md p-4 text-center" style={{ background: BRAND.primaryPale, border: `1px solid ${BRAND.primarySky}` }}>
                 <p className="text-xs font-medium uppercase tracking-wider mb-1" style={{ color: BRAND.primary }}>Expected By</p>
                 <p className="text-sm font-semibold leading-snug" style={{ color: BRAND.dark }}>{formattedDate}</p>
               </div>
@@ -210,7 +210,7 @@ export default function OrderSuccess() {
             </div>
 
             <div
-              className="bg-white rounded-xl shadow-sm p-6"
+              className="bg-white rounded-md shadow-sm p-6"
               style={{
                 border: `1px solid ${BRAND.slate100}`,
                 opacity: animateIn ? 1 : 0,
@@ -239,7 +239,7 @@ export default function OrderSuccess() {
 
           {/* What Happens Next */}
           <div
-            className="bg-white rounded-xl shadow-sm p-6 mb-8"
+            className="bg-white rounded-md shadow-sm p-6 mb-8"
             style={{
               border: `1px solid ${BRAND.slate100}`,
               opacity: animateIn ? 1 : 0,
@@ -278,7 +278,7 @@ export default function OrderSuccess() {
           >
             <button
               onClick={() => navigate('/')}
-              className="inline-flex items-center gap-2 text-white px-8 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 group"
+              className="inline-flex items-center gap-2 text-white px-8 py-3.5 rounded-md font-semibold text-sm transition-all duration-200 group"
               style={{
                 background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.primary} 100%)`,
                 boxShadow: `0 8px 24px ${BRAND.primary}33`,

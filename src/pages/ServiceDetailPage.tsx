@@ -10,6 +10,7 @@ import { useGetServicesQuery } from "@/store/api";
 import Loader from "@/components/ui/Loader";
 import CTASection from "@/components/CTASection";
 import { sendQuoteViaWhatsApp } from "@/lib/whatsapp";
+import servicesHeaderBg from "@/assets/HeaderBackgroundImg/ServicesBackground.png";
 
 const iconMap: Record<string, React.ElementType> = { ShieldCheck, MapPin, Settings2, Wind, Wrench };
 const renderIcon = (name: string): React.ElementType => iconMap[name] ?? Wrench;
@@ -54,7 +55,18 @@ export default function ServiceDetailPage() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
       {/* ── Top Hero Banner (Matching Site Header & All Subpages) ── */}
-      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+        {/* Background Image with Clear Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={service.headerImage || servicesHeaderBg}
+            alt={service.title}
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Balanced soft gradient overlay so diagnostics/technicians image is vividly visible and text is crisp */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/75 via-[#03172C]/35 to-[#03172C]/90" />
+        </div>
+
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
@@ -68,7 +80,7 @@ export default function ServiceDetailPage() {
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
           >
             {service.title}
           </motion.h1>
@@ -77,7 +89,7 @@ export default function ServiceDetailPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5"
+            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]"
           >
             {service.longDesc || service.desc}
           </motion.p>
@@ -101,8 +113,8 @@ export default function ServiceDetailPage() {
       </section>
 
       {/* ── Main Section Container (Standardized max-w-7xl) ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-0">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 items-start">
           
           {/* ── LEFT COLUMN (Main Details) ── */}
           <div className="lg:col-span-8 space-y-4">
@@ -114,7 +126,7 @@ export default function ServiceDetailPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="relative w-full rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-900 h-64 sm:h-80 md:h-[340px] lg:h-[360px]"
+                className="relative w-full rounded-md overflow-hidden shadow-none border border-slate-200/80 bg-slate-900 h-64 sm:h-80 md:h-[340px] lg:h-[360px]"
               >
                 <img
                   src={service.image}
@@ -125,7 +137,7 @@ export default function ServiceDetailPage() {
                 
                 <div className="absolute bottom-6 left-6 right-6 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div>
-                    <span className="bg-[#0284C7] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block shadow-md">
+                    <span className="bg-[#0284C7] text-white text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wider mb-2 inline-block shadow-sm">
                       Verified Service Package
                     </span>
                     <h2 className="text-xl sm:text-2xl font-extrabold text-white leading-tight">
@@ -135,7 +147,7 @@ export default function ServiceDetailPage() {
 
                   <button
                     onClick={handleBooking}
-                    className="bg-white hover:bg-slate-100 text-[#051B30] font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer"
+                    className="bg-white hover:bg-slate-100 text-[#051B30] font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-md shadow-sm transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer"
                   >
                     <span>Instant Booking</span>
                     <ArrowRight size={15} className="text-[#0284C7]" />
@@ -151,7 +163,7 @@ export default function ServiceDetailPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-md"
+                className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/80 shadow-none"
               >
                 <div className="flex items-center gap-2.5 text-[#051B30] font-extrabold text-xl mb-6 pb-3 border-b border-slate-100">
                   <ShieldCheck size={24} className="text-[#0284C7]" />
@@ -162,9 +174,9 @@ export default function ServiceDetailPage() {
                   {service.highlights.map((h: string, idx: number) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-sky-200 transition-colors"
+                      className="flex items-start gap-3.5 p-4 rounded-md bg-slate-50 border border-slate-100 hover:border-sky-200 transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-xl bg-sky-100 text-[#0284C7] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-8 h-8 rounded-md bg-sky-100 text-[#0284C7] flex items-center justify-center flex-shrink-0 mt-0.5">
                         <CheckCircle2 size={18} />
                       </div>
                       <span className="text-slate-800 text-sm font-bold leading-snug">
@@ -183,7 +195,7 @@ export default function ServiceDetailPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-md"
+                className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/80 shadow-none"
               >
                 <div className="flex items-center gap-2.5 text-[#051B30] font-extrabold text-xl mb-6 pb-3 border-b border-slate-100">
                   <Wrench size={24} className="text-[#0284C7]" />
@@ -194,11 +206,11 @@ export default function ServiceDetailPage() {
                   {service.process.map((p: any, idx: number) => (
                     <div
                       key={idx}
-                      className="relative p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-sky-50/50 border border-slate-200/80 flex flex-col justify-between hover:border-sky-300 transition-all group"
+                      className="relative p-5 rounded-md bg-gradient-to-br from-slate-50 to-sky-50/50 border border-slate-200/80 flex flex-col justify-between hover:border-sky-300 transition-all group"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <span className="w-9 h-9 rounded-xl bg-[#0284C7] text-white font-extrabold text-xs flex items-center justify-center shadow-md">
+                          <span className="w-9 h-9 rounded-md bg-[#0284C7] text-white font-extrabold text-xs flex items-center justify-center shadow-sm">
                             {p.step}
                           </span>
                           <span className="text-xs font-bold text-sky-700 uppercase tracking-widest bg-sky-100 px-2.5 py-1 rounded-md">
@@ -225,7 +237,7 @@ export default function ServiceDetailPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-md"
+                className="bg-white rounded-md p-6 sm:p-8 border border-slate-200/80 shadow-none"
               >
                 <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100">
                   <h3 className="text-xl font-extrabold text-[#051B30]">
@@ -247,10 +259,10 @@ export default function ServiceDetailPage() {
                       <div
                         key={r.slug}
                         onClick={() => navigate(`/service/${r.slug}`)}
-                        className="p-4 rounded-2xl border border-slate-200/80 hover:border-sky-300 bg-slate-50 hover:bg-white transition-all cursor-pointer group flex flex-col justify-between"
+                        className="p-4 rounded-md border border-slate-200/80 hover:border-sky-300 bg-slate-50 hover:bg-white transition-all cursor-pointer group flex flex-col justify-between"
                       >
                         <div>
-                          <div className="w-10 h-10 rounded-xl bg-sky-100 text-[#0284C7] flex items-center justify-center mb-3 group-hover:bg-[#0284C7] group-hover:text-white transition-colors">
+                          <div className="w-10 h-10 rounded-md bg-sky-100 text-[#0284C7] flex items-center justify-center mb-3 group-hover:bg-[#0284C7] group-hover:text-white transition-colors">
                             <RelIcon size={20} />
                           </div>
                           <h4 className="font-bold text-[#051B30] text-sm mb-1 line-clamp-1 group-hover:text-[#0284C7] transition-colors">
@@ -279,11 +291,11 @@ export default function ServiceDetailPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xl relative overflow-hidden"
+              className="bg-white rounded-md p-5 sm:p-6 border border-slate-200/90 shadow-none relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-sky-400/10 rounded-full blur-2xl pointer-events-none" />
 
-              <span className="inline-block bg-sky-100 text-[#0284C7] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">
+              <span className="inline-block bg-sky-100 text-[#0284C7] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md mb-3">
                 Transparent Pricing
               </span>
 
@@ -300,7 +312,7 @@ export default function ServiceDetailPage() {
               <div className="space-y-3 mb-6">
                 <button
                   onClick={handleBooking}
-                  className="w-full bg-gradient-to-r from-[#0284C7] to-[#0369A1] hover:from-[#0369A1] hover:to-[#075985] text-white font-extrabold text-sm py-3.5 px-5 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20 transition-all cursor-pointer"
+                  className="w-full bg-gradient-to-r from-[#0284C7] to-[#0369A1] hover:from-[#0369A1] hover:to-[#075985] text-white font-extrabold text-sm py-3.5 px-5 rounded-md flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
                 >
                   <Calendar size={18} />
                   <span>Book Service Now</span>
@@ -308,7 +320,7 @@ export default function ServiceDetailPage() {
 
                 <a
                   href="tel:+919839171701"
-                  className="w-full bg-slate-100 hover:bg-slate-200 text-[#051B30] font-bold text-sm py-3 px-5 rounded-2xl flex items-center justify-center gap-2 transition-all text-decoration-none"
+                  className="w-full bg-slate-100 hover:bg-slate-200 text-[#051B30] font-bold text-sm py-3 px-5 rounded-md flex items-center justify-center gap-2 transition-all text-decoration-none"
                 >
                   <Phone size={16} className="text-[#0284C7]" />
                   <span>Call +91 98391 71701</span>
@@ -332,7 +344,7 @@ export default function ServiceDetailPage() {
               </div>
 
               {/* Free Inspection Callout */}
-              <div className="mt-6 p-4 rounded-2xl bg-sky-50/80 border border-sky-100 text-center">
+              <div className="mt-6 p-4 rounded-md bg-sky-50/80 border border-sky-100 text-center">
                 <p className="text-xs font-bold text-[#051B30] mb-1">
                   Need a Custom Commercial BOQ?
                 </p>

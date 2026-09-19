@@ -95,11 +95,11 @@ const TermsConditions = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.5 }}
-            className="rounded-2xl p-8 border"
+            className="rounded-md p-8 border"
             style={{ background: BRAND.white, borderColor: BRAND.slate100 }}
           >
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: BRAND.primaryPale }}>
+              <div className="w-10 h-10 rounded-md flex items-center justify-center" style={{ background: BRAND.primaryPale }}>
                 <s.icon size={20} style={{ color: BRAND.primary }} />
               </div>
               <h2 className="heading-2" style={{ color: BRAND.dark }}>{s.title}</h2>

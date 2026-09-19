@@ -65,7 +65,7 @@ const AdminBookings = () => {
         </div>
       ) : sortedBookings.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-32 text-center">
-          <div className="w-20 h-20 rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center mb-5">
+          <div className="w-20 h-20 rounded-md bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center mb-5">
             <svg className="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10m-11 9h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v11a2 2 0 002 2z" />
             </svg>
@@ -87,14 +87,14 @@ const AdminBookings = () => {
             return (
               <div
                 key={id}
-                className="relative rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
+                className="relative rounded-md border border-neutral-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <div>
                     <p className="text-sm font-semibold text-neutral-900">{booking?.name || '-'}</p>
                     <p className="text-xs text-neutral-500">{formatDateTime(booking?.createdAt)}</p>
                   </div>
-                  <span className="inline-flex items-center rounded-lg bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-700">
+                  <span className="inline-flex items-center rounded-md bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-700">
                     {serviceLabel}
                   </span>
                 </div>
@@ -111,26 +111,26 @@ const AdminBookings = () => {
                 {!isConfirmingDelete ? (
                   <button
                     onClick={() => setConfirmDeleteId(id)}
-                    className="mt-4 w-full rounded-xl border border-red-200 bg-red-50 py-2 text-xs font-semibold text-red-600 hover:bg-red-100 transition-colors"
+                    className="mt-4 w-full rounded-md border border-red-200 bg-red-50 py-2 text-xs font-semibold text-red-600 hover:bg-red-100 transition-colors cursor-pointer"
                   >
                     Delete Booking
                   </button>
                 ) : (
-                  <div className="mt-4 rounded-xl border border-neutral-200 bg-neutral-50 p-3">
+                  <div className="mt-4 rounded-md border border-neutral-200 bg-neutral-50 p-3">
                     <p className="text-xs font-medium text-neutral-700 mb-3">
                       Are you sure you want to delete this booking?
                     </p>
                     <div className="flex gap-2">
                       <button
                         onClick={() => setConfirmDeleteId(null)}
-                        className="flex-1 rounded-lg border border-neutral-200 bg-white py-2 text-xs font-medium text-neutral-600 hover:bg-neutral-100 transition-colors"
+                        className="flex-1 rounded-md border border-neutral-200 bg-white py-2 text-xs font-medium text-neutral-600 hover:bg-neutral-100 transition-colors cursor-pointer"
                       >
                         Cancel
                       </button>
                       <button
                         onClick={() => handleDeleteConfirm(id)}
                         disabled={isDeleting}
-                        className="flex-1 rounded-lg bg-red-500 py-2 text-xs font-semibold text-white hover:bg-red-600 transition-colors disabled:opacity-60"
+                        className="flex-1 rounded-md bg-red-500 py-2 text-xs font-semibold text-white hover:bg-red-600 transition-colors disabled:opacity-60 cursor-pointer"
                       >
                         {isDeleting ? 'Deleting...' : 'Confirm'}
                       </button>

@@ -15,7 +15,7 @@ const MegaSale = () => (
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="relative rounded-xl bg-hero-gradient p-10 sm:p-14 mb-20 overflow-hidden"
+        className="relative rounded-md bg-hero-gradient p-10 sm:p-14 mb-20 overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[80px]" />
         <div className="relative z-10 flex flex-col sm:flex-row items-center gap-8">
@@ -61,7 +61,7 @@ const MegaSale = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
             whileHover={{ boxShadow: "0 25px 60px -15px hsl(32 95% 52% / 0.25)" }}
-            className={`relative p-8 rounded-xl border transition-all duration-300 ${
+            className={`relative p-8 rounded-md border transition-all duration-300 ${
               plan.popular
                 ? "bg-card border-accent shadow-glow-accent"
                 : "bg-card border-border"
@@ -86,7 +86,7 @@ const MegaSale = () => (
                 </li>
               ))}
             </ul>
-            <button className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
+            <button className={`w-full py-3 rounded-md font-semibold transition-all duration-300 cursor-pointer ${
               plan.popular
                 ? "bg-accent text-accent-foreground shadow-glow-accent hover:shadow-glow-accent-strong"
                 : "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground"

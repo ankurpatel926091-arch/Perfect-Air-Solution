@@ -77,7 +77,7 @@ export function CommercialApplications() {
               style={{
                 display: "flex", flexDirection: "column", alignItems: "center",
                 justifyContent: "center", gap: "12px",
-                background: "hsl(var(--brand-light))", borderRadius: "16px",
+                background: "hsl(var(--brand-light))", borderRadius: "6px",
                 padding: "28px 16px", cursor: "pointer",
                 border: "1px solid hsl(var(--border))",
                 transition: "all 0.25s",

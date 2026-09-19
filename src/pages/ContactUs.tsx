@@ -184,7 +184,7 @@ const Field = ({
     <div className="relative flex flex-col gap-1">
       <div className="relative">
         <div
-          className={`absolute inset-0 rounded-xl pointer-events-none transition-all duration-300 ${
+          className={`absolute inset-0 rounded-md pointer-events-none transition-all duration-300 ${
             hasError
               ? "border-2 border-red-500 ring-4 ring-red-500/10"
               : focused
@@ -227,7 +227,7 @@ const Field = ({
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => { setFocused(false); onBlur?.(); }}
-          className="w-full rounded-xl pl-11 pr-4 pt-6 pb-2 h-14 text-sm font-medium outline-none bg-transparent text-slate-900 placeholder:text-transparent disabled:opacity-50 disabled:cursor-not-allowed z-0 relative"
+          className="w-full rounded-md pl-11 pr-4 pt-6 pb-2 h-14 text-sm font-medium outline-none bg-transparent text-slate-900 placeholder:text-transparent disabled:opacity-50 disabled:cursor-not-allowed z-0 relative"
         />
       </div>
       <AnimatePresence>
@@ -260,7 +260,7 @@ const TextareaField = ({
     <div className="flex flex-col gap-1">
       <div className="relative">
         <div
-          className={`absolute inset-0 rounded-xl pointer-events-none transition-all duration-300 ${
+          className={`absolute inset-0 rounded-md pointer-events-none transition-all duration-300 ${
             hasError
               ? "border-2 border-red-500 ring-4 ring-red-500/10"
               : focused
@@ -301,7 +301,7 @@ const TextareaField = ({
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => { setFocused(false); onBlur?.(); }}
-          className="w-full rounded-xl pl-11 pr-4 pt-7 pb-4 text-sm font-medium outline-none resize-none bg-transparent text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed z-0 relative"
+          className="w-full rounded-md pl-11 pr-4 pt-7 pb-4 text-sm font-medium outline-none resize-none bg-transparent text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed z-0 relative"
         />
       </div>
       <div className="flex justify-between items-center pl-1">
@@ -345,7 +345,7 @@ const ServicePicker = ({ value, onChange }: { value: string; onChange: (v: strin
             key={s.id}
             type="button"
             onClick={() => onChange(sel ? "" : s.id)}
-            className={`relative flex items-center gap-2.5 px-3.5 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 ${
+            className={`relative flex items-center gap-2.5 px-3.5 py-3 rounded-md text-xs sm:text-sm font-bold transition-all duration-300 ${
               sel
                 ? "bg-gradient-to-r from-[#0284C7] via-[#0091EE] to-[#00A8FF] text-white border-transparent shadow-lg shadow-sky-500/25 scale-[1.02]"
                 : "bg-slate-50 border border-slate-200 text-slate-700 hover:bg-sky-50/80 hover:border-sky-300 hover:text-[#0284C7]"
@@ -436,7 +436,7 @@ const ContactDetailItem = ({
       transition={{ delay: 0.3 + index * 0.08 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="flex items-start gap-4 rounded-xl p-3 -mx-2 transition-all duration-300"
+      className="flex items-start gap-4 rounded-md p-3 -mx-2 transition-all duration-300"
       style={{
         background: hovered && detail.hoverColor ? detail.hoverColor : "transparent",
         border: `1px solid ${hovered && detail.hoverBorder ? detail.hoverBorder : "transparent"}`,
@@ -445,7 +445,7 @@ const ContactDetailItem = ({
       }}
     >
       <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 transform"
+        className="w-10 h-10 rounded-md flex items-center justify-center shrink-0 transition-all duration-300 transform"
         style={{
           background: hovered && detail.hoverColor ? detail.hoverColor : "hsl(var(--brand-light))",
           border: `1px solid ${hovered && detail.hoverBorder ? detail.hoverBorder : "hsl(var(--primary) / 0.15)"}`,
@@ -673,7 +673,7 @@ export default function ContactUs() {
           >
             {/* Contact details card */}
             <div
-              className="rounded-2xl p-6 bg-card"
+              className="rounded-md p-6 bg-card"
               style={{ border: "1px solid hsl(var(--border))", boxShadow: "0 10px 25px -5px hsl(var(--brand-dark) / 0.03)" }}
             >
               <h2 className="text-xl font-bold text-[#051B30] tracking-tight mb-4 flex items-center gap-2">
@@ -688,7 +688,7 @@ export default function ContactUs() {
 
             {/* Brands card */}
             <div
-              className="rounded-xl p-6 bg-gradient-to-br from-white to-sky-50/60 border border-sky-100 shadow-sm"
+              className="rounded-md p-6 bg-gradient-to-br from-white to-sky-50/60 border border-sky-100 shadow-sm"
             >
               <p
                 className="text-[10px] tracking-widest uppercase font-extrabold mb-3 text-[#0284C7]"
@@ -712,7 +712,7 @@ export default function ContactUs() {
 
             {/* Trust card */}
             <div
-              className="rounded-xl p-5 bg-white border border-slate-200/90 space-y-3 shadow-xs"
+              className="rounded-md p-5 bg-white border border-slate-200/90 space-y-3 shadow-xs"
             >
               {["5000+ satisfied clients across UP", "Response guaranteed within 24 hours", "Free site inspection for commercial projects"].map((t) => (
                 <div key={t} className="flex items-center gap-2.5">
@@ -728,7 +728,7 @@ export default function ContactUs() {
           {/* ── RIGHT: Form ── */}
           <motion.div
             initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 rounded-xl bg-white border border-slate-200/90 shadow-2xl shadow-sky-950/5 relative overflow-hidden"
+            className="lg:col-span-3 rounded-md bg-white border border-slate-200/90 shadow-2xl shadow-sky-950/5 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-sky-100/50 rounded-full blur-3xl pointer-events-none" />
 
@@ -769,7 +769,7 @@ export default function ContactUs() {
 
                     <button
                       type="submit" disabled={!canSubmit}
-                      className="group relative w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-extrabold text-xs sm:text-sm text-white uppercase tracking-wider overflow-hidden transition-all duration-300 mt-3 shadow-lg shadow-sky-500/25 hover:shadow-xl hover:shadow-sky-500/35 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+                      className="group relative w-full flex items-center justify-center gap-2.5 py-4 rounded-md font-extrabold text-xs sm:text-sm text-white uppercase tracking-wider overflow-hidden transition-all duration-300 mt-3 shadow-lg shadow-sky-500/25 hover:shadow-xl hover:shadow-sky-500/35 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
                       style={{
                         background: canSubmit
                           ? "linear-gradient(135deg, #051B30 0%, #0284C7 50%, #00A8FF 100%)"

@@ -107,14 +107,10 @@ const SiteFooter = () => {
 
               <p className="text-[14px] leading-relaxed mb-2 text-slate-200 font-normal">
                 Perfect Air Solution is a leading HVAC and air conditioning company offering turnkey residential, commercial, and industrial solutions.
-                
               </p>
               <p className="text-[14px] leading-relaxed mb-1 text-slate-200 font-normal">
                 Certified HVAC Engineers & Technicians
-                
               </p>
-
-              
             </div>
 
             {/* Social Links */}
@@ -142,7 +138,7 @@ const SiteFooter = () => {
                 <li key={link.label}>
                   <Link
                     to={link.to}
-                    className="text-base font-semibold text-slate-200 hover:text-cyan-300 flex items-center gap-2.5 transition-all duration-200 text-decoration-none group"
+                    className="text-base font-normal text-slate-200 hover:text-cyan-300 flex items-center gap-2.5 transition-all duration-200 text-decoration-none group"
                   >
                     <ChevronRight size={15} className="text-[#0284C7] group-hover:translate-x-1 transition-transform" />
                     <span>{link.label}</span>
@@ -162,7 +158,7 @@ const SiteFooter = () => {
                 <li key={s.title}>
                   <Link
                     to={s.to}
-                    className="text-base font-semibold text-slate-200 hover:text-cyan-300 flex items-center gap-2.5 transition-all duration-200 text-decoration-none group"
+                    className="text-base font-normal text-slate-200 hover:text-cyan-300 flex items-center gap-2.5 transition-all duration-200 text-decoration-none group"
                   >
                     <ChevronRight size={15} className="text-[#0284C7] group-hover:translate-x-1 transition-transform" />
                     <span>{s.title}</span>
@@ -219,14 +215,14 @@ const SiteFooter = () => {
         </div>
       </div>
 
-      {/* Bottom Copyright Bar */}
+      {/* Bottom Copyright Bar - Bold Removed (font-normal) */}
       <div className="border-t border-slate-800/80 bg-slate-950/80 py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-5">
-          <p className="text-sm sm:text-base text-slate-200 font-semibold">
+          <p className="text-sm sm:text-base text-slate-200 font-normal">
             © {new Date().getFullYear()} Perfect Air Solution. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-6 flex-wrap justify-center text-sm sm:text-base font-semibold">
+          <div className="flex items-center gap-6 flex-wrap justify-center text-sm sm:text-base font-normal">
             {policyLinks.map((l) => (
               <Link
                 key={l.label}
@@ -244,7 +240,7 @@ const SiteFooter = () => {
             rel="noopener noreferrer"
             className="flex items-center gap-3 text-sm sm:text-base text-slate-200 hover:text-white transition-colors text-decoration-none"
           >
-            <span className="font-bold">Designed by</span>
+            <span className="font-normal">Designed by</span>
             <img src={cclogo} alt="CodeCrafter" className="h-10 sm:h-12 w-auto object-contain brightness-125 hover:scale-105 transition-transform" />
           </a>
         </div>

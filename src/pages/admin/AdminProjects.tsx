@@ -51,7 +51,7 @@ const AdminProjects = () => {
         </div>
         <button
           onClick={handleAdd}
-          className="group inline-flex items-center gap-2 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold px-5 py-3 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 whitespace-nowrap"
+          className="group inline-flex items-center gap-2 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold px-5 py-3 rounded-md transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 whitespace-nowrap"
         >
           <span className="text-lg leading-none transition-transform duration-200 group-hover:rotate-90">+</span>
           Add New Project
@@ -67,7 +67,7 @@ const AdminProjects = () => {
       ) : projects.length === 0 ? (
         /* ── Empty State ── */
         <div className="flex flex-col items-center justify-center py-32 text-center">
-          <div className="w-20 h-20 rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center mb-5">
+          <div className="w-20 h-20 rounded-md bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center mb-5">
             <svg className="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
@@ -78,7 +78,7 @@ const AdminProjects = () => {
           </p>
           <button
             onClick={handleAdd}
-            className="inline-flex items-center gap-2 bg-neutral-900 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-neutral-700 transition-all active:scale-95"
+            className="inline-flex items-center gap-2 bg-neutral-900 text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-neutral-700 transition-all active:scale-95 cursor-pointer"
           >
             <span>+</span> Add First Project
           </button>
@@ -102,7 +102,7 @@ const AdminProjects = () => {
           {/* Add New Ghost Card */}
           <button
             onClick={handleAdd}
-            className="group flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-neutral-300 hover:border-neutral-500 bg-white hover:bg-neutral-50 min-h-[200px] transition-all duration-200 cursor-pointer"
+            className="group flex flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed border-neutral-300 hover:border-neutral-500 bg-white hover:bg-neutral-50 min-h-[200px] transition-all duration-200 cursor-pointer"
           >
             <div className="w-10 h-10 rounded-full bg-neutral-100 group-hover:bg-neutral-200 flex items-center justify-center transition-colors">
               <span className="text-2xl text-neutral-400 group-hover:text-neutral-600 leading-none">+</span>
@@ -137,7 +137,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   onEdit, onDeleteRequest, onDeleteConfirm, onDeleteCancel,
 }) => {
   return (
-    <div className="group relative bg-white rounded-2xl border border-neutral-200 hover:border-neutral-300 hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col">
+    <div className="group relative bg-white rounded-md border border-neutral-200 hover:border-neutral-300 hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col">
 
       {/* Image */}
       <div className="relative h-40 bg-neutral-100 overflow-hidden flex-shrink-0">
@@ -156,7 +156,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
         {/* Gallery count badge */}
         {project.images?.length > 0 && (
-          <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-black/60 text-white text-xs font-medium px-2 py-1 rounded-lg backdrop-blur-sm">
+          <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-black/60 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
@@ -194,7 +194,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="absolute inset-x-0 bottom-0 flex translate-y-full group-hover:translate-y-0 transition-transform duration-200">
           <button
             onClick={onEdit}
-            className="flex-1 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1"
+            className="flex-1 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1 cursor-pointer"
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -204,7 +204,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="w-px bg-neutral-700" />
           <button
             onClick={onDeleteRequest}
-            className="flex-1 py-2.5 bg-neutral-900 hover:bg-red-600 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1"
+            className="flex-1 py-2.5 bg-neutral-900 hover:bg-red-600 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1 cursor-pointer"
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -227,10 +227,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             <p className="text-xs text-neutral-500 mt-0.5">This cannot be undone.</p>
           </div>
           <div className="flex gap-2 w-full">
-            <button onClick={onDeleteCancel} className="flex-1 py-2 rounded-xl border border-neutral-200 text-xs font-medium text-neutral-600 hover:bg-neutral-100 transition-colors">
+            <button onClick={onDeleteCancel} className="flex-1 py-2 rounded-md border border-neutral-200 text-xs font-medium text-neutral-600 hover:bg-neutral-100 transition-colors cursor-pointer">
               Cancel
             </button>
-            <button onClick={onDeleteConfirm} disabled={isDeleting} className="flex-1 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white text-xs font-semibold transition-colors disabled:opacity-60">
+            <button onClick={onDeleteConfirm} disabled={isDeleting} className="flex-1 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white text-xs font-semibold transition-colors disabled:opacity-60 cursor-pointer">
               {isDeleting ? '...' : 'Delete'}
             </button>
           </div>

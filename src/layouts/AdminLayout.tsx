@@ -45,7 +45,7 @@ const AdminLayout = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
                   isActive 
                     ? "bg-sky-50 text-[#0284C7] font-semibold" 
                     : "text-neutral-600 hover:bg-neutral-100"
@@ -67,7 +67,7 @@ const AdminLayout = () => {
               logout();
               navigate('/admin/login');
             }}
-            className="p-2 text-neutral-500 hover:text-red-600 hover:bg-neutral-100 rounded-lg transition-colors"
+            className="p-2 text-neutral-500 hover:text-red-600 hover:bg-neutral-100 rounded-md transition-colors cursor-pointer"
             title="Logout"
           >
             <LogOut size={20} />

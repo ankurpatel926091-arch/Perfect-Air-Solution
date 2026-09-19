@@ -4,6 +4,8 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { useGetBlogsQuery } from "@/store/api";
 import React from "react";
 import Loader from "@/components/ui/Loader";
+import Breadcrumb from "@/components/Breadcrumb";
+import aboutHeaderBg from "@/assets/HeaderBackgroundImg/AboutBackground.png";
 
 const Blog = () => {
   const { data: blogPosts = [], isLoading } = useGetBlogsQuery();
@@ -14,12 +16,25 @@ const Blog = () => {
     <div className="bg-background min-h-screen">
 
       {/* ── Hero Banner ── */}
-      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+        {/* Background Image with Clear Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={aboutHeaderBg}
+            alt="Expert HVAC Articles"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/75 via-[#03172C]/35 to-[#03172C]/90" />
+        </div>
+
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="flex justify-center mb-3">
+            <Breadcrumb variant="dark" />
+          </div>
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
             <Sparkles size={14} className="animate-pulse text-cyan-300" />
             <span>EXPERT HVAC ARTICLES</span>

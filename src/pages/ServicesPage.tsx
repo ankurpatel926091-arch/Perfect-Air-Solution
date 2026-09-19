@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetServicesQuery } from "@/store/api";
 import Loader from "@/components/ui/Loader";
 import CTASection from "@/components/CTASection";
+import Breadcrumb from "@/components/Breadcrumb";
 
 import splitAcImg from "@/assets/categories/split-ac.png";
 import repairImg from "@/assets/why_choose_showcase.jpg";
@@ -17,6 +18,7 @@ import ductableImg from "@/assets/categories/ductable.jpg";
 import ahuImg from "@/assets/categories/air-handling-unit.png";
 import chillerImg from "@/assets/categories/chiller.jpg";
 import copperImg from "@/assets/categories/ventilation.jpg";
+import servicesHeaderBg from "@/assets/HeaderBackgroundImg/ServicesBackground.png";
 
 interface StaticService {
   slug: string;
@@ -145,16 +147,26 @@ export default function ServicesPage(): React.ReactElement {
     <div className="relative min-h-screen bg-slate-50 font-sans">
 
       {/* Hero Banner */}
-      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
-        {/* Background Dot Grid */}
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle,rgba(255,255,255,0.3)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+        {/* Background Image with Clear Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={servicesHeaderBg}
+            alt="Services Perfect Air Solution"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Balanced soft gradient overlay so diagnostics/technicians image is vividly visible */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/70 via-[#03172C]/30 to-[#03172C]/85" />
+        </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
+          <div className="flex justify-center mb-3">
+            <Breadcrumb variant="dark" />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest px-3.5 py-1 rounded-full mt-1.5 sm:mt-2 mb-3 backdrop-blur-md"
+            className="inline-flex items-center gap-2 bg-[#03172C]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-widest px-3.5 py-1 rounded-full mt-1.5 sm:mt-2 mb-3 backdrop-blur-md shadow-sm"
           >
             <Sparkles size={14} className="animate-pulse text-cyan-300" />
             <span>Complete HVAC Expertise</span>
@@ -164,7 +176,7 @@ export default function ServicesPage(): React.ReactElement {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-4 text-white"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-4 text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
           >
             Comprehensive HVAC &amp; <span className="text-cyan-300">Cooling Services</span>
           </motion.h1>
@@ -173,7 +185,7 @@ export default function ServicesPage(): React.ReactElement {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-4"
+            className="text-slate-100 text-sm sm:text-base max-w-3xl mx-auto font-medium leading-relaxed mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
           >
             From precision AC installation and scheduled AMC to commercial VRF central plants and cleanroom AHU systems — Perfect Air Solution delivers engineered comfort you can depend on.
           </motion.p>
@@ -187,7 +199,7 @@ export default function ServicesPage(): React.ReactElement {
       </section>
 
       {/* Services Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-4 sm:pb-6">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {servicesToDisplay.map((s, idx) => {
@@ -200,7 +212,7 @@ export default function ServicesPage(): React.ReactElement {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.06, duration: 0.4 }}
                 onClick={() => navigate(`/service/${s.slug}`)}
-                className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/90 bg-white hover:border-[#0284C7] transition-all duration-300 cursor-pointer shadow-none hover:shadow-none"
+                className="group relative flex flex-col rounded-md overflow-hidden border border-slate-200/90 bg-white hover:border-[#0284C7] transition-all duration-300 cursor-pointer shadow-none hover:shadow-none"
               >
                 {/* Visual Image Header */}
                 <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100 flex items-center justify-center">
@@ -211,7 +223,7 @@ export default function ServicesPage(): React.ReactElement {
                   />
                   
                   {/* Floating Icon Badge */}
-                  <div className="absolute top-3.5 left-3.5 w-10 h-10 rounded-xl bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center">
+                  <div className="absolute top-3.5 left-3.5 w-10 h-10 rounded-md bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center">
                     <IconComp size={20} />
                   </div>
 
@@ -235,7 +247,7 @@ export default function ServicesPage(): React.ReactElement {
 
                     {/* Bullet Highlights */}
                     {s.bullets && s.bullets.length > 0 && (
-                      <div className="space-y-1.5 mb-4">
+                      <div className="space-y-1.5 mb-2">
                         {s.bullets.slice(0, 3).map((b: string) => (
                           <div key={b} className="flex items-center gap-2 text-xs text-slate-500 font-medium">
                             <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
@@ -259,13 +271,10 @@ export default function ServicesPage(): React.ReactElement {
             );
           })}
         </div>
-
-        {/* CTA Section */}
-        <div className="mt-16">
-          <CTASection />
-        </div>
-
       </div>
+
+      {/* CTA Section */}
+      <CTASection />
     </div>
   );
 }

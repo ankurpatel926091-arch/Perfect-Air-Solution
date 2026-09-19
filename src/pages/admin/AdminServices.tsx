@@ -51,7 +51,7 @@ const AdminServices = () => {
         </div>
         <button
           onClick={handleAdd}
-          className="group inline-flex items-center gap-2 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold px-5 py-3 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 whitespace-nowrap"
+          className="group inline-flex items-center gap-2 bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-semibold px-5 py-3 rounded-md transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 whitespace-nowrap"
         >
           <span className="text-lg leading-none transition-transform duration-200 group-hover:rotate-90">+</span>
           Add New Service
@@ -67,7 +67,7 @@ const AdminServices = () => {
       ) : services.length === 0 ? (
         /* ── Empty State ── */
         <div className="flex flex-col items-center justify-center py-32 text-center">
-          <div className="w-20 h-20 rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center mb-5">
+          <div className="w-20 h-20 rounded-md bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center mb-5">
             <svg className="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
@@ -78,7 +78,7 @@ const AdminServices = () => {
           </p>
           <button
             onClick={handleAdd}
-            className="inline-flex items-center gap-2 bg-neutral-900 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-neutral-700 transition-all active:scale-95"
+            className="inline-flex items-center gap-2 bg-neutral-900 text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-neutral-700 transition-all active:scale-95 cursor-pointer"
           >
             <span>+</span> Add First Service
           </button>
@@ -102,7 +102,7 @@ const AdminServices = () => {
           {/* Add New Ghost Card */}
           <button
             onClick={handleAdd}
-            className="group flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-neutral-300 hover:border-neutral-500 bg-white hover:bg-neutral-50 min-h-[220px] transition-all duration-200 cursor-pointer"
+            className="group flex flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed border-neutral-300 hover:border-neutral-500 bg-white hover:bg-neutral-50 min-h-[220px] transition-all duration-200 cursor-pointer"
           >
             <div className="w-10 h-10 rounded-full bg-neutral-100 group-hover:bg-neutral-200 flex items-center justify-center transition-colors">
               <span className="text-2xl text-neutral-400 group-hover:text-neutral-600 leading-none">+</span>
@@ -139,7 +139,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   onEdit, onDeleteRequest, onDeleteConfirm, onDeleteCancel,
 }) => {
   return (
-    <div className="group relative bg-white rounded-2xl border border-neutral-200 hover:border-neutral-300 hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col">
+    <div className="group relative bg-white rounded-md border border-neutral-200 hover:border-neutral-300 hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col">
 
       {/* Image */}
       <div className="relative h-36 bg-neutral-100 overflow-hidden flex-shrink-0">
@@ -159,14 +159,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         {/* Badge */}
         {service.badge && (
           <div className="absolute top-2 left-2">
-            <span className="inline-flex items-center px-2 py-0.5 bg-neutral-900/80 backdrop-blur-sm text-white text-xs font-semibold rounded-lg">
+            <span className="inline-flex items-center px-2 py-0.5 bg-neutral-900/80 backdrop-blur-sm text-white text-xs font-semibold rounded-md">
               {service.badge}
             </span>
           </div>
         )}
         {/* Rating */}
         {service.rating && (
-          <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-black/60 text-white text-xs font-medium px-2 py-1 rounded-lg backdrop-blur-sm">
+          <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-black/60 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">
             <svg className="w-3 h-3 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
@@ -185,7 +185,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         )}
         <div className="flex items-center justify-between mt-auto pt-1">
           {service.price ? (
-            <span className="text-xs font-semibold text-neutral-800 bg-neutral-100 px-2.5 py-1 rounded-lg">
+            <span className="text-xs font-semibold text-neutral-800 bg-neutral-100 px-2.5 py-1 rounded-md">
               {service.price}
             </span>
           ) : <span />}
@@ -205,7 +205,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         <div className="absolute inset-x-0 bottom-0 flex translate-y-full group-hover:translate-y-0 transition-transform duration-200">
           <button
             onClick={onEdit}
-            className="flex-1 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1"
+            className="flex-1 py-2.5 bg-neutral-900 hover:bg-neutral-700 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1 cursor-pointer"
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -215,7 +215,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           <div className="w-px bg-neutral-700" />
           <button
             onClick={onDeleteRequest}
-            className="flex-1 py-2.5 bg-neutral-900 hover:bg-red-600 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1"
+            className="flex-1 py-2.5 bg-neutral-900 hover:bg-red-600 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1 cursor-pointer"
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -240,14 +240,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           <div className="flex gap-2 w-full">
             <button
               onClick={onDeleteCancel}
-              className="flex-1 py-2 rounded-xl border border-neutral-200 text-xs font-medium text-neutral-600 hover:bg-neutral-100 transition-colors"
+              className="flex-1 py-2 rounded-md border border-neutral-200 text-xs font-medium text-neutral-600 hover:bg-neutral-100 transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               onClick={onDeleteConfirm}
               disabled={isDeleting}
-              className="flex-1 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white text-xs font-semibold transition-colors disabled:opacity-60"
+              className="flex-1 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white text-xs font-semibold transition-colors disabled:opacity-60 cursor-pointer"
             >
               {isDeleting ? '...' : 'Delete'}
             </button>

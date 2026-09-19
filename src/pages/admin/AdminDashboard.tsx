@@ -17,7 +17,7 @@ import { useGetBlogsQuery, useGetServicesQuery, useGetBrandsQuery, useGetProject
 /* ─── tiny helper ─────────────────────────────────────────────── */
 const CountBadge = ({ loading, count }: { loading: boolean; count: number }) =>
   loading ? (
-    <span className="inline-block w-10 h-8 rounded-lg bg-neutral-100 animate-pulse" />
+    <span className="inline-block w-10 h-8 rounded-md bg-neutral-100 animate-pulse" />
   ) : (
     <span>{count}</span>
   );
@@ -39,13 +39,13 @@ const StatCard: React.FC<StatCardProps> = ({
   label, count, loading, icon: Icon,
   accent, accentBg, accentBorder, path, addPath,
 }) => (
-  <div className={`relative overflow-hidden rounded-2xl border ${accentBorder} bg-white group transition-all duration-300 hover:shadow-xl`}>
+  <div className={`relative overflow-hidden rounded-md border ${accentBorder} bg-white group transition-all duration-300 hover:shadow-md`}>
     {/* subtle top stripe */}
     <div className={`h-1 w-full ${accent.replace("text-", "bg-")}`} />
 
     <div className="p-6">
       {/* icon */}
-      <div className={`inline-flex p-3 rounded-xl ${accentBg} ${accent} mb-4`}>
+      <div className={`inline-flex p-3 rounded-md ${accentBg} ${accent} mb-4`}>
         <Icon size={20} />
       </div>
 
@@ -66,7 +66,7 @@ const StatCard: React.FC<StatCardProps> = ({
         {addPath && (
           <Link
             to={addPath}
-            className="ml-auto flex items-center gap-1 text-xs bg-neutral-900 text-white px-3 py-1.5 rounded-lg hover:bg-neutral-700 transition-colors font-semibold"
+            className="ml-auto flex items-center gap-1 text-xs bg-neutral-900 text-white px-3 py-1.5 rounded-md hover:bg-neutral-700 transition-colors font-semibold"
           >
             <Plus size={11} /> Add
           </Link>
@@ -79,8 +79,8 @@ const StatCard: React.FC<StatCardProps> = ({
 /* ─── quick action button ─────────────────────────────────────── */
 const QuickAction = ({ to, icon: Icon, label, sub, external = false }: any) => {
   const inner = (
-    <div className="flex items-center gap-4 p-4 rounded-xl border border-neutral-200 bg-white hover:border-neutral-400 hover:shadow-md transition-all duration-200 group cursor-pointer">
-      <div className="p-2.5 rounded-lg bg-neutral-100 text-neutral-600 group-hover:bg-neutral-900 group-hover:text-white transition-colors">
+    <div className="flex items-center gap-4 p-4 rounded-md border border-neutral-200 bg-white hover:border-neutral-400 hover:shadow-md transition-all duration-200 group cursor-pointer">
+      <div className="p-2.5 rounded-md bg-neutral-100 text-neutral-600 group-hover:bg-neutral-900 group-hover:text-white transition-colors">
         <Icon size={18} />
       </div>
       <div>
@@ -195,7 +195,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* ── overview strip ── */}
-      <div className="rounded-2xl border border-neutral-200 bg-gradient-to-r from-neutral-950 to-neutral-800 text-white p-6 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+      <div className="rounded-md border border-neutral-200 bg-gradient-to-r from-neutral-950 to-neutral-800 text-white p-6 flex flex-col sm:flex-row items-start sm:items-center gap-6">
         <TrendingUp size={32} className="shrink-0 text-neutral-400" />
         <div className="flex-1">
           <p className="font-bold text-lg font-syne">Content Overview</p>
@@ -212,7 +212,7 @@ const AdminDashboard = () => {
           href="/"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-2 shrink-0 bg-white text-neutral-900 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-neutral-100 transition-colors"
+          className="flex items-center gap-2 shrink-0 bg-white text-neutral-900 text-xs font-bold px-4 py-2.5 rounded-md hover:bg-neutral-100 transition-colors"
         >
           <Globe size={14} /> View Live Site
         </a>

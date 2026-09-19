@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { useGetBlogsQuery } from "@/store/api";
 import CTASection from "@/components/CTASection";
+import Breadcrumb from "@/components/Breadcrumb";
+import aboutHeaderBg from "@/assets/HeaderBackgroundImg/AboutBackground.png";
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -82,12 +84,24 @@ const BlogPost = () => {
     <div className="bg-slate-50 min-h-screen font-sans">
       {/* ── HERO HEADER ── */}
       <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+        {/* Background Image with Clear Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={post.image || aboutHeaderBg}
+            alt={post.title}
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/80 via-[#03172C]/40 to-[#03172C]/95" />
+        </div>
+
         {/* Ambient Gradient Glows */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-sky-500/15 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-10 w-[450px] h-[450px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#03172C] via-[#052848] to-[#041E38]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="mb-4">
+            <Breadcrumb variant="dark" customTitle={post.title} />
+          </div>
           {/* Back to Blog Button */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -160,10 +174,10 @@ const BlogPost = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-none hover:shadow-none relative"
+          className="bg-white rounded-md p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-none hover:shadow-none relative"
         >
           {/* Top color gradient highlight bar */}
-          <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#051B30] via-[#0284C7] to-cyan-400 rounded-t-3xl" />
+          <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#051B30] via-[#0284C7] to-cyan-400 rounded-t-md" />
 
           {/* Read time floating pill badge */}
           <div className="absolute -top-4 right-6 sm:right-10 px-4 py-1.5 rounded-full bg-[#051B30] text-white text-xs font-bold uppercase tracking-wider border border-cyan-400/30 flex items-center gap-1.5">
@@ -197,7 +211,7 @@ const BlogPost = () => {
 
           {/* Featured Header Image if present */}
           {post.image && (
-            <div className="mb-8 rounded-2xl overflow-hidden border border-slate-200/80 max-h-[500px]">
+            <div className="mb-8 rounded-md overflow-hidden border border-slate-200/80 max-h-[500px]">
               <img
                 src={post.image}
                 alt={post.title}
@@ -223,7 +237,7 @@ const BlogPost = () => {
 
                   {/* Highlight Blockquote */}
                   {i === 1 && para.length > 50 && (
-                    <blockquote className="my-8 p-6 sm:p-7 rounded-2xl bg-sky-50/80 border-l-4 border-[#0284C7]">
+                    <blockquote className="my-8 p-6 sm:p-7 rounded-md bg-sky-50/80 border-l-4 border-[#0284C7]">
                       <p className="text-base sm:text-lg font-medium italic text-[#051B30] leading-relaxed m-0">
                         "{para.slice(0, 140)}..."
                       </p>
@@ -246,11 +260,6 @@ const BlogPost = () => {
                 #{tag}
               </span>
             ))}
-          </div>
-
-          {/* CTA Banner */}
-          <div className="mt-10">
-            <CTASection />
           </div>
         </motion.div>
       </main>
@@ -286,7 +295,7 @@ const BlogPost = () => {
               >
                 <Link
                   to={`/blog/${rp.slug || rp._id}`}
-                  className="group bg-white rounded-2xl overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col h-full"
+                  className="group bg-white rounded-md overflow-hidden border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none transition-all duration-300 flex flex-col h-full"
                 >
                   <div className="relative h-48 overflow-hidden bg-slate-100">
                     <img
@@ -311,6 +320,9 @@ const BlogPost = () => {
           </div>
         </section>
       )}
+
+      {/* ── CTA Banner ── */}
+      <CTASection />
 
       {/* Scroll to Top Floating Button */}
       {showScrollTop && (
