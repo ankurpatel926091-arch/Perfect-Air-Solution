@@ -34,4 +34,4 @@ backend/.env
 
 # Ignore backend folder
 backend/
-
+adminpanel/
