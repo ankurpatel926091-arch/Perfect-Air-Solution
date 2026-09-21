@@ -4,7 +4,6 @@ import ProductCategories from "@/components/ProductCategories";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import HVACSolutions from "@/components/HVACSolutions";
-import FeaturedProjects from "@/components/FeaturedProjects";
 import Testimonials from "@/components/Testimonials";
 import BrandMarquee from "@/components/BrandMarquee";
 import BlogPreview from "@/components/BlogPreview";
@@ -30,10 +29,7 @@ const Index = () => (
     {/* 6. Industries / Sectors */}
     <HVACSolutions />
 
-    {/* 7. Projects / Gallery Preview */}
-    <FeaturedProjects />
-
-    {/* 8. Testimonials */}
+    {/* 7. Testimonials */}
     <Testimonials />
 
     {/* Brand Partners Marquee */}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Filter, X, ZoomIn, MapPin, Building, ArrowRight, Phone, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ZoomIn, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "@/components/Breadcrumb";
 
@@ -17,98 +17,20 @@ import galleryHeaderBg from "@/assets/HeaderBackgroundImg/GalleryBackground.png"
 
 type GalleryItem = {
   id: string;
-  title: string;
   category: "all" | "residential" | "commercial" | "vrf" | "ductable" | "maintenance";
-  categoryLabel: string;
   image: string;
-  location: string;
-  description: string;
 };
 
 const galleryItems: GalleryItem[] = [
-  {
-    id: "1",
-    title: "Corporate Office VRF Cooling System",
-    category: "vrf",
-    categoryLabel: "VRF / VRV System",
-    image: commercialImg,
-    location: "Commercial Tower, Central Business District",
-    description: "Multi-zone VRF HVAC installation providing centralized temperature control and ultra-high energy efficiency for a 12-story office complex."
-  },
- 
-   {
-    id: "2",
-    title: "Air Handling Unit & Ventilation Facility",
-    category: "maintenance",
-    categoryLabel: "AHU & Maintenance",
-    image: indoor,
-    location: "Pharmaceutical Lab",
-    description: "Cleanroom Air Handling Unit (AHU) installation with HEPA filtration and preventive maintenance schedule."
-  },
-  {
-    id: "3",
-    title: "Hospitality Lounge Ceiling Cassette ACs",
-    category: "commercial",
-    categoryLabel: "Cassette AC",
-    image: cassetteImg,
-    location: "Grand Hotel & Conference Suite",
-    description: "4-way airflow ceiling cassette units providing even temperature distribution and sleek flush-mount aesthetics."
-  },
-  {
-    id: "4",
-    title: "Industrial Manufacturing Plant Ductable HVAC",
-    category: "ductable",
-    categoryLabel: "Ductable System",
-    image: ductableImg,
-    location: "Industrial Corridor",
-    description: "Heavy-duty ductable air conditioning system designed for large industrial volume cooling with continuous air exchange."
-  },
-  {
-    id: "5",
-    title: "Multi-Storey Tech Park VRV Central Plant",
-    category: "vrf",
-    categoryLabel: "VRF / VRV System",
-    image: vrfImg,
-    location: "IT Hub Park",
-    description: "Variable Refrigerant Volume centralized heating & cooling plant customized for 24/7 server rooms and workspace zones."
-  },
-  {
-    id: "6",
-    title: "Air Handling Unit & Ventilation Facility",
-    category: "maintenance",
-    categoryLabel: "AHU & Maintenance",
-    image: ahuImg,
-    location: "Pharmaceutical Lab",
-    description: "Cleanroom Air Handling Unit (AHU) installation with HEPA filtration and preventive maintenance schedule."
-  },
-  {
-    id: "7",
-    title: "Shopping Mall Centralized Chiller Plant",
-    category: "commercial",
-    categoryLabel: "Commercial HVAC",
-    image: chillerImg,
-    location: "Metropolitan Mall Complex",
-    description: "High-tonnage water-cooled chiller plant delivering reliable environmental control across retail, food court, and cinema zones."
-  },
-  {
-    id: "8",
-    title: "Commercial Supermarket Ducted Cooling",
-    category: "ductable",
-    categoryLabel: "Ductable System",
-    image: maintenanceImg,
-    location: "Retail Chain Superstore",
-    description: "Precision-engineered ducted air distribution keeping retail floor and perishables at exact thermal thresholds."
-  },
-   {
-    id: "9",
-    title: "Luxury Residence Split & Multi-Split AC Setup",
-    category: "residential",
-    categoryLabel: "Residential Split AC",
-    image: residentialImg,
-    location: "Executive Villa Complex",
-    description: "Silent, inverter-driven split air conditioning solution engineered for optimal indoor climate and aesthetic harmony."
-  },
- 
+  { id: "1", category: "vrf", image: commercialImg },
+  { id: "2", category: "maintenance", image: indoor },
+  { id: "3", category: "commercial", image: cassetteImg },
+  { id: "4", category: "ductable", image: ductableImg },
+  { id: "5", category: "vrf", image: vrfImg },
+  { id: "6", category: "maintenance", image: ahuImg },
+  { id: "7", category: "commercial", image: chillerImg },
+  { id: "8", category: "ductable", image: maintenanceImg },
+  { id: "9", category: "residential", image: residentialImg },
 ];
 
 const categories = [
@@ -192,7 +114,7 @@ export default function Gallery() {
           <div className="flex justify-center mb-3">
             <Breadcrumb variant="dark" />
           </div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#03172C]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-sm bg-[#03172C]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md shadow-sm">
             <span>PROJECT PORTFOLIO</span>
           </div>
           
@@ -258,7 +180,7 @@ export default function Gallery() {
               <div className="relative w-full h-full overflow-hidden bg-white">
                 <img
                   src={item.image}
-                  alt={item.title}
+                  alt="HVAC Installation"
                   className="w-full h-full object-cover object-center"
                 />
                 
@@ -322,7 +244,7 @@ export default function Gallery() {
                   <img
                     key={selectedItem.id}
                     src={selectedItem.image}
-                    alt={selectedItem.title}
+                    alt="HVAC Installation"
                     className="w-full h-full object-cover object-center rounded-md select-none transition-opacity duration-150"
                   />
                 </div>

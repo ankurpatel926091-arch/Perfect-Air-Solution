@@ -126,7 +126,9 @@ export default function ProductCategories() {
       : categories.filter((c) => c.type === activeTab);
 
   return (
-    <section className="py-16 sm:py-20 bg-slate-50/60 relative overflow-hidden">
+    <section className="py-16 sm:py-20 bg-gradient-to-b from-[#F4FAFF] via-[#EEF8FF] to-[#E6F4FA] font-sans relative overflow-hidden">
+      {/* Background subtle dot overlay */}
+      <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#0284C7_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* ── Section Header (Clean & Minimal) ── */}
@@ -200,12 +202,12 @@ export default function ProductCategories() {
                     </div>
                   </div>
 
-                  {/* Clean Visual Stage (Enlarged Hero Product Image) */}
-                  <div className="h-48 sm:h-52 w-full bg-gradient-to-b from-sky-50/60 via-slate-50/40 to-transparent rounded-xl flex items-center justify-center p-2 relative overflow-hidden my-2">
+                  {/* Clean Visual Stage (Consistent Height, Width & Background Color) */}
+                  <div className="h-48 sm:h-52 w-full bg-slate-100 rounded-xl flex items-center justify-center relative overflow-hidden my-2 border border-slate-200/70">
                     <img
                       src={cat.image}
                       alt={cat.name}
-                      className="h-full max-h-44 sm:max-h-48 w-auto max-w-[92%] object-contain filter drop-shadow-sm group-hover:scale-108 group-hover:-translate-y-1 transition-transform duration-500 ease-out"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                   </div>
 

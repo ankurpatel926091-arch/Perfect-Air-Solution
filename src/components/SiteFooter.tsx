@@ -15,7 +15,7 @@ import {
 import cclogo from "../assets/cc-logo.png";
 
 const quickLinks = [
-  { label: "Home", to: "/" },
+  // { label: "Home", to: "/" },
   { label: "About Us", to: "/about" },
   { label: "Products", to: "/product" },
   { label: "Services", to: "/services" },
