@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Phone, Wind, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import perfectAirLogo from "/public/Perfect Air Logo.png";
+import perfectAirLogo from "@/assets/perfect-air-logo.png";
+
 
 const navLinks = [
   { name: "Home", path: "/" },
