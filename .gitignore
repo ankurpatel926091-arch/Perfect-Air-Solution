@@ -27,11 +27,11 @@ dist-ssr
 .env
 .env.local
 .env.*.local
-*.env
+
+# Explicitly ignore env files in subfolders
 backend/.env
-Frontend/.env
 **/.env
 
-# Ignore backend & adminpanel folders (separate repos / services)
+# Ignore backend folder
 backend/
-adminpanel/
+

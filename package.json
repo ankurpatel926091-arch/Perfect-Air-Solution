@@ -1,16 +1,16 @@
 {
-  "name": "perfect-air-solution",
+  "name": "vite_react_shadcn_ts",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm --prefix Frontend run dev",
-    "dev:frontend": "npm --prefix Frontend run dev",
-    "dev:admin": "npm --prefix adminpanel run dev",
-    "dev:backend": "npm --prefix backend run dev",
-    "build": "npm --prefix Frontend run build",
-    "build:frontend": "npm --prefix Frontend run build",
-    "build:admin": "npm --prefix adminpanel run build"
+    "dev": "vite",
+    "build": "vite build",
+    "build:dev": "vite build --mode development",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
