@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Phone, Wind, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import perfectAirLogo from "/public/Perfect Air Logo.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
   { name: "Products", path: "/product" },
   { name: "Services", path: "/services" },
-  // { name: "Projects", path: "/case-studies" },
   { name: "Gallery", path: "/gallery" },
   // { name: "Contact Us", path: "/contact" },
 ];
@@ -73,23 +73,19 @@ const SiteHeader = () => {
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-[64px] sm:h-[68px] md:h-[72px]">
 
           {/* Perfect Air Solution Brand Logo */}
-          <Link
-            to="/"
-            aria-label="Perfect Air Solution – Home"
-            className="flex items-center gap-2.5 group flex-shrink-0 text-decoration-none"
-          >
-            <div className="w-10 h-10 rounded-md bg-gradient-to-tr from-[#051B30] via-[#0B2E4C] to-[#0284C7] flex items-center justify-center text-white group-hover:scale-105 transition-transform duration-300">
-              <Wind size={22} className="text-cyan-300 animate-pulse" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-base sm:text-lg md:text-xl tracking-tight text-[#051B30] leading-none">
-                PERFECT <span className="text-[#0284C7]">AIR</span>
-              </span>
-              <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] text-slate-500 uppercase leading-none mt-1">
-                SOLUTION
-              </span>
-            </div>
-          </Link>
+          {/* Perfect Air Solution Brand Logo */}
+{/* Perfect Air Solution Brand Logo */}
+<Link
+  to="/"
+  aria-label="Perfect Air Solution – Home"
+  className="flex items-center flex-shrink-0 group"
+>
+  <img
+    src={perfectAirLogo}
+    alt="Perfect Air Solution"
+    className="h-20 sm:h-22 md:h-24 lg:h-26 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+  />
+</Link>
 
           {/* Desktop Nav */}
           <nav
