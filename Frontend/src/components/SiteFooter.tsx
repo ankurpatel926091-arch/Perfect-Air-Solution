@@ -15,11 +15,10 @@ import {
 import cclogo from "../assets/cc-logo.png";
 
 const quickLinks = [
-  // { label: "Home", to: "/" },
+  { label: "Home", to: "/" },
   { label: "About Us", to: "/about" },
   { label: "Products", to: "/product" },
   { label: "Services", to: "/services" },
-  { label: "Projects", to: "/case-studies" },
   { label: "Gallery", to: "/gallery" },
   { label: "Contact Us", to: "/contact" },
 ];
