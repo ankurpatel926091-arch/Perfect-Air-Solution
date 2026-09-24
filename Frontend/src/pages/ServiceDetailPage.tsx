@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import {
   Wrench, ShieldCheck, MapPin, Settings2, Wind,
   CheckCircle2, Star, Phone, Calendar,
-  Shield, Zap, ArrowUpRight, Clock, Award, ArrowRight
+  Shield, Zap, ArrowUpRight, Clock, Award, ArrowRight,
+  Activity, Building2
 } from "lucide-react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useGetServicesQuery } from "@/store/api";
@@ -11,8 +12,9 @@ import Loader from "@/components/ui/Loader";
 import CTASection from "@/components/CTASection";
 import { sendQuoteViaWhatsApp } from "@/lib/whatsapp";
 import servicesHeaderBg from "@/assets/HeaderBackgroundImg/ServicesBackground.png";
+import { ServiceData } from "@/data/staticData";
 
-const iconMap: Record<string, React.ElementType> = { ShieldCheck, MapPin, Settings2, Wind, Wrench };
+const iconMap: Record<string, React.ElementType> = { ShieldCheck, MapPin, Settings2, Wind, Wrench, Activity, Building2 };
 const renderIcon = (name: string): React.ElementType => iconMap[name] ?? Wrench;
 
 const fadeUp = {
@@ -29,24 +31,28 @@ export default function ServiceDetailPage() {
 
   if (isLoading) return <Loader fullScreen />;
 
-  const service = services.find(
-    (s: any) =>
+  const service: ServiceData = (services as ServiceData[]).find(
+    (s: ServiceData) =>
       s.slug === slug ||
-      (slug === "ac-repair" && s.slug === "ac-repair-maintenance") ||
-      (slug === "amc-service" && s.slug === "amc-services") ||
+      (slug === "ac-repair" && (s.slug === "ac-repair-service" || s.slug === "ac-repair-maintenance")) ||
+      (slug === "ac-repair-maintenance" && (s.slug === "ac-repair-service" || s.slug === "ac-repair-maintenance")) ||
+      (slug === "ac-repair-service" && (s.slug === "ac-repair-service" || s.slug === "ac-repair-maintenance")) ||
+      (slug === "amc-service" && (s.slug === "annual-maintenance-contract" || s.slug === "amc-services")) ||
+      (slug === "amc-services" && (s.slug === "annual-maintenance-contract" || s.slug === "amc-services")) ||
+      (slug === "annual-maintenance-contract" && (s.slug === "annual-maintenance-contract" || s.slug === "amc-services")) ||
       (slug === "commercial-hvac" && s.slug === "commercial-hvac-solutions") ||
       (slug === "vrf-vrv-systems" && s.slug === "commercial-hvac-solutions") ||
-      (slug === "copper-piping-ductwork" && s.slug === "hvac-design-consultation")
-  ) || services[0];
+      (slug === "copper-piping-ductwork" && (s.slug === "ventilation-solutions" || s.slug === "hvac-design-consultation"))
+  ) || (services[0] as ServiceData);
 
   const Icon = renderIcon(service.icon);
-  const related = services.filter((s: any) => s.slug !== service.slug).slice(0, 3);
+  const related = (services as ServiceData[]).filter((s: ServiceData) => s.slug !== service.slug).slice(0, 3);
 
   const handleBooking = () => {
     sendQuoteViaWhatsApp({
       serviceName: service.title,
       name: "Customer",
-      phone: "+91 98391 71701", 
+      phone: "+91 84291 52092", 
       city: "Uttar Pradesh",
       message: `Hi, I want to book the ${service.title} (${service.price}). Please share available slots.`,
     });
@@ -203,7 +209,7 @@ export default function ServiceDetailPage() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {service.process.map((p: any, idx: number) => (
+                  {service.process.map((p: { step: string; title: string; desc: string }, idx: number) => (
                     <div
                       key={idx}
                       className="relative p-5 rounded-lg bg-gradient-to-br from-slate-50 to-sky-50/50 border border-slate-200/80 flex flex-col justify-between hover:border-sky-300 transition-all group"
@@ -253,7 +259,7 @@ export default function ServiceDetailPage() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {related.map((r: any) => {
+                  {related.map((r: ServiceData) => {
                     const RelIcon = renderIcon(r.icon);
                     return (
                       <div
@@ -319,11 +325,11 @@ export default function ServiceDetailPage() {
                 </button>
 
                 <a
-                  href="tel:+919839171701"
+                  href="tel:+918429152092"
                   className="w-full bg-slate-100 hover:bg-slate-200 text-[#051B30] font-bold text-sm py-3 px-5 rounded-lg flex items-center justify-center gap-2 transition-all text-decoration-none"
                 >
                   <Phone size={16} className="text-[#0284C7]" />
-                  <span>Call +91 98391 71701</span>
+                  <span>Call +91 84291 52092</span>
                 </a>
               </div>
 

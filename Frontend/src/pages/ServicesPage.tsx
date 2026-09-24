@@ -30,29 +30,63 @@ interface StaticService {
   image: string;
 }
 
+const iconMap: Record<string, React.ElementType> = {
+  Wrench,
+  ShieldCheck,
+  MapPin,
+  Settings2,
+  Wind,
+  Activity,
+  Building2,
+};
+
+const getIconComponent = (icon: any): React.ElementType => {
+  if (typeof icon === "function") return icon;
+  if (typeof icon === "string" && iconMap[icon]) return iconMap[icon];
+  return Wrench;
+};
+
 const staticServicesList: StaticService[] = [
   {
     slug: "ac-installation",
-    title: "Precision AC Installation",
-    badge: "Residential & Commercial",
+    title: "AC Installation",
+    badge: "Quick & Safe Installation",
     desc: "Certified installation for Split, Cassette, Ductable, and VRF systems with vacuum leak testing and precision copper piping.",
     bullets: ["OEM Certified Copper Piping", "Nitrogen Pressure Leak Testing", "Airflow CFM Balancing"],
     icon: Wrench,
     image: splitAcImg,
   },
   {
-    slug: "ac-repair-maintenance",
-    title: "AC Servicing & Gas Refilling",
-    badge: "24/7 Emergency Support",
+    slug: "ac-repair-service",
+    title: "AC Repair & Service",
+    badge: "Fast & Reliable Solutions",
     desc: "Complete servicing, high-pressure jet washing, eco-friendly gas top-up (R32/R410A), and compressor troubleshooting.",
     bullets: ["Chemical Jet Washing", "Gas Leakage Detection", "Electrical & PCB Diagnostics"],
     icon: Activity,
     image: repairImg,
   },
   {
-    slug: "amc-services",
-    title: "AMC (Annual Maintenance Contract)",
-    badge: "Zero Downtime Guarantee",
+    slug: "ac-maintenance",
+    title: "AC Maintenance",
+    badge: "Regular Care for Longer Life",
+    desc: "Periodic preventive servicing, deep coil cleaning, filter sanitization, electrical checks, and performance tuning.",
+    bullets: ["Periodic Preventive Tune-Up", "Coil Descaling & Rust Protection", "Electrical Amperage Testing"],
+    icon: Settings2,
+    image: ahuImg,
+  },
+  {
+    slug: "ventilation-solutions",
+    title: "Ventilation Solutions",
+    badge: "Fresh Air, Better Living",
+    desc: "Fresh air intake systems, exhaust solutions, commercial kitchen ventilation, basement ventilation, and HEPA air purification.",
+    bullets: ["Fresh Air Intake & Circulation", "Kitchen & Basement Exhaust", "Cleanroom HEPA Air Systems"],
+    icon: Wind,
+    image: copperImg,
+  },
+  {
+    slug: "annual-maintenance-contract",
+    title: "Annual Maintenance Contract",
+    badge: "Worry Free Year Round",
     desc: "Comprehensive & Non-Comprehensive annual contracts ensuring regular preventive maintenance and breakdown response.",
     bullets: ["Scheduled Servicing Audits", "< 2 Hour Emergency Response", "100% Genuine Spare Parts"],
     icon: ShieldCheck,
@@ -76,42 +110,6 @@ const staticServicesList: StaticService[] = [
     icon: Wind,
     image: ductableImg,
   },
-  {
-    slug: "chiller-ahu-services",
-    title: "Chiller Plants & AHU Systems",
-    badge: "Commercial Central Plant",
-    desc: "Water-cooled & Air-cooled Chiller servicing, Air Handling Unit (AHU) installation, HEPA filtration, and cleanroom setup.",
-    bullets: ["Air & Water-Cooled Chillers", "Cleanroom HEPA Filtration", "Thermal Energy Audits"],
-    icon: Settings2,
-    image: ahuImg,
-  },
-  {
-    slug: "industrial-cooling-repair",
-    title: "Industrial & 3-Phase Machine Repair",
-    badge: "Heavy Duty Cooling",
-    desc: "Specialized repair and preventive maintenance for 3-phase cooling machines, panel ACs, and industrial chiller units.",
-    bullets: ["Heavy Equipment Diagnostics", "Compressor Overhaul", "24/7 Breakdown Crew"],
-    icon: Settings2,
-    image: chillerImg,
-  },
-  {
-    slug: "copper-piping-ductwork",
-    title: "Copper Piping & Ductwork Layout",
-    badge: "Precision Engineering",
-    desc: "High-grade insulation copper piping and customized GI/PI ductwork fabrication for commercial central air plants.",
-    bullets: ["Hard Copper Piping", "Zero Condensation Insulation", "Custom Duct Fabrication"],
-    icon: MapPin,
-    image: copperImg,
-  },
-   {
-    slug: "ac-repair-maintenance",
-    title: "AC Servicing & Gas Refilling",
-    badge: "24/7 Emergency Support",
-    desc: "Complete servicing, high-pressure jet washing, eco-friendly gas top-up (R32/R410A), and compressor troubleshooting.",
-    bullets: ["Chemical Jet Washing", "Gas Leakage Detection", "Electrical & PCB Diagnostics"],
-    icon: Activity,
-    image: repairImg,
-  },
 ];
 
 const STATS = [
@@ -125,21 +123,34 @@ export default function ServicesPage(): React.ReactElement {
   const navigate = useNavigate();
   const { data: apiServices = [], isLoading } = useGetServicesQuery();
 
-  // Merge API services with rich static fallback details
-  const servicesToDisplay = (apiServices && apiServices.length > 0)
-    ? apiServices.map((apiS: any, i: number) => {
-        const fallback = staticServicesList[i % staticServicesList.length];
+  const excludedSlugs = [
+    "chiller-ahu-services",
+    "cleanroom-industrial-ventilation",
+    "copper-piping-ductwork",
+  ];
+
+  // Merge API services with rich static fallback details & filter out removed services
+  const rawServices = (apiServices && apiServices.length > 0)
+    ? apiServices.map((apiS: any) => {
+        const fallback = staticServicesList.find(f => f.slug === apiS.slug) || staticServicesList[0];
         return {
           slug: apiS.slug || fallback.slug,
           title: apiS.title || fallback.title,
           badge: apiS.badge || fallback.badge,
           desc: apiS.desc || apiS.description || fallback.desc,
           bullets: apiS.highlights || fallback.bullets,
-          icon: fallback.icon,
+          icon: getIconComponent(apiS.icon || fallback.icon),
           image: apiS.image || fallback.image,
         };
       })
     : staticServicesList;
+
+  const servicesToDisplay = rawServices.filter(
+    (s: any) =>
+      !excludedSlugs.includes(s.slug) &&
+      !s.title?.toLowerCase().includes("chiller") &&
+      !s.title?.toLowerCase().includes("cleanroom")
+  );
 
   if (isLoading && (!apiServices || apiServices.length === 0)) return <Loader />;
 
@@ -169,7 +180,7 @@ export default function ServicesPage(): React.ReactElement {
             className="inline-flex items-center gap-2 bg-[#03172C]/80 border border-cyan-400/40 text-cyan-300 text-xs font-bold uppercase tracking-widest px-3.5 py-1 rounded-full mt-1.5 sm:mt-2 mb-3 backdrop-blur-md shadow-sm"
           >
             <Sparkles size={14} className="animate-pulse text-cyan-300" />
-            <span>Complete HVAC Expertise</span>
+            <span>PURE AIR • PERFECT CARE • COMPLETE SOLUTION</span>
           </motion.div>
 
           <motion.h1
@@ -178,30 +189,70 @@ export default function ServicesPage(): React.ReactElement {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-4 text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
           >
-            Comprehensive HVAC &amp; <span className="text-cyan-300">Cooling Services</span>
+            Complete Air Solutions <span className="text-cyan-300">For Your Comfort</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-slate-100 text-sm sm:text-base max-w-3xl mx-auto font-medium leading-relaxed mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+            className="text-slate-100 text-sm sm:text-base max-w-3xl mx-auto font-medium leading-relaxed mb-5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
           >
-            From precision AC installation and scheduled AMC to commercial VRF central plants and cleanroom AHU systems — Perfect Air Solution delivers engineered comfort you can depend on.
+            We provide professional installation, service and maintenance of all types of air conditioning and ventilation systems.
           </motion.p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-2xl mx-auto">
-            <span>✓ 5,000+ Projects Delivered</span>
-            <span>✓ 4.9/5 Customer Rating</span>
-            <span>✓ &lt; 2 Hrs Emergency AMC Response</span>
+          {/* 3 Core Highlights from Flyer */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-cyan-200 font-semibold pt-3 border-t border-white/10 max-w-2xl mx-auto">
+            <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">
+              <CheckCircle2 size={15} className="text-cyan-400" /> Better Air Quality
+            </span>
+            <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">
+              <CheckCircle2 size={15} className="text-cyan-400" /> Reliable Service
+            </span>
+            <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">
+              <CheckCircle2 size={15} className="text-cyan-400" /> Complete Care
+            </span>
           </div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-4 sm:pb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4 sm:pb-6">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Intro Header & Theory Above Service Images */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-[#0284C7] font-bold text-xs uppercase tracking-wider mb-3 shadow-xs"
+          >
+            <Sparkles size={13} className="text-[#0284C7]" />
+            <span>Our Service Offerings</span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.08 }}
+            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#051B30] tracking-tight mb-3"
+          >
+            Engineered Cooling, Precision Repair &amp; Comprehensive Maintenance
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.16 }}
+            className="text-slate-600 text-sm sm:text-base leading-relaxed"
+          >
+            At Perfect Air Solution, we deliver end-to-end climate control solutions backed by certified HVAC technicians, advanced diagnostic tools, and 100% genuine spare parts. From rapid doorstep repairs and precision installations to worry-free AMC contracts and specialized ventilation setups, explore our core services engineered to keep your environment cool, fresh, and energy-efficient.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {servicesToDisplay.map((s, idx) => {
             const IconComp = s.icon || Wrench;
             return (
@@ -274,7 +325,9 @@ export default function ServicesPage(): React.ReactElement {
       </div>
 
       {/* CTA Section */}
-      <CTASection />
+      <div className="pb-10 sm:pb-14">
+        <CTASection />
+      </div>
     </div>
   );
 }

@@ -19,7 +19,7 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
-import { sendContactViaWhatsApp } from "@/lib/whatsapp";
+
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type ServiceOption = { id: string; label: string; icon: React.ReactNode };
@@ -75,11 +75,12 @@ const contactSchema = Yup.object({
     ),
 
   service: Yup.string()
-    .optional()
-    .oneOf(
-      ["AC Installation", "AC Repair", "AMC Service", "VRF", "Cold Storage"],
-      "Invalid service selected"
-    ),
+  .optional()
+  .transform((value) => (value === "" ? undefined : value))
+  .oneOf(
+    ["residential", "commercial", "vrf", "amc", "chiller", "other"],
+    "Invalid service selected"
+  ),
 
   message: Yup.string()
     .optional()
@@ -106,7 +107,13 @@ const services: ServiceOption[] = [
 const slugToServiceId: Record<string, string> = {
   "ac-installation": "residential",
   "ac-repair": "residential",
+  "ac-repair-service": "residential",
+  "ac-repair-maintenance": "residential",
+  "ac-maintenance": "residential",
+  "ventilation-solutions": "commercial",
+  "annual-maintenance-contract": "amc",
   "amc-service": "amc",
+  "amc-services": "amc",
   "vrf": "vrf",
   "cold-storage": "chiller",
   "commercial-hvac": "commercial",
@@ -122,7 +129,7 @@ const contactDetails = [
   {
     icon: <Phone size={20} />,
     label: "Call Us",
-    value: "+91 98391 71701",
+    value: "+91 84291 52092",
     sub: "Available 24/7 Support",
     href: "tel:+919839171701",
     hoverColor: "rgba(34,197,94,0.08)",
@@ -583,25 +590,50 @@ export default function ContactUs() {
     setForm({ name: "", email: "", phone: "", service: "", message: "" });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (loading) return;
-    const isValid = await validateAll();
-    if (!isValid) return;
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    setLoading(true);
-    const toastId = toast.loading("Preparing your message...");
-    try {
-      sendContactViaWhatsApp(form);
-      toast.update(toastId, { render: "✅ Opening WhatsApp with your inquiry!", type: "success", isLoading: false, autoClose: 3000 });
-      reset();
-      setSubmitted(true);
-    } catch (err: any) {
-      toast.update(toastId, { render: "❌ Failed to prepare message", type: "error", isLoading: false, autoClose: 4000 });
-    } finally {
-      setLoading(false);
+  if (loading) return;
+
+  const isValid = await validateAll();
+
+  if (!isValid) return;
+
+  setLoading(true);
+
+  try {
+    const response = await fetch("http://localhost:5000/api/contact/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        service: form.service,
+        message: form.message,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Something went wrong");
     }
-  };
+
+    toast.success("Message sent successfully!");
+
+    reset();
+    setSubmitted(true);
+
+  } catch (error) {
+    console.error("Contact API Error:", error);
+    toast.error("Failed to send message");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const canSubmit = !loading && form.name.trim() && form.email.trim() && Object.values(errors).every((e) => !e);
 

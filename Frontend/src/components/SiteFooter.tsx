@@ -10,8 +10,8 @@ import {
   Clock,
   ShieldCheck,
   ChevronRight,
-  Wind,
 } from "lucide-react";
+import perfectAirLogo from "../assets/perfect-air-logo-white.png";
 import cclogo from "../assets/cc-logo.png";
 
 const quickLinks = [
@@ -20,6 +20,7 @@ const quickLinks = [
   { label: "Products", to: "/product" },
   { label: "Services", to: "/services" },
   { label: "Gallery", to: "/gallery" },
+   { label: "blog", to: "/blog" },
   { label: "Contact Us", to: "/contact" },
 ];
 
@@ -52,11 +53,10 @@ const colVariants = {
 const SiteFooter = () => {
   const servicesList = [
     { title: "AC Installation", to: "/service/ac-installation" },
-    { title: "AC Repair & Maintenance", to: "/service/ac-repair-maintenance" },
-    { title: "AMC Services", to: "/service/amc-services" },
-    { title: "HVAC Design & Consultation", to: "/service/hvac-design-consultation" },
-    { title: "Commercial HVAC Solutions", to: "/service/commercial-hvac-solutions" },
-    { title: "Preventive Maintenance", to: "/service/preventive-maintenance" },
+    { title: "AC Repair & Service", to: "/service/ac-repair-service" },
+    { title: "AC Maintenance", to: "/service/ac-maintenance" },
+    { title: "Ventilation Solutions", to: "/service/ventilation-solutions" },
+    { title: "Annual Maintenance Contract", to: "/service/annual-maintenance-contract" },
   ];
 
   return (
@@ -89,19 +89,14 @@ const SiteFooter = () => {
             <div>
               <Link
                 to="/"
-                className="flex items-center gap-3 mb-3.5 text-decoration-none group"
+                aria-label="Perfect Air Solution – Home"
+                className="inline-block group mb-1"
               >
-                <div className="w-11 h-11 p-2.5 rounded-xl bg-gradient-to-tr from-[#0284C7] to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-sky-500/25 group-hover:scale-105 transition-transform">
-                  <Wind size={24} className="text-white" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-extrabold text-2xl lg:text-3xl tracking-tight text-white leading-none">
-                    PERFECT <span className="text-[#38BDF8]">AIR</span>
-                  </span>
-                  <span className="text-xs font-bold tracking-[0.24em] text-slate-300 uppercase leading-none mt-1">
-                    SOLUTION
-                  </span>
-                </div>
+                <img
+                  src={perfectAirLogo}
+                  alt="Perfect Air Solution"
+                  className="h-10 sm:h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                />
               </Link>
 
               <p className="text-[14px] leading-relaxed mb-2 text-slate-200 font-normal">
@@ -180,7 +175,7 @@ const SiteFooter = () => {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 mb-0.5 font-semibold">Phone Call / WhatsApp</p>
-                    <p className="text-base font-extrabold text-white group-hover:text-cyan-300 transition-colors">+91 98391 71701</p>
+                    <p className="text-base font-extrabold text-white group-hover:text-cyan-300 transition-colors">+91 84291 52092</p>
                   </div>
                 </a>
               </li>

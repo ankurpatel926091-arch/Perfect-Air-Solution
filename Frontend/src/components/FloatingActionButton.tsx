@@ -52,9 +52,9 @@ const FloatingActionButton = () => {
 
       {/* 2. Phone Call Button (Visible by Default) */}
       <motion.a
-        href="tel:+919839171701"
-        aria-label="Call +91 98391 71701"
-        title="Call +91 98391 71701"
+        href="tel:+918429152092"
+        aria-label="Call +91 84291 52092"
+        title="Call +91 84291 52092"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.12 }}

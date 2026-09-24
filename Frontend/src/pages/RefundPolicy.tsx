@@ -1,126 +1,234 @@
 import { motion } from "framer-motion";
-import { BRAND } from "@/lib/colors";
-import { RotateCcw, CheckCircle, XCircle, Clock, CreditCard, Mail, HelpCircle } from "lucide-react";
+import { RotateCcw, CheckCircle, XCircle, Clock, CreditCard, Mail, Phone, HelpCircle, Sparkles, CheckCircle2, ShieldCheck, ArrowRight } from "lucide-react";
+import Breadcrumb from "@/components/Breadcrumb";
 
-const fadeUp = { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const keyHighlights = [
+  { icon: Clock, title: "7-Day Return Window", desc: "Initiate return or replacement requests within 7 days of delivery" },
+  { icon: CreditCard, title: "Fast 5–7 Days Refund", desc: "Refunds credited directly to your original payment method or bank" },
+  { icon: ShieldCheck, title: "100% Transit Assurance", desc: "Free replacement for any unit with verified transit damage" },
+];
 
 const sections = [
   {
     icon: CheckCircle,
-    title: "Eligible for Refund",
+    iconColor: "from-emerald-500 to-teal-500",
+    badgeColor: "text-emerald-700 bg-emerald-50 border-emerald-100",
+    title: "1. Eligible for Refund & Replacement",
+    tag: "Approved Cases",
     content: [
-      "Products that are defective or damaged upon delivery — report within 24 hours of receipt with photographic evidence.",
-      "Wrong product delivered — we will arrange a replacement or full refund at no additional cost.",
-      "Cancellation of order before dispatch — full refund will be processed within 5–7 business days.",
-      "Service not rendered as agreed — partial or full refund based on the scope of incomplete work.",
+      "Transit Damage: Products received with physical defects or shipping damage — please notify us within 24 hours of delivery with unboxing photos or videos.",
+      "Incorrect Item Delivered: In the rare case you receive a different AC tonnage, model, or brand from what you ordered, we arrange priority same-week exchange or full refund at zero extra cost.",
+      "Order Cancellation Prior to Dispatch: Full 100% refund processed within 5–7 business days if cancelled before the unit departs our logistics facility.",
+      "Service Unfulfillment: If a booked installation or AMC visit cannot be executed due to technical limitations on our end, an immediate full or pro-rata refund will be issued.",
     ],
   },
   {
     icon: XCircle,
-    title: "Not Eligible for Refund",
+    iconColor: "from-rose-500 to-red-500",
+    badgeColor: "text-rose-700 bg-rose-50 border-rose-100",
+    title: "2. Non-Refundable Scenarios",
+    tag: "Exclusions",
     content: [
-      "Products that have been installed and used, unless they are defective due to manufacturing faults covered under warranty.",
-      "Damage caused by improper use, unauthorized repairs, or failure to follow installation guidelines.",
-      "Change of mind after product installation has been completed.",
-      "Consumable items such as filters, gas refills, and cleaning supplies once opened or used.",
+      "Installed & Operating Units: Once an air conditioner has been mounted, piped, and commissioned on-site, it is covered under manufacturer warranty rather than immediate product returns.",
+      "Improper Physical Handling: Damage resulting from non-certified third-party tampering, power surge spikes, or non-compliance with manufacturer voltage requirements.",
+      "Consumable Accessories: Opened copper pipes, refrigerants/gas recharges, chemical wash materials, and air filters once unsealed or applied.",
+      "Change of Mind After Installation: Returns cannot be accepted solely due to aesthetic preference after completion of structural wall mounting.",
     ],
   },
   {
     icon: Clock,
-    title: "Refund Timeline",
+    iconColor: "from-[#0284C7] to-cyan-400",
+    badgeColor: "text-[#0284C7] bg-sky-50 border-sky-100",
+    title: "3. Refund Timelines & Settlement",
+    tag: "Timeline",
     content: [
-      "Refund requests must be initiated within 7 days of product delivery or service completion.",
-      "Once approved, refunds are processed within 5–7 business days to the original payment method.",
-      "For Cash on Delivery orders, refunds will be processed via bank transfer. You will need to provide your bank account details.",
-      "You will receive email and SMS notifications at each stage of the refund process.",
+      "Claim Initiation: Return requests must be registered with our customer desk within 7 calendar days of delivery.",
+      "Inspection & Verification: Our technical team reviews supporting media or conducts a brief site inspection within 24–48 hours.",
+      "Disbursement: Once approved, electronic refunds are initiated within 5–7 business days to the source payment method.",
+      "Cash on Delivery Orders: COD refunds are securely transferred via direct NEFT/IMPS to your verified bank account details.",
+      "You will receive transparent SMS and email confirmations at each progression checkpoint of the refund cycle.",
     ],
   },
   {
     icon: RotateCcw,
-    title: "Exchange Policy",
+    iconColor: "from-indigo-500 to-sky-500",
+    badgeColor: "text-indigo-700 bg-indigo-50 border-indigo-100",
+    title: "4. Product Exchange Guidelines",
+    tag: "Exchanges",
     content: [
-      "We offer product exchanges for items of equal or higher value within 7 days of delivery.",
-      "The product must be in its original packaging and unused condition for exchange eligibility.",
-      "Exchange requests are subject to product availability. If the replacement is unavailable, a refund will be issued.",
+      "Eligible products can be exchanged for alternative tonnage (e.g. upgrading 1.5 Ton to 2.0 Ton) or higher-tier inverter series within 7 days of delivery.",
+      "The returned unit must be unused, in its original pristine manufacturer box, with all manuals, warranties, and remote controls intact.",
+      "Any price differential between the exchanged products can be paid online or adjusted against the final installation billing.",
     ],
   },
   {
     icon: CreditCard,
-    title: "Refund Process",
+    iconColor: "from-sky-600 to-blue-600",
+    badgeColor: "text-sky-700 bg-sky-50 border-sky-100",
+    title: "5. How to Initiate a Claim",
+    tag: "Step-by-Step",
     content: [
-      "Contact our customer support team via email (info@perfectairsolution.com) or phone (+91 98391 71701) to initiate a refund request.",
-      "Provide your order number, reason for refund, and any supporting images if applicable.",
-      "Our team will review your request and respond within 48 hours with the resolution.",
-      "Approved refunds will be credited back to the original payment method used during purchase.",
-    ],
-  },
-  {
-    icon: Mail,
-    title: "Need Help?",
-    content: [
-      "For any refund-related queries, reach out to us at info@perfectairsolution.com or call +91 98391 71701.",
-      "Our customer support team is available Monday to Saturday, 9:00 AM – 7:00 PM.",
-      "Perfect Air Solution, Civil Lines, Uttar Pradesh 241001.",
+      "Step 1: Contact our support desk via email at info@perfectairsolution.com or call +91 84291 52092.",
+      "Step 2: Share your invoice number, product serial number, and a brief description accompanied by photographs.",
+      "Step 3: Our technical support representative will provide a Return Authorization Number (RAN) and dispatch an inspector or courier pickup.",
+      "Step 4: Upon warehouse verification, your exchange or bank refund will be processed promptly.",
     ],
   },
 ];
 
-const RefundPolicy = () => (
-  <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
-    <section
-      className="relative overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 text-white"
-      style={{
-        background: `linear-gradient(135deg, ${BRAND.dark} 0%, ${BRAND.darkMid} 50%, ${BRAND.primary} 100%)`,
-      }}
-    >
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-        <motion.div {...fadeUp}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)" }}>
-            <HelpCircle size={16} style={{ color: BRAND.primaryLight }} />
-            <span className="text-sm font-medium text-white/80">Customer Assurance</span>
-          </div>
-          <h1 className="heading-1 text-white mb-4">
-            Refund & Cancellation Policy
-          </h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            Your satisfaction is our priority. Learn about our hassle-free refund and exchange process.
-          </p>
-          <p className="text-sm text-white/40 mt-4">Last updated: March 2026</p>
-        </motion.div>
-      </div>
-    </section>
+const RefundPolicy = () => {
+  return (
+    <div className="font-sans min-h-screen bg-slate-50 text-slate-800" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+      {/* ── Hero Section ── */}
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+        {/* Ambient Gradient Glows */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, #38BDF8 1px, transparent 0)`,
+            backgroundSize: "28px 28px",
+          }}
+        />
 
-    <section className="py-16 px-6" style={{ background: BRAND.bgSoft }}>
-      <div className="max-w-4xl mx-auto space-y-8">
-        {sections.map((s, i) => (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="flex justify-center mb-3">
+            <Breadcrumb variant="dark" />
+          </div>
+
+          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md shadow-sm">
+              <HelpCircle size={14} className="text-cyan-400" />
+              <span>CUSTOMER ASSURANCE</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans">
+              Refund &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-[#38BDF8]">Cancellation</span>
+            </h1>
+
+            <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed mb-4">
+              Your satisfaction and trust are our top priorities. Learn about our clear, fair, and hassle-free return and refund procedures.
+            </p>
+
+            <div className="inline-flex items-center gap-2 text-xs font-medium text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-white/10">
+              <Sparkles size={12} className="text-cyan-400" />
+              <span>Last updated: March 2026</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Key Highlights Strip ── */}
+      <section className="relative -mt-8 z-20 max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {keyHighlights.map((item, idx) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * idx, duration: 0.4 }}
+              className="bg-white rounded-xl p-5 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex items-start gap-3.5"
+            >
+              <div className="w-10 h-10 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center flex-shrink-0 text-[#0284C7]">
+                <item.icon size={20} />
+              </div>
+              <div>
+                <h2 className="text-sm font-bold text-[#051B30] mb-0.5">{item.title}</h2>
+                <p className="text-xs text-slate-500 leading-relaxed font-normal">{item.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Detailed Policy Sections ── */}
+      <section className="py-14 sm:py-20 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto space-y-6">
+          {sections.map((s, i) => (
+            <motion.div
+              key={s.title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ delay: i * 0.05, duration: 0.45 }}
+              className="rounded-2xl bg-white p-6 sm:p-8 border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-5 pb-4 border-b border-slate-100">
+                <div className="flex items-center gap-3.5">
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${s.iconColor} flex items-center justify-center text-white shadow-md`}>
+                    <s.icon size={20} />
+                  </div>
+                  <h2 className="text-lg sm:text-xl font-bold text-[#051B30] tracking-tight">{s.title}</h2>
+                </div>
+                <span className={`text-[11px] font-bold border px-3 py-1 rounded-full uppercase tracking-wider ${s.badgeColor}`}>
+                  {s.tag}
+                </span>
+              </div>
+
+              <ul className="space-y-3.5">
+                {s.content.map((point, j) => (
+                  <li key={j} className="flex items-start gap-3 text-sm sm:text-base leading-relaxed text-slate-600 font-normal">
+                    <CheckCircle2 size={18} className="text-[#0284C7] flex-shrink-0 mt-0.5" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+
+          {/* ── Customer Help Desk Card ── */}
           <motion.div
-            key={s.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08, duration: 0.5 }}
-            className="rounded-md p-8 border"
-            style={{ background: BRAND.white, borderColor: BRAND.slate100 }}
+            transition={{ duration: 0.45 }}
+            className="rounded-2xl bg-gradient-to-br from-[#051B30] to-[#0B2E4C] text-white p-6 sm:p-8 shadow-lg border border-slate-700/80 mt-10"
           >
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-md flex items-center justify-center" style={{ background: BRAND.primaryPale }}>
-                <s.icon size={20} style={{ color: BRAND.primary }} />
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/20 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">
+                  <RotateCcw size={13} />
+                  <span>REFUND DESK</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 font-sans">
+                  Need help with a return, refund, or exchange?
+                </h3>
+                <p className="text-slate-300 text-sm leading-relaxed max-w-xl font-normal">
+                  Our customer care team is available Monday to Saturday (9:00 AM – 7:00 PM) to help you resolve your request promptly.
+                </p>
+                <p className="text-xs text-slate-400 mt-2">
+                  Corporate Office: Perfect Air Solution, Civil Lines, Uttar Pradesh 241001.
+                </p>
               </div>
-              <h2 className="heading-2" style={{ color: BRAND.dark }}>{s.title}</h2>
+
+              <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+                <a
+                  href="mailto:info@perfectairsolution.com"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#0284C7] hover:bg-sky-500 text-white font-bold text-sm shadow-md transition-colors"
+                >
+                  <Mail size={16} />
+                  <span>Email Refund Desk</span>
+                </a>
+                <a
+                  href="tel:+918429152092"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/15 transition-colors"
+                >
+                  <Phone size={16} />
+                  <span>Call Support</span>
+                </a>
+              </div>
             </div>
-            <ul className="space-y-3">
-              {s.content.map((item, j) => (
-                <li key={j} className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: BRAND.slate600 }}>
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: BRAND.primary }} />
-                  {item}
-                </li>
-              ))}
-            </ul>
           </motion.div>
-        ))}
-      </div>
-    </section>
-  </div>
-);
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export default RefundPolicy;

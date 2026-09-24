@@ -1,4 +1,4 @@
-export const WHATSAPP_PHONE = "919839171701";
+export const WHATSAPP_PHONE = "918429152092";
 
 export const openWhatsApp = (message: string) => {
   const encodedText = encodeURIComponent(message.trim());
@@ -9,14 +9,14 @@ export const openWhatsApp = (message: string) => {
 export const sendContactViaWhatsApp = (data: {
   name: string;
   phone?: string;
-  email: string;
+  email?: string;
   service?: string;
   message?: string;
 }) => {
   const text = `*New Inquiry via Perfect Air Solution Website* ❄️\n\n` +
     `👤 *Name:* ${data.name}\n` +
     `📞 *Phone:* ${data.phone || "Not specified"}\n` +
-    `✉️ *Email:* ${data.email}\n` +
+    `✉️ *Email:* ${data.email || "Not specified"}\n` +
     `🛠️ *Service Needed:* ${data.service || "General Inquiry"}\n` +
     `📝 *Message/Requirement:* ${data.message || "Please contact me back regarding HVAC services."}`;
 
@@ -24,18 +24,24 @@ export const sendContactViaWhatsApp = (data: {
 };
 
 export const sendQuoteViaWhatsApp = (data: {
-  name: string;
-  phone: string;
-  email: string;
-  service: string;
+  name?: string;
+  phone?: string;
+  email?: string;
+  service?: string;
+  serviceName?: string;
+  city?: string;
+  message?: string;
   notes?: string;
 }) => {
-  const text = `*New Free Quote Request* ❄️\n\n` +
-    `👤 *Name:* ${data.name}\n` +
-    `📞 *Phone:* ${data.phone}\n` +
-    `✉️ *Email:* ${data.email}\n` +
-    `❄️ *Service Required:* ${data.service}\n` +
-    `📋 *Additional Notes:* ${data.notes || "None"}`;
+  const sName = data.service || data.serviceName || "HVAC Service";
+  const details = data.message || data.notes || "None";
+  const text = `*New Free Quote / Booking Request* ❄️\n\n` +
+    `👤 *Name:* ${data.name || "Customer"}\n` +
+    `📞 *Phone:* ${data.phone || "+91 84291 52092"}\n` +
+    (data.city ? `📍 *City:* ${data.city}\n` : "") +
+    (data.email ? `✉️ *Email:* ${data.email}\n` : "") +
+    `❄️ *Service Required:* ${sName}\n` +
+    `📋 *Additional Details:* ${details}`;
 
   openWhatsApp(text);
 };

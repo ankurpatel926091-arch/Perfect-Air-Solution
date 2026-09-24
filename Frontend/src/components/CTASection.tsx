@@ -9,7 +9,7 @@ interface CTAProps {
 }
 
 const CTASection: React.FC<CTAProps> = ({
-  phoneNumber = "+91 98391 71701",
+  phoneNumber = "+91 84291 52092",
   onConsultationClick,
 }) => {
   const navigate = useNavigate();

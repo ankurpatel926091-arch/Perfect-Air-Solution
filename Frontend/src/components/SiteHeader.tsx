@@ -64,7 +64,7 @@ const SiteHeader = () => {
               <span>Working Hours: Mon - Sat 9:00 AM - 7:00 PM</span>
               <span>•</span>
               <a href="tel:+919839171701" className="text-cyan-400 font-bold hover:underline">
-                Call: +91 98391 71701
+                Call: +91 84291 52092
               </a>
             </div>
           </div>
@@ -98,7 +98,7 @@ const SiteHeader = () => {
                 key={link.name}
                 to={link.path}
                 className={`
-                  relative whitespace-nowrap rounded-md transition-all duration-200 font-semibold text-xs xl:text-sm px-2.5 py-2
+                  relative whitespace-nowrap rounded-md transition-all duration-200 font-semibold text-sm xl:text-base px-3 xl:px-4 py-2
                   ${isActive(link.path)
                     ? "text-[#0284C7] bg-sky-50 font-bold"
                     : "text-slate-700 hover:text-[#0284C7] hover:bg-slate-50"
@@ -114,7 +114,7 @@ const SiteHeader = () => {
           <div className="flex items-center gap-3 flex-shrink-0">
             <button
               onClick={() => navigate("/contact")}
-              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-[#051B30] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold rounded-md text-xs xl:text-sm px-5 py-2.5 transition-all duration-300 transform hover:-translate-y-0.5"
+              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-[#051B30] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold rounded-md text-sm xl:text-base px-5 xl:px-6 py-2.5 transition-all duration-300 transform hover:-translate-y-0.5"
             >
               <span>Contact Us</span>
             </button>
@@ -166,7 +166,7 @@ const SiteHeader = () => {
                     <Link
                       to={link.path}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center justify-between px-4 py-3 rounded-md font-semibold text-sm transition-all ${
+                      className={`flex items-center justify-between px-4 py-3 rounded-md font-semibold text-base transition-all ${
                         isActive(link.path)
                           ? "bg-sky-50 text-[#0284C7] font-bold"
                           : "text-slate-700 hover:bg-slate-50 hover:text-[#0284C7]"
