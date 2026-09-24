@@ -101,9 +101,9 @@ export default function Services() {
   const navigate = useNavigate();
   const { data: apiServices = [], isLoading } = useGetServicesQuery();
 
-  // Map services cleanly prioritizing our 5 core services
+  // Map services cleanly prioritizing our 6 core services (2 rows of 3)
   const displayServices = (apiServices && apiServices.length > 0)
-    ? apiServices.slice(0, 5).map((s: any, idx: number) => {
+    ? apiServices.slice(0, 6).map((s: any, idx: number) => {
         const fallback = staticServices.find((f) => f.slug === s.slug) || staticServices[idx % staticServices.length];
         return {
           ...s,
