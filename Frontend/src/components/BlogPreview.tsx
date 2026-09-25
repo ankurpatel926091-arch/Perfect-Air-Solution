@@ -1,5 +1,5 @@
 import { Tag, ChevronRight, BookOpen, Wrench, Thermometer, Wind, Zap, ChevronLeft, Sparkles } from "lucide-react";
-import { useGetBlogsQuery } from "@/store/api";
+import { staticBlogs } from "@/data/staticData";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -188,7 +188,7 @@ function MobileCarousel({ posts }: { posts: ApiBlogPost[] }) {
 
 // ─── Main Export ─────────────────────────────────────────────────────────────
 export default function BlogPreview() {
-  const { data: blogPosts = [], isLoading, error } = useGetBlogsQuery();
+  const blogPosts = staticBlogs;
   const recentPosts = blogPosts.slice(0, 3);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -199,7 +199,7 @@ export default function BlogPreview() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  if (isLoading || error || recentPosts.length === 0) return null;
+  if (recentPosts.length === 0) return null;
 
   return (
     <section className="py-16 sm:py-15 bg-gradient-to-b from-[#EBF5FA] via-[#F4FAFE] to-[#F8FAFC] text-slate-800 relative overflow-hidden font-sans">

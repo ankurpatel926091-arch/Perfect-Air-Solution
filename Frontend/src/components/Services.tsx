@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useGetServicesQuery } from "@/store/api";
-import Loader from "@/components/ui/Loader";
 import {
   Wrench,
   ShieldCheck,
@@ -99,25 +97,7 @@ const renderIcon = (icon: any) => {
 
 export default function Services() {
   const navigate = useNavigate();
-  const { data: apiServices = [], isLoading } = useGetServicesQuery();
-
-  // Map services cleanly prioritizing our 6 core services (2 rows of 3)
-  const displayServices = (apiServices && apiServices.length > 0)
-    ? apiServices.slice(0, 6).map((s: any, idx: number) => {
-        const fallback = staticServices.find((f) => f.slug === s.slug) || staticServices[idx % staticServices.length];
-        return {
-          ...s,
-          title: s.title || fallback.title,
-          badge: s.badge || fallback.badge,
-          desc: s.desc || fallback.desc,
-          points: s.highlights || fallback.points,
-          image: s.image || fallback.image,
-          icon: s.icon || fallback.icon,
-        };
-      })
-    : staticServices;
-
-  if (isLoading && (!apiServices || apiServices.length === 0)) return <Loader />;
+  const displayServices = staticServices;
 
   return (
     <section className="py-16 sm:py-20 bg-gradient-to-b from-[#EEF8FF] via-[#F4FAFF] to-[#E6F4FA] font-sans relative overflow-hidden">

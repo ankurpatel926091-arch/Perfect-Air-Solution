@@ -1,8 +1,7 @@
-import { useGetBrandsQuery } from "@/store/api";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { BRAND } from "@/lib/colors";
-import Loader from "@/components/ui/Loader";
+import { staticBrands } from "@/data/staticData";
 import productHeaderBg from "@/assets/HeaderBackgroundImg/ProductBackground.png";
 
 const BrandCard: React.FC<{ brand: any; index: number }> = ({ brand, index }) => (
@@ -36,9 +35,7 @@ const BrandCard: React.FC<{ brand: any; index: number }> = ({ brand, index }) =>
 );
 
 const Brand: React.FC = () => {
-  const { data: brands = [], isLoading } = useGetBrandsQuery();
-
-  if (isLoading) return <Loader />;
+  const brands = staticBrands;
 
   return (
     <div className="bg-slate-50 min-h-screen font-sans">

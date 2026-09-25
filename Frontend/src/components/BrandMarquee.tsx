@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useGetBrandsQuery } from "@/store/api";
 import { BRAND } from "@/lib/colors";
-import Loader from "@/components/ui/Loader";
+import { staticBrands } from "@/data/staticData";
 
 function BrandCard({ brand }: { brand: any }) {
   const [imgError, setImgError] = useState(false);
@@ -52,10 +51,9 @@ function BrandCard({ brand }: { brand: any }) {
 }
 
 const BrandMarquee = () => {
-  const { data: brands = [], isLoading } = useGetBrandsQuery();
+  const brands = staticBrands;
   const doubled = [...brands, ...brands];
 
-  if (isLoading) return <Loader />;
   if (brands.length === 0) return null;
 
   return (

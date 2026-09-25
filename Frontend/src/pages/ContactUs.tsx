@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import {createContact} from "../api/contact.api.js"
 import {
   User,
   Mail,
@@ -602,31 +603,18 @@ export default function ContactUs() {
   setLoading(true);
 
   try {
-    const response = await fetch("http://localhost:5000/api/contact/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: form.name,
-        phone: form.phone,
-        email: form.email,
-        service: form.service,
-        message: form.message,
-      }),
+    await createContact({
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      service: form.service,
+      message: form.message,
     });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Something went wrong");
-    }
 
     toast.success("Message sent successfully!");
 
     reset();
     setSubmitted(true);
-
   } catch (error) {
     console.error("Contact API Error:", error);
     toast.error("Failed to send message");

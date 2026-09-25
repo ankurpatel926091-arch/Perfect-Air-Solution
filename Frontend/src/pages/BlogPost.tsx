@@ -13,14 +13,14 @@ import {
   Linkedin,
   ChevronUp,
 } from "lucide-react";
-import { useGetBlogsQuery } from "@/store/api";
+import { staticBlogs } from "@/data/staticData";
 import CTASection from "@/components/CTASection";
 import Breadcrumb from "@/components/Breadcrumb";
 import aboutHeaderBg from "@/assets/HeaderBackgroundImg/AboutBackground.png";
 
 const BlogPost = () => {
   const { slug } = useParams();
-  const { data: blogPosts = [], isLoading } = useGetBlogsQuery();
+  const blogPosts = staticBlogs;
 
   const post = blogPosts.find((p: any) => p.slug === slug || String(p._id) === slug);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -31,17 +31,6 @@ const BlogPost = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [slug]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#03172C] text-cyan-300 font-sans">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm font-medium">Loading article...</span>
-        </div>
-      </div>
-    );
-  }
 
   if (!post) return <Navigate to="/blog" replace />;
 

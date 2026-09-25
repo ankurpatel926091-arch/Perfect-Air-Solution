@@ -1,11 +1,10 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Phone, Trophy, Heart, IndianRupee, Star, CheckCircle2, ArrowRight, Shield, ChevronRight } from 'lucide-react';
-import { useGetBrandsQuery } from '@/store/api';
 import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 import { BRAND } from '@/lib/colors';
-import Loader from '@/components/ui/Loader';
+import { staticBrands } from '@/data/staticData';
 import productHeaderBg from '@/assets/HeaderBackgroundImg/ProductBackground.png';
 
 const renderIcon = (iconName: string): React.ReactNode => {
@@ -29,12 +28,8 @@ const fadeUp = {
 
 export default function BrandDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { data: brands = [], isLoading } = useGetBrandsQuery();
+  const brands = staticBrands;
   const brand = brands.find((b: any) => b.slug === slug);
-
-  if (isLoading) {
-    return <Loader fullScreen />;
-  }
 
   if (!brand) {
     return (

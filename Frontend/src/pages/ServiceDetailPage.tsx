@@ -7,12 +7,10 @@ import {
   Activity, Building2
 } from "lucide-react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { useGetServicesQuery } from "@/store/api";
-import Loader from "@/components/ui/Loader";
 import CTASection from "@/components/CTASection";
 import { sendQuoteViaWhatsApp } from "@/lib/whatsapp";
 import servicesHeaderBg from "@/assets/HeaderBackgroundImg/ServicesBackground.png";
-import { ServiceData } from "@/data/staticData";
+import { ServiceData, staticServices } from "@/data/staticData";
 
 const iconMap: Record<string, React.ElementType> = { ShieldCheck, MapPin, Settings2, Wind, Wrench, Activity, Building2 };
 const renderIcon = (name: string): React.ElementType => iconMap[name] ?? Wrench;
@@ -25,11 +23,9 @@ const fadeUp = {
 export default function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const { data: services = [], isLoading } = useGetServicesQuery();
+  const services = staticServices;
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [slug]);
-
-  if (isLoading) return <Loader fullScreen />;
 
   const service: ServiceData = (services as ServiceData[]).find(
     (s: ServiceData) =>

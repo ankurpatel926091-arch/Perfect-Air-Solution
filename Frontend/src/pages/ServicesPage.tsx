@@ -5,8 +5,6 @@ import {
   Clock, Star, Sparkles, ArrowRight, TrendingUp, Award, Activity, Building2, CheckCircle2, Phone
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useGetServicesQuery } from "@/store/api";
-import Loader from "@/components/ui/Loader";
 import CTASection from "@/components/CTASection";
 import Breadcrumb from "@/components/Breadcrumb";
 
@@ -121,7 +119,6 @@ const STATS = [
 
 export default function ServicesPage(): React.ReactElement {
   const navigate = useNavigate();
-  const { data: apiServices = [], isLoading } = useGetServicesQuery();
 
   const excludedSlugs = [
     "chiller-ahu-services",
@@ -129,21 +126,7 @@ export default function ServicesPage(): React.ReactElement {
     "copper-piping-ductwork",
   ];
 
-  // Merge API services with rich static fallback details & filter out removed services
-  const rawServices = (apiServices && apiServices.length > 0)
-    ? apiServices.map((apiS: any) => {
-        const fallback = staticServicesList.find(f => f.slug === apiS.slug) || staticServicesList[0];
-        return {
-          slug: apiS.slug || fallback.slug,
-          title: apiS.title || fallback.title,
-          badge: apiS.badge || fallback.badge,
-          desc: apiS.desc || apiS.description || fallback.desc,
-          bullets: apiS.highlights || fallback.bullets,
-          icon: getIconComponent(apiS.icon || fallback.icon),
-          image: apiS.image || fallback.image,
-        };
-      })
-    : staticServicesList;
+  const rawServices = staticServicesList;
 
   const servicesToDisplay = rawServices.filter(
     (s: any) =>
@@ -151,8 +134,6 @@ export default function ServicesPage(): React.ReactElement {
       !s.title?.toLowerCase().includes("chiller") &&
       !s.title?.toLowerCase().includes("cleanroom")
   );
-
-  if (isLoading && (!apiServices || apiServices.length === 0)) return <Loader />;
 
   return (
     <div className="relative min-h-screen bg-slate-50 font-sans">

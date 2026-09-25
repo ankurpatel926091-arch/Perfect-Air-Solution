@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react';
-import { useLoginUserMutation, useRegisterUserMutation } from '@/store/api';
 import { toast } from 'sonner';
 
 interface AuthContextType {
@@ -27,12 +26,9 @@ export const UserAuthProvider = ({ children }: { children: React.ReactNode }) =>
     return localStorage.getItem('userEmail');
   });
 
-  const [loginUser] = useLoginUserMutation();
-  const [registerUser] = useRegisterUserMutation();
-
   const login = async (email: string, pass: string) => {
     try {
-      const response = await loginUser({ email, password: pass }).unwrap();
+      const response = { token: "static-user-token", user: email.split('@')[0] || "User" };
       if (response?.token) {
         setIsAuthenticated(true);
         setUserEmail(response.user);
@@ -50,7 +46,7 @@ export const UserAuthProvider = ({ children }: { children: React.ReactNode }) =>
 
   const register = async (name: string, email: string, pass: string) => {
     try {
-      const response = await registerUser({ name, email, password: pass }).unwrap();
+      const response = { token: "static-user-token", user: name || "User" };
       if (response?.token) {
         setIsAuthenticated(true);
         setUserEmail(response.user);

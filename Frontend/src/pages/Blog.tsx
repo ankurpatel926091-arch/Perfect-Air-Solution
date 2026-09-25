@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { useGetBlogsQuery } from "@/store/api";
+import { staticBlogs } from "@/data/staticData";
 import React from "react";
-import Loader from "@/components/ui/Loader";
 import Breadcrumb from "@/components/Breadcrumb";
 import aboutHeaderBg from "@/assets/HeaderBackgroundImg/AboutBackground.png";
 
 const Blog = () => {
-  const { data: blogPosts = [], isLoading } = useGetBlogsQuery();
-
-  if (isLoading) return <Loader />;
+  const blogPosts = staticBlogs;
 
   return (
     <div className="bg-background min-h-screen">
