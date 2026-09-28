@@ -113,23 +113,25 @@ const Blog = () => {
                     }}
                   >
                     {/* Category badge */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "14px",
-                        left: "14px",
-                        zIndex: 10,
-                        background: "hsl(var(--brand-dark))",
-                        color: "#fff",
-                        fontSize: "0.7rem",
-                        fontWeight: 700,
-                        padding: "5px 12px",
-                        borderRadius: "100px",
-                        letterSpacing: "0.05em",
-                      }}
-                    >
-                      {post.category}
-                    </div>
+                    {post.category && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "14px",
+                          left: "14px",
+                          zIndex: 10,
+                          background: "hsl(var(--brand-dark))",
+                          color: "#fff",
+                          fontSize: "0.7rem",
+                          fontWeight: 700,
+                          padding: "5px 12px",
+                          borderRadius: "100px",
+                          letterSpacing: "0.05em",
+                        }}
+                      >
+                        {post.category}
+                      </div>
+                    )}
                     <img
                       src={post.image}
                       alt={post.title}

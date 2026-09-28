@@ -245,7 +245,7 @@ export default function Gallery() {
                     key={selectedItem.id}
                     src={selectedItem.image}
                     alt="HVAC Installation"
-                    className="w-full h-full object-cover object-center rounded-md select-none transition-opacity duration-150"
+                    className="max-w-full max-h-full object-contain rounded-md select-none transition-opacity duration-150"
                   />
                 </div>
 

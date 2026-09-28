@@ -113,10 +113,12 @@ const BlogPost = () => {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="flex flex-wrap items-center gap-3 mb-4"
           >
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
-              <Tag size={13} className="text-cyan-400" />
-              {post.category || "HVAC Tech"}
-            </span>
+            {post.category && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
+                <Tag size={13} className="text-cyan-400" />
+                {post.category}
+              </span>
+            )}
             <span className="inline-flex items-center gap-1 text-slate-300 text-xs sm:text-sm">
               <Clock size={14} className="text-cyan-400" />
               {formattedReadTime}
@@ -234,6 +236,11 @@ const BlogPost = () => {
                   )}
                 </motion.div>
               ))
+            ) : typeof post.content === "string" && post.content.includes("<") ? (
+              <div
+                className="prose prose-slate max-w-none text-slate-700 text-base sm:text-lg leading-relaxed font-sans blog-rich-content"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
             ) : (
               <p className="text-base sm:text-lg leading-relaxed">{post.content}</p>
             )}
@@ -241,7 +248,9 @@ const BlogPost = () => {
 
           {/* Article Tags */}
           <div className="flex flex-wrap gap-2 mt-10 pt-6 border-t border-slate-200/80">
-            {["HVAC", post.category, "Energy Saving", "Climate Control", "Expert Advice"].map((tag) => (
+            {["HVAC", post.category, "Energy Saving", "Climate Control", "Expert Advice"]
+              .filter(Boolean)
+              .map((tag) => (
               <span
                 key={tag}
                 className="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-[#0284C7] hover:text-white border border-slate-200/80 text-slate-600 text-xs font-bold uppercase tracking-wider cursor-pointer transition-all duration-200"

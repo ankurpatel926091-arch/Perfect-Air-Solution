@@ -5,7 +5,3 @@ export const createContact = async (data) => {
   return response.data;
 };
 
-export const getContacts = async () => {
-  const response = await baseApi.get("/contact/get");
-  return response.data;
-};

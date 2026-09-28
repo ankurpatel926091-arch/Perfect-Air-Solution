@@ -35,7 +35,7 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
   if (post.content && Array.isArray(post.content) && post.content.length > 0) {
     excerpt = post.content[0];
   } else if (typeof post.content === "string") {
-    excerpt = post.content;
+    excerpt = post.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
   }
 
   return (
@@ -43,9 +43,11 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden bg-slate-100">
         {/* Category Icon Badge */}
-        <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-lg bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
-          {getCategoryIcon(post.category)}
-        </div>
+        {post.category && (
+          <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-lg bg-gradient-to-tr from-[#051B30] to-[#0284C7] flex items-center justify-center text-white border border-white/20">
+            {getCategoryIcon(post.category)}
+          </div>
+        )}
         
         {post.featured && (
           <div className="absolute top-4 right-4 z-10 text-white text-xs font-extrabold px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500">
@@ -65,9 +67,11 @@ function BlogCard({ post }: { post: ApiBlogPost }) {
 
       {/* Card Content Body */}
       <div className="p-6 flex flex-col flex-1">
-        <div className="flex items-center justify-between mb-3">
-          <CategoryBadge category={post.category || "Uncategorized"} />
-        </div>
+        {post.category && (
+          <div className="flex items-center justify-between mb-3">
+            <CategoryBadge category={post.category} />
+          </div>
+        )}
 
         <h3 className="font-extrabold text-[#051B30] text-lg sm:text-xl font-sans group-hover:text-[#0284C7] transition-colors leading-snug mb-2">
           {post.title}
