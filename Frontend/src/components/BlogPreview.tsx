@@ -340,11 +340,6 @@ export default function BlogPreview() {
         const response =
           await getActiveBlogs();
 
-        console.log(
-          "Home Active Blogs API Response:",
-          response
-        );
-
         const activeBlogs =
           Array.isArray(response?.data)
             ? response.data
@@ -352,11 +347,6 @@ export default function BlogPreview() {
 
         setBlogPosts(activeBlogs);
       } catch (error) {
-        console.error(
-          "Failed to fetch home blogs:",
-          error
-        );
-
         setBlogPosts([]);
       } finally {
         setIsLoading(false);

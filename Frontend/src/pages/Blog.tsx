@@ -17,15 +17,12 @@ const Blog = () => {
 
         const response = await getActiveBlogs();
 
-        console.log("Active Blogs API Response:", response);
-
         const activeBlogs = Array.isArray(response?.data)
           ? response.data
           : [];
 
         setBlogPosts(activeBlogs);
       } catch (error) {
-        console.error("Failed to fetch active blogs:", error);
         setBlogPosts([]);
       } finally {
         setIsLoading(false);

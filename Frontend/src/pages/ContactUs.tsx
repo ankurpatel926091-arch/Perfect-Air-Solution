@@ -616,7 +616,6 @@ export default function ContactUs() {
     reset();
     setSubmitted(true);
   } catch (error) {
-    console.error("Contact API Error:", error);
     toast.error("Failed to send message");
   } finally {
     setLoading(false);

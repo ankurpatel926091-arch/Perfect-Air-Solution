@@ -43,7 +43,7 @@ const App: React.FC = () => (
       <Sonner />
       <ToastContainer position="top-right" autoClose={3000} />
 
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <ScrollToTop />
         <Routes>
           <Route element={

@@ -156,7 +156,6 @@ export default function Checkout() {
         navigate("/order-success", { state: orderResult });
       }, 1000);
     } catch (error) {
-      console.error("Checkout error:", error);
       toast.error("Error processing request. Please try again.");
     } finally {
       setIsSubmitting(false);

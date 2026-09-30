@@ -38,7 +38,6 @@ export const UserAuthProvider = ({ children }: { children: React.ReactNode }) =>
       }
       return false;
     } catch (err: any) {
-      console.error("Login failed:", err);
       toast.error(err.message || 'Invalid email or password');
       return false;
     }
@@ -56,7 +55,6 @@ export const UserAuthProvider = ({ children }: { children: React.ReactNode }) =>
       }
       return false;
     } catch (err: any) {
-      console.error("Registration failed:", err);
       toast.error(err.message || 'Failed to create account');
       return false;
     }

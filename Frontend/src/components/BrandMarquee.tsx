@@ -104,13 +104,10 @@ const BrandMarquee = () => {
 
         const response = await getActiveBrands();
 
-        console.log("Active Brands API Response:", response);
-
         const activeBrands = Array.isArray(response?.data) ? response.data : [];
 
         setBrands(activeBrands);
       } catch (error) {
-        console.error("Failed to fetch active brands:", error);
         setBrands([]);
       } finally {
         setIsLoading(false);

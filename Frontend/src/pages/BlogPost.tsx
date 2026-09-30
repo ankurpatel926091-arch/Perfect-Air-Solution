@@ -42,8 +42,6 @@ const BlogPost = () => {
         // Get current blog
         const response = await getBlogById(slug);
 
-        console.log("Blog Details API Response:", response);
-
         if (!response?.data) {
           setPost(null);
           return;
@@ -55,11 +53,6 @@ const BlogPost = () => {
 
         // Get active blogs for related articles
         const activeResponse = await getActiveBlogs();
-
-        console.log(
-          "Related Blogs API Response:",
-          activeResponse
-        );
 
         const allBlogs = Array.isArray(activeResponse?.data)
           ? activeResponse.data
@@ -75,7 +68,6 @@ const BlogPost = () => {
 
         setRelatedPosts(related);
       } catch (error) {
-        console.error("Failed to fetch blog:", error);
         setPost(null);
         setRelatedPosts([]);
       } finally {

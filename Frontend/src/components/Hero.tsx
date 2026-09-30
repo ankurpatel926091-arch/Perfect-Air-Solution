@@ -304,11 +304,6 @@ const Hero = () => {
       setErrors({});
       setTouched({});
     } catch (error: any) {
-      console.error(
-        "Contact API Error:",
-        error
-      );
-
       toast.error(
         error?.response?.data?.message ||
           "Failed to submit your request. Please try again."
