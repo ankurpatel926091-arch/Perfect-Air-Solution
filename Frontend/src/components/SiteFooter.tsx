@@ -169,7 +169,7 @@ const SiteFooter = () => {
             </p>
             <ul className="space-y-3">
               <li>
-                <a href="tel:+919839171701" className="flex items-start gap-3 group text-decoration-none">
+                <a href="tel:+91 84291 52092" className="flex items-start gap-3 group text-decoration-none">
                   <div className="w-9 h-9 rounded-xl bg-sky-500/10 text-cyan-400 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#0284C7] group-hover:text-white transition-colors">
                     <Phone size={16} />
                   </div>

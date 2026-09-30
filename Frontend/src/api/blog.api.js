@@ -1,11 +1,38 @@
 import baseApi from "./baseApi";
 
+// In-flight request deduplication to prevent duplicate concurrent network calls
+const inFlightRequests = new Map();
+
 export const getActiveBlogs = async () => {
-  const response = await baseApi.get("/blogs/active");
-  return response.data;
+  const key = "getActiveBlogs";
+  if (inFlightRequests.has(key)) {
+    return inFlightRequests.get(key);
+  }
+
+  const promise = baseApi
+    .get("/blogs/active")
+    .then((response) => response.data)
+    .finally(() => {
+      inFlightRequests.delete(key);
+    });
+
+  inFlightRequests.set(key, promise);
+  return promise;
 };
 
 export const getBlogById = async (slugOrId) => {
-  const response = await baseApi.get(`/blogs/${slugOrId}`);
-  return response.data;
-};
+  const key = `getBlogById_${slugOrId}`;
+  if (inFlightRequests.has(key)) {
+    return inFlightRequests.get(key);
+  }
+
+  const promise = baseApi
+    .get(`/blogs/${slugOrId}`)
+    .then((response) => response.data)
+    .finally(() => {
+      inFlightRequests.delete(key);
+    });
+
+  inFlightRequests.set(key, promise);
+  return promise;
+};

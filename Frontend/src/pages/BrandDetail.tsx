@@ -93,18 +93,18 @@ export default function BrandDetail() {
                 color: BRAND.white, lineHeight: 1.1, marginBottom: "12px", fontWeight: 800
               }}>
                 <span style={{ color: BRAND.accentOnDark }}>{brand.brandName}</span>
-                <br />{brand.title}
+                <br />{brand.name}
               </h1>
 
               <p style={{ color: BRAND.textOnDarkMuted, fontWeight: 700, fontSize: "0.8rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "16px" }}>
-                {brand.subtitle}
+                {brand.tagline}
               </p>
               <p style={{ color: BRAND.textOnDark, lineHeight: 1.75, maxWidth: "500px", fontWeight: 300, marginBottom: "28px" }}>
-                {brand.description}
+                {brand.overview}
               </p>
 
               <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
-                <a href="tel:+919839171701" style={{
+                <a href="tel:+91 84291 52092" style={{
                   background: BRAND.white, color: BRAND.dark,
                   padding: "12px 24px", borderRadius: "6px", fontWeight: 700,
                   display: "inline-flex", alignItems: "center", gap: "8px",
@@ -113,7 +113,7 @@ export default function BrandDetail() {
                 }}>
                   <Phone size={16} /> Get {brand.brandName} Quote
                 </a>
-                <a href={`https://wa.me/919839171701?text=Hi, I'm interested in ${brand.brandName} products`}
+                <a href={`https://wa.me/91 84291 52092?text=Hi, I'm interested in ${brand.brandName} products`}
                   target="_blank" rel="noopener noreferrer"
                   style={{
                     background: "rgba(255,255,255,0.1)", color: BRAND.white,
@@ -136,7 +136,7 @@ export default function BrandDetail() {
                   background: `${BRAND.primary}33`,
                   borderRadius: "20px", filter: "blur(24px)"
                 }} />
-                <img src={brand.heroImage} alt={brand.title}
+                <img src={brand.heroImage} alt={brand.name}
                   style={{ width: "100%", borderRadius: "6px", boxShadow: "0 24px 60px rgba(0,0,0,0.3)", position: "relative", zIndex: 1, display: "block" }}
                 />
               </div>
@@ -239,7 +239,7 @@ export default function BrandDetail() {
                         </li>
                       ))}
                     </ul>
-                    <a href="tel:+919839171701" style={{
+                    <a href="tel:+91 84291 52092" style={{
                       width: "100%", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px",
                       background: `linear-gradient(135deg, ${BRAND.dark}, ${BRAND.primary})`,
                       color: BRAND.white, padding: "11px", borderRadius: "6px",
@@ -275,7 +275,7 @@ export default function BrandDetail() {
               Get the best deals on {brand.brandName} air conditioners in Hardoi with expert installation &amp; service.
             </p>
             <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "14px" }}>
-              <a href="tel:+919839171701" style={{
+              <a href="tel:+91 84291 52092" style={{
                 background: BRAND.white, color: BRAND.dark,
                 padding: "13px 28px", borderRadius: "6px", fontWeight: 700,
                 display: "inline-flex", alignItems: "center", gap: "8px",

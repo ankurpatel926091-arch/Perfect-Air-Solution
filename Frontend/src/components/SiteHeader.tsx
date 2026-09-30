@@ -63,7 +63,7 @@ const SiteHeader = () => {
             <div className="flex items-center gap-4">
               <span>Working Hours: Mon - Sat 9:00 AM - 7:00 PM</span>
               <span>•</span>
-              <a href="tel:+919839171701" className="text-cyan-400 font-bold hover:underline">
+              <a href="tel:+91 84291 52092" className="text-cyan-400 font-bold hover:underline">
                 Call: +91 84291 52092
               </a>
             </div>

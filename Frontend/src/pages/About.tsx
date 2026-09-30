@@ -124,98 +124,116 @@ const About = () => (
 
     {/* ── Our Story ── */}
     <section className="py-16 sm:py-18 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] relative overflow-hidden">
-      {/* Background Ambient Glows */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
+  {/* Background Ambient Glows */}
+  <div className="absolute top-1/3 left-0 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
+  <div className="absolute bottom-10 right-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-          
-          {/* Left Column: Story Content */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="lg:col-span-7 flex flex-col items-start"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100 border border-sky-200 text-[#0284C7] font-extrabold text-xs uppercase tracking-wider mb-4 shadow-sm">
-              <HeartHandshake size={15} className="text-[#0284C7]" />
-              <span>OUR STORY</span>
-            </div>
-
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight mb-5 leading-[1.18] font-sans">
-              Delivering Comfort, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-sky-500 to-cyan-400">Building Trust</span>
-            </h2>
-            
-            <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed font-normal w-full">
-              <div className="p-5 rounded-md bg-white border border-slate-200/80 border-l-4 border-l-[#0284C7] shadow-none hover:shadow-none transition-shadow">
-                <p>
-                  Founded in 2012, <strong className="text-[#051B30] font-bold">Perfect Air Solution</strong> began with a clear vision — to provide reliable, honest, and high-quality cooling solutions that customers can truly depend on. What started as a focused HVAC service initiative has steadily evolved into a trusted name in air conditioning and industrial cooling across multiple cities.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-md bg-white border border-slate-200/80 border-l-4 border-l-sky-500 shadow-none hover:shadow-none transition-shadow">
-                <p>
-                  Over the years, we have successfully installed and serviced thousands of climate control systems — from residential Split and Window AC units to advanced VRF systems, cold rooms, and large-scale industrial chiller plants. Our growth is driven by strong technical expertise, prompt service delivery, and an unwavering commitment to quality workmanship.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-md bg-white border border-slate-200/80 border-l-4 border-l-cyan-400 shadow-none hover:shadow-none transition-shadow">
-                <p>
-                  Today, with <span className="text-[#0284C7] font-extrabold">5,000+ satisfied customers</span> and <span className="text-[#0284C7] font-extrabold">500+ completed commercial projects</span>, we continue to focus on innovation, energy-efficient solutions, and long-term client partnerships.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Column: 4 Modern Highlight Cards */}
-          <div className="lg:col-span-5">
-            <div className="grid grid-cols-2 gap-4 sm:gap-5">
-              {stats.map((s, i) => {
-                const IconComp = s.icon;
-                return (
-                  <motion.div
-                    key={s.label}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1, duration: 0.5 }}
-                    className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col items-start justify-between group"
-                  >
-                    {/* Glowing Icon Badge */}
-                    <div
-                      className={`w-11 h-11 rounded-lg bg-gradient-to-tr ${s.color} flex items-center justify-center text-white mb-4 group-hover:scale-108 transition-transform`}
-                    >
-                      <IconComp size={22} />
-                    </div>
-
-                    {/* Number CountUp */}
-                    <div className="text-3xl sm:text-4xl font-extrabold text-[#051B30] mb-1 font-sans group-hover:text-[#0284C7] transition-colors">
-                      <CountUp
-                        from={0}
-                        to={s.value}
-                        duration={1.2}
-                        separator=","
-                        direction="up"
-                        startWhen={true}
-                      />
-                      <span className="text-cyan-500">{s.suffix}</span>
-                    </div>
-
-                    {/* Label */}
-                    <div className="text-xs sm:text-sm font-bold text-slate-600">
-                      {s.label}
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    {/* YAHAN CHANGE: items-start rakha taaki top se align ho */}
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
+      
+      {/* Left Column: Story Content */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeUp}
+        className="lg:col-span-7 flex flex-col items-start h-full"
+      >
+        {/* --- HEADER PART (Badge + Heading) --- */}
+        <div className="w-full">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100 border border-sky-200 text-[#0284C7] font-extrabold text-xs uppercase tracking-wider mb-4 shadow-sm">
+            <HeartHandshake size={15} className="text-[#0284C7]" />
+            <span>OUR STORY</span>
           </div>
 
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight mb-5 leading-[1.18] font-sans">
+            Delivering Comfort, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-sky-500 to-cyan-400">Building Trust</span>
+          </h2>
+        </div>
+
+        {/* --- PARAGRAPHS PART (Yahan se alignment shuru hogi) --- */}
+        <div className="flex flex-col gap-4 text-slate-700 text-sm sm:text-base leading-relaxed font-normal w-full flex-grow">
+          
+          {/* Paragraph 1 */}
+          <div className="p-5 rounded-md bg-white border border-slate-200/80 border-l-4 border-l-[#0284C7] shadow-none hover:shadow-none transition-shadow flex-grow flex items-center">
+            <p>
+              Founded in 2012, <strong className="text-[#051B30] font-bold">Perfect Air Solution</strong> began with a clear vision — to provide reliable, honest, and high-quality cooling solutions customers can depend on. Since then, it has grown into a trusted name in air conditioning and industrial cooling.
+            </p>
+          </div>
+
+          {/* Paragraph 2 */}
+          <div className="p-5 rounded-md bg-white border border-slate-200/80 border-l-4 border-l-sky-500 shadow-none hover:shadow-none transition-shadow flex-grow flex items-center">
+            <p>
+             Over the years, we have installed and serviced thousands of climate control systems, from residential ACs to advanced VRF systems and industrial chillers. Our growth is driven by technical expertise, prompt service, and quality workmanship.
+            </p>
+          </div>
+
+          {/* Paragraph 3 */}
+          <div className="p-5 rounded-md bg-white border border-slate-200/80 border-l-4 border-l-cyan-400 shadow-none hover:shadow-none transition-shadow flex-grow flex items-center">
+            <p>
+              Today, with <span className="text-[#0284C7] font-extrabold">5,000+ satisfied customers</span> and <span className="text-[#0284C7] font-extrabold">500+ completed commercial projects</span>, we continue to focus on innovation, energy-efficient solutions, and long-term client partnerships.
+            </p>
+          </div>
+          
+        </div>
+      </motion.div>
+
+      {/* Right Column: 4 Modern Highlight Cards */}
+      {/* YAHAN CHANGE: Right side ko ek wrapper diya aur usme pt diya */}
+      <div className="lg:col-span-5 h-full">
+        {/* 
+          Yahan pt-[88px] ki jagah humne pt-[86px] ya pt-[90px] try kiya hai.
+          Lekin sabse best tareeka yeh hai ki aap browser mein inspect karke
+          left side ke Heading ke neeche ka exact gap dekh lein.
+          Filhal maine pt-[90px] diya hai jo ki heading + badge ki height ke lagbhag barabar hai.
+        */}
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-4 h-full pt-[90px]">
+          {stats.map((s, i) => {
+            const IconComp = s.icon;
+            return (
+              <motion.div
+                key={s.label}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-none hover:shadow-none hover:border-[#0284C7] transition-all duration-300 flex flex-col items-start justify-between group h-full"
+              >
+                {/* Glowing Icon Badge */}
+                <div
+                  className={`w-11 h-11 rounded-lg bg-gradient-to-tr ${s.color} flex items-center justify-center text-white mb-4 group-hover:scale-108 transition-transform`}
+                >
+                  <IconComp size={22} />
+                </div>
+
+                {/* Number CountUp */}
+                <div className="text-3xl sm:text-4xl font-extrabold text-[#051B30] mb-1 font-sans group-hover:text-[#0284C7] transition-colors">
+                  <CountUp
+                    from={0}
+                    to={s.value}
+                    duration={1.2}
+                    separator=","
+                    direction="up"
+                    startWhen={true}
+                  />
+                  <span className="text-cyan-500">{s.suffix}</span>
+                </div>
+
+                {/* Label */}
+                <div className="text-xs sm:text-sm font-bold text-slate-600">
+                  {s.label}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
-    </section>
+
+    </div>
+  </div>
+</section>
 
     {/* ── Core Values Section ── */}
     <section className="py-20 sm:py-16 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] relative overflow-hidden font-sans">

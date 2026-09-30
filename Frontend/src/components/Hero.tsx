@@ -825,7 +825,7 @@ const Hero = () => {
                   <span>
                     {isSubmitting
                       ? "Submitting..."
-                      : "GET INSTANT QUOTE →"}
+                      : "SUBMIT →"}
                   </span>
 
                 </button>

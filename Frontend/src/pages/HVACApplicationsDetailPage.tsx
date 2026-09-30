@@ -552,7 +552,7 @@ export function HVACApplicationsDetailPage() {
                 <ArrowRight size={18} />
               </button>
               <a
-                href="tel:+919839171701"
+                href="tel:+91 84291 52092"
                 className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-md text-sm sm:text-base transition-all border border-white/20 backdrop-blur-md cursor-pointer"
               >
                 <Phone size={16} className="text-cyan-300" />

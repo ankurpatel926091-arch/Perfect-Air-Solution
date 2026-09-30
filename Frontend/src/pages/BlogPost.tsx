@@ -7,12 +7,15 @@ import {
   Clock,
   Calendar,
   User,
+   CalendarDays,
   Share2,
+   Clock3,
   Facebook,
   Twitter,
   Linkedin,
   ChevronUp,
 } from "lucide-react";
+
 
 import { getActiveBlogs, getBlogById } from "@/api/blog.api";
 
@@ -30,29 +33,35 @@ const BlogPost = () => {
 
   // Fetch blog details
   useEffect(() => {
+    let isCancelled = false;
+
+    if (!slug) {
+      setPost(null);
+      setRelatedPosts([]);
+      setIsLoading(false);
+      return;
+    }
+
     const fetchBlog = async () => {
       try {
         setIsLoading(true);
 
-        if (!slug) {
+        // Fetch current blog and active blogs in parallel without waterfall
+        const [blogResponse, activeResponse] = await Promise.all([
+          getBlogById(slug),
+          getActiveBlogs(),
+        ]);
+
+        if (isCancelled) return;
+
+        if (!blogResponse?.data) {
           setPost(null);
+          setRelatedPosts([]);
           return;
         }
 
-        // Get current blog
-        const response = await getBlogById(slug);
-
-        if (!response?.data) {
-          setPost(null);
-          return;
-        }
-
-        const currentBlog = response.data;
-
+        const currentBlog = blogResponse.data;
         setPost(currentBlog);
-
-        // Get active blogs for related articles
-        const activeResponse = await getActiveBlogs();
 
         const allBlogs = Array.isArray(activeResponse?.data)
           ? activeResponse.data
@@ -68,14 +77,22 @@ const BlogPost = () => {
 
         setRelatedPosts(related);
       } catch (error) {
-        setPost(null);
-        setRelatedPosts([]);
+        if (!isCancelled) {
+          setPost(null);
+          setRelatedPosts([]);
+        }
       } finally {
-        setIsLoading(false);
+        if (!isCancelled) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchBlog();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [slug]);
 
   // Scroll handling
@@ -83,10 +100,11 @@ const BlogPost = () => {
     window.scrollTo(0, 0);
 
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 500);
+      const shouldShow = window.scrollY > 500;
+      setShowScrollTop((prev) => (prev !== shouldShow ? shouldShow : prev));
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -129,6 +147,18 @@ const BlogPost = () => {
     .includes("read")
     ? rawReadTime
     : `${rawReadTime} read`;
+
+  // Date formatting with fallback to createdAt
+  const formattedDate =
+    post.date && post.date.trim()
+      ? post.date
+      : post.createdAt
+      ? new Date(post.createdAt).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        })
+      : "";
 
   // Use first tag as category
   const category =
@@ -228,13 +258,13 @@ const BlogPost = () => {
               {formattedReadTime}
             </span>
 
-            {post.date && (
+            {formattedDate && (
               <span className="inline-flex items-center gap-1 text-slate-300 text-xs sm:text-sm">
                 <Calendar
                   size={14}
                   className="text-cyan-400"
                 />
-                {post.date}
+                {formattedDate}
               </span>
             )}
           </motion.div>
@@ -292,36 +322,90 @@ const BlogPost = () => {
             <span>{formattedReadTime}</span>
           </div>
 
-          {/* Share Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-200/80">
+          {/* Article Info Bar */}
+<div className="flex flex-wrap items-center justify-between gap-5 pb-6 mb-8 border-b border-slate-200/80">
 
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
-              <Share2
-                size={15}
-                className="text-[#0284C7]"
-              />
+  {/* Published Date */}
+  <div className="flex items-center gap-3">
+    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
+      <CalendarDays
+        size={16}
+        className="text-[#0284C7]"
+      />
+    </div>
 
-              <span>Share Article</span>
-            </div>
+    <div>
+      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+        Published
+      </p>
 
-            <div className="flex items-center gap-2">
-              {socialButtons.map(
-                ({ Icon, href, label, color }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    title={label}
-                    className={`w-9 h-9 rounded-full border border-slate-200 text-slate-500 flex items-center justify-center transition-all duration-300 ${color}`}
-                  >
-                    <Icon size={16} />
-                  </a>
-                )
-              )}
-            </div>
-          </div>
+      <p className="text-sm font-semibold text-slate-700">
+        {formattedDate || "—"}
+      </p>
+    </div>
+  </div>
+
+  {/* Author */}
+  <div className="flex items-center gap-3">
+    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
+      <User
+        size={16}
+        className="text-[#0284C7]"
+      />
+    </div>
+
+    <div>
+      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+        Author
+      </p>
+
+      <p className="text-sm font-semibold text-slate-700">
+        {post?.author || "Perfect Air Solution"}
+      </p>
+    </div>
+  </div>
+
+  {/* Read Time */}
+  <div className="flex items-center gap-3">
+    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
+      <Clock3
+        size={16}
+        className="text-[#0284C7]"
+      />
+    </div>
+
+    <div>
+      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+        Read Time
+      </p>
+
+      <p className="text-sm font-semibold text-slate-700">
+        {post?.readTime || "5 min read"}
+      </p>
+    </div>
+  </div>
+
+  {/* Category */}
+  <div className="flex items-center gap-3">
+    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
+      <Tag
+        size={16}
+        className="text-[#0284C7]"
+      />
+    </div>
+
+    <div>
+      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+        Category
+      </p>
+
+      <p className="text-sm font-semibold text-slate-700">
+        {post?.tags?.[0] || "HVAC"}
+      </p>
+    </div>
+  </div>
+
+</div>
 
           {/* Featured Image */}
           {post.image?.url && (

@@ -310,7 +310,7 @@ export default function Shop() {
 
                   <div className="p-4 grid grid-cols-2 gap-3 border-t border-slate-100">
                     <a
-                      href="tel:+919839171701"
+                      href="tel:+91 84291 52092"
                       className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 py-2 rounded-md text-sm font-semibold hover:bg-slate-50 transition-colors"
                       style={{ textDecoration: 'none' }}
                     >

@@ -132,7 +132,7 @@ const contactDetails = [
     label: "Call Us",
     value: "+91 84291 52092",
     sub: "Available 24/7 Support",
-    href: "tel:+919839171701",
+    href: "tel:+91 84291 52092",
     hoverColor: "rgba(34,197,94,0.08)",
     hoverBorder: "rgba(34,197,94,0.3)",
     iconColor: "#16a34a",

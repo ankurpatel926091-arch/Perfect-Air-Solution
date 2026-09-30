@@ -498,7 +498,7 @@ export default function CategoryDetailPage() {
                   Get Instant Quotation
                 </button>
                 <a
-                  href="tel:+919839171701"
+                  href="tel:+91 84291 52092"
                   className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white text-sm font-bold transition-all flex items-center gap-2"
                 >
                   <Phone size={16} className="text-cyan-400" />

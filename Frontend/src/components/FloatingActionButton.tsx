@@ -24,7 +24,7 @@ const FloatingActionButton = () => {
     >
       {/* 1. WhatsApp Button (Visible by Default) */}
       <motion.a
-        href="https://wa.me/919839171701"
+        href="https://wa.me/91 84291 52092"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
