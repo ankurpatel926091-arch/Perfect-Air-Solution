@@ -452,8 +452,8 @@ export default function ProductsPage() {
       </section>
 
       {/* ── Sticky Category Filter Bar ── */}
-      <div className="bg-white/95 backdrop-blur-md sticky top-[64px] lg:top-[96px] z-[900] border-b border-sky-100 py-3.5 px-4">
-        <div className="flex gap-2.5 overflow-x-auto w-full px-2 no-scrollbar justify-start sm:justify-center max-w-5xl mx-auto">
+      <div className="bg-white/95 backdrop-blur-md sticky top-[64px] lg:top-[96px] z-[900] border-b border-sky-100 py-2.5 sm:py-3.5 px-3 sm:px-4">
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:gap-3 sm:justify-center max-w-xl mx-auto w-full">
           {filters.map((f) => {
             const isActive = activeFilter === f.id;
             return (
@@ -463,9 +463,9 @@ export default function ProductsPage() {
                   setActiveFilter(f.id);
                   setSelectedCategory("all");
                 }}
-                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-300 cursor-pointer ${
+                className={`px-2 sm:px-6 py-2.5 rounded-xl sm:rounded-full text-[11.5px] sm:text-sm font-bold text-center leading-snug transition-all duration-200 cursor-pointer flex items-center justify-center ${
                   isActive
-                    ? "bg-[#0284C7] text-white scale-105"
+                    ? "bg-[#0284C7] text-white shadow-md shadow-sky-500/25 sm:scale-105"
                     : "bg-slate-100 text-slate-700 hover:bg-sky-50 hover:text-[#0284C7] border border-slate-200/80"
                 }`}
               >

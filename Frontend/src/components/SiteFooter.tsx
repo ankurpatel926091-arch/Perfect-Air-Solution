@@ -216,7 +216,7 @@ const SiteFooter = () => {
             © {new Date().getFullYear()} Perfect Air Solution. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-6 flex-wrap justify-center text-xs sm:text-sm font-normal">
+          <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center text-xs sm:text-sm font-normal">
             {policyLinks.map((l) => (
               <Link
                 key={l.label}
@@ -226,6 +226,16 @@ const SiteFooter = () => {
                 {l.label}
               </Link>
             ))}
+
+            <a
+              href="https://admin-panel-of-perfect-air-solution.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-800/90 hover:bg-[#0284C7] text-slate-200 hover:text-white border border-slate-700 transition-all text-xs font-semibold text-decoration-none shadow-sm"
+            >
+              <ShieldCheck size={13} className="text-cyan-400" />
+              <span>Admin</span>
+            </a>
           </div>
 
           <a

@@ -317,7 +317,7 @@ const About = () => (
     {/* ── Milestones & Mission ── */}
     <section className="py-10 sm:py-16 bg-gradient-to-b from-[#E6F4FA] via-[#F4FAFF] to-[#EEF8FF]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12">
           
           {/* Milestones Timeline */}
           <div className="lg:col-span-7">
@@ -326,17 +326,17 @@ const About = () => (
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="mb-8"
+              className="mb-5 sm:mb-8"
             >
-              <div className="inline-block bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3 shadow-sm">
+              <div className="inline-block bg-sky-100/90 border border-sky-200/80 text-[#0284C7] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-2.5 sm:mb-3 shadow-sm">
                 Milestones
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#051B30] tracking-tight font-sans">
+              <h2 className="text-xl sm:text-3xl font-extrabold text-[#051B30] tracking-tight font-sans">
                 Our Growth Journey
               </h2>
             </motion.div>
 
-            <div className="space-y-6 relative pl-4 border-l-2 border-sky-200">
+            <div className="space-y-3 sm:space-y-5 lg:space-y-6 relative pl-3.5 sm:pl-4 border-l-2 border-sky-200">
               {milestones.map((m, i) => (
                 <motion.div
                   key={m.year}
@@ -344,16 +344,16 @@ const About = () => (
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.4 }}
-                  className="relative pl-6"
+                  className="relative pl-3.5 sm:pl-6"
                 >
                   {/* Dot */}
-                  <div className="absolute -left-[25px] top-2 w-4 h-4 rounded-full bg-[#0284C7] border-4 border-white" />
+                  <div className="absolute -left-[23px] sm:-left-[25px] top-2 w-4 h-4 rounded-full bg-[#0284C7] border-4 border-white" />
                   
-                  <div className="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/90 shadow-none hover:shadow-none transition-shadow">
-                    <span className="inline-block text-xs sm:text-sm font-bold text-[#0284C7] bg-sky-50 border border-sky-200 px-3 py-1 rounded-md mb-2.5">
+                  <div className="bg-white rounded-xl py-3 px-3.5 sm:p-5 lg:p-6 border border-slate-200/90 shadow-none hover:shadow-none transition-shadow">
+                    <span className="inline-block text-xs sm:text-sm font-bold text-[#0284C7] bg-sky-50 border border-sky-200 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-md mb-1.5 sm:mb-2.5">
                       {m.year}
                     </span>
-                    <p className="text-slate-700 text-sm sm:text-base font-normal leading-relaxed">
+                    <p className="text-slate-700 text-xs sm:text-base font-normal leading-relaxed">
                       {m.text}
                     </p>
                   </div>
@@ -369,58 +369,58 @@ const About = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-xl p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between border border-cyan-400/20"
+              className="bg-gradient-to-br from-[#041C33] to-[#07365E] rounded-xl p-4 sm:p-7 lg:p-8 text-white shadow-2xl relative overflow-hidden h-full flex flex-col justify-between border border-cyan-400/20"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div>
-                <div className="w-14 h-14 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-cyan-300 mb-6 backdrop-blur-md">
-                  <Target size={28} />
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-cyan-300 mb-3 sm:mb-6 backdrop-blur-md">
+                  <Target className="w-5 h-5 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-2xl font-extrabold text-white uppercase tracking-wider mb-4 font-sans">
+                <h3 className="text-lg sm:text-2xl font-extrabold text-white uppercase tracking-wider mb-2 sm:mb-4 font-sans">
                   Our Mission
                 </h3>
 
-                <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-normal mb-4">
+                <p className="text-slate-200 text-xs sm:text-base leading-relaxed font-normal mb-3 sm:mb-4">
                   Our mission is to provide reliable, energy-efficient, and cost-effective air conditioning and industrial cooling solutions tailored to residential, commercial, and industrial needs.
                 </p>
 
                 {/* Core Mission Pillars */}
-                <div className="space-y-3 pt-2 mb-6">
-                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-lg border border-white/10 backdrop-blur-sm">
-                    <div className="w-8 h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Zap size={18} />
+                <div className="space-y-2 sm:space-y-3 pt-1 mb-4 sm:mb-6">
+                  <div className="flex items-start gap-2.5 sm:gap-3 bg-white/5 p-2.5 sm:p-3.5 rounded-lg border border-white/10 backdrop-blur-sm">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Zap size={16} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">Energy &amp; Cost Optimization</h4>
-                      <p className="text-xs text-slate-300 leading-normal">Maximizing seasonal SEER ratings and lowering operational power costs by up to 40% using inverter VRF technology.</p>
+                      <h4 className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-wider mb-0.5">Energy &amp; Cost Optimization</h4>
+                      <p className="text-[11px] sm:text-xs text-slate-300 leading-normal">Maximizing seasonal SEER ratings and lowering operational power costs by up to 40% using inverter VRF technology.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-lg border border-white/10 backdrop-blur-sm">
-                    <div className="w-8 h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <ShieldCheck size={18} />
+                  <div className="flex items-start gap-2.5 sm:gap-3 bg-white/5 p-2.5 sm:p-3.5 rounded-lg border border-white/10 backdrop-blur-sm">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <ShieldCheck size={16} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">Turnkey Engineering Precision</h4>
-                      <p className="text-xs text-slate-300 leading-normal">Delivering end-to-end heat load calculations, GI/PI duct fabrication, nitrogen leak testing, and BMS integration.</p>
+                      <h4 className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-wider mb-0.5">Turnkey Engineering Precision</h4>
+                      <p className="text-[11px] sm:text-xs text-slate-300 leading-normal">Delivering end-to-end heat load calculations, GI/PI duct fabrication, nitrogen leak testing, and BMS integration.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 bg-white/5 p-3.5 rounded-lg border border-white/10 backdrop-blur-sm">
-                    <div className="w-8 h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Clock size={18} />
+                  <div className="flex items-start gap-2.5 sm:gap-3 bg-white/5 p-2.5 sm:p-3.5 rounded-lg border border-white/10 backdrop-blur-sm">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Clock size={16} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">24/7 Breakdown &amp; AMC Guarantee</h4>
-                      <p className="text-xs text-slate-300 leading-normal">Providing guaranteed emergency dispatch within 2 hours with 100% genuine spare parts for continuous cooling.</p>
+                      <h4 className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-wider mb-0.5">24/7 Breakdown &amp; AMC Guarantee</h4>
+                      <p className="text-[11px] sm:text-xs text-slate-300 leading-normal">Providing guaranteed emergency dispatch within 2 hours with 100% genuine spare parts for continuous cooling.</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/15 flex items-center justify-between text-xs font-semibold text-cyan-300">
+              <div className="mt-4 sm:mt-8 pt-3 sm:pt-6 border-t border-white/15 flex items-center justify-between text-[11px] sm:text-xs font-semibold text-cyan-300">
                 <span>Certified HVAC Engineers</span>
                 <span>Established 2012</span>
               </div>
