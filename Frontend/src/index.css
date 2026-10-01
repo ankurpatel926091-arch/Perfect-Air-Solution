@@ -215,3 +215,220 @@
     transform: translateX(-50%);
   }
 }
+
+/* ============================================================
+   BLOG ARTICLE RICH TYPOGRAPHY
+   ============================================================ */
+.blog-rich-content {
+  color: #334155;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+}
+
+@media (min-width: 640px) {
+  .blog-rich-content {
+    font-size: 1.125rem;
+    line-height: 1.9;
+  }
+}
+
+.blog-rich-content p {
+  margin-top: 0;
+  margin-bottom: 1.45rem;
+  line-height: 1.85;
+  color: #334155;
+}
+
+/* Lead paragraph styling */
+.blog-rich-content > p:first-of-type {
+  font-size: 1.125rem;
+  line-height: 1.85;
+  color: #1E293B;
+}
+
+@media (min-width: 640px) {
+  .blog-rich-content > p:first-of-type {
+    font-size: 1.2rem;
+  }
+}
+
+/* Headings */
+.blog-rich-content h1,
+.blog-rich-content h2,
+.blog-rich-content h3,
+.blog-rich-content h4 {
+  color: #03172C;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.blog-rich-content h1 {
+  font-size: 1.85rem;
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+}
+
+.blog-rich-content h2 {
+  font-size: 1.55rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #F1F5F9;
+}
+
+.blog-rich-content h3 {
+  font-size: 1.35rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-rich-content h4 {
+  font-size: 1.15rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Fallback for headings formatted as <p><strong>Heading</strong></p> */
+.blog-rich-content p:has(> strong:only-child) {
+  color: #03172C;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .blog-rich-content p:has(> strong:only-child) {
+    font-size: 1.4rem;
+    margin-top: 2.5rem;
+  }
+}
+
+/* Lists */
+.blog-rich-content ul,
+.blog-rich-content ol {
+  margin-top: 0.75rem;
+  margin-bottom: 1.6rem;
+  padding-left: 1.5rem;
+}
+
+.blog-rich-content ul {
+  list-style-type: disc;
+}
+
+.blog-rich-content ol {
+  list-style-type: decimal;
+}
+
+.blog-rich-content li {
+  margin-bottom: 0.55rem;
+  line-height: 1.75;
+  color: #334155;
+  padding-left: 0.25rem;
+}
+
+.blog-rich-content li::marker {
+  color: #0284C7;
+  font-weight: 700;
+}
+
+/* Blockquotes */
+.blog-rich-content blockquote {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  background: #F0F9FF;
+  border-left: 4px solid #0284C7;
+  border-radius: 0 0.75rem 0.75rem 0;
+  font-style: italic;
+  color: #03172C;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* Strong / Bold */
+.blog-rich-content strong,
+.blog-rich-content b {
+  font-weight: 700;
+  color: #03172C;
+}
+
+/* Links */
+.blog-rich-content a {
+  color: #0284C7;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.blog-rich-content a:hover {
+  color: #0369A1;
+}
+
+/* Tables */
+.blog-rich-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+  font-size: 0.95rem;
+}
+
+.blog-rich-content th,
+.blog-rich-content td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E2E8F0;
+  text-align: left;
+}
+
+.blog-rich-content th {
+  background: #F8FAFC;
+  font-weight: 700;
+  color: #03172C;
+}
+
+/* Clean empty trailing paragraphs */
+.blog-rich-content p:empty,
+.blog-rich-content p:has(> br:only-child) {
+  display: none;
+}
+
+/* Blog In-article CTA Card Text Overrides */
+.blog-rich-content .blog-cta-card,
+.blog-rich-content .blog-cta-card * {
+  color: #FFFFFF;
+}
+
+.blog-rich-content .blog-cta-card h4,
+.blog-rich-content .blog-cta-card .blog-cta-title {
+  color: #FFFFFF !important;
+}
+
+.blog-rich-content .blog-cta-card p,
+.blog-rich-content .blog-cta-card .blog-cta-desc {
+  color: #CBD5E1 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.blog-rich-content .blog-cta-card a.blog-cta-btn-primary {
+  background-color: #0284C7 !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+}
+
+.blog-rich-content .blog-cta-card a.blog-cta-btn-secondary {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+}
+
+.blog-rich-content .blog-cta-card a span {
+  color: #FFFFFF !important;
+}
+
+

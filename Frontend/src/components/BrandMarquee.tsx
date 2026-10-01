@@ -124,7 +124,7 @@ const BrandMarquee = () => {
   if (isLoading) {
     return (
       <section
-        className="section-padding py-16"
+        className="py-12 md:py-14"
         style={{
           background: BRAND.white,
           overflow: "hidden",
@@ -194,7 +194,7 @@ const BrandMarquee = () => {
 
   return (
     <section
-      className="section-padding py-16"
+      className="py-12 md:py-14"
       style={{
         background: BRAND.white,
         overflow: "hidden",

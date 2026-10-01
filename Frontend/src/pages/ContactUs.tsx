@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import {createContact} from "../api/contact.api.js"
+import { createContact } from "../api/contact.api.js";
+import contactHeaderBg from "@/assets/HeaderBackgroundImg/ProjectBackground.png";
 import {
   User,
   Mail,
@@ -20,7 +21,6 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
-
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type ServiceOption = { id: string; label: string; icon: React.ReactNode };
@@ -54,7 +54,7 @@ const contactSchema = Yup.object({
       "Disposable email addresses are not allowed",
       (value) =>
         !value ||
-        !/(mailinator|tempmail|10minutemail|guerrillamail)/i.test(value)
+        !/(mailinator|tempmail|10minutemail|guerrillamail)/i.test(value),
     ),
 
   phone: Yup.string()
@@ -65,23 +65,27 @@ const contactSchema = Yup.object({
     .test(
       "not-repeating",
       "Phone number cannot contain all repeating digits",
-      (value) => !value || !/^(\d)\1{9}$/.test(value)
+      (value) => !value || !/^(\d)\1{9}$/.test(value),
     )
     .test(
       "not-sequential",
       "Sequential numbers are not allowed",
       (value) =>
-        !value ||
-        !["0123456789", "1234567890", "9876543210"].includes(value)
+        !value || !["0123456789", "1234567890", "9876543210"].includes(value),
     ),
 
   service: Yup.string()
-  .optional()
-  .transform((value) => (value === "" ? undefined : value))
-  .oneOf(
-    ["residential", "commercial", "vrf", "amc", "chiller", "other"],
-    "Invalid service selected"
-  ),
+    .trim()
+    .required("Please select a service")
+    .test(
+      "service-required",
+      "Please select a service",
+      (val) => !!val && val.trim().length > 0,
+    )
+    .oneOf(
+      ["residential", "commercial", "vrf", "amc", "chiller", "other"],
+      "Please select a service",
+    ),
 
   message: Yup.string()
     .optional()
@@ -90,7 +94,7 @@ const contactSchema = Yup.object({
     .test(
       "not-empty",
       "Message cannot be empty",
-      (value) => !value || value.trim().length > 0
+      (value) => !value || value.trim().length > 0,
     ),
 });
 
@@ -115,7 +119,7 @@ const slugToServiceId: Record<string, string> = {
   "annual-maintenance-contract": "amc",
   "amc-service": "amc",
   "amc-services": "amc",
-  "vrf": "vrf",
+  vrf: "vrf",
   "cold-storage": "chiller",
   "commercial-hvac": "commercial",
   "residential-ac": "residential",
@@ -177,12 +181,29 @@ const contactDetails = [
 
 // ─── Field ────────────────────────────────────────────────────────────────────
 const Field = ({
-  id, label, type = "text", icon, value, onChange, onBlur,
-  required = false, disabled = false, error, maxLength,
+  id,
+  label,
+  type = "text",
+  icon,
+  value,
+  onChange,
+  onBlur,
+  required = false,
+  disabled = false,
+  error,
+  maxLength,
 }: {
-  id: string; label: string; type?: string; icon: React.ReactNode;
-  value: string; onChange: (v: string) => void; onBlur?: () => void;
-  required?: boolean; disabled?: boolean; error?: string; maxLength?: number;
+  id: string;
+  label: string;
+  type?: string;
+  icon: React.ReactNode;
+  value: string;
+  onChange: (v: string) => void;
+  onBlur?: () => void;
+  required?: boolean;
+  disabled?: boolean;
+  error?: string;
+  maxLength?: number;
 }) => {
   const [focused, setFocused] = useState(false);
   const active = focused || value.length > 0;
@@ -202,7 +223,11 @@ const Field = ({
         />
         <span
           className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-200 z-10 ${
-            hasError ? "text-red-500" : focused ? "text-[#0284C7]" : "text-slate-400"
+            hasError
+              ? "text-red-500"
+              : focused
+                ? "text-[#0284C7]"
+                : "text-slate-400"
           }`}
         >
           {icon}
@@ -213,36 +238,45 @@ const Field = ({
           style={{
             ...(active
               ? {
-                top: "7px",
-                fontSize: "10px",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase" as const,
-                color: hasError ? "#ef4444" : "#0284C7",
-              }
+                  top: "7px",
+                  fontSize: "10px",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase" as const,
+                  color: hasError ? "#ef4444" : "#0284C7",
+                }
               : {
-                top: "50%",
-                transform: "translateY(-50%)",
-                fontSize: "0.875rem",
-                color: "#64748b",
-              }),
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  fontSize: "0.875rem",
+                  color: "#64748b",
+                }),
           }}
         >
           {label}
         </label>
         <input
-          id={id} type={type} required={required} disabled={disabled}
-          value={value} maxLength={maxLength}
+          id={id}
+          type={type}
+          required={required}
+          disabled={disabled}
+          value={value}
+          maxLength={maxLength}
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
-          onBlur={() => { setFocused(false); onBlur?.(); }}
+          onBlur={() => {
+            setFocused(false);
+            onBlur?.();
+          }}
           className="w-full rounded-md pl-11 pr-4 pt-6 pb-2 h-14 text-sm font-medium outline-none bg-transparent text-slate-900 placeholder:text-transparent disabled:opacity-50 disabled:cursor-not-allowed z-0 relative"
         />
       </div>
       <AnimatePresence>
         {error && (
           <motion.p
-            initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.18 }}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.18 }}
             className="text-[11px] text-red-500 font-medium pl-1"
           >
             {error}
@@ -255,10 +289,23 @@ const Field = ({
 
 // ─── TextareaField ────────────────────────────────────────────────────────────
 const TextareaField = ({
-  id, label, icon, value, onChange, onBlur, disabled = false, error,
+  id,
+  label,
+  icon,
+  value,
+  onChange,
+  onBlur,
+  disabled = false,
+  error,
 }: {
-  id: string; label: string; icon: React.ReactNode; value: string;
-  onChange: (v: string) => void; onBlur?: () => void; disabled?: boolean; error?: string;
+  id: string;
+  label: string;
+  icon: React.ReactNode;
+  value: string;
+  onChange: (v: string) => void;
+  onBlur?: () => void;
+  disabled?: boolean;
+  error?: string;
 }) => {
   const [focused, setFocused] = useState(false);
   const active = focused || value.length > 0;
@@ -278,7 +325,11 @@ const TextareaField = ({
         />
         <span
           className={`absolute left-4 top-5 transition-colors duration-200 z-10 ${
-            hasError ? "text-red-500" : focused ? "text-[#0284C7]" : "text-slate-400"
+            hasError
+              ? "text-red-500"
+              : focused
+                ? "text-[#0284C7]"
+                : "text-slate-400"
           }`}
         >
           {icon}
@@ -289,26 +340,33 @@ const TextareaField = ({
           style={{
             ...(active
               ? {
-                top: "10px",
-                fontSize: "10px",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase" as const,
-                color: hasError ? "#ef4444" : "#0284C7",
-              }
+                  top: "10px",
+                  fontSize: "10px",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase" as const,
+                  color: hasError ? "#ef4444" : "#0284C7",
+                }
               : {
-                top: "20px",
-                fontSize: "0.875rem",
-                color: "#64748b",
-              }),
+                  top: "20px",
+                  fontSize: "0.875rem",
+                  color: "#64748b",
+                }),
           }}
         >
           {label}
         </label>
         <textarea
-          id={id} rows={4} maxLength={500} disabled={disabled} value={value}
+          id={id}
+          rows={4}
+          maxLength={500}
+          disabled={disabled}
+          value={value}
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
-          onBlur={() => { setFocused(false); onBlur?.(); }}
+          onBlur={() => {
+            setFocused(false);
+            onBlur?.();
+          }}
           className="w-full rounded-md pl-11 pr-4 pt-7 pb-4 text-sm font-medium outline-none resize-none bg-transparent text-slate-900 disabled:opacity-50 disabled:cursor-not-allowed z-0 relative"
         />
       </div>
@@ -316,8 +374,10 @@ const TextareaField = ({
         <AnimatePresence>
           {error && (
             <motion.p
-              initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.18 }}
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18 }}
               className="text-[11px] text-red-500 font-medium"
             >
               {error}
@@ -333,7 +393,15 @@ const TextareaField = ({
 };
 
 // ─── ServicePicker ────────────────────────────────────────────────────────────
-const ServicePicker = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+const ServicePicker = ({
+  value,
+  onChange,
+  error,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  error?: string;
+}) => (
   <div>
     <div className="flex items-center justify-between pl-0.5 mb-2.5">
       <p className="text-[11px] tracking-wider uppercase font-bold text-slate-500">
@@ -356,7 +424,9 @@ const ServicePicker = ({ value, onChange }: { value: string; onChange: (v: strin
             className={`relative flex items-center gap-2.5 px-3.5 py-3 rounded-md text-xs sm:text-sm font-bold transition-all duration-300 ${
               sel
                 ? "bg-gradient-to-r from-[#0284C7] via-[#0091EE] to-[#00A8FF] text-white border-transparent shadow-lg shadow-sky-500/25 scale-[1.02]"
-                : "bg-slate-50 border border-slate-200 text-slate-700 hover:bg-sky-50/80 hover:border-sky-300 hover:text-[#0284C7]"
+                : error
+                  ? "bg-red-50/50 border border-red-200 text-slate-700 hover:bg-sky-50/80 hover:border-sky-300 hover:text-[#0284C7]"
+                  : "bg-slate-50 border border-slate-200 text-slate-700 hover:bg-sky-50/80 hover:border-sky-300 hover:text-[#0284C7]"
             }`}
           >
             <span className={sel ? "text-white" : "text-[#0284C7]"}>
@@ -376,19 +446,34 @@ const ServicePicker = ({ value, onChange }: { value: string; onChange: (v: strin
         );
       })}
     </div>
+    <AnimatePresence>
+      {error && (
+        <motion.p
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{ duration: 0.18 }}
+          className="text-[11px] text-red-500 font-medium mt-1.5 pl-1"
+        >
+          {error}
+        </motion.p>
+      )}
+    </AnimatePresence>
   </div>
 );
 
 // ─── Success ──────────────────────────────────────────────────────────────────
 const SuccessScreen = ({ onReset }: { onReset: () => void }) => (
   <motion.div
-    initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
     exit={{ opacity: 0, scale: 0.9 }}
     className="flex flex-col items-center justify-center text-center py-20 px-8"
   >
     <div className="relative mb-8">
       <motion.div
-        initial={{ scale: 0 }} animate={{ scale: 1 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 14, delay: 0.1 }}
         className="w-24 h-24 rounded-full flex items-center justify-center"
         style={{
@@ -401,27 +486,43 @@ const SuccessScreen = ({ onReset }: { onReset: () => void }) => (
     </div>
 
     <motion.h3
-      initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-      style={{ fontSize: "1.75rem", color: "hsl(var(--brand-dark))", marginBottom: "12px" }}
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.4 }}
+      style={{
+        fontSize: "1.75rem",
+        color: "hsl(var(--brand-dark))",
+        marginBottom: "12px",
+      }}
     >
       Message Received!
     </motion.h3>
 
     <motion.p
-      initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.55 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.55 }}
       className="body-text mb-10 max-w-xs"
       style={{ color: "hsl(var(--muted-foreground))" }}
     >
-      Our expert team will reach out within 24 hours to discuss your HVAC requirements.
+      Our expert team will reach out within 24 hours to discuss your HVAC
+      requirements.
     </motion.p>
 
     <motion.button
-      initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.65 }}
       onClick={onReset}
       className="text-sm font-bold underline underline-offset-4 transition-colors"
       style={{ color: "hsl(var(--primary))" }}
-      onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "hsl(var(--brand-dark))")}
-      onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "hsl(var(--primary))")}
+      onMouseEnter={(e) =>
+        ((e.currentTarget as HTMLElement).style.color =
+          "hsl(var(--brand-dark))")
+      }
+      onMouseLeave={(e) =>
+        ((e.currentTarget as HTMLElement).style.color = "hsl(var(--primary))")
+      }
     >
       Send another message →
     </motion.button>
@@ -430,9 +531,10 @@ const SuccessScreen = ({ onReset }: { onReset: () => void }) => (
 
 // ─── ContactDetailItem ────────────────────────────────────────────────────────
 const ContactDetailItem = ({
-  detail, index,
+  detail,
+  index,
 }: {
-  detail: typeof contactDetails[number];
+  detail: (typeof contactDetails)[number];
   index: number;
 }) => {
   const [hovered, setHovered] = useState(false);
@@ -446,7 +548,8 @@ const ContactDetailItem = ({
       onMouseLeave={() => setHovered(false)}
       className="flex items-start gap-4 rounded-md p-3 -mx-2 transition-all duration-300"
       style={{
-        background: hovered && detail.hoverColor ? detail.hoverColor : "transparent",
+        background:
+          hovered && detail.hoverColor ? detail.hoverColor : "transparent",
         border: `1px solid ${hovered && detail.hoverBorder ? detail.hoverBorder : "transparent"}`,
         boxShadow: hovered ? "0 4px 14px -3px rgba(0,0,0,0.06)" : "none",
         cursor: detail.href ? "pointer" : "default",
@@ -455,7 +558,10 @@ const ContactDetailItem = ({
       <div
         className="w-10 h-10 rounded-md flex items-center justify-center shrink-0 transition-all duration-300 transform"
         style={{
-          background: hovered && detail.hoverColor ? detail.hoverColor : "hsl(var(--brand-light))",
+          background:
+            hovered && detail.hoverColor
+              ? detail.hoverColor
+              : "hsl(var(--brand-light))",
           border: `1px solid ${hovered && detail.hoverBorder ? detail.hoverBorder : "hsl(var(--primary) / 0.15)"}`,
           color: detail.iconColor,
           transform: hovered ? "scale(1.08)" : "scale(1)",
@@ -466,7 +572,9 @@ const ContactDetailItem = ({
       <div className="flex-1 min-w-0">
         <p
           className="text-[10px] tracking-widest uppercase font-bold mb-0.5 transition-colors duration-200"
-          style={{ color: hovered ? detail.iconColor : "hsl(var(--muted-foreground))" }}
+          style={{
+            color: hovered ? detail.iconColor : "hsl(var(--muted-foreground))",
+          }}
         >
           {detail.label}
         </p>
@@ -492,12 +600,16 @@ const ContactDetailItem = ({
         </div>
         <p
           className="text-xs font-medium transition-colors duration-200 min-h-[18px] flex items-center gap-1 mt-0.5"
-          style={{ color: hovered ? detail.iconColor : "hsl(var(--muted-foreground))" }}
+          style={{
+            color: hovered ? detail.iconColor : "hsl(var(--muted-foreground))",
+          }}
         >
           {hovered && detail.actionLabel ? (
             <>
               <span>{detail.actionLabel}</span>
-              <span className="transition-transform duration-200 transform translate-x-0.5">→</span>
+              <span className="transition-transform duration-200 transform translate-x-0.5">
+                →
+              </span>
             </>
           ) : (
             <span>{detail.sub}</span>
@@ -513,7 +625,9 @@ const ContactDetailItem = ({
     <a
       href={detail.href}
       target={(detail as any).target || "_self"}
-      rel={(detail as any).target === "_blank" ? "noopener noreferrer" : undefined}
+      rel={
+        (detail as any).target === "_blank" ? "noopener noreferrer" : undefined
+      }
       className="block no-underline"
       aria-label={`${detail.label}: ${detail.value}`}
     >
@@ -524,9 +638,17 @@ const ContactDetailItem = ({
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 export default function ContactUs() {
-  const [form, setForm] = useState<FormState>({ name: "", email: "", phone: "", service: "", message: "" });
+  const [form, setForm] = useState<FormState>({
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof FormState, boolean>>>({});
+  const [touched, setTouched] = useState<
+    Partial<Record<keyof FormState, boolean>>
+  >({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -538,7 +660,7 @@ export default function ContactUs() {
 
     const id = services.find((s) => s.id === param)
       ? param
-      : slugToServiceId[param] ?? "";
+      : (slugToServiceId[param] ?? "");
 
     if (id) {
       setForm((prev) => ({ ...prev, service: id }));
@@ -563,9 +685,17 @@ export default function ContactUs() {
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const newErrors: FormErrors = {};
-        err.inner.forEach((e) => { if (e.path) newErrors[e.path as keyof FormState] = e.message; });
+        err.inner.forEach((e) => {
+          if (e.path) newErrors[e.path as keyof FormState] = e.message;
+        });
         setErrors(newErrors);
-        setTouched({ name: true, email: true, phone: true, message: true });
+        setTouched({
+          name: true,
+          email: true,
+          phone: true,
+          service: true,
+          message: true,
+        });
       }
       return false;
     }
@@ -591,38 +721,43 @@ export default function ContactUs() {
     setForm({ name: "", email: "", phone: "", service: "", message: "" });
   };
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if (loading) return;
+    if (loading) return;
 
-  const isValid = await validateAll();
+    const isValid = await validateAll();
 
-  if (!isValid) return;
+    if (!isValid) {
+      if (!form.service || !form.service.trim()) {
+        toast.error("Please select a service");
+      } else {
+        toast.error("Please fill all required fields correctly");
+      }
+      return;
+    }
 
-  setLoading(true);
+    setLoading(true);
 
-  try {
-    await createContact({
-      name: form.name,
-      phone: form.phone,
-      email: form.email,
-      service: form.service,
-      message: form.message,
-    });
+    try {
+      await createContact({
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        service: form.service,
+        message: form.message,
+      });
 
-    toast.success("Message sent successfully!");
+      toast.success("Message sent successfully!");
 
-    reset();
-    setSubmitted(true);
-  } catch (error) {
-    toast.error("Failed to send message");
-  } finally {
-    setLoading(false);
-  }
-};
-
-  const canSubmit = !loading && form.name.trim() && form.email.trim() && Object.values(errors).every((e) => !e);
+      reset();
+      setSubmitted(true);
+    } catch (error) {
+      toast.error("Failed to send message");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -630,38 +765,58 @@ export default function ContactUs() {
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div
           className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full opacity-60"
-          style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.12) 0%, transparent 70%)" }}
+          style={{
+            background:
+              "radial-gradient(circle, hsl(var(--primary) / 0.12) 0%, transparent 70%)",
+          }}
         />
         <div
           className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full opacity-60"
-          style={{ background: "radial-gradient(circle, hsl(var(--brand-sky) / 0.08) 0%, transparent 70%)" }}
+          style={{
+            background:
+              "radial-gradient(circle, hsl(var(--brand-sky) / 0.08) 0%, transparent 70%)",
+          }}
         />
         <div
           className="absolute inset-0 opacity-[0.4]"
           style={{
-            backgroundImage: "radial-gradient(hsl(var(--primary) / 0.15) 1px, transparent 1px)",
+            backgroundImage:
+              "radial-gradient(hsl(var(--primary) / 0.15) 1px, transparent 1px)",
             backgroundSize: "32px 32px",
           }}
         />
       </div>
 
       {/* HERO - full width */}
-      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white overflow-hidden">
+      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
+        {/* Background Image with Clear Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={contactHeaderBg}
+            alt="Contact Perfect Air Solution"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#03172C]/75 via-[#03172C]/35 to-[#03172C]/90" />
+        </div>
+
         {/* Ambient background light */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-widest mt-1.5 sm:mt-2 mb-3 backdrop-blur-md">
-            <span className="flex items-center gap-1.5"><MessageSquare size={13} /> GET IN TOUCH</span>
+            <span className="flex items-center gap-1.5">
+              <MessageSquare size={13} /> GET IN TOUCH
+            </span>
           </div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans"
           >
-            Let's Build Your <span className="text-cyan-300">Perfect Climate</span>
+            Let's Build Your{" "}
+            <span className="text-cyan-300">Perfect Climate</span>
           </motion.h1>
 
           <motion.p
@@ -670,7 +825,8 @@ export default function ContactUs() {
             transition={{ delay: 0.15 }}
             className="text-slate-200 text-sm sm:text-base max-w-3xl mx-auto font-normal leading-relaxed mb-5"
           >
-            9+ years of HVAC expertise. Tell us what you need and our engineering experts will take care of the rest.
+            9+ years of HVAC expertise. Tell us what you need and our
+            engineering experts will take care of the rest.
           </motion.p>
 
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-cyan-200 font-medium pt-3 border-t border-white/10 max-w-2xl mx-auto">
@@ -684,16 +840,20 @@ export default function ContactUs() {
       {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid lg:grid-cols-5 gap-8 items-start">
-
           {/* ── LEFT ── */}
           <motion.aside
-            initial={{ opacity: 0, x: -28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
+            initial={{ opacity: 0, x: -28 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             className="lg:col-span-2 flex flex-col gap-6"
           >
             {/* Contact details card */}
             <div
               className="rounded-xl p-6 bg-card"
-              style={{ border: "1px solid hsl(var(--border))", boxShadow: "0 10px 25px -5px hsl(var(--brand-dark) / 0.03)" }}
+              style={{
+                border: "1px solid hsl(var(--border))",
+                boxShadow: "0 10px 25px -5px hsl(var(--brand-dark) / 0.03)",
+              }}
             >
               <h2 className="text-xl font-bold text-[#051B30] tracking-tight mb-4 flex items-center gap-2">
                 <Phone className="w-5 h-5 text-[#0284C7]" /> Contact Details
@@ -706,16 +866,20 @@ export default function ContactUs() {
             </div>
 
             {/* Brands card */}
-            <div
-              className="rounded-xl p-6 bg-gradient-to-br from-white to-sky-50/60 border border-sky-100 shadow-sm"
-            >
-              <p
-                className="text-[10px] tracking-widest uppercase font-extrabold mb-3 text-[#0284C7]"
-              >
+            <div className="rounded-xl p-6 bg-gradient-to-br from-white to-sky-50/60 border border-sky-100 shadow-sm">
+              <p className="text-[10px] tracking-widest uppercase font-extrabold mb-3 text-[#0284C7]">
                 Authorized Dealers
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["Daikin", "Blue Star", "Hitachi", "Panasonic", "Mitsubishi", "Carrier", "Midea"].map((b) => (
+                {[
+                  "Daikin",
+                  "Blue Star",
+                  "Hitachi",
+                  "Panasonic",
+                  "Mitsubishi",
+                  "Carrier",
+                  "Midea",
+                ].map((b) => (
                   <span
                     key={b}
                     className="px-3 py-1 rounded-full text-xs font-bold bg-white text-[#051B30] border border-sky-100 shadow-2xs"
@@ -724,13 +888,15 @@ export default function ContactUs() {
                   </span>
                 ))}
               </div>
-              <p className="text-slate-500 text-xs font-normal">
-                Authorized partner for sales &amp; service — your factory warranty is always guaranteed.
+              <p className="text-slate-500 text-sm font-normal">
+                Our trusted partnerships ensure genuine products, professional
+                installation, and dependable after-sales support. We deliver
+                quality cooling solutions backed by reliable brands.
               </p>
             </div>
 
             {/* Trust card */}
-            <div
+            {/* <div
               className="rounded-xl p-5 bg-white border border-slate-200/90 space-y-3 shadow-xs"
             >
               {["5000+ satisfied clients across UP", "Response guaranteed within 24 hours", "Free site inspection for commercial projects"].map((t) => (
@@ -741,12 +907,14 @@ export default function ContactUs() {
                   </span>
                 </div>
               ))}
-            </div>
+            </div> */}
           </motion.aside>
 
           {/* ── RIGHT: Form ── */}
           <motion.div
-            initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, x: 28 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-3 rounded-xl bg-white border border-slate-200/90 shadow-2xl shadow-sky-950/5 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-sky-100/50 rounded-full blur-3xl pointer-events-none" />
@@ -756,69 +924,126 @@ export default function ContactUs() {
                 <SuccessScreen key="success" onReset={reset} />
               ) : (
                 <motion.form
-                  key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                  onSubmit={handleSubmit} className="p-6 sm:p-9 relative z-10"
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={handleSubmit}
+                  className="p-6 sm:p-9 relative z-10"
                 >
                   <div className="mb-6">
-                    
                     <h2 className="text-xl sm:text-2xl font-extrabold text-[#051B30] tracking-tight leading-tight">
                       Send Us a Message
                     </h2>
                     <p className="text-slate-500 text-xs sm:text-sm mt-1 font-normal">
-                      Describe your needs and a senior HVAC expert will contact you shortly.
+                      Describe your needs and a senior HVAC expert will contact
+                      you shortly.
                     </p>
                   </div>
 
                   <div className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-5">
-                      <Field id="name" label="Full Name" disabled={loading} icon={<User size={16} />}
-                        value={form.name} onChange={set("name")} onBlur={handleBlur("name")}
-                        error={touched.name ? errors.name : undefined} required maxLength={50} />
-                      <Field id="phone" disabled={loading} label="Phone Number" type="tel" icon={<Phone size={16} />}
-                        value={form.phone} onChange={set("phone")} onBlur={handleBlur("phone")}
-                        error={touched.phone ? errors.phone : undefined} maxLength={10} />
+                      <Field
+                        id="name"
+                        label="Full Name"
+                        disabled={loading}
+                        icon={<User size={16} />}
+                        value={form.name}
+                        onChange={set("name")}
+                        onBlur={handleBlur("name")}
+                        error={touched.name ? errors.name : undefined}
+                        required
+                        maxLength={50}
+                      />
+                      <Field
+                        id="phone"
+                        disabled={loading}
+                        label="Phone Number"
+                        type="tel"
+                        icon={<Phone size={16} />}
+                        value={form.phone}
+                        onChange={set("phone")}
+                        onBlur={handleBlur("phone")}
+                        error={touched.phone ? errors.phone : undefined}
+                        maxLength={10}
+                      />
                     </div>
-                    <Field id="email" label="Email Address" disabled={loading} type="email" icon={<Mail size={16} />}
-                      value={form.email} onChange={set("email")} onBlur={handleBlur("email")}
-                      error={touched.email ? errors.email : undefined} required maxLength={100} />
-                    <ServicePicker value={form.service} onChange={set("service")} />
-                    <TextareaField id="message" label="Describe your project…" disabled={loading} icon={<MessageSquare size={16} />}
-                      value={form.message} onChange={set("message")} onBlur={handleBlur("message")}
-                      error={touched.message ? errors.message : undefined} />
+                    <Field
+                      id="email"
+                      label="Email Address"
+                      disabled={loading}
+                      type="email"
+                      icon={<Mail size={16} />}
+                      value={form.email}
+                      onChange={set("email")}
+                      onBlur={handleBlur("email")}
+                      error={touched.email ? errors.email : undefined}
+                      required
+                      maxLength={100}
+                    />
+                    <ServicePicker
+                      value={form.service}
+                      onChange={(v) => {
+                        set("service")(v);
+                        setTouched((p) => ({ ...p, service: true }));
+                      }}
+                      error={touched.service ? errors.service : undefined}
+                    />
+                    <TextareaField
+                      id="message"
+                      label="Describe your project…"
+                      disabled={loading}
+                      icon={<MessageSquare size={16} />}
+                      value={form.message}
+                      onChange={set("message")}
+                      onBlur={handleBlur("message")}
+                      error={touched.message ? errors.message : undefined}
+                    />
 
                     <button
-                      type="submit" disabled={!canSubmit}
+                      type="submit"
+                      disabled={loading}
                       className="group relative w-full flex items-center justify-center gap-2.5 py-4 rounded-md font-extrabold text-xs sm:text-sm text-white uppercase tracking-wider overflow-hidden transition-all duration-300 mt-3 shadow-lg shadow-sky-500/25 hover:shadow-xl hover:shadow-sky-500/35 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
                       style={{
-                        background: canSubmit
-                          ? "linear-gradient(135deg, #051B30 0%, #0284C7 50%, #00A8FF 100%)"
-                          : "#cbd5e1",
+                        background: loading
+                          ? "#cbd5e1"
+                          : "linear-gradient(135deg, #051B30 0%, #0284C7 50%, #00A8FF 100%)",
                       }}
                     >
                       {loading ? (
                         <motion.div
                           animate={{ rotate: 360 }}
-                          transition={{ duration: 0.9, repeat: Infinity, ease: "linear" }}
+                          transition={{
+                            duration: 0.9,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
                           className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white"
                         />
                       ) : (
                         <>
-                          <Send size={16} className="group-hover:translate-x-0.5 transition-transform" />
-                          <span>Send Message — Free Consultation</span>
-                          <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                          <Send
+                            size={16}
+                            className="group-hover:translate-x-0.5 transition-transform"
+                          />
+                          <span>Submit Inquiry</span>
+                          <ArrowRight
+                            size={16}
+                            className="group-hover:translate-x-1 transition-transform"
+                          />
                         </>
                       )}
                     </button>
 
                     <p className="text-center text-[11px] font-medium text-slate-400 pt-1">
-                      🔒 Privacy Guarantee: Your details remain 100% confidential.
+                      🔒 Privacy Guarantee: Your details remain 100%
+                      confidential.
                     </p>
                   </div>
                 </motion.form>
               )}
             </AnimatePresence>
           </motion.div>
-
         </div>
       </div>
     </div>

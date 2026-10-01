@@ -384,7 +384,7 @@ export default function BlogPreview() {
   // Loading
   if (isLoading) {
     return (
-      <section className="py-16 bg-gradient-to-b from-[#EBF5FA] via-[#F4FAFE] to-[#F8FAFC]">
+      <section className="py-12 md:py-14 bg-gradient-to-b from-[#EBF5FA] via-[#F4FAFE] to-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-center py-20">
             <div className="w-10 h-10 border-4 border-slate-200 border-t-[#0284C7] rounded-full animate-spin" />
@@ -400,7 +400,7 @@ export default function BlogPreview() {
   }
 
   return (
-    <section className="py-16 sm:py-15 bg-gradient-to-b from-[#EBF5FA] via-[#F4FAFE] to-[#F8FAFC] text-slate-800 relative overflow-hidden font-sans">
+    <section className="py-12 md:py-14 bg-gradient-to-b from-[#EBF5FA] via-[#F4FAFE] to-[#F8FAFC] text-slate-800 relative overflow-hidden font-sans">
 
       {/* Background Dot overlay */}
       <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#0284C7_1px,transparent_1px)] [background-size:28px_28px]" />
@@ -423,7 +423,7 @@ export default function BlogPreview() {
           transition={{
             duration: 0.6,
           }}
-          className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
+          className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100 border border-sky-200 text-[#0284C7] font-extrabold text-xs uppercase tracking-wider mb-3.5 shadow-sm">
             <Sparkles

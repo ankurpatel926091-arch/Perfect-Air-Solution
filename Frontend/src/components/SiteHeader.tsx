@@ -10,6 +10,7 @@ const navLinks = [
   { name: "About Us", path: "/about" },
   { name: "Products", path: "/product" },
   { name: "Services", path: "/services" },
+  { name: "Blogs", path: "/Blog" }, 
   { name: "Gallery", path: "/gallery" },
   // { name: "Contact Us", path: "/contact" },
 ];
@@ -91,7 +92,7 @@ const SiteHeader = () => {
           {/* Desktop Nav */}
           <nav
             aria-label="Main navigation"
-            className="hidden lg:flex items-center justify-center flex-1 gap-1 xl:gap-2 px-4"
+            className="hidden lg:flex items-center justify-center flex-1 gap-0.5 xl:gap-1px-2"
           >
             {navLinks.map((link) => (
               <Link

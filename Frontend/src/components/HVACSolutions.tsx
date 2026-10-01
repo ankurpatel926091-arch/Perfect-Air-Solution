@@ -52,7 +52,7 @@ export default function HVACSolutions() {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 sm:py-15 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] text-slate-800 relative overflow-hidden font-sans">
+    <section className="py-12 md:py-14 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] text-slate-800 relative overflow-hidden font-sans">
       {/* Background Decorative Glow Accents */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -60,7 +60,7 @@ export default function HVACSolutions() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}

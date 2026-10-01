@@ -179,7 +179,7 @@ export default function ProductCategories() {
       : categoriesList.filter((c) => c.type === activeTab);
 
   return (
-    <section className="py-14 sm:py-18 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] font-sans relative overflow-hidden">
+    <section className="py-12 md:py-14 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] font-sans relative overflow-hidden">
       {/* Soft Ambient Glows matching project style (No harsh grid lines) */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-sky-200/25 rounded-full blur-3xl pointer-events-none" />

@@ -2,7 +2,6 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
-  ArrowLeft,
   Tag,
   Clock,
   Calendar,
@@ -22,6 +21,47 @@ import { getActiveBlogs, getBlogById } from "@/api/blog.api";
 import CTASection from "@/components/CTASection";
 import Breadcrumb from "@/components/Breadcrumb";
 import aboutHeaderBg from "@/assets/HeaderBackgroundImg/AboutBackground.png";
+
+const enhanceBlogContent = (html: string): string => {
+  if (!html || typeof html !== "string") return "";
+
+  // 1. Remove trailing empty paragraphs with spaces, &nbsp;, or <br>
+  let processed = html.replace(/<p>(?:&nbsp;|\s|<br\s*\/?>)*<\/p>/gi, "");
+
+  
+
+  // 3. Numbered headings: <p><strong>1. Reduced Cooling Performance</strong></p>
+  processed = processed.replace(
+    /<p>\s*<strong>(\d+)[\.\)]\s*([^<]+)<\/strong>\s*<\/p>/gi,
+    (_match, num, title) => {
+      return `
+      <div class="mt-10 sm:mt-12 mb-4 pt-6 border-t border-slate-100 flex items-start gap-3.5">
+        <span class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#0284C7] to-cyan-500 text-white flex items-center justify-center font-extrabold text-sm sm:text-base shadow-sm shadow-sky-500/25">
+          ${num}
+        </span>
+        <h3 class="text-xl sm:text-2xl font-extrabold text-[#03172C] tracking-tight leading-snug pt-0.5">
+          ${title.trim()}
+        </h3>
+      </div>`;
+    }
+  );
+
+  // 4. Section headings: <p><strong>Introduction</strong></p>, etc.
+  processed = processed.replace(
+    /<p>\s*<strong>([^<]{2,90})<\/strong>\s*<\/p>/gi,
+    (_match, title) => {
+      return `
+      <div class="mt-9 mb-4">
+        <h3 class="text-xl sm:text-2xl font-extrabold text-[#03172C] tracking-tight flex items-center gap-2.5">
+          <span class="w-1.5 h-6 rounded-full bg-[#0284C7] inline-block flex-shrink-0"></span>
+          <span>${title.trim()}</span>
+        </h3>
+      </div>`;
+    }
+  );
+
+  return processed;
+};
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -220,61 +260,14 @@ const BlogPost = () => {
             />
           </div>
 
-          {/* Back to Blog */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 hover:text-white text-xs sm:text-sm font-semibold transition-all duration-200 mb-6 backdrop-blur-md group"
-            >
-              <ArrowLeft
-                size={16}
-                className="group-hover:-translate-x-1 transition-transform"
-              />
 
-              <span>Back to Blog</span>
-            </Link>
-          </motion.div>
-
-          {/* Category & Meta */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="flex flex-wrap items-center gap-3 mb-4"
-          >
-            {category && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
-                <Tag size={13} className="text-cyan-400" />
-                {category}
-              </span>
-            )}
-
-            <span className="inline-flex items-center gap-1 text-slate-300 text-xs sm:text-sm">
-              <Clock size={14} className="text-cyan-400" />
-              {formattedReadTime}
-            </span>
-
-            {formattedDate && (
-              <span className="inline-flex items-center gap-1 text-slate-300 text-xs sm:text-sm">
-                <Calendar
-                  size={14}
-                  className="text-cyan-400"
-                />
-                {formattedDate}
-              </span>
-            )}
-          </motion.div>
 
           {/* Article Title */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.2] mb-6 font-sans break-words"
+            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-[1.2] mb-6 font-sans break-words"
           >
             {post.title}
           </motion.h1>
@@ -310,11 +303,11 @@ const BlogPost = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-xl p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-none hover:shadow-none relative"
+          className="bg-white rounded-2xl p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.06)] relative"
         >
 
           {/* Top Gradient Bar */}
-          <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#051B30] via-[#0284C7] to-cyan-400 rounded-t-xl" />
+          <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#051B30] via-[#0284C7] to-cyan-400 rounded-t-2xl" />
 
           {/* Read Time */}
           <div className="absolute -top-4 right-6 sm:right-10 px-4 py-1.5 rounded-full bg-[#051B30] text-white text-xs font-bold uppercase tracking-wider border border-cyan-400/30 flex items-center gap-1.5">
@@ -323,93 +316,93 @@ const BlogPost = () => {
           </div>
 
           {/* Article Info Bar */}
-<div className="flex flex-wrap items-center justify-between gap-5 pb-6 mb-8 border-b border-slate-200/80">
+          <div className="flex flex-wrap items-center justify-between gap-5 pb-6 mb-8 border-b border-slate-200/80">
 
-  {/* Published Date */}
-  <div className="flex items-center gap-3">
-    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
-      <CalendarDays
-        size={16}
-        className="text-[#0284C7]"
-      />
-    </div>
+            {/* Published Date */}
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
+                <CalendarDays
+                  size={16}
+                  className="text-[#0284C7]"
+                />
+              </div>
 
-    <div>
-      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-        Published
-      </p>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  Published
+                </p>
 
-      <p className="text-sm font-semibold text-slate-700">
-        {formattedDate || "—"}
-      </p>
-    </div>
-  </div>
+                <p className="text-sm font-semibold text-slate-700">
+                  {formattedDate || "—"}
+                </p>
+              </div>
+            </div>
 
-  {/* Author */}
-  <div className="flex items-center gap-3">
-    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
-      <User
-        size={16}
-        className="text-[#0284C7]"
-      />
-    </div>
+            {/* Author */}
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
+                <User
+                  size={16}
+                  className="text-[#0284C7]"
+                />
+              </div>
 
-    <div>
-      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-        Author
-      </p>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  Author
+                </p>
 
-      <p className="text-sm font-semibold text-slate-700">
-        {post?.author || "Perfect Air Solution"}
-      </p>
-    </div>
-  </div>
+                <p className="text-sm font-semibold text-slate-700">
+                  {post?.author || "Perfect Air Solution"}
+                </p>
+              </div>
+            </div>
 
-  {/* Read Time */}
-  <div className="flex items-center gap-3">
-    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
-      <Clock3
-        size={16}
-        className="text-[#0284C7]"
-      />
-    </div>
+            {/* Read Time */}
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
+                <Clock3
+                  size={16}
+                  className="text-[#0284C7]"
+                />
+              </div>
 
-    <div>
-      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-        Read Time
-      </p>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  Read Time
+                </p>
 
-      <p className="text-sm font-semibold text-slate-700">
-        {post?.readTime || "5 min read"}
-      </p>
-    </div>
-  </div>
+                <p className="text-sm font-semibold text-slate-700">
+                  {post?.readTime || "5 min read"}
+                </p>
+              </div>
+            </div>
 
-  {/* Category */}
-  <div className="flex items-center gap-3">
-    <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
-      <Tag
-        size={16}
-        className="text-[#0284C7]"
-      />
-    </div>
+            {/* Category */}
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center">
+                <Tag
+                  size={16}
+                  className="text-[#0284C7]"
+                />
+              </div>
 
-    <div>
-      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-        Category
-      </p>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  Category
+                </p>
 
-      <p className="text-sm font-semibold text-slate-700">
-        {post?.tags?.[0] || "HVAC"}
-      </p>
-    </div>
-  </div>
+                <p className="text-sm font-semibold text-slate-700">
+                  {post?.tags?.[0] || "HVAC"}
+                </p>
+              </div>
+            </div>
 
-</div>
+          </div>
 
           {/* Featured Image */}
           {post.image?.url && (
-            <div className="mb-8 rounded-xl overflow-hidden border border-slate-200/80 max-h-[500px]">
+            <div className="mb-10 rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm max-h-[500px]">
               <img
                 src={post.image.url}
                 alt={post.title}
@@ -419,79 +412,59 @@ const BlogPost = () => {
           )}
 
           {/* Article Content */}
-          <div className="prose prose-slate max-w-none text-slate-700 text-base sm:text-lg leading-relaxed space-y-6 font-sans">
-
-            {post.content &&
-            Array.isArray(post.content) ? (
-              post.content.map(
-                (para: string, i: number) => (
-                  <motion.div
-                    key={i}
-                    initial={{
-                      opacity: 0,
-                      y: 15,
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    viewport={{
-                      once: true,
-                      margin: "-50px",
-                    }}
-                    transition={{
-                      duration: 0.5,
-                    }}
-                  >
-                    <p
-                      className={
-                        i === 0
-                          ? "text-lg sm:text-xl font-normal text-slate-800 leading-relaxed"
-                          : ""
-                      }
-                    >
-                      {para}
-                    </p>
-
-                    {i === 1 &&
-                      para.length > 50 && (
-                        <blockquote className="my-8 p-6 sm:p-7 rounded-md bg-sky-50/80 border-l-4 border-[#0284C7]">
-                          <p className="text-base sm:text-lg font-medium italic text-[#051B30] leading-relaxed m-0">
-                            "{para.slice(0, 140)}..."
-                          </p>
-                        </blockquote>
-                      )}
-                  </motion.div>
-                )
-              )
-            ) : typeof post.content === "string" &&
-              post.content.includes("<") ? (
+          <div className="blog-rich-content font-sans">
+            {post.content && Array.isArray(post.content) ? (
+              post.content.map((para: string, i: number) => (
+                <p
+                  key={i}
+                  className={
+                    i === 0
+                      ? "text-lg sm:text-xl font-medium text-slate-800 leading-relaxed"
+                      : ""
+                  }
+                >
+                  {para}
+                </p>
+              ))
+            ) : typeof post.content === "string" && post.content.includes("<") ? (
               <div
-                className="prose prose-slate max-w-none text-slate-700 text-base sm:text-lg leading-relaxed font-sans blog-rich-content"
                 dangerouslySetInnerHTML={{
-                  __html: post.content,
+                  __html: enhanceBlogContent(post.content),
                 }}
               />
+            ) : typeof post.content === "string" ? (
+              <div className="space-y-5">
+                {post.content.split(/\n\s*\n/).map((para: string, i: number) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
             ) : (
-              <p className="text-base sm:text-lg leading-relaxed">
-                {post.content}
-              </p>
+              <p>{post.content}</p>
             )}
           </div>
 
-          {/* Article Tags */}
-          {post.tags?.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-10 pt-6 border-t border-slate-200/80">
-              {post.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-[#0284C7] hover:text-white border border-slate-200/80 text-slate-600 text-xs font-bold uppercase tracking-wider cursor-pointer transition-all duration-200"
-                >
-                  #{tag}
+          {/* Article Tags & Share */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-12 pt-8 border-t border-slate-200/80">
+            {post.tags?.length > 0 ? (
+              <div className="flex flex-wrap gap-2 items-center">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1">
+                  Tags:
                 </span>
-              ))}
-            </div>
-          )}
+                {post.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-[#0284C7] hover:text-white border border-slate-200/80 text-slate-600 text-xs font-bold uppercase tracking-wider cursor-pointer transition-all duration-200"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div />
+            )}
+
+            
+          </div>
         </motion.div>
       </main>
 

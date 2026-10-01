@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  ZoomIn,
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { X, ZoomIn, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "@/components/Breadcrumb";
 
@@ -41,13 +35,17 @@ export default function Gallery() {
     { key: "all", label: "All Projects" },
   ]);
 
-
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // ✅ PAGINATION STATES
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const LIMIT = 9;
 
   // ============================
   // GET ACTIVE CATEGORIES API
@@ -75,7 +73,7 @@ export default function Gallery() {
   }, []);
 
   // ============================
-  // GET GALLERY API
+  // GET GALLERY API (With Pagination)
   // ============================
   useEffect(() => {
     const fetchGallery = async () => {
@@ -91,8 +89,8 @@ export default function Gallery() {
           limit: number;
         } = {
           status: "active",
-          page: 1,
-          limit: 50,
+          page: page,
+          limit: LIMIT,
         };
 
         // Category filter
@@ -101,18 +99,33 @@ export default function Gallery() {
         }
 
         const response = await getGallery(params);
+        const newItems = Array.isArray(response?.gallery)
+          ? response.gallery
+          : [];
 
-        setGalleryItems(Array.isArray(response?.gallery) ? response.gallery : []);
+        // ✅ Page 1 par replace, baaki par append
+        if (page === 1) {
+          setGalleryItems(newItems);
+        } else {
+          setGalleryItems((prev) => [...prev, ...newItems]);
+        }
+
+        const totalAvailable = response?.filteredTotal ?? response?.total;
+        if (typeof totalAvailable === "number") {
+          setHasMore(page * LIMIT < totalAvailable);
+        } else {
+          setHasMore(newItems.length === LIMIT);
+        }
       } catch (error) {
         setError("Failed to load gallery images.");
-        setGalleryItems([]);
+        if (page === 1) setGalleryItems([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchGallery();
-  }, [activeCategory]);
+  }, [activeCategory, page]);
 
   // ============================
   // FILTERED ITEMS
@@ -123,7 +136,6 @@ export default function Gallery() {
     }
     return true;
   });
-
 
   // ============================
   // SELECTED ITEM
@@ -142,7 +154,7 @@ export default function Gallery() {
     }
 
     setSelectedIndex((prev) =>
-      prev === 0 ? filteredItems.length - 1 : (prev ?? 0) - 1
+      prev === 0 ? filteredItems.length - 1 : (prev ?? 0) - 1,
     );
   };
 
@@ -157,7 +169,7 @@ export default function Gallery() {
     }
 
     setSelectedIndex((prev) =>
-      prev === filteredItems.length - 1 ? 0 : (prev ?? 0) + 1
+      prev === filteredItems.length - 1 ? 0 : (prev ?? 0) + 1,
     );
   };
 
@@ -178,7 +190,7 @@ export default function Gallery() {
             ? prev === 0
               ? filteredItems.length - 1
               : prev - 1
-            : null
+            : null,
         );
       }
 
@@ -190,7 +202,7 @@ export default function Gallery() {
             ? prev === filteredItems.length - 1
               ? 0
               : prev + 1
-            : null
+            : null,
         );
       }
 
@@ -250,10 +262,9 @@ export default function Gallery() {
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
           >
-            Perfect Air Solution{" "}
-            <span className="text-cyan-300">Showcase</span>
+            Perfect Air Solution <span className="text-cyan-300">Showcase</span>
           </motion.h1>
 
           <motion.p
@@ -289,6 +300,8 @@ export default function Gallery() {
               onClick={() => {
                 setActiveCategory(cat.key);
                 setSelectedIndex(null);
+                setPage(1); // ✅ Page reset
+                setGalleryItems([]); // ✅ Purane items clear
               }}
               className={`px-5 py-2.5 rounded-md font-semibold text-sm transition-all duration-300 shadow-sm ${
                 activeCategory === cat.key
@@ -302,13 +315,11 @@ export default function Gallery() {
         </div>
 
         {/* ============================
-            LOADING
+            LOADING (Only first load)
         ============================ */}
-        {loading && (
+        {loading && page === 1 && (
           <div className="py-20 text-center">
-            <p className="text-slate-500 font-medium">
-              Loading gallery...
-            </p>
+            <p className="text-slate-500 font-medium">Loading gallery...</p>
           </div>
         )}
 
@@ -335,7 +346,7 @@ export default function Gallery() {
         {/* ============================
             GALLERY GRID
         ============================ */}
-        {!loading && !error && filteredItems.length > 0 && (
+        {!error && filteredItems.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredItems.map((item, idx) => (
               <motion.div
@@ -344,7 +355,7 @@ export default function Gallery() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 0.3,
-                  delay: idx * 0.05,
+                  delay: (idx % LIMIT) * 0.05,
                 }}
                 className="group relative h-64 sm:h-72 lg:h-80 rounded-xl overflow-hidden border border-slate-200/90 shadow-none transition-all duration-300 cursor-pointer bg-white"
                 onClick={() => setSelectedIndex(idx)}
@@ -352,10 +363,7 @@ export default function Gallery() {
                 <div className="relative w-full h-full overflow-hidden bg-white">
                   <img
                     src={item.image?.url}
-                    alt={
-                      item.galleryCategory?.title ||
-                      "HVAC Installation"
-                    }
+                    alt={item.galleryCategory?.title || "HVAC Installation"}
                     className="w-full h-full object-cover object-center"
                   />
 
@@ -366,6 +374,33 @@ export default function Gallery() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        )}
+
+        {/* ============================
+            ✅ LOAD MORE BUTTON
+        ============================ */}
+        {!error && filteredItems.length > 0 && hasMore && (
+          <div className="flex justify-center mt-10 mb-6">
+            <button
+              onClick={() => setPage((prev) => prev + 1)}
+              disabled={loading}
+              className="inline-flex items-center gap-2 bg-white hover:bg-[#0284C7] text-[#0284C7] hover:text-white font-bold px-8 py-3.5 rounded-md border-2 border-[#0284C7] transition-all duration-300 shadow-sm hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading && page > 1 ? "Loading..." : "Load More Images"}
+              {!(loading && page > 1) && <ArrowRight size={18} />}
+            </button>
+          </div>
+        )}
+
+        {/* ============================
+            ✅ NO MORE ITEMS
+        ============================ */}
+        {!error && filteredItems.length > 0 && !hasMore && (
+          <div className="text-center mt-10 mb-6">
+            <p className="text-slate-400 text-sm font-medium">
+              — You've seen all images —
+            </p>
           </div>
         )}
 
@@ -438,8 +473,7 @@ export default function Gallery() {
                     key={selectedItem._id}
                     src={selectedItem.image?.url}
                     alt={
-                      selectedItem.galleryCategory?.title ||
-                      "HVAC Installation"
+                      selectedItem.galleryCategory?.title || "HVAC Installation"
                     }
                     className="max-w-full max-h-full object-contain rounded-md select-none transition-opacity duration-150"
                   />
@@ -459,7 +493,7 @@ export default function Gallery() {
         ============================ */}
         <div className="mt-20 mb-12 sm:mb-20 bg-gradient-to-br from-[#051B30] to-[#0F4C81] rounded-md p-8 md:p-12 text-white text-center shadow-xl relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold mb-4">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-[1.75rem] font-extrabold mb-4 whitespace-nowrap">
               Need Custom HVAC System Design or Installation?
             </h2>
 

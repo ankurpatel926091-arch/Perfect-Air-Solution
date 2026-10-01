@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { toast } from "react-toastify";
-import { sendQuoteViaWhatsApp } from "@/lib/whatsapp";
 import {
   Wind,
   Star,
@@ -17,13 +15,7 @@ import {
   ThermometerSun,
   Droplet,
   MessageSquare,
-  LoaderCircle,
   Sparkles,
-  User,
-  Phone,
-  Mail,
-  CheckCircle2,
-  X,
 } from "lucide-react";
 import SplitAcImg from "@/assets/categories/split-ac.png";
 import WindowAcImg from "@/assets/categories/window-ac.png";
@@ -44,13 +36,6 @@ import DuctableAcImg from "@/assets/categories/ductable.jpg";
 import HeatPumpImg from "@/assets/categories/heat-pump.jpg";
 import VentilationImg from "@/assets/categories/ventilation.jpg";
 import productHeaderBg from "@/assets/HeaderBackgroundImg/ProductBackground.png";
-import {  
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import CTASection from "@/components/CTASection";
 import Breadcrumb from "@/components/Breadcrumb";
 
@@ -70,15 +55,6 @@ interface Category {
   brands: string[];
   price?: string;
   products: Product[];
-}
-
-interface EnquiryFormState {
-  name: string;
-  email: string;
-  phone: string;
-  brand: string;
-  city: string;
-  message: string;
 }
 
 const categories: Category[] = [
@@ -268,11 +244,10 @@ function StarRating({ count }: { count: number }) {
 
 function ProductCard({
   cat,
-  onGetQuote,
 }: {
   cat: Category;
-  onGetQuote: (product: Category, brand?: string) => void;
 }) {
+  const navigate = useNavigate();
   const isCommercialProduct = Boolean(cat.price);
 
   return (
@@ -320,7 +295,7 @@ function ProductCard({
               <button
                 key={b}
                 type="button"
-                onClick={() => onGetQuote(cat, b)}
+                onClick={() => navigate("/contact")}
                 className="text-xs px-2.5 py-1 rounded-full font-semibold bg-slate-100 text-slate-700 border border-slate-200/70 hover:bg-sky-50 hover:text-[#0284C7] hover:border-sky-200 transition-colors cursor-pointer"
                 title={`Get quote for ${b} ${cat.title}`}
               >
@@ -346,7 +321,7 @@ function ProductCard({
         {isCommercialProduct ? (
           <button
             type="button"
-            onClick={() => onGetQuote(cat)}
+            onClick={() => navigate("/contact")}
             className="mt-auto w-full py-3 px-4 rounded-md bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
             <MessageSquare size={15} />
@@ -356,7 +331,7 @@ function ProductCard({
         ) : (
           <button
             type="button"
-            onClick={() => onGetQuote(cat)}
+            onClick={() => navigate("/contact")}
             className="mt-auto w-full py-3 px-4 rounded-md bg-slate-100 hover:bg-[#051B30] text-slate-800 hover:text-white border border-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
           >
             <MessageSquare size={15} />
@@ -371,42 +346,8 @@ function ProductCard({
 
 export default function ProductsPage() {
   const [searchParams] = useSearchParams();
-  const getSavedCustomer = () => {
-    try {
-      const saved = localStorage.getItem("pas_customer_info");
-      if (saved) return JSON.parse(saved);
-    } catch {}
-    return { name: "", email: "", phone: "", city: "" };
-  };
-
   const [activeFilter, setActiveFilter] = useState("residential");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedEnquiryProduct, setSelectedEnquiryProduct] = useState<Category | null>(null);
-  const [selectedBrand, setSelectedBrand] = useState<string>("");
-  const [isSubmittingEnquiry, setIsSubmittingEnquiry] = useState(false);
-  const [enquiryForm, setEnquiryForm] = useState<EnquiryFormState>({
-    name: "",
-    email: "",
-    phone: "",
-    brand: "",
-    city: "",
-    message: "",
-  });
-
-  const handleOpenQuoteModal = (cat: Category, brandPreset?: string) => {
-    const saved = getSavedCustomer();
-    const initialBrand = brandPreset || (cat.brands && cat.brands.length > 0 ? cat.brands[0] : "All Brands");
-    setSelectedEnquiryProduct(cat);
-    setSelectedBrand(initialBrand);
-    setEnquiryForm({
-      name: saved.name || "",
-      email: saved.email || "",
-      phone: saved.phone || "",
-      city: saved.city || "",
-      brand: initialBrand,
-      message: `Hi, I would like to request a quote for ${cat.title}${initialBrand && initialBrand !== "All Brands" ? ` (${initialBrand})` : ""}. Please share pricing, product options, and installation details.`,
-    });
-  };
 
   const filters = [
     { id: "residential", label: "Residential Solution" },
@@ -459,77 +400,6 @@ export default function ProductsPage() {
     return matchesFilter && matchesCategory;
   });
 
-  const updateEnquiryField = (field: keyof EnquiryFormState, value: string) => {
-    let nextValue = value;
-
-    if (field === "name") nextValue = value.replace(/[^A-Za-z\s]/g, "");
-    if (field === "phone") nextValue = value.replace(/\D/g, "").slice(0, 10);
-
-    setEnquiryForm((prev) => ({ ...prev, [field]: nextValue }));
-  };
-
-  const closeEnquiryDialog = () => {
-    if (isSubmittingEnquiry) return;
-    setSelectedEnquiryProduct(null);
-  };
-
-  const handleEnquirySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!selectedEnquiryProduct || isSubmittingEnquiry) return;
-    if (!enquiryForm.name.trim() || !enquiryForm.phone.trim()) {
-      toast.error("Please provide your name and mobile number.");
-      return;
-    }
-    if (enquiryForm.phone.trim().length < 10) {
-      toast.error("Please enter a valid 10-digit mobile number.");
-      return;
-    }
-
-    setIsSubmittingEnquiry(true);
-    const toastId = toast.loading("Preparing quote enquiry...");
-
-    // Persist details for future convenience
-    try {
-      localStorage.setItem(
-        "pas_customer_info",
-        JSON.stringify({
-          name: enquiryForm.name.trim(),
-          email: enquiryForm.email.trim(),
-          phone: enquiryForm.phone.trim(),
-          city: enquiryForm.city.trim(),
-        })
-      );
-    } catch {}
-
-    try {
-      sendQuoteViaWhatsApp({
-        name: enquiryForm.name.trim(),
-        phone: enquiryForm.phone.trim(),
-        email: enquiryForm.email.trim() || "Not specified",
-        service: `Product Quote: ${selectedEnquiryProduct.title} (Brand: ${selectedBrand || "All Brands"})`,
-        notes: `${enquiryForm.message.trim()}${enquiryForm.city.trim() ? `\n📍 Location: ${enquiryForm.city.trim()}` : ""}`,
-      });
-
-      toast.update(toastId, {
-        render: "✅ Opening WhatsApp with your quote enquiry!",
-        type: "success",
-        isLoading: false,
-        autoClose: 3000,
-      });
-      setSelectedEnquiryProduct(null);
-    } catch (err: any) {
-      toast.update(toastId, {
-        render: "❌ Failed to prepare product enquiry.",
-        type: "error",
-        isLoading: false,
-        autoClose: 4000,
-      });
-    } finally {
-      setIsSubmittingEnquiry(false);
-    }
-  };
-
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
       
@@ -558,7 +428,7 @@ export default function ProductsPage() {
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
           >
             Cooling Products &amp; <span className="text-cyan-300">Solutions</span>
           </motion.h1>
@@ -609,201 +479,10 @@ export default function ProductsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {visible.map((cat) => (
-            <ProductCard key={cat.id} cat={cat} onGetQuote={handleOpenQuoteModal} />
+            <ProductCard key={cat.id} cat={cat} />
           ))}
         </div>
       </div>
-
-      <Dialog open={Boolean(selectedEnquiryProduct)} onOpenChange={(open) => !open && closeEnquiryDialog()}>
-        <DialogContent hideCloseButton className="z-[9999] sm:max-w-[500px] p-0 overflow-hidden rounded-xl max-h-[85vh] sm:max-h-[88vh] flex flex-col border border-slate-200 shadow-2xl">
-          {/* Modal Header */}
-          <div className="bg-gradient-to-r from-[#041C33] via-[#06375E] to-[#0D5F9F] text-white p-5 sm:p-6 pb-6 relative flex-shrink-0">
-            <button
-              type="button"
-              onClick={closeEnquiryDialog}
-              className="absolute right-4 top-4 z-30 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-colors cursor-pointer"
-              aria-label="Close"
-            >
-              <X size={16} />
-            </button>
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-cyan-400/20 border border-cyan-400/30 text-cyan-300 text-[10px] font-bold uppercase tracking-wider mb-2">
-              <Sparkles size={12} className="text-cyan-300" />
-              <span>Free Instant Quote</span>
-            </div>
-            <DialogTitle className="text-xl sm:text-2xl font-extrabold tracking-tight text-white pr-8">
-              Get Quote &amp; Consultation
-            </DialogTitle>
-            <DialogDescription className="text-xs sm:text-sm text-cyan-100/90 mt-1 pr-6">
-              {selectedEnquiryProduct
-                ? `Get estimated pricing, best model recommendations, and site support for ${selectedEnquiryProduct.title}.`
-                : "Enter your contact details below to receive a personalized quote."}
-            </DialogDescription>
-          </div>
-
-          {/* Form and product summary - Scrollable area */}
-          <div className="p-5 sm:p-6 overflow-y-auto flex-1 bg-white">
-            {selectedEnquiryProduct && (
-              <form className="space-y-4" onSubmit={handleEnquirySubmit}>
-                {/* Pre-filled Product Card Highlight */}
-                <div className="rounded-xl border border-sky-100 bg-sky-50/70 p-3 flex items-center gap-3">
-                  <div className="w-14 h-14 rounded-lg bg-white border border-sky-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
-                    <img
-                      src={selectedEnquiryProduct.image}
-                      alt={selectedEnquiryProduct.title}
-                      className="w-full h-full object-cover rounded"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0284C7]/10 text-[#0284C7]">
-                        {activeFilter === "commercial" ? "Commercial HVAC" : "Residential Solution"}
-                      </span>
-                      {selectedEnquiryProduct.price && (
-                        <span className="text-[11px] font-bold text-slate-700">
-                          {selectedEnquiryProduct.price}
-                        </span>
-                      )}
-                    </div>
-                    <h4 className="font-extrabold text-[#051B30] text-sm sm:text-base truncate mt-0.5">
-                      {selectedEnquiryProduct.title}
-                    </h4>
-                    <p className="text-[11px] text-slate-500 line-clamp-1">
-                      {selectedEnquiryProduct.description}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Pre-selected / Available Brand selection */}
-                {selectedEnquiryProduct.brands && selectedEnquiryProduct.brands.length > 0 && (
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
-                      <span>Preferred Brand</span>
-                      <span className="text-[11px] font-normal text-[#0284C7] font-semibold">Pre-filled</span>
-                    </label>
-                    <select
-                      value={selectedBrand}
-                      onChange={(e) => {
-                        const newBrand = e.target.value;
-                        setSelectedBrand(newBrand);
-                        setEnquiryForm((prev) => ({
-                          ...prev,
-                          brand: newBrand,
-                          message: `Hi, I would like to request a quote for ${selectedEnquiryProduct.title} (${newBrand}). Please share pricing, product options, and installation details.`,
-                        }));
-                      }}
-                      className="w-full rounded-md border border-slate-200 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:border-transparent transition-all cursor-pointer"
-                    >
-                      <option value="All Brands / Best Recommendation">All Brands / Best Recommendation</option>
-                      {selectedEnquiryProduct.brands.map((brand) => (
-                        <option key={brand} value={brand}>
-                          {brand}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
-                {/* Name Field */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Your Full Name <span className="text-rose-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <User size={16} className="absolute left-3.5 top-3 text-slate-400 pointer-events-none" />
-                    <input
-                      type="text"
-                      value={enquiryForm.name}
-                      onChange={(e) => updateEnquiryField("name", e.target.value)}
-                      placeholder="e.g. Ramesh Kumar"
-                      className="w-full rounded-md border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Phone & Email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Phone Number <span className="text-rose-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <Phone size={16} className="absolute left-3.5 top-3 text-slate-400 pointer-events-none" />
-                      <input
-                        type="tel"
-                        value={enquiryForm.phone}
-                        onChange={(e) => updateEnquiryField("phone", e.target.value)}
-                        placeholder="10-digit mobile"
-                        maxLength={10}
-                        className="w-full rounded-md border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Email Address
-                    </label>
-                    <div className="relative">
-                      <Mail size={16} className="absolute left-3.5 top-3 text-slate-400 pointer-events-none" />
-                      <input
-                        type="email"
-                        value={enquiryForm.email}
-                        onChange={(e) => updateEnquiryField("email", e.target.value)}
-                        placeholder="name@example.com"
-                        className="w-full rounded-md border border-slate-200 bg-slate-50/50 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Requirement / Message (Pre-filled) */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center justify-between">
-                    <span>Requirement / Message</span>
-                    <span className="text-[11px] font-normal text-[#0284C7] font-semibold">Pre-filled</span>
-                  </label>
-                  <textarea
-                    value={enquiryForm.message}
-                    onChange={(e) => updateEnquiryField("message", e.target.value)}
-                    rows={3}
-                    className="w-full rounded-md border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:bg-white transition-all leading-relaxed"
-                    required
-                  />
-                </div>
-
-                {/* Trust Highlight */}
-                <div className="flex items-center justify-center gap-4 text-[11px] font-medium text-slate-500 pt-1">
-                  <span className="flex items-center gap-1 text-emerald-600 font-semibold">
-                    <CheckCircle2 size={13} /> Free Consultation
-                  </span>
-                  <span>•</span>
-                  <span>Direct WhatsApp Quotation</span>
-                </div>
-
-                {/* Submit button */}
-                <button
-                  type="submit"
-                  disabled={isSubmittingEnquiry}
-                  className="w-full rounded-md py-3 px-4 bg-gradient-to-r from-[#051B30] via-[#0B2E4C] to-[#0284C7] hover:from-[#0B2E4C] hover:to-[#0369A1] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20 hover:shadow-sky-600/30 transition-all cursor-pointer active:scale-[0.99]"
-                >
-                  {isSubmittingEnquiry ? (
-                    <LoaderCircle size={18} className="animate-spin" />
-                  ) : (
-                    <MessageSquare size={18} />
-                  )}
-                  <span>
-                    {isSubmittingEnquiry ? "Preparing Quotation..." : "Get Free Quote on WhatsApp"}
-                  </span>
-                </button>
-              </form>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-      
     </div>
-    
   );
 }

@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import CTASection from "@/components/CTASection";
-import { sendQuoteViaWhatsApp } from "@/lib/whatsapp";
 import servicesHeaderBg from "@/assets/HeaderBackgroundImg/ServicesBackground.png";
 import { ServiceData, staticServices } from "@/data/staticData";
 
@@ -45,13 +44,7 @@ export default function ServiceDetailPage() {
   const related = (services as ServiceData[]).filter((s: ServiceData) => s.slug !== service.slug).slice(0, 3);
 
   const handleBooking = () => {
-    sendQuoteViaWhatsApp({
-      serviceName: service.title,
-      name: "Customer",
-      phone: "+91 84291 52092", 
-      city: "Uttar Pradesh",
-      message: `Hi, I want to book the ${service.title} (${service.price}). Please share available slots.`,
-    });
+    navigate("/contact");
   };
 
   return (
@@ -82,7 +75,7 @@ export default function ServiceDetailPage() {
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
           >
             {service.title}
           </motion.h1>

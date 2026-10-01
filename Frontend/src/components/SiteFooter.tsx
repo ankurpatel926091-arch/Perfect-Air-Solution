@@ -210,13 +210,13 @@ const SiteFooter = () => {
       </div>
 
       {/* Bottom Copyright Bar - Bold Removed (font-normal) */}
-      <div className="border-t border-slate-800/80 bg-slate-950/80 py-5">
+      <div className="border-t border-slate-800/80 bg-slate-950/80 py-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-5">
-          <p className="text-sm sm:text-base text-slate-200 font-normal">
+          <p className="text-xs sm:text-sm text-slate-200 font-normal">
             © {new Date().getFullYear()} Perfect Air Solution. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-6 flex-wrap justify-center text-sm sm:text-base font-normal">
+          <div className="flex items-center gap-6 flex-wrap justify-center text-xs sm:text-sm font-normal">
             {policyLinks.map((l) => (
               <Link
                 key={l.label}
@@ -232,10 +232,10 @@ const SiteFooter = () => {
             href="https://www.codecrafter.co.in/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 text-sm sm:text-base text-slate-200 hover:text-white transition-colors text-decoration-none"
+            className="flex items-center gap-3 text-xs sm:text-sm text-slate-200 hover:text-white transition-colors text-decoration-none"
           >
             <span className="font-normal">Designed by</span>
-            <img src={cclogo} alt="CodeCrafter" className="h-10 sm:h-12 w-auto object-contain brightness-125 hover:scale-105 transition-transform" />
+            <img src={cclogo} alt="CodeCrafter" className="	h-8 sm:h-9 w-auto object-contain brightness-125 hover:scale-105 transition-transform" />
           </a>
         </div>
       </div>

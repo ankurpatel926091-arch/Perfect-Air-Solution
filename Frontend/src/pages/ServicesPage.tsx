@@ -168,7 +168,7 @@ export default function ServicesPage(): React.ReactElement {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-4 text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
           >
             Complete Air Solutions <span className="text-cyan-300">For Your Comfort</span>
           </motion.h1>

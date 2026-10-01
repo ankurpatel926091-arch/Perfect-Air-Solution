@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "framer-motion";
-import { Star, CheckCircle2, ShieldCheck, Clock, Award, ThumbsUp, Sparkles, Building2, Stethoscope, Hotel } from "lucide-react";
+import {
+  Star,
+  CheckCircle2,
+  ShieldCheck,
+  Clock,
+  Award,
+  ThumbsUp,
+  Sparkles,
+  Building2,
+  Stethoscope,
+  Hotel,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 type Testimonial = {
   id: string;
@@ -52,6 +66,42 @@ const testimonials: Testimonial[] = [
     avatarLetter: "R",
     gradient: "from-blue-600 to-indigo-600",
   },
+  {
+    id: "4",
+    name: "Priya Verma",
+    role: "VP Operations",
+    company: "InnoWave IT Park",
+    tag: "Corporate Tech Hub",
+    icon: Building2,
+    comment: "Flawless chiller plant installation with smart BMS integration. Their prompt emergency response and preventive AMC keep our 24/7 operations completely uninterrupted.",
+    rating: 5,
+    avatarLetter: "P",
+    gradient: "from-indigo-500 to-sky-600",
+  },
+  {
+    id: "5",
+    name: "Amitabh Sen",
+    role: "Plant Operations Head",
+    company: "Zenith Pharma Logistics",
+    tag: "Cold Chain & Warehousing",
+    icon: Building2,
+    comment: "Precision temperature control for our cold storage facilities. The team calibrated CFM airflow perfectly, resulting in significant operational efficiency.",
+    rating: 5,
+    avatarLetter: "A",
+    gradient: "from-teal-500 to-blue-600",
+  },
+  {
+    id: "6",
+    name: "Sunita Kapoor",
+    role: "Secretary",
+    company: "Royal Residency Towers",
+    tag: "Residential Luxury",
+    icon: Hotel,
+    comment: "From site survey to commissioning multi-split ACs for our club and penthouse apartments, Perfect Air Solution's certified engineers delivered exceptional workmanship.",
+    rating: 5,
+    avatarLetter: "S",
+    gradient: "from-sky-600 to-cyan-600",
+  },
 ];
 
 const metrics = [
@@ -82,8 +132,52 @@ const metrics = [
 ];
 
 export default function Testimonials() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 1,
+  });
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const scrollTo = useCallback(
+    (index: number) => {
+      if (emblaApi) emblaApi.scrollTo(index);
+    },
+    [emblaApi]
+  );
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+  }, [emblaApi, onSelect]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const interval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [emblaApi]);
+
   return (
-    <section className="py-16 sm:py-15 bg-gradient-to-b from-[#F0F8FF] via-[#F6FBFF] to-[#EBF5FA] text-slate-800 relative overflow-hidden font-sans">
+    <section className="py-12 md:py-14 bg-gradient-to-b from-[#F0F8FF] via-[#F6FBFF] to-[#EBF5FA] text-slate-800 relative overflow-hidden font-sans">
       {/* Background glow and dot matrix decoration */}
       <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#0284C7_1px,transparent_1px)] [background-size:28px_28px]" />
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-cyan-400/10 rounded-full filter blur-3xl pointer-events-none" />
@@ -92,14 +186,14 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500/10 via-cyan-500/15 to-sky-500/10 border border-sky-300/40 text-[#0284C7] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-0 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] text-xs font-bold uppercase tracking-wider mb-3.5 shadow-sm"
           >
-            <Sparkles className="w-3.5 h-3.5 text-cyan-600 animate-pulse" />
+            <Sparkles className="w-3.5 h-3.5 text-[#0284C7] animate-pulse" />
             <span>CLIENT FEEDBACK</span>
           </motion.div>
 
@@ -108,7 +202,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-3"
+            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#051B30] tracking-tight leading-tight mb-4"
           >
             Trusted by Commercial &amp;{" "}
             <span className="text-[#0284C7]">
@@ -127,64 +221,107 @@ export default function Testimonials() {
           </motion.p>
         </div>
 
-        {/* Testimonials Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {testimonials.map((t, idx) => {
-            const SectorIcon = t.icon;
-            return (
-              <motion.div
-                key={t.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.12, duration: 0.5 }}
-                className="bg-white/90 backdrop-blur-md rounded-xl p-7 sm:p-8 border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-none flex flex-col justify-between relative group transition-all duration-300 overflow-hidden"
-              >
-                {/* Top color gradient highlight bar on hover */}
-                <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${t.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-xl`} />
+        {/* Testimonials Carousel */}
+        <div className="relative">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex -ml-4 py-1">
+              {testimonials.map((t) => {
+                const SectorIcon = t.icon;
+                return (
+                  <div
+                    key={t.id}
+                    className="min-w-0 flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] pl-4"
+                  >
+                    <div className="h-full bg-white/95 backdrop-blur-md rounded-xl p-7 sm:p-8 border border-slate-200/90 hover:border-[#0284C7] shadow-none hover:shadow-md flex flex-col justify-between relative group transition-all duration-300 overflow-hidden">
+                      {/* Top color gradient highlight bar on hover */}
+                      <div
+                        className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${t.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-xl`}
+                      />
 
-                <div>
-                  {/* Sector Tag & Rating */}
-                  <div className="flex items-center justify-between gap-2 mb-6">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-slate-100/90 text-slate-700 border border-slate-200/70 group-hover:bg-cyan-50 group-hover:text-cyan-700 group-hover:border-cyan-200 transition-colors">
-                      <SectorIcon className="w-3.5 h-3.5 text-cyan-600" />
-                      <span>{t.tag}</span>
-                    </div>
+                      <div>
+                        {/* Sector Tag & Rating */}
+                        <div className="flex items-center justify-between gap-2 mb-5">
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-slate-100/90 text-slate-700 border border-slate-200/70 group-hover:bg-cyan-50 group-hover:text-cyan-700 group-hover:border-cyan-200 transition-colors">
+                            <SectorIcon className="w-3.5 h-3.5 text-cyan-600" />
+                            <span>{t.tag}</span>
+                          </div>
 
-                    <div className="flex items-center gap-1 bg-amber-50 border border-amber-200/60 px-2.5 py-1 rounded-md">
-                      <div className="flex text-amber-400">
-                        {Array.from({ length: t.rating }).map((_, i) => (
-                          <Star key={i} size={13} fill="currentColor" />
-                        ))}
+                          <div className="flex items-center gap-1 bg-amber-50 border border-amber-200/60 px-2.5 py-1 rounded-md">
+                            <div className="flex text-amber-400">
+                              {Array.from({ length: t.rating }).map((_, i) => (
+                                <Star key={i} size={13} fill="currentColor" />
+                              ))}
+                            </div>
+                            <span className="text-[11px] font-bold text-amber-700 ml-1">5.0</span>
+                          </div>
+                        </div>
+
+                        {/* Comment Body */}
+                        <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-normal mb-6 relative z-10">
+                          "{t.comment}"
+                        </p>
                       </div>
-                      <span className="text-[11px] font-bold text-amber-700 ml-1">5.0</span>
+
+                      {/* Author Info */}
+                      <div className="pt-5 border-t border-slate-100/90 flex items-center gap-3.5 mt-auto">
+                        <div
+                          className={`w-11 h-11 rounded-full bg-gradient-to-tr ${t.gradient} flex items-center justify-center text-white font-bold text-base shrink-0`}
+                        >
+                          {t.avatarLetter}
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="text-base font-bold text-[#051B30] group-hover:text-[#0284C7] transition-colors flex items-center gap-1.5 truncate">
+                            <span>{t.name}</span>
+                            <CheckCircle2 className="w-4 h-4 text-cyan-500 fill-cyan-500/10 shrink-0" />
+                          </h4>
+                          <p className="text-xs text-slate-500 mt-0.5 truncate">
+                            {t.role}, <span className="text-[#0284C7] font-semibold">{t.company}</span>
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                );
+              })}
+            </div>
+          </div>
 
-                  {/* Comment Body */}
-                  <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-normal mb-8 relative z-10">
-                    "{t.comment}"
-                  </p>
-                </div>
+          {/* Carousel Navigation Arrows & Dots */}
+          <div className="flex items-center justify-center gap-3 mt-6">
+            <button
+              onClick={scrollPrev}
+              type="button"
+              className="w-9 h-9 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 hover:text-[#0284C7] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
+              aria-label="Previous review"
+            >
+              <ChevronLeft size={18} />
+            </button>
 
-                {/* Author Info */}
-                <div className="pt-5 border-t border-slate-100/90 flex items-center gap-3.5">
-                  <div className={`w-11 h-11 rounded-full bg-gradient-to-tr ${t.gradient} flex items-center justify-center text-white font-bold text-base shrink-0`}>
-                    {t.avatarLetter}
-                  </div>
-                  <div className="min-w-0">
-                    <h4 className="text-base font-bold text-[#051B30] group-hover:text-[#0284C7] transition-colors flex items-center gap-1.5 truncate">
-                      <span>{t.name}</span>
-                      <CheckCircle2 className="w-4 h-4 text-cyan-500 fill-cyan-500/10 shrink-0" />
-                    </h4>
-                    <p className="text-xs text-slate-500 mt-0.5 truncate">
-                      {t.role}, <span className="text-[#0284C7] font-semibold">{t.company}</span>
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+            <div className="flex items-center gap-1.5 px-2">
+              {scrollSnaps.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => scrollTo(index)}
+                  type="button"
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                    index === selectedIndex
+                      ? "w-6 bg-[#0284C7]"
+                      : "w-2 bg-slate-300 hover:bg-slate-400"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={scrollNext}
+              type="button"
+              className="w-9 h-9 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 hover:text-[#0284C7] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
+              aria-label="Next review"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
 
         {/* Enhanced Glassmorphic Trust Metrics Bar */}

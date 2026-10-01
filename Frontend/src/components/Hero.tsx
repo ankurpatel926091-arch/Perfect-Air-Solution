@@ -400,34 +400,34 @@ const Hero = () => {
             </p>
 
             {/* Service Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 w-full max-w-xl mb-10">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-4 w-full max-w-xl mb-6 sm:mb-10">
 
               {/* Cooling */}
               <div
                 onClick={() => navigate("/services")}
-                className="flex items-center justify-between p-3 sm:p-3.5 rounded-xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+                className="flex items-center justify-between p-2.5 sm:p-3.5 rounded-xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
               >
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
 
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0091FF] to-[#00D4FF] flex items-center justify-center text-white shadow-[0_0_16px_rgba(0,180,255,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#0091FF] to-[#00D4FF] flex items-center justify-center text-white shadow-[0_0_16px_rgba(0,180,255,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
 
                     <Snowflake
-                      size={18}
-                      className="text-white"
+                      size={15}
+                      className="text-white sm:w-[18px] sm:h-[18px]"
                     />
 
                   </div>
 
-                  <span className="text-white font-bold text-xs sm:text-sm">
+                  <span className="text-white font-bold text-xs sm:text-sm truncate">
                     Cooling Solutions
                   </span>
 
                 </div>
 
                 <ArrowRight
-                  size={16}
-                  className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0"
+                  size={14}
+                  className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0 hidden xs:block sm:block"
                 />
 
               </div>
@@ -435,29 +435,29 @@ const Hero = () => {
               {/* Installation */}
               <div
                 onClick={() => navigate("/services")}
-                className="flex items-center justify-between p-3 sm:p-3.5 rounded-xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+                className="flex items-center justify-between p-2.5 sm:p-3.5 rounded-xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
               >
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
 
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#00C9A7] to-[#00E5BC] flex items-center justify-center text-white shadow-[0_0_16px_rgba(0,210,180,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#00C9A7] to-[#00E5BC] flex items-center justify-center text-white shadow-[0_0_16px_rgba(0,210,180,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
 
                     <Wrench
-                      size={18}
-                      className="text-white"
+                      size={15}
+                      className="text-white sm:w-[18px] sm:h-[18px]"
                     />
 
                   </div>
 
-                  <span className="text-white font-bold text-xs sm:text-sm">
+                  <span className="text-white font-bold text-xs sm:text-sm truncate">
                     Expert Installation
                   </span>
 
                 </div>
 
                 <ArrowRight
-                  size={16}
-                  className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0"
+                  size={14}
+                  className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0 hidden xs:block sm:block"
                 />
 
               </div>
@@ -465,29 +465,29 @@ const Hero = () => {
               {/* Trusted Service */}
               <div
                 onClick={() => navigate("/services")}
-                className="flex items-center justify-between p-3 sm:p-3.5 rounded-xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+                className="flex items-center justify-between p-2.5 sm:p-3.5 rounded-xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
               >
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
 
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#903AFF] to-[#B666FF] flex items-center justify-center text-white shadow-[0_0_16px_rgba(160,85,255,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#903AFF] to-[#B666FF] flex items-center justify-center text-white shadow-[0_0_16px_rgba(160,85,255,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
 
                     <ShieldCheck
-                      size={18}
-                      className="text-white"
+                      size={15}
+                      className="text-white sm:w-[18px] sm:h-[18px]"
                     />
 
                   </div>
 
-                  <span className="text-white font-bold text-xs sm:text-sm">
+                  <span className="text-white font-bold text-xs sm:text-sm truncate">
                     Trusted Service
                   </span>
 
                 </div>
 
                 <ArrowRight
-                  size={16}
-                  className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0"
+                  size={14}
+                  className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0 hidden xs:block sm:block"
                 />
 
               </div>
@@ -495,29 +495,29 @@ const Hero = () => {
               {/* Energy Efficient */}
               <div
                 onClick={() => navigate("/services")}
-                className="flex items-center justify-between p-3 sm:p-3.5 rounded-xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
+                className="flex items-center justify-between p-2.5 sm:p-3.5 rounded-xl bg-[#052848]/80 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-[#073660] transition-all duration-300 backdrop-blur-md group shadow-md cursor-pointer"
               >
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
 
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#FF9F1C] to-[#FFC107] flex items-center justify-center text-white shadow-[0_0_16px_rgba(255,159,28,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#FF9F1C] to-[#FFC107] flex items-center justify-center text-white shadow-[0_0_16px_rgba(255,159,28,0.75)] group-hover:scale-105 transition-transform flex-shrink-0">
 
                     <Zap
-                      size={18}
-                      className="text-white"
+                      size={15}
+                      className="text-white sm:w-[18px] sm:h-[18px]"
                     />
 
                   </div>
 
-                  <span className="text-white font-bold text-xs sm:text-sm">
+                  <span className="text-white font-bold text-xs sm:text-sm truncate">
                     Energy Efficient
                   </span>
 
                 </div>
 
                 <ArrowRight
-                  size={16}
-                  className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0"
+                  size={14}
+                  className="text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0 hidden xs:block sm:block"
                 />
 
               </div>
@@ -525,24 +525,24 @@ const Hero = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4 w-full">
+            <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-center sm:gap-4 w-full">
 
               <button
                 onClick={() => navigate("/services")}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#009BF2] via-[#00B4FF] to-[#00D4FF] hover:opacity-95 text-white font-bold text-sm sm:text-base shadow-lg shadow-cyan-500/30 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-7 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-[#009BF2] via-[#00B4FF] to-[#00D4FF] hover:opacity-95 text-white font-bold text-xs sm:text-base shadow-lg shadow-cyan-500/30 transition-all transform hover:-translate-y-0.5 cursor-pointer whitespace-nowrap text-center"
               >
                 <span>Explore Our Services</span>
 
-                <ArrowRight size={18} />
+                <ArrowRight size={14} className="sm:w-[18px] sm:h-[18px] shrink-0" />
               </button>
 
               <button
                 onClick={() => navigate("/contact")}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-cyan-400/40 text-white font-bold text-sm sm:text-base backdrop-blur-md transition-all transform hover:-translate-y-0.5 cursor-pointer shadow-md"
+                className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-cyan-400/40 text-white font-bold text-xs sm:text-base backdrop-blur-md transition-all transform hover:-translate-y-0.5 cursor-pointer shadow-md whitespace-nowrap text-center"
               >
                 <span>Get a Quote</span>
 
-                <ArrowRight size={18} />
+                <ArrowRight size={14} className="sm:w-[18px] sm:h-[18px] shrink-0" />
               </button>
 
             </div>
@@ -879,7 +879,7 @@ const Hero = () => {
       </div>
 
       {/* Slider Controls */}
-      <div className="absolute bottom-10 sm:bottom-14 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 px-4 py-2 rounded-full bg-[#03172C]/70 backdrop-blur-md border border-cyan-400/30 shadow-xl">
+      <div className="absolute bottom-10 sm:bottom-14 left-1/2 -translate-x-1/2 z-20 hidden sm:flex items-center gap-3 px-4 py-2 rounded-full bg-[#03172C]/70 backdrop-blur-md border border-cyan-400/30 shadow-xl">
 
         <button
           onClick={prevSlide}

@@ -64,7 +64,7 @@ const fadeUp = {
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-300 md:py-14 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] font-sans relative overflow-hidden">
+    <section className="py-12 md:py-14 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] font-sans relative overflow-hidden">
       {/* Background Soft Glow Accents */}
       <div className="absolute top-12 left-10 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -72,7 +72,7 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0695CD] text-xs font-bold uppercase tracking-wider mb-3.5 shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-[#0695CD] animate-pulse" />
             <span>Why Choose Perfect Air Solution</span>

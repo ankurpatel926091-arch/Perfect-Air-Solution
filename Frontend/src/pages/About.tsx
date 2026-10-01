@@ -99,7 +99,7 @@ const About = () => (
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
         >
           Building Comfort &amp; Engineering Trust <span className="text-cyan-300 block sm:inline-block">Since 2012</span>
         </motion.h1>
@@ -123,7 +123,7 @@ const About = () => (
     </section>
 
     {/* ── Our Story ── */}
-    <section className="py-16 sm:py-18 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] relative overflow-hidden">
+    <section className="py-10 sm:py-16 bg-gradient-to-b from-[#F8FAFC] via-[#F1F7FC] to-[#E6F4FA] relative overflow-hidden">
   {/* Background Ambient Glows */}
   <div className="absolute top-1/3 left-0 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl pointer-events-none" />
   <div className="absolute bottom-10 right-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -131,7 +131,7 @@ const About = () => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     
     {/* YAHAN CHANGE: items-start rakha taaki top se align ho */}
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-start">
       
       {/* Left Column: Story Content */}
       <motion.div
@@ -181,15 +181,8 @@ const About = () => (
       </motion.div>
 
       {/* Right Column: 4 Modern Highlight Cards */}
-      {/* YAHAN CHANGE: Right side ko ek wrapper diya aur usme pt diya */}
       <div className="lg:col-span-5 h-full">
-        {/* 
-          Yahan pt-[88px] ki jagah humne pt-[86px] ya pt-[90px] try kiya hai.
-          Lekin sabse best tareeka yeh hai ki aap browser mein inspect karke
-          left side ke Heading ke neeche ka exact gap dekh lein.
-          Filhal maine pt-[90px] diya hai jo ki heading + badge ki height ke lagbhag barabar hai.
-        */}
-        <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-4 h-full pt-[90px]">
+        <div className="grid grid-cols-2 grid-rows-2 gap-3.5 sm:gap-4 h-full pt-0 lg:pt-[90px]">
           {stats.map((s, i) => {
             const IconComp = s.icon;
             return (
@@ -236,7 +229,7 @@ const About = () => (
 </section>
 
     {/* ── Core Values Section ── */}
-    <section className="py-20 sm:py-16 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] relative overflow-hidden font-sans">
+    <section className="py-10 sm:py-14 bg-gradient-to-b from-[#F4FAFE] via-[#FFFFFF] to-[#EBF6FC] relative overflow-hidden font-sans">
       {/* Background Decorative Glow Accents */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -249,7 +242,7 @@ const About = () => (
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="text-center max-w-3xl mx-auto mb-10"
+          className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
         >
           <div className="inline-flex items-center  gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] text-xs font-bold uppercase tracking-wider mb-3.5 shadow-sm">
             <CheckCircle size={14} className="text-[#0284C7]" />
@@ -322,7 +315,7 @@ const About = () => (
     </section>
 
     {/* ── Milestones & Mission ── */}
-    <section className="py-16 sm:py-20 bg-gradient-to-b from-[#E6F4FA] via-[#F4FAFF] to-[#EEF8FF]">
+    <section className="py-10 sm:py-16 bg-gradient-to-b from-[#E6F4FA] via-[#F4FAFF] to-[#EEF8FF]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
