@@ -291,6 +291,47 @@
   margin-bottom: 0.5rem;
 }
 
+/* Numbered Headings (Align number badge directly beside heading text) */
+.blog-rich-content .blog-numbered-heading {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.875rem !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 1rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid #F1F5F9 !important;
+}
+
+.blog-rich-content .blog-numbered-heading h3 {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1.35rem !important;
+  line-height: 1.35 !important;
+  display: inline-block !important;
+}
+
+@media (min-width: 640px) {
+  .blog-rich-content .blog-numbered-heading h3 {
+    font-size: 1.5rem !important;
+  }
+}
+
+.blog-rich-content .blog-numbered-heading .blog-numbered-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+  border-radius: 0.75rem !important;
+  background: linear-gradient(135deg, #0284C7 0%, #06B6D4 100%) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25) !important;
+}
+
 /* Fallback for headings formatted as <p><strong>Heading</strong></p> */
 .blog-rich-content p:has(> strong:only-child) {
   color: #03172C;
@@ -430,5 +471,3 @@
 .blog-rich-content .blog-cta-card a span {
   color: #FFFFFF !important;
 }
-
-

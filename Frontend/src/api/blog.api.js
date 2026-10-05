@@ -10,7 +10,7 @@ export const getActiveBlogs = async () => {
   }
 
   const promise = baseApi
-    .get("/blogs/active")
+    .get("/blogs/active", { params: { _t: Date.now() } })
     .then((response) => response.data)
     .finally(() => {
       inFlightRequests.delete(key);
@@ -27,7 +27,7 @@ export const getBlogById = async (slugOrId) => {
   }
 
   const promise = baseApi
-    .get(`/blogs/${slugOrId}`)
+    .get(`/blogs/${slugOrId}`, { params: { _t: Date.now() } })
     .then((response) => response.data)
     .finally(() => {
       inFlightRequests.delete(key);

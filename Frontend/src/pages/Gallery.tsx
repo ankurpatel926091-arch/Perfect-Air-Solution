@@ -414,16 +414,16 @@ export default function Gallery() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{
-                duration: 0.15,
+                duration: 0.2,
                 ease: "easeInOut",
               }}
-              className="fixed inset-0 z-[1000] bg-black flex items-center justify-center p-4 sm:p-6 select-none"
+              className="fixed inset-0 z-[1000] bg-slate-950/70 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 md:p-8 select-none"
               onClick={() => setSelectedIndex(null)}
             >
               <motion.div
                 initial={{
                   opacity: 0,
-                  scale: 0.96,
+                  scale: 0.95,
                 }}
                 animate={{
                   opacity: 1,
@@ -431,20 +431,27 @@ export default function Gallery() {
                 }}
                 exit={{
                   opacity: 0,
-                  scale: 0.96,
+                  scale: 0.95,
                 }}
                 transition={{
-                  duration: 0.15,
+                  duration: 0.2,
                   ease: "easeInOut",
                 }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative max-w-4xl w-full h-[65vh] sm:h-[75vh] md:h-[80vh] flex items-center justify-center rounded-xl bg-black border border-white/10 shadow-2xl overflow-hidden"
+                className="relative max-w-4xl w-full h-[60vh] sm:h-[70vh] md:h-[75vh] flex items-center justify-center rounded-2xl bg-slate-900/30 backdrop-blur-md border border-white/20 shadow-2xl overflow-hidden"
               >
+                {/* Category Title Badge */}
+                {selectedItem.galleryCategory?.title && (
+                  <div className="absolute top-4 left-4 z-30 bg-black/50 backdrop-blur-md text-white text-xs font-bold px-3.5 py-1.5 rounded-full border border-white/20 shadow-md pointer-events-none">
+                    {selectedItem.galleryCategory.title}
+                  </div>
+                )}
+
                 {/* Close Button */}
                 <button
                   onClick={() => setSelectedIndex(null)}
                   aria-label="Close"
-                  className="absolute top-4 right-4 z-30 bg-black/70 hover:bg-black text-white p-2.5 rounded-full transition-colors border border-white/20 shadow-lg cursor-pointer"
+                  className="absolute top-4 right-4 z-30 bg-black/50 hover:bg-rose-600/90 backdrop-blur-md text-white p-2.5 rounded-full transition-all border border-white/20 shadow-lg cursor-pointer hover:scale-105 active:scale-95"
                 >
                   <X size={20} />
                 </button>
@@ -453,7 +460,7 @@ export default function Gallery() {
                 <button
                   onClick={handlePrev}
                   aria-label="Previous image"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/70 hover:bg-[#0284C7] text-white p-3 rounded-full transition-all duration-200 border border-white/20 shadow-xl cursor-pointer hover:scale-110 active:scale-95"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/50 hover:bg-[#0284C7] backdrop-blur-md text-white p-3 rounded-full transition-all duration-200 border border-white/20 shadow-xl cursor-pointer hover:scale-110 active:scale-95"
                 >
                   <ChevronLeft size={24} />
                 </button>
@@ -462,12 +469,12 @@ export default function Gallery() {
                 <button
                   onClick={handleNext}
                   aria-label="Next image"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/70 hover:bg-[#0284C7] text-white p-3 rounded-full transition-all duration-200 border border-white/20 shadow-xl cursor-pointer hover:scale-110 active:scale-95"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/50 hover:bg-[#0284C7] backdrop-blur-md text-white p-3 rounded-full transition-all duration-200 border border-white/20 shadow-xl cursor-pointer hover:scale-110 active:scale-95"
                 >
                   <ChevronRight size={24} />
                 </button>
 
-                {/* Image */}
+                {/* Image - Same height & width for all photos */}
                 <div className="w-full h-full flex items-center justify-center overflow-hidden">
                   <img
                     key={selectedItem._id}
@@ -475,12 +482,12 @@ export default function Gallery() {
                     alt={
                       selectedItem.galleryCategory?.title || "HVAC Installation"
                     }
-                    className="max-w-full max-h-full object-contain rounded-md select-none transition-opacity duration-150"
+                    className="w-full h-full object-cover object-center select-none transition-opacity duration-200"
                   />
                 </div>
 
                 {/* Counter */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 bg-black/70 text-white/90 text-xs font-bold px-4 py-1.5 rounded-full border border-white/15 pointer-events-none">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-4 py-1.5 rounded-full border border-white/20 pointer-events-none shadow-md">
                   {(selectedIndex ?? 0) + 1} / {filteredItems.length}
                 </div>
               </motion.div>

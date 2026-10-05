@@ -1,16 +1,45 @@
 import { motion } from "framer-motion";
-import { RotateCcw, CheckCircle, XCircle, Clock, CreditCard, Mail, Phone, HelpCircle, Sparkles, CheckCircle2, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  RotateCcw,
+  CheckCircle,
+  XCircle,
+  Clock,
+  CreditCard,
+  Mail,
+  Phone,
+  HelpCircle,
+  Sparkles,
+  CheckCircle2,
+  ShieldCheck,
+  ArrowRight,
+} from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
 };
 
 const keyHighlights = [
-  { icon: Clock, title: "7-Day Return Window", desc: "Initiate return or replacement requests within 7 days of delivery" },
-  { icon: CreditCard, title: "Fast 5–7 Days Refund", desc: "Refunds credited directly to your original payment method or bank" },
-  { icon: ShieldCheck, title: "100% Transit Assurance", desc: "Free replacement for any unit with verified transit damage" },
+  {
+    icon: Clock,
+    title: "7-Day Return Window",
+    desc: "Initiate return or replacement requests within 7 days of delivery",
+  },
+  {
+    icon: CreditCard,
+    title: "Fast 5–7 Days Refund",
+    desc: "Refunds credited directly to your original payment method or bank",
+  },
+  {
+    icon: ShieldCheck,
+    title: "100% Transit Assurance",
+    desc: "Free replacement for any unit with verified transit damage",
+  },
 ];
 
 const sections = [
@@ -83,7 +112,10 @@ const sections = [
 
 const RefundPolicy = () => {
   return (
-    <div className="font-sans min-h-screen bg-slate-50 text-slate-800" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+    <div
+      className="font-sans min-h-screen bg-slate-50 text-slate-800"
+      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+    >
       {/* ── Hero Section ── */}
       <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
         {/* Ambient Gradient Glows */}
@@ -109,11 +141,15 @@ const RefundPolicy = () => {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans">
-              Refund &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-[#38BDF8]">Cancellation</span>
+              Refund &amp;{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-[#38BDF8]">
+                Cancellation
+              </span>
             </h1>
 
             <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed mb-4">
-              Your satisfaction and trust are our top priorities. Learn about our clear, fair, and hassle-free return and refund procedures.
+              Your satisfaction and trust are our top priorities. Learn about
+              our clear, fair, and hassle-free return and refund procedures.
             </p>
 
             <div className="inline-flex items-center gap-2 text-xs font-medium text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-white/10">
@@ -139,8 +175,12 @@ const RefundPolicy = () => {
                 <item.icon size={20} />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-[#051B30] mb-0.5">{item.title}</h2>
-                <p className="text-xs text-slate-500 leading-relaxed font-normal">{item.desc}</p>
+                <h2 className="text-sm font-bold text-[#051B30] mb-0.5">
+                  {item.title}
+                </h2>
+                <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                  {item.desc}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -148,7 +188,8 @@ const RefundPolicy = () => {
       </section>
 
       {/* ── Detailed Policy Sections ── */}
-      <section className="py-14 sm:py-20 px-4 sm:px-6">
+      <section className="pt-6 sm:pt-10 pb-6 sm:pb-8 px-4 sm:px-6">
+        {" "}
         <div className="max-w-4xl mx-auto space-y-6">
           {sections.map((s, i) => (
             <motion.div
@@ -161,20 +202,32 @@ const RefundPolicy = () => {
             >
               <div className="flex flex-wrap items-center justify-between gap-3 mb-5 pb-4 border-b border-slate-100">
                 <div className="flex items-center gap-3.5">
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${s.iconColor} flex items-center justify-center text-white shadow-md`}>
+                  <div
+                    className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${s.iconColor} flex items-center justify-center text-white shadow-md`}
+                  >
                     <s.icon size={20} />
                   </div>
-                  <h2 className="text-lg sm:text-xl font-bold text-[#051B30] tracking-tight">{s.title}</h2>
+                  <h2 className="text-lg sm:text-xl font-bold text-[#051B30] tracking-tight">
+                    {s.title}
+                  </h2>
                 </div>
-                <span className={`text-[11px] font-bold border px-3 py-1 rounded-full uppercase tracking-wider ${s.badgeColor}`}>
+                <span
+                  className={`text-[11px] font-bold border px-3 py-1 rounded-full uppercase tracking-wider ${s.badgeColor}`}
+                >
                   {s.tag}
                 </span>
               </div>
 
               <ul className="space-y-3.5">
                 {s.content.map((point, j) => (
-                  <li key={j} className="flex items-start gap-3 text-sm sm:text-base leading-relaxed text-slate-600 font-normal">
-                    <CheckCircle2 size={18} className="text-[#0284C7] flex-shrink-0 mt-0.5" />
+                  <li
+                    key={j}
+                    className="flex items-start gap-3 text-sm sm:text-base leading-relaxed text-slate-600 font-normal"
+                  >
+                    <CheckCircle2
+                      size={18}
+                      className="text-[#0284C7] flex-shrink-0 mt-0.5"
+                    />
                     <span>{point}</span>
                   </li>
                 ))}
@@ -200,10 +253,12 @@ const RefundPolicy = () => {
                   Need help with a return, refund, or exchange?
                 </h3>
                 <p className="text-slate-300 text-sm leading-relaxed max-w-xl font-normal">
-                  Our customer care team is available Monday to Saturday (9:00 AM – 7:00 PM) to help you resolve your request promptly.
+                  Our customer care team is available Monday to Saturday (9:00
+                  AM – 7:00 PM) to help you resolve your request promptly.
                 </p>
                 <p className="text-xs text-slate-400 mt-2">
-                  Corporate Office: Perfect Air Solution, Civil Lines, Uttar Pradesh 241001.
+                  Corporate Office: Perfect Air Solution, Civil Lines, Uttar
+                  Pradesh 241001.
                 </p>
               </div>
 

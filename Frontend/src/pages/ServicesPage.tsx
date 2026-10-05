@@ -12,7 +12,6 @@ import splitAcImg from "@/assets/categories/split-ac.png";
 import repairImg from "@/assets/why_choose_showcase.jpg";
 import amcImg from "@/assets/commercial.jpg";
 import vrfImg from "@/assets/categories/vrf.png";
-import ductableImg from "@/assets/categories/ductable.jpg";
 import ahuImg from "@/assets/categories/air-handling-unit.png";
 import chillerImg from "@/assets/categories/chiller.jpg";
 import copperImg from "@/assets/categories/ventilation.jpg";
@@ -98,15 +97,6 @@ const staticServicesList: StaticService[] = [
     bullets: ["Multi-Zone Thermostat Control", "Up to 40% Power Savings", "Daikin & Blue Star Certified"],
     icon: Building2,
     image: vrfImg,
-  },
-  {
-    slug: "ductable-cassette-ac",
-    title: "Ductable & Cassette AC Solutions",
-    badge: "Flush Ceiling Fit",
-    desc: "Heavy-duty ductable and 4-way ceiling cassette AC setups engineered for uniform 360-degree air distribution.",
-    bullets: ["360° Air Diffusion Vents", "Low-Noise Operation", "Sleek Flush Ceiling Design"],
-    icon: Wind,
-    image: ductableImg,
   },
 ];
 

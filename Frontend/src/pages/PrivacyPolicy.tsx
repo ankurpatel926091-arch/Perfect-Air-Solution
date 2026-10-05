@@ -1,17 +1,45 @@
 import { motion } from "framer-motion";
-import { Shield, Eye, Database, Lock, UserCheck, Mail, Phone, CheckCircle2, Sparkles, FileText, ArrowRight } from "lucide-react";
+import {
+  Shield,
+  Eye,
+  Database,
+  Lock,
+  UserCheck,
+  Mail,
+  Phone,
+  CheckCircle2,
+  Sparkles,
+  FileText,
+  ArrowRight,
+} from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
 import { Link } from "react-router-dom";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
 };
 
 const keyHighlights = [
-  { icon: Lock, title: "100% Secure Data", desc: "Industry-grade encryption for transactions & personal records" },
-  { icon: Eye, title: "Zero Data Selling", desc: "We never sell or rent your personal info to third parties" },
-  { icon: UserCheck, title: "Full User Control", desc: "Easily access, update, or request deletion of your information" },
+  {
+    icon: Lock,
+    title: "100% Secure Data",
+    desc: "Industry-grade encryption for transactions & personal records",
+  },
+  {
+    icon: Eye,
+    title: "Zero Data Selling",
+    desc: "We never sell or rent your personal info to third parties",
+  },
+  {
+    icon: UserCheck,
+    title: "Full User Control",
+    desc: "Easily access, update, or request deletion of your information",
+  },
 ];
 
 const sections = [
@@ -73,7 +101,10 @@ const sections = [
 
 const PrivacyPolicy = () => {
   return (
-    <div className="font-sans min-h-screen bg-slate-50 text-slate-800" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+    <div
+      className="font-sans min-h-screen bg-slate-50 text-slate-800"
+      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+    >
       {/* ── Hero Section ── */}
       <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24 bg-[#03172C] text-white overflow-hidden">
         {/* Ambient Gradient Glows */}
@@ -99,11 +130,15 @@ const PrivacyPolicy = () => {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans">
-              Privacy <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-[#38BDF8]">Policy</span>
+              Privacy{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-[#38BDF8]">
+                Policy
+              </span>
             </h1>
 
             <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed mb-4">
-              We are committed to protecting your personal information and being transparent about how we collect, use, and safeguard your data.
+              We are committed to protecting your personal information and being
+              transparent about how we collect, use, and safeguard your data.
             </p>
 
             <div className="inline-flex items-center gap-2 text-xs font-medium text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-white/10">
@@ -129,8 +164,12 @@ const PrivacyPolicy = () => {
                 <item.icon size={20} />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-[#051B30] mb-0.5">{item.title}</h2>
-                <p className="text-xs text-slate-500 leading-relaxed font-normal">{item.desc}</p>
+                <h2 className="text-sm font-bold text-[#051B30] mb-0.5">
+                  {item.title}
+                </h2>
+                <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                  {item.desc}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -138,7 +177,8 @@ const PrivacyPolicy = () => {
       </section>
 
       {/* ── Detailed Policy Sections ── */}
-      <section className="py-14 sm:py-20 px-4 sm:px-6">
+      <section className="pt-6 sm:pt-10 pb-6 sm:pb-8 px-4 sm:px-6">
+        {" "}
         <div className="max-w-4xl mx-auto space-y-6">
           {sections.map((s, i) => (
             <motion.div
@@ -154,7 +194,9 @@ const PrivacyPolicy = () => {
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#0284C7] to-cyan-400 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
                     <s.icon size={20} />
                   </div>
-                  <h2 className="text-lg sm:text-xl font-bold text-[#051B30] tracking-tight">{s.title}</h2>
+                  <h2 className="text-lg sm:text-xl font-bold text-[#051B30] tracking-tight">
+                    {s.title}
+                  </h2>
                 </div>
                 <span className="text-[11px] font-bold text-[#0284C7] bg-sky-50 border border-sky-100 px-3 py-1 rounded-full uppercase tracking-wider">
                   {s.tag}
@@ -163,8 +205,14 @@ const PrivacyPolicy = () => {
 
               <ul className="space-y-3.5">
                 {s.content.map((point, j) => (
-                  <li key={j} className="flex items-start gap-3 text-sm sm:text-base leading-relaxed text-slate-600 font-normal">
-                    <CheckCircle2 size={18} className="text-[#0284C7] flex-shrink-0 mt-0.5" />
+                  <li
+                    key={j}
+                    className="flex items-start gap-3 text-sm sm:text-base leading-relaxed text-slate-600 font-normal"
+                  >
+                    <CheckCircle2
+                      size={18}
+                      className="text-[#0284C7] flex-shrink-0 mt-0.5"
+                    />
                     <span>{point}</span>
                   </li>
                 ))}
@@ -186,14 +234,16 @@ const PrivacyPolicy = () => {
                   <Mail size={13} />
                   <span>PRIVACY OFFICER</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 font-sans">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 font-sans">
                   Have questions about your data privacy?
                 </h3>
                 <p className="text-slate-300 text-sm leading-relaxed max-w-xl font-normal">
-                  Our compliance team is here to assist you with data requests, account updates, or privacy questions.
+                  Our compliance team is here to assist you with data requests,
+                  account updates, or privacy questions.
                 </p>
                 <p className="text-xs text-slate-400 mt-2">
-                  Corporate Office: Perfect Air Solution, Civil Lines, Uttar Pradesh 241001.
+                  Corporate Office: Perfect Air Solution, Civil Lines, Uttar
+                  Pradesh 241001.
                 </p>
               </div>
 

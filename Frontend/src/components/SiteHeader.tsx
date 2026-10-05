@@ -37,7 +37,7 @@ const SiteHeader = () => {
   }, [menuOpen]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -52,24 +52,34 @@ const SiteHeader = () => {
         }`}
       >
         {/* Top Info Strip */}
-        <div className="hidden lg:block bg-[#051B30] text-slate-300 text-xs py-1.5 border-b border-slate-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <div className="flex items-center gap-6">
-              <span className="flex items-center gap-1.5 text-cyan-400 font-medium">
-                <ShieldCheck size={14} /> Certified HVAC Engineers & Technicians
-              </span>
-              <span>•</span>
-              <span>Email: <a href="mailto:info@perfectairsolution.com" className="hover:text-cyan-400 transition-colors">info@perfectairsolution.com</a></span>
-            </div>
-            <div className="flex items-center gap-4">
-              <span>Working Hours: Mon - Sat 9:00 AM - 7:00 PM</span>
-              <span>•</span>
-              <a href="tel:+91 84291 52092" className="text-cyan-400 font-bold hover:underline">
-                Call: +91 84291 52092
-              </a>
-            </div>
-          </div>
-        </div>
+        <AnimatePresence initial={false}>
+          {!scrolled && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="hidden lg:block overflow-hidden bg-[#051B30] text-slate-300 text-xs border-b border-slate-800"
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-1.5">
+                <div className="flex items-center gap-6">
+                  <span className="flex items-center gap-1.5 text-cyan-400 font-medium">
+                    <ShieldCheck size={14} /> Certified HVAC Engineers & Technicians
+                  </span>
+                  <span>•</span>
+                  <span>Email: <a href="mailto:info@perfectairsolution.com" className="hover:text-cyan-400 transition-colors">info@perfectairsolution.com</a></span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span>Working Hours: Mon - Sat 9:00 AM - 7:00 PM</span>
+                  <span>•</span>
+                  <a href="tel:+91 84291 52092" className="text-cyan-400 font-bold hover:underline">
+                    Call: +91 84291 52092
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Inner flex row */}
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-[64px] sm:h-[68px] md:h-[72px]">

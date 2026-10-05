@@ -28,25 +28,70 @@ const enhanceBlogContent = (html: string): string => {
   // 1. Remove trailing empty paragraphs with spaces, &nbsp;, or <br>
   let processed = html.replace(/<p>(?:&nbsp;|\s|<br\s*\/?>)*<\/p>/gi, "");
 
-  
-
-  // 3. Numbered headings: <p><strong>1. Reduced Cooling Performance</strong></p>
+  // 2. Numbered headings with body in the same paragraph separated by <br>:
+  // Example: <p>1. Clean the Condenser Coils Regularly<br>Description text...</p>
   processed = processed.replace(
-    /<p>\s*<strong>(\d+)[\.\)]\s*([^<]+)<\/strong>\s*<\/p>/gi,
-    (_match, num, title) => {
+    /<p>\s*(?:<strong>)?(\d+)[\.\)]\s*([^<]+?)(?:<\/strong>)?\s*<br\s*\/?>([\s\S]*?)<\/p>/gi,
+    (_match, num, title, desc) => {
       return `
-      <div class="mt-10 sm:mt-12 mb-4 pt-6 border-t border-slate-100 flex items-start gap-3.5">
-        <span class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#0284C7] to-cyan-500 text-white flex items-center justify-center font-extrabold text-sm sm:text-base shadow-sm shadow-sky-500/25">
+      <div class="blog-numbered-heading mt-10 sm:mt-12 mb-4 pt-6 border-t border-slate-100 flex items-center gap-3.5">
+        <span class="blog-numbered-badge flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#0284C7] to-cyan-500 text-white flex items-center justify-center font-extrabold text-sm sm:text-base shadow-sm shadow-sky-500/25">
           ${num}
         </span>
-        <h3 class="text-xl sm:text-2xl font-extrabold text-[#03172C] tracking-tight leading-snug pt-0.5">
+        <h3 class="text-xl sm:text-2xl font-extrabold text-[#03172C] tracking-tight leading-snug !m-0 !p-0">
+          ${title.trim()}
+        </h3>
+      </div>
+      <p>${desc.trim()}</p>`;
+    }
+  );
+
+  // 3. Standalone numbered headings: <p><strong>1. Reduced Cooling Performance</strong></p> or <h3>1. ...</h3>
+  processed = processed.replace(
+    /<(?:p|h[2-4])>\s*(?:<strong>)?(\d+)[\.\)]\s*([^<]+?)(?:<\/strong>)?\s*<\/(?:p|h[2-4])>/gi,
+    (_match, num, title) => {
+      return `
+      <div class="blog-numbered-heading mt-10 sm:mt-12 mb-4 pt-6 border-t border-slate-100 flex items-center gap-3.5">
+        <span class="blog-numbered-badge flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#0284C7] to-cyan-500 text-white flex items-center justify-center font-extrabold text-sm sm:text-base shadow-sm shadow-sky-500/25">
+          ${num}
+        </span>
+        <h3 class="text-xl sm:text-2xl font-extrabold text-[#03172C] tracking-tight leading-snug !m-0 !p-0">
           ${title.trim()}
         </h3>
       </div>`;
     }
   );
 
-  // 4. Section headings: <p><strong>Introduction</strong></p>, etc.
+  // 4. Section headings with body separated by <br>:
+  processed = processed.replace(
+    /<p>\s*(?:<strong>)?(Introduction|Conclusion|Why Regular Maintenance Matters|Top \d+[^<]*?)(?:<\/strong>)?\s*<br\s*\/?>([\s\S]*?)<\/p>/gi,
+    (_match, title, body) => {
+      return `
+      <div class="mt-9 mb-4">
+        <h3 class="text-xl sm:text-2xl font-extrabold text-[#03172C] tracking-tight flex items-center gap-2.5">
+          <span class="w-1.5 h-6 rounded-full bg-[#0284C7] inline-block flex-shrink-0"></span>
+          <span>${title.trim()}</span>
+        </h3>
+      </div>
+      <p>${body.trim()}</p>`;
+    }
+  );
+
+  // 5. Standalone section headings (Introduction, Conclusion, etc.):
+  processed = processed.replace(
+    /<p>\s*(?:<strong>)?(Introduction|Conclusion|Why Regular Maintenance Matters|Top \d+[^<]*?)(?:<\/strong>)?\s*<\/p>/gi,
+    (_match, title) => {
+      return `
+      <div class="mt-9 mb-4">
+        <h3 class="text-xl sm:text-2xl font-extrabold text-[#03172C] tracking-tight flex items-center gap-2.5">
+          <span class="w-1.5 h-6 rounded-full bg-[#0284C7] inline-block flex-shrink-0"></span>
+          <span>${title.trim()}</span>
+        </h3>
+      </div>`;
+    }
+  );
+
+  // 6. Generic strong section headings: <p><strong>Heading</strong></p>
   processed = processed.replace(
     /<p>\s*<strong>([^<]{2,90})<\/strong>\s*<\/p>/gi,
     (_match, title) => {
@@ -57,6 +102,26 @@ const enhanceBlogContent = (html: string): string => {
           <span>${title.trim()}</span>
         </h3>
       </div>`;
+    }
+  );
+
+  // 7. Bullet lists typed as "* item" or "• item" separated by <br>:
+  processed = processed.replace(
+    /<p>((?:(?:\*|•)\s*[^<]+<br\s*\/?>)+?(?:\*|•)\s*[^<]+)<\/p>/gi,
+    (_match, listBlock) => {
+      const items = listBlock
+        .split(/<br\s*\/?>/gi)
+        .map((s: string) => s.replace(/^[\s\*•]+/, "").trim())
+        .filter(Boolean);
+      return `
+      <ul class="my-4 space-y-2 list-none pl-0">
+        ${items
+          .map(
+            (it: string) =>
+              `<li class="flex items-start gap-2.5 text-slate-700 leading-relaxed"><span class="w-2 h-2 rounded-full bg-[#0284C7] mt-2 flex-shrink-0"></span><span>${it}</span></li>`
+          )
+          .join("")}
+      </ul>`;
     }
   );
 
@@ -297,13 +362,13 @@ const BlogPost = () => {
       </section>
 
       {/* ── ARTICLE CONTENT CARD ── */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-10 sm:-mt-16 pb-16">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-10 sm:-mt-16 pb-6 sm:pb-8">
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-2xl p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.06)] relative"
+          className="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 pb-6 sm:pb-8 lg:pb-8 border border-slate-200/90 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.06)] relative"
         >
 
           {/* Top Gradient Bar */}
@@ -444,8 +509,8 @@ const BlogPost = () => {
           </div>
 
           {/* Article Tags & Share */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-12 pt-8 border-t border-slate-200/80">
-            {post.tags?.length > 0 ? (
+          {post.tags?.length > 0 && (
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-8 pt-6 border-t border-slate-200/80">
               <div className="flex flex-wrap gap-2 items-center">
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1">
                   Tags:
@@ -459,18 +524,14 @@ const BlogPost = () => {
                   </span>
                 ))}
               </div>
-            ) : (
-              <div />
-            )}
-
-            
-          </div>
+            </div>
+          )}
         </motion.div>
       </main>
 
       {/* ── RELATED ARTICLES ── */}
       {relatedPosts.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 sm:pt-6 sm:pb-14">
 
           <div className="flex items-center justify-between gap-4 mb-8">
 
