@@ -160,9 +160,9 @@ const contactDetails = [
     sub: "Serving all Over India",
     href: "https://maps.google.com/?q=184,+New+Civil+Lines,+Hardoi,+Uttar+Pradesh+241001",
     target: "_blank",
-    hoverColor: "rgba(239,68,68,0.08)",
-    hoverBorder: "rgba(239,68,68,0.3)",
-    iconColor: "#dc2626",
+    hoverColor: "rgba(20,184,166,0.08)", // teal tint
+    hoverBorder: "rgba(20,184,166,0.3)", // teal border
+    iconColor: "#0d9488", // teal icon/text
     actionLabel: "Open in Maps",
     showExternal: true,
   },

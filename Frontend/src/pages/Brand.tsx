@@ -13,7 +13,7 @@ const BrandCard: React.FC<{ brand: any; index: number }> = ({ brand, index }) =>
     whileHover={{ scale: 1.06 }}
     style={{
       background: BRAND.white,
-      border: `1px solid ${BRAND.slate100}`,
+      border: "1px solid #CBD5E1",
       borderRadius: "12px",
       display: "flex",
       alignItems: "center",
@@ -21,7 +21,7 @@ const BrandCard: React.FC<{ brand: any; index: number }> = ({ brand, index }) =>
       padding: "28px 20px",
       cursor: "pointer",
       aspectRatio: "1 / 1",
-      boxShadow: `0 2px 16px ${BRAND.primary}14`,
+      boxShadow: `0 4px 16px ${BRAND.primary}1A`,
       position: "relative",
       overflow: "hidden",
     }}

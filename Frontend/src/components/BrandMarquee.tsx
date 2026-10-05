@@ -22,14 +22,14 @@ function BrandCard({ brand }: { brand: any }) {
         flexShrink: 0,
         width: "180px",
         background: BRAND.white,
-        border: `1px solid ${BRAND.slate100}`,
+        border: "1px solid #CBD5E1",
         borderRadius: "12px",
         cursor: "pointer",
         textAlign: "center",
         padding: "14px 12px",
         position: "relative",
         overflow: "hidden",
-        boxShadow: "0 4px 16px rgba(2, 132, 199, 0.08)",
+        boxShadow: "0 4px 16px rgba(2, 132, 199, 0.12)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -284,6 +284,8 @@ const BrandMarquee = () => {
           style={{
             width: "100%",
             overflow: "hidden",
+            padding: "16px 0",
+            margin: "-8px 0",
           }}
         >
           <div
@@ -317,6 +319,7 @@ const BrandMarquee = () => {
       width: max-content;
       animation: brandMarquee 20s linear infinite;
       will-change: transform;
+      padding: 8px 0;
     }
 
     @keyframes brandMarquee {
