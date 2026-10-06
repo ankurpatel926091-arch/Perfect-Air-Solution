@@ -1,4 +1,4 @@
-# Limra Sales and Services
+# Perfect Air Solution
 
 A modern, full-stack web application built to manage sales, services, brands, projects, and orders. The project features a highly interactive and animated React frontend using Shadcn UI and an Express/Node.js backend that utilizes both REST and GraphQL APIs.
 
