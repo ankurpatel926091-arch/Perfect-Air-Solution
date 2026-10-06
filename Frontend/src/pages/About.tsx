@@ -99,9 +99,10 @@ const About = () => (
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
+          className="text-lg xs:text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]"
         >
-          Building Comfort &amp; Engineering Trust <span className="text-cyan-300 block sm:inline-block">Since 2012</span>
+          Building Comfort &amp; Engineering Trust{" "}
+          <span className="text-cyan-300 block mt-1 sm:mt-0 sm:inline-block">Since 2012</span>
         </motion.h1>
 
         <motion.p

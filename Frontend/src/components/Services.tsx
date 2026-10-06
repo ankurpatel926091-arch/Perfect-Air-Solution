@@ -28,7 +28,7 @@ const staticServices = [
   {
     title: "AC Installation",
     slug: "ac-installation",
-    desc: "Certified installation for Split, Cassette, Ductable, and VRF systems with vacuum leak testing and precision copper piping.",
+    desc: "Certified installation for Split, Cassette, Ductable & VRF systems with precision vacuum testing.",
     icon: Wrench,
     image: installationImg,
     badge: "Quick & Safe Installation",
@@ -37,7 +37,7 @@ const staticServices = [
   {
     title: "AC Repair & Service",
     slug: "ac-repair-service",
-    desc: "Fast emergency repairs, chemical jet washing, eco-friendly refrigerant top-up (R32/R410A), and compressor troubleshooting.",
+    desc: "Fast emergency repairs, chemical jet washing, eco gas top-up & compressor diagnostics.",
     icon: Activity,
     image: repairImg,
     badge: "Fast & Reliable Solutions",
@@ -46,7 +46,7 @@ const staticServices = [
   {
     title: "AC Maintenance",
     slug: "ac-maintenance",
-    desc: "Periodic preventive servicing, deep coil cleaning, filter sanitization, electrical checks, and performance tuning.",
+    desc: "Preventive tune-ups, deep coil descaling, filter sanitization & performance optimization.",
     icon: Settings2,
     image: maintenanceImg,
     badge: "Regular Care for Longer Life",
@@ -55,7 +55,7 @@ const staticServices = [
   {
     title: "Ventilation Solutions",
     slug: "ventilation-solutions",
-    desc: "Fresh air intake systems, commercial kitchen exhaust, basement ventilation, cleanroom HEPA airflow, and custom ducting.",
+    desc: "Fresh air intake, kitchen & basement exhaust systems, HEPA filtration & custom ductwork.",
     icon: Wind,
     image: ventilationImg,
     badge: "Fresh Air, Better Living",
@@ -64,7 +64,7 @@ const staticServices = [
   {
     title: "Annual Maintenance Contract",
     slug: "annual-maintenance-contract",
-    desc: "Comprehensive & Non-Comprehensive annual contracts ensuring regular preventive maintenance, priority support, and genuine parts.",
+    desc: "Comprehensive & non-comprehensive AMC plans with 24/7 priority support & genuine spares.",
     icon: ShieldCheck,
     image: amcImg,
     badge: "Worry Free Year Round",
@@ -73,7 +73,7 @@ const staticServices = [
   {
     title: "Ductable & Cassette AC Solutions",
     slug: "ductable-cassette-ac",
-    desc: "Heavy-duty ductable and 4-way ceiling cassette AC setups engineered for uniform 360-degree air distribution.",
+    desc: "Heavy-duty ductable & 4-way ceiling cassette setups for uniform 360° airflow distribution.",
     icon: Wind,
     image: ductableImg,
     badge: "Flush Ceiling Fit",
@@ -100,26 +100,26 @@ export default function Services() {
   const displayServices = staticServices;
 
   return (
-    <section className="py-12 md:py-14 bg-gradient-to-b from-[#EEF8FF] via-[#F4FAFF] to-[#E6F4FA] font-sans relative overflow-hidden">
+    <section className="py-14 sm:py-16 bg-gradient-to-b from-[#EEF8FF] via-[#F4FAFF] to-[#E6F4FA] font-sans relative overflow-hidden">
       {/* Background Dot Overlay */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          opacity: 0.4,
-          backgroundImage: "radial-gradient(circle, rgba(2, 132, 199, 0.12) 1px, transparent 1px)",
+          opacity: 0.35,
+          backgroundImage: "radial-gradient(circle, rgba(2, 132, 199, 0.14) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] font-bold text-xs uppercase tracking-widest mb-3 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-200 text-[#0284C7] font-bold text-xs uppercase tracking-widest mb-3.5 shadow-xs"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#0284C7] animate-pulse" />
             <span>PURE AIR • PERFECT CARE • COMPLETE SOLUTION</span>
@@ -143,12 +143,12 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal mb-6"
+            className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium mb-6 max-w-2xl mx-auto"
           >
-            We provide professional installation, service and maintenance of all types of air conditioning and ventilation systems.
+            We provide professional installation, service, and maintenance for all types of residential and commercial air conditioning systems.
           </motion.p>
 
-          {/* 3 Core Highlights from Reference Poster */}
+          {/* 3 Core Highlights */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -156,20 +156,20 @@ export default function Services() {
             transition={{ delay: 0.25 }}
             className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-xs font-semibold text-[#0284C7]"
           >
-            <span className="flex items-center gap-1.5 bg-white/90 border border-sky-200 px-3.5 py-1.5 rounded-full shadow-sm">
+            <span className="flex items-center gap-1.5 bg-white/95 border border-sky-200/90 px-3.5 py-1.5 rounded-full shadow-xs">
               <CheckCircle2 size={14} className="text-[#0284C7]" /> Better Air Quality
             </span>
-            <span className="flex items-center gap-1.5 bg-white/90 border border-sky-200 px-3.5 py-1.5 rounded-full shadow-sm">
+            <span className="flex items-center gap-1.5 bg-white/95 border border-sky-200/90 px-3.5 py-1.5 rounded-full shadow-xs">
               <CheckCircle2 size={14} className="text-[#0284C7]" /> Reliable Service
             </span>
-            <span className="flex items-center gap-1.5 bg-white/90 border border-sky-200 px-3.5 py-1.5 rounded-full shadow-sm">
+            <span className="flex items-center gap-1.5 bg-white/95 border border-sky-200/90 px-3.5 py-1.5 rounded-full shadow-xs">
               <CheckCircle2 size={14} className="text-[#0284C7]" /> Complete Care
             </span>
           </motion.div>
         </div>
 
-        {/* Visual Cards Grid - Featuring the 5 Core Services */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Visual Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayServices.map((s: any, i: number) => {
             const IconComponent = renderIcon(s.icon);
             return (
@@ -179,8 +179,8 @@ export default function Services() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.08, type: "spring", stiffness: 100 }}
-                className="group relative flex flex-col rounded-xl overflow-hidden border border-slate-200/90 bg-white transition-all duration-300 cursor-pointer hover:border-[#0284C7] shadow-sm hover:shadow-md"
+                transition={{ delay: i * 0.07, type: "spring", stiffness: 100 }}
+                className="group relative flex flex-col rounded-2xl overflow-hidden border border-slate-200/80 bg-white transition-all duration-300 cursor-pointer hover:border-sky-400 shadow-xs hover:shadow-xl hover:-translate-y-1"
               >
                 {/* Visual Image Header */}
                 <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100 flex items-center justify-center">
@@ -189,33 +189,27 @@ export default function Services() {
                     alt={s.title}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
-                  {/* Top Image Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#051B30]/75 via-transparent to-transparent" />
 
                   {/* Floating Icon Badge */}
-                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-lg bg-white/95 border border-sky-100 text-[#0284C7] backdrop-blur-md flex items-center justify-center shadow-sm">
+                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-lg bg-white/95 border border-slate-200/80 text-[#0284C7] backdrop-blur-md flex items-center justify-center shadow-sm group-hover:bg-[#0284C7] group-hover:text-white transition-all duration-300">
                     <IconComponent size={18} />
                   </div>
 
-                  {/* Subtitle / Badge from Poster */}
+                  {/* Subtitle / Badge */}
                   {s.badge && (
-                    <span className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-white/95 border border-sky-100 text-[#0284C7] text-[10px] font-bold backdrop-blur-md shadow-sm">
+                    <span className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-white/95 border border-slate-200/80 text-[#0284C7] text-[10px] font-extrabold backdrop-blur-md shadow-sm tracking-wide">
                       {s.badge}
                     </span>
                   )}
-
-                  {/* Bottom Image Title Overlay */}
-                  <div className="absolute bottom-3 left-3.5 right-3.5">
-                    <h3 className="text-lg font-bold text-white leading-tight drop-shadow-md">
-                      {s.title}
-                    </h3>
-                  </div>
                 </div>
 
                 {/* Card Content */}
-                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-white">
+                <div className="p-5 flex-1 flex flex-col justify-between bg-white">
                   <div>
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal mb-3 line-clamp-2">
+                    <h3 className="text-lg font-bold text-[#051B30] group-hover:text-[#0284C7] transition-colors mb-2 leading-tight">
+                      {s.title}
+                    </h3>
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal mb-3.5">
                       {s.desc}
                     </p>
 
@@ -223,9 +217,12 @@ export default function Services() {
                     {s.points && s.points.length > 0 && (
                       <div className="space-y-1.5 mb-2">
                         {s.points.slice(0, 3).map((p: string) => (
-                          <div key={p} className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+                          <div
+                            key={p}
+                            className="flex items-center gap-2 text-xs text-slate-600 font-medium bg-slate-50/90 px-2.5 py-1.5 rounded-lg border border-slate-100 group-hover:border-sky-100/80 group-hover:bg-sky-50/40 transition-colors"
+                          >
                             <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
-                            <span className="line-clamp-1">{p}</span>
+                            <span className="truncate">{p}</span>
                           </div>
                         ))}
                       </div>
@@ -233,9 +230,9 @@ export default function Services() {
                   </div>
 
                   {/* Action Link Footer */}
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0284C7] group-hover:text-sky-600">
+                  <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0284C7] group-hover:text-sky-600">
                     <span>Explore Service Details</span>
-                    <div className="w-7 h-7 rounded-full bg-sky-50 group-hover:bg-[#0284C7] group-hover:text-white flex items-center justify-center transition-all">
+                    <div className="w-7 h-7 rounded-full bg-sky-50 text-[#0284C7] group-hover:bg-[#0284C7] group-hover:text-white flex items-center justify-center group-hover:translate-x-0.5 transition-all shadow-xs">
                       <ArrowRight size={14} />
                     </div>
                   </div>

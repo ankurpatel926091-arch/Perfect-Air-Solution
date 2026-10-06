@@ -113,47 +113,45 @@ export default function WhyChooseUs() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#082A45]/90 via-[#082A45]/30 to-slate-900/40" />
 
               {/* Top-Left Glass Badge: Rating & Happy Clients */}
-              <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-lg border border-white/80 shadow-xl flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-amber-500/15 text-amber-500 flex items-center justify-center">
-                  <Star className="w-5 h-5 fill-amber-500 text-amber-500" />
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 bg-white/95 backdrop-blur-md px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 rounded-lg border border-white/80 shadow-xl flex items-center gap-2 sm:gap-3">
+                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0">
+                  <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-amber-500 text-amber-500" />
                 </div>
                 <div>
                   <div className="flex items-center gap-1">
-                    <span className="text-xs font-extrabold text-[#082A45]">4.9 / 5.0</span>
-                    <span className="text-[10px] text-amber-500 font-semibold">★★★★★</span>
+                    <span className="text-[11px] sm:text-xs font-extrabold text-[#082A45]">4.9 / 5.0</span>
+                    <span className="text-[9px] sm:text-[10px] text-amber-500 font-semibold">★★★★★</span>
                   </div>
-                  <p className="text-[10px] text-slate-500 font-medium">5,000+ Happy Clients in UP</p>
+                  <p className="text-[9px] sm:text-[10px] text-slate-500 font-medium">5,000+ Happy Clients</p>
                 </div>
               </div>
 
               {/* Top-Right Badge: Experience Seal */}
-              <div className="absolute top-4 right-4 z-20 bg-[#082A45]/85 backdrop-blur-md px-3 py-2 rounded-lg border border-white/20 text-white flex items-center gap-2 text-xs font-semibold shadow-md">
-                <ShieldCheck className="w-4 h-4 text-[#0695CD]" />
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 bg-[#082A45]/85 backdrop-blur-md px-2 py-1 sm:px-3 sm:py-2 rounded-lg border border-white/20 text-white flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-semibold shadow-md">
+                <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0695CD]" />
                 <span>12+ Years Exp.</span>
               </div>
 
-             
-
               {/* Bottom-Right Inset Thumbnail: Indoor AC Showcase */}
-              <div className="absolute bottom-4 right-4 z-20 w-36 sm:w-44 rounded-lg overflow-hidden border-2 border-white shadow-2xl bg-slate-900">
+              <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 w-28 xs:w-32 sm:w-44 rounded-lg overflow-hidden border-2 border-white shadow-2xl bg-slate-900">
                 <img
                   src={indoorImg}
                   alt="Modern Indoor Air Conditioning Cooling"
-                  className="w-full h-24 object-cover"
+                  className="w-full h-16 xs:h-20 sm:h-24 object-cover"
                 />
-                <div className="p-1.5 bg-slate-900/90 backdrop-blur-md text-white text-center">
-                  <span className="text-[10px] font-bold text-sky-300 block">Indoor Air Quality</span>
-                  <span className="text-[9px] text-slate-300">Clean & Silent Cooling</span>
+                <div className="p-1 sm:p-1.5 bg-slate-900/90 backdrop-blur-md text-white text-center">
+                  <span className="text-[9px] sm:text-[10px] font-bold text-sky-300 block leading-tight">Indoor Air Quality</span>
+                  <span className="text-[8px] sm:text-[9px] text-slate-300 leading-tight hidden xs:block">Clean & Silent Cooling</span>
                 </div>
               </div>
 
               {/* Bottom-Left Engineer Tagline */}
-              <div className="absolute bottom-4 left-4 z-20 max-w-[200px] text-white">
-                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#0695CD] text-white text-[10px] font-bold uppercase tracking-wider mb-1">
+              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-20 max-w-[125px] xs:max-w-[160px] sm:max-w-[200px] text-white">
+                <span className="inline-block px-2 py-0.5 rounded-full bg-[#0695CD] text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-wider mb-0.5">
                   OEM Certified
                 </span>
-                <p className="text-xs font-semibold text-sky-100 leading-snug">
-                  Precision HVAC Installation & AMC Servicing
+                <p className="text-[10px] sm:text-xs font-semibold text-sky-100 leading-snug">
+                  Precision HVAC Installation & AMC
                 </p>
               </div>
 

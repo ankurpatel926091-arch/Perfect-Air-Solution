@@ -156,7 +156,7 @@ const contactDetails = [
   {
     icon: <MapPin size={20} />,
     label: "Visit",
-    value: "184, New Civil Lines, Hardoi",
+    value: "184, New Civil Lines, Lucknow",
     sub: "Serving all Over India",
     href: "https://maps.google.com/?q=184,+New+Civil+Lines,+Hardoi,+Uttar+Pradesh+241001",
     target: "_blank",

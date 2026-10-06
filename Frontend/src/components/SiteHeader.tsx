@@ -4,13 +4,12 @@ import { Menu, X, Phone, Wind, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import perfectAirLogo from "@/assets/perfect-air-logo.png";
 
-
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
   { name: "Products", path: "/product" },
   { name: "Services", path: "/services" },
-  { name: "Blogs", path: "/Blog" }, 
+  { name: "Blogs", path: "/Blog" },
   { name: "Gallery", path: "/gallery" },
   // { name: "Contact Us", path: "/contact" },
 ];
@@ -21,7 +20,9 @@ const SiteHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -33,7 +34,9 @@ const SiteHeader = () => {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   useEffect(() => {
@@ -48,7 +51,9 @@ const SiteHeader = () => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-[1000] bg-white/95 backdrop-blur-xl transition-colors duration-300 ${
-          scrolled ? "border-b border-slate-200" : "border-b border-slate-100/80"
+          scrolled
+            ? "border-b border-slate-200"
+            : "border-b border-slate-100/80"
         }`}
       >
         {/* Top Info Strip */}
@@ -64,15 +69,27 @@ const SiteHeader = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-1.5">
                 <div className="flex items-center gap-6">
                   <span className="flex items-center gap-1.5 text-cyan-400 font-medium">
-                    <ShieldCheck size={14} /> Certified HVAC Engineers & Technicians
+                    <ShieldCheck size={14} /> Certified HVAC Engineers &
+                    Technicians
                   </span>
                   <span>•</span>
-                  <span>Email: <a href="mailto:info@perfectairsolution.com" className="hover:text-cyan-400 transition-colors">info@perfectairsolution.com</a></span>
+                  <span>
+                    Email:{" "}
+                    <a
+                      href="mailto:info@perfectairsolution.com"
+                      className="hover:text-cyan-400 transition-colors"
+                    >
+                      info@perfectairsolution.com
+                    </a>
+                  </span>
                 </div>
                 <div className="flex items-center gap-4">
                   <span>Working Hours: Mon - Sat 9:00 AM - 7:00 PM</span>
                   <span>•</span>
-                  <a href="tel:+91 84291 52092" className="text-cyan-400 font-bold hover:underline">
+                  <a
+                    href="tel:+91 84291 52092"
+                    className="text-cyan-400 font-bold hover:underline"
+                  >
                     Call: +91 84291 52092
                   </a>
                 </div>
@@ -83,21 +100,20 @@ const SiteHeader = () => {
 
         {/* Inner flex row */}
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-[64px] sm:h-[68px] md:h-[72px]">
-
           {/* Perfect Air Solution Brand Logo */}
           {/* Perfect Air Solution Brand Logo */}
-{/* Perfect Air Solution Brand Logo */}
-<Link
-  to="/"
-  aria-label="Perfect Air Solution – Home"
-  className="flex items-center flex-shrink-0 group"
->
-  <img
-    src={perfectAirLogo}
-    alt="Perfect Air Solution"
-    className="h-20 sm:h-22 md:h-24 lg:h-26 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-  />
-</Link>
+          {/* Perfect Air Solution Brand Logo */}
+          <Link
+            to="/"
+            aria-label="Perfect Air Solution – Home"
+            className="flex items-center flex-shrink-0 group"
+          >
+            <img
+              src={perfectAirLogo}
+              alt="Perfect Air Solution"
+              className="h-20 sm:h-22 md:h-24 lg:h-26 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+            />
+          </Link>
 
           {/* Desktop Nav */}
           <nav
@@ -110,9 +126,10 @@ const SiteHeader = () => {
                 to={link.path}
                 className={`
                   relative whitespace-nowrap rounded-md transition-all duration-200 font-semibold text-sm xl:text-base px-3 xl:px-4 py-2
-                  ${isActive(link.path)
-                    ? "text-[#0284C7] bg-sky-50 font-bold"
-                    : "text-slate-700 hover:text-[#0284C7] hover:bg-slate-50"
+                  ${
+                    isActive(link.path)
+                      ? "text-[#0284C7] bg-sky-50 font-bold"
+                      : "text-slate-700 hover:text-[#0284C7] hover:bg-slate-50"
                   }
                 `}
               >
@@ -194,7 +211,10 @@ const SiteHeader = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navLinks.length * 0.04 + 0.05, duration: 0.2 }}
+                  transition={{
+                    delay: navLinks.length * 0.04 + 0.05,
+                    duration: 0.2,
+                  }}
                   className="mt-2 pt-2 border-t border-slate-100"
                 >
                   <button
@@ -205,7 +225,7 @@ const SiteHeader = () => {
                     className="w-full flex justify-center items-center gap-2 px-5 py-3.5 bg-gradient-to-r from-[#051B30] to-[#0284C7] text-white font-bold text-sm rounded-md shadow-lg shadow-sky-500/20 active:opacity-90 transition-all"
                   >
                     <Phone size={16} />
-                    <span>Get a Quote / Call Now</span>
+                    <span>Contact Us</span>
                   </button>
                 </motion.div>
               </div>
